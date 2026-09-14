@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { OpeningFilm } from "@/components/OpeningFilm";
+import { Reviews } from "@/components/Reviews";
 import { JarFigure } from "@/components/JarFigure";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
@@ -92,6 +93,8 @@ function Home() {
           </Link>
         </div>
       </section>
+      <Reviews />
+
     </main>
   );
 }

@@ -64,3 +64,25 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Review marquee: the track is doubled, so travelling exactly -50% loops
+   seamlessly. Pauses on hover so a clip can be watched, and holds still for
+   anyone who has asked for less motion. */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 52s linear infinite;
+}
+.marquee:hover {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+}

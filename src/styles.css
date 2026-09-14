@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-display: "Stylish", "Palatino Linotype", Palatino, serif;
+  --font-serif: "Stylish", "Palatino Linotype", Palatino, serif;
+  --font-sans: "Stylish", "Palatino Linotype", Palatino, serif;
+
+  --color-paper: #f4ebd8;
+  --color-paper-deep: #e7d7bc;
+  --color-cream: #fbf6ec;
+  --color-ink: #2c1b12;
+  --color-walnut: #4a3224;
+  --color-muted: #7a6252;
+  --color-honey: #c4a35a;
+  --color-forest: #3f4f3a;
+  --color-barn: #8b3a2a;
+  --color-rule: #d4c4a8;
+  --color-lid: #6d6a64;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-soft: 0 18px 40px -24px rgb(44 27 18 / 0.35);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -4,16 +4,26 @@ import { noCards } from "@/data/buck";
 import { easeOut, usePrefersReducedMotion, useScrollProgress, windowed } from "@/lib/scroll";
 import { ResolveHeading } from "./ResolveHeading";
 
+/** Height of one header pill. Also the stack step — see the note below. */
+const PILL = 62;
+
 /**
- * The one pinned section in the sequence, matching Buck's single pin.
+ * The one pinned section, and the only one.
  *
- * The outer section carries the height; the inner panel sticks to the top of
- * the viewport for its duration. Each card flies up from below, tilted about
- * five degrees, and stacks over the one before it.
+ * Each card is two pieces: a **header pill** and a **body panel** hanging under
+ * it. Card i sits at `i * PILL` from the top, so when card i+1 lands it covers
+ * card i's *body* and leaves its *pill* showing. The pills accumulate into a
+ * clean column and the reader can still see every claim they have passed.
  *
- * Under reduced motion this is a plain four-card grid with no pin at all --
- * not a pinned section with the animation switched off, which would leave the
- * reader scrolling three empty screens.
+ * That two-piece split is the whole trick. A single solid card stacked this way
+ * slices a paragraph in half and just looks broken.
+ *
+ * Cards fly in tilted and settle perfectly flush — the tilt is motion, not a
+ * resting state.
+ *
+ * Under reduced motion there is no pin at all: four cards, one grid. Not a
+ * pinned section with the animation switched off, which would leave the reader
+ * scrolling three empty screens.
  */
 export function NoCards() {
   const [ref, progress] = useScrollProgress<HTMLElement>();
@@ -21,16 +31,17 @@ export function NoCards() {
 
   if (reduced) {
     return (
-      <section aria-label="What is not in the jar" className="px-5 py-20 sm:px-8">
-        <div className="mx-auto max-w-6xl">
+      <section aria-label="What is not in the jar" className="px-5 py-24 sm:px-8">
+        <div className="mx-auto max-w-5xl">
           <ResolveHeading
             text="What is not in the jar"
-            className="text-center font-display text-4xl sm:text-5xl"
+            className="t-section text-center text-[#fbf3e4]"
           />
-          <ul className="mt-12 grid gap-6 sm:grid-cols-2">
+          <ul className="mt-14 grid gap-5 sm:grid-cols-2">
             {noCards.map((card) => (
               <li key={card.id}>
-                <Card card={card} />
+                <Pill card={card} />
+                <Body card={card} />
               </li>
             ))}
           </ul>
@@ -39,54 +50,35 @@ export function NoCards() {
     );
   }
 
-  // How many cards have essentially landed. The stack grows downward from a
-  // fixed height, and the band it lives in centres it -- so four cards deep
-  // still sits in the middle of the pin instead of climbing into the heading
-  // or running off the bottom.
-  const landed = noCards.reduce(
-    (n, _, i) => (windowed(progress, 0.06 + i * 0.2, 0.34 + i * 0.2) > 0.45 ? n + 1 : n),
-    0,
-  );
-
   return (
-    <section ref={ref} className="relative h-[320svh]" aria-label="What is not in the jar">
-      <div className="sticky top-0 flex h-svh flex-col overflow-hidden px-5 pt-20 pb-6 sm:px-8 sm:pt-24">
+    <section ref={ref} className="relative h-[330svh]" aria-label="What is not in the jar">
+      <div className="sticky top-0 flex h-svh flex-col overflow-hidden px-5 pt-28 pb-8 sm:px-8 sm:pt-32">
         <ResolveHeading
           text="What is not in the jar"
-          className="shrink-0 text-center font-display text-3xl sm:text-5xl"
+          className="t-section shrink-0 text-center text-[#fbf3e4]"
         />
 
-        <div
-          className="flex min-h-0 flex-1 items-center justify-center"
-          style={{
-            // One stack step. The px floor keeps each card's kicker and title
-            // clear of the card that lands on top of it, tilt included.
-            ["--step" as string]: "max(104px, 12svh)",
-          }}
-        >
+        <div className="flex min-h-0 flex-1 items-center justify-center">
           <div
-            className="relative w-full max-w-lg"
-            style={{
-              height: `calc(var(--step) * ${Math.max(0, landed - 1)} + 11rem)`,
-              transition: "height 620ms cubic-bezier(0.2,0.9,0.2,1)",
-            }}
+            className="relative w-full max-w-md"
+            style={{ height: PILL * noCards.length + 210 }}
           >
             {noCards.map((card, i) => {
-              // Each card owns a slice of the scroll, overlapping the next a
-              // little so the stack never sits empty.
-              const t = easeOut(windowed(progress, 0.06 + i * 0.2, 0.34 + i * 0.2));
-              const tilt = (i % 2 === 0 ? -1 : 1) * 4;
+              const t = easeOut(windowed(progress, 0.05 + i * 0.2, 0.33 + i * 0.2));
               return (
                 <article
                   key={card.id}
-                  className="absolute inset-x-0 top-0 will-change-transform"
+                  className="absolute inset-x-0 will-change-transform"
                   style={{
+                    top: i * PILL,
                     zIndex: i + 1,
-                    transform: `translate3d(0, calc(${(1 - t) * 86}svh + var(--step) * ${i}), 0) rotate(${(tilt * (1 + (1 - t) * 1.6)).toFixed(2)}deg)`,
+                    // Flies up from below, tilted, and settles flush at 0.
+                    transform: `translate3d(0, ${(1 - t) * 78}svh, 0) rotate(${((1 - t) * 6).toFixed(2)}deg)`,
                     opacity: t < 0.02 ? 0 : 1,
                   }}
                 >
-                  <Card card={card} />
+                  <Pill card={card} />
+                  <Body card={card} />
                 </article>
               );
             })}
@@ -97,12 +89,27 @@ export function NoCards() {
   );
 }
 
-function Card({ card }: { card: (typeof noCards)[number] }) {
+function Pill({ card }: { card: (typeof noCards)[number] }) {
   return (
-    <div className="rounded-xl border border-rule bg-paper px-6 py-5 shadow-[0_28px_50px_-28px_rgba(44,27,18,0.5)] sm:px-7 sm:py-6">
-      <p className="font-display text-xs tracking-[0.34em] text-barn uppercase">{card.kicker}</p>
-      <h3 className="mt-1 font-display text-3xl leading-none sm:text-4xl">{card.title}</h3>
-      <p className="mt-3 text-[0.95rem] leading-snug text-walnut">{card.body}</p>
+    <div
+      className="flex items-center justify-center gap-3 rounded-full bg-[#fbf3e4] px-6 text-[#1c120a] shadow-[0_10px_30px_-12px_rgba(20,12,6,0.7)]"
+      style={{ height: PILL }}
+    >
+      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#9E3617]" />
+      {/* Never wraps: a pill is one line by definition, and the stack step is
+          uniform, so a second line would be clipped by the pill below. */}
+      <h3 className="t-card text-[clamp(0.95rem,3.2vw,1.45rem)] leading-none whitespace-nowrap">
+        {card.kicker} {card.title}
+      </h3>
+      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#9E3617]" />
+    </div>
+  );
+}
+
+function Body({ card }: { card: (typeof noCards)[number] }) {
+  return (
+    <div className="mx-2 -mt-6 rounded-3xl bg-[#1c120a] px-7 pt-12 pb-8 text-center shadow-[0_24px_50px_-20px_rgba(0,0,0,0.8)]">
+      <p className="t-body text-[#f0e3cd]">{card.body}</p>
     </div>
   );
 }

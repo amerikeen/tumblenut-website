@@ -43,16 +43,20 @@ export function ThreePack() {
   return (
     <section
       aria-label="Build your 3 Pack"
-      className="border-y border-rule/60 bg-paper/85 px-5 py-20 backdrop-blur-[2px] sm:px-8 sm:py-28"
+      className="relative px-5 py-24 sm:px-8 sm:py-28"
     >
-      <div className="mx-auto max-w-6xl">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[#1c120a]/55"
+      />
+      <div className="relative mx-auto max-w-6xl">
         <div className="text-center">
-          <p className="text-xs tracking-[0.28em] text-muted uppercase">{threePack.eyebrow}</p>
+          <p className="t-meta text-[#e9c98a]">{threePack.eyebrow}</p>
           <ResolveHeading
             text={threePack.heading}
-            className="mt-4 font-display text-4xl sm:text-6xl"
+            className="t-section mt-5 text-[#fbf3e4]"
           />
-          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-walnut">{threePack.body}</p>
+          <p className="t-body mx-auto mt-6 max-w-[46ch] text-[#f0e3cd]">{threePack.body}</p>
         </div>
 
         <ul className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">

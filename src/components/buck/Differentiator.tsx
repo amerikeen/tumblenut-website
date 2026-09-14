@@ -1,28 +1,37 @@
 import { ResolveHeading } from "./ResolveHeading";
 import { differentiator } from "@/data/buck";
 
-/** The one section that argues, rather than shows. */
+/** The one section that argues rather than shows. Cream on the valley. */
 export function Differentiator() {
   return (
     <section
-      aria-label="What is actually different"
-      className="border-y border-rule/60 bg-cream/85 px-5 py-20 backdrop-blur-[2px] sm:px-8 sm:py-28"
+      aria-label="What is different"
+      className="relative px-5 py-24 sm:px-8 sm:py-32"
     >
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-20">
+      {/* A soft scrim only where the prose is, so the landscape stays visible
+          either side of it. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-[#1c120a]/45 to-transparent"
+      />
+      <div className="relative mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-20">
         <div>
-          <p className="text-xs tracking-[0.28em] text-muted uppercase">{differentiator.eyebrow}</p>
+          <p className="t-meta text-[#e9c98a]">{differentiator.eyebrow}</p>
           <ResolveHeading
             text={differentiator.heading}
-            className="mt-4 font-display text-4xl leading-[1.08] sm:text-5xl"
+            className="t-section mt-5 text-[#fbf3e4]"
           />
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-walnut">{differentiator.body}</p>
+          <p className="t-body mt-7 max-w-[46ch] text-[#f0e3cd]">{differentiator.body}</p>
         </div>
 
-        <dl className="grid gap-px overflow-hidden rounded-lg border border-rule bg-rule sm:grid-cols-3 lg:grid-cols-1">
+        <dl className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
           {differentiator.proof.map((row) => (
-            <div key={row.k} className="bg-paper px-6 py-7">
-              <dt className="text-xs tracking-[0.24em] text-muted uppercase">{row.k}</dt>
-              <dd className="mt-2 font-display text-4xl tabular-nums">{row.v}</dd>
+            <div
+              key={row.k}
+              className="rounded-2xl border border-[#fbf3e4]/20 bg-[#1c120a]/55 px-6 py-6 backdrop-blur-[2px]"
+            >
+              <dt className="t-meta text-[0.75rem] text-[#e9c98a]">{row.k}</dt>
+              <dd className="t-card mt-2 text-[#fbf3e4]">{row.v}</dd>
             </div>
           ))}
         </dl>

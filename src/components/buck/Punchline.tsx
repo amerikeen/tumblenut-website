@@ -1,32 +1,34 @@
 import { Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
 import { ResolveHeading } from "./ResolveHeading";
 import { punchline } from "@/data/buck";
 
 /**
- * The first thing under the reel: the line, then the only button that matters.
- * `#after-film` is the anchor the reel's Scroll and Skip controls jump to --
- * keep the id.
+ * The first thing under the reel, and the one that has to land.
+ *
+ * Cream type straight onto the valley — no panel, no card. `#after-film` is the
+ * anchor the reel used to jump to; keep the id.
  */
 export function Punchline() {
   return (
-    <section id="after-film" className="mx-auto max-w-4xl px-5 py-24 text-center sm:px-8 sm:py-32">
-      <p className="font-display text-xs tracking-[0.42em] text-muted uppercase">
-        {punchline.eyebrow}
-      </p>
+    <section
+      id="after-film"
+      className="relative flex min-h-[86svh] flex-col items-center justify-center px-5 py-24 text-center sm:px-8"
+    >
+      <p className="t-meta text-[#e9c98a]">{punchline.eyebrow}</p>
 
       <ResolveHeading
         as="h1"
         text={punchline.heading}
-        className="mt-5 font-display text-[2.6rem] leading-[1.05] tracking-[0.02em] sm:text-6xl lg:text-7xl"
+        className="t-hero mt-6 max-w-[16ch] text-[#fbf3e4] drop-shadow-[0_4px_24px_rgba(20,12,6,0.65)]"
       />
 
-      <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-walnut">{punchline.body}</p>
+      <p className="t-body mt-8 max-w-[46ch] text-[#f0e3cd]">{punchline.body}</p>
 
-      <Link to="/shop" className="mt-10 inline-block">
-        <Button size="lg" className="px-10 text-base tracking-[0.28em] uppercase">
-          {punchline.cta}
-        </Button>
+      <Link
+        to="/shop"
+        className="t-ui mt-10 inline-flex h-14 items-center rounded-full bg-[#fbf3e4] px-10 text-base tracking-[0.2em] text-[#1c120a] uppercase transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
+      >
+        {punchline.cta}
       </Link>
     </section>
   );

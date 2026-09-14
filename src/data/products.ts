@@ -16,6 +16,12 @@ export type Product = {
   ingredients: string[];
   jar: string;
   die: string;
+  /**
+   * The panel field colour for this SKU, taken from what the nut butter
+   * actually looks like once it is ground. Deep enough that cream type sits on
+   * it without a scrim.
+   */
+  tone: string;
 };
 
 export const FACILITY_NOTE =
@@ -37,6 +43,7 @@ export const products: Product[] = [
     ingredients: ["Roasted peanuts", "Applewood smoked salt", "Honey"],
     jar: "/brand/jars3d/jar-16oz-campfire-peanut-hero.png",
     die: "/brand/dies/campfire-peanut.png",
+    tone: "#8A4B24",
   },
   {
     slug: "firecracker-peanut",
@@ -53,6 +60,7 @@ export const products: Product[] = [
     ingredients: ["Roasted peanuts", "Cayenne", "Chile flake", "Smoked salt"],
     jar: "/brand/jars3d/jar-16oz-firecracker-peanut-hero.png",
     die: "/brand/dies/firecracker-peanut.png",
+    tone: "#9E3617",
   },
   {
     slug: "smokehouse-almond",
@@ -69,6 +77,7 @@ export const products: Product[] = [
     ingredients: ["Roasted almonds", "Smoked salt"],
     jar: "/brand/jars3d/jar-16oz-smokehouse-almond-hero.png",
     die: "/brand/dies/smokehouse-almond.png",
+    tone: "#7A5C36",
   },
   {
     slug: "pumpkin-patch",
@@ -85,6 +94,7 @@ export const products: Product[] = [
     ingredients: ["Toasted pumpkin seeds", "Maple", "Smoked salt"],
     jar: "/brand/jars3d/jar-8oz-pumpkin-patch-hero.png",
     die: "/brand/dies/pumpkin-patch.png",
+    tone: "#49512F",
   },
   {
     slug: "lucky-pistachio",
@@ -101,6 +111,7 @@ export const products: Product[] = [
     ingredients: ["Pistachios", "Sea salt"],
     jar: "/brand/jars3d/jar-4oz-lucky-pistachio-hero.png",
     die: "/brand/dies/lucky-pistachio.png",
+    tone: "#5C6840",
   },
   {
     slug: "harvest-pecan",
@@ -117,6 +128,7 @@ export const products: Product[] = [
     ingredients: ["Pecans", "Brown butter", "Cane sugar", "Salt"],
     jar: "/brand/jars3d/jar-4oz-harvest-pecan-hero.png",
     die: "/brand/dies/harvest-pecan.png",
+    tone: "#7A4326",
   },
   {
     slug: "wild-cacao",
@@ -133,6 +145,7 @@ export const products: Product[] = [
     ingredients: ["Hazelnuts", "Cacao", "Honey", "Salt"],
     jar: "/brand/jars3d/jar-4oz-wild-cacao-hero.png",
     die: "/brand/dies/wild-cacao.png",
+    tone: "#3D2A20",
   },
 ];
 

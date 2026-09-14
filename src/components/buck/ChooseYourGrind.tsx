@@ -1,110 +1,106 @@
+"use client";
+
 import { Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
-import { products, type Product } from "@/data/products";
-import { formatUsd } from "@/lib/utils";
+import { products } from "@/data/products";
 import { grind } from "@/data/buck";
+import { formatUsd } from "@/lib/utils";
+import { useCart } from "@/lib/cart";
 import { ResolveHeading } from "./ResolveHeading";
+import { useState } from "react";
 
 /**
- * Choose your grind: full-bleed colour panels stacked, the way Buck stacks
- * "Choose your weapon" -- not a one-at-a-time chooser.
+ * Choose your grind: one full-bleed colour panel per jar, stacked.
  *
- * Doc's shelf and Cecil's shelf fold in here rather than becoming their own
- * section. Cecil's panel says what is on the shelf and who it was built for. It
- * does not say it is safe, because every jar is packed in a shop that handles
- * peanuts and tree nuts.
+ * The reference site does exactly this — a panel each, not a chooser and not a
+ * grid of thumbnails. Each panel's field is the colour of that nut butter once
+ * it is ground, so the range reads as seven distinct things rather than seven
+ * variations on brown. The jar is big enough that the label can be read.
+ *
+ * Panels alternate side so the scroll has a rhythm instead of a rail.
  */
-const panels = [
-  {
-    id: "doc",
-    kicker: "Doc's shelf",
-    title: "The peanut jars",
-    line: "Deep roast, smoked salt, honey. The jars he was grinding long before there was a second shelf.",
-    tone: "bg-[#8b3a2a] text-[#f6e9d6]",
-    accent: "text-[#f0cf9a]",
-  },
-  {
-    id: "cecil",
-    kicker: "Cecil's shelf",
-    title: "Everything else he grinds",
-    line: "Almond, pistachio, pecan, hazelnut, pepita. Built for the friend who cannot go near a peanut — packed in the same shop, labelled plainly, so you can decide.",
-    tone: "bg-[#3f4f3a] text-[#eadcc9]",
-    accent: "text-[#cbb27a]",
-  },
-] as const;
-
 export function ChooseYourGrind() {
   return (
     <section aria-label="Choose your grind">
-      <div className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 sm:py-24">
-        <p className="text-xs tracking-[0.28em] text-muted uppercase">{grind.eyebrow}</p>
-        <ResolveHeading
-          text={grind.heading}
-          className="mt-4 font-display text-4xl sm:text-6xl"
-        />
-        <p className="mx-auto mt-5 max-w-xl leading-relaxed text-walnut">{grind.body}</p>
+      <div className="px-5 py-24 text-center sm:px-8">
+        <p className="t-meta text-[#e9c98a]">{grind.eyebrow}</p>
+        <ResolveHeading text={grind.heading} className="t-section mt-5 text-[#fbf3e4]" />
       </div>
 
-      {panels.map((panel) => {
-        const jars: Product[] = products.filter((p) => p.shelf === panel.id);
-        return (
-          <div key={panel.id} className={panel.tone}>
-            <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-              <div className="flex flex-wrap items-end justify-between gap-6">
-                <div>
-                  <p className={`text-xs tracking-[0.3em] uppercase ${panel.accent}`}>
-                    {panel.kicker}
-                  </p>
-                  <ResolveHeading
-                    text={panel.title}
-                    className="mt-2 font-display text-4xl sm:text-5xl"
-                  />
-                </div>
-                <Link to="/shop">
-                  <Button
-                    variant="line"
-                    className="border-current/40 text-current hover:border-current hover:bg-white/10"
-                  >
-                    See the shelf
-                  </Button>
-                </Link>
-              </div>
-
-              <p className="mt-5 max-w-2xl leading-relaxed opacity-90">{panel.line}</p>
-
-              <ul className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
-                {jars.map((p, i) => (
-                  <li key={p.slug}>
-                    <Link
-                      to="/shop/$slug"
-                      params={{ slug: p.slug }}
-                      className="group block text-center"
-                    >
-                      <span
-                        className="jar-float block"
-                        style={{ animationDelay: `${i * 0.5}s` }}
-                      >
-                        <img
-                          src={p.jar}
-                          alt={`${p.name} ${p.sizeLabel} jar`}
-                          className="mx-auto h-44 w-auto object-contain drop-shadow-[0_24px_34px_rgba(0,0,0,0.42)] transition-transform duration-500 group-hover:-rotate-2 sm:h-56"
-                          width={400}
-                          height={640}
-                          loading="lazy"
-                        />
-                      </span>
-                      <span className="mt-4 block font-display text-lg">{p.name}</span>
-                      <span className={`mt-1 block text-sm ${panel.accent}`}>
-                        {p.sizeLabel} · {formatUsd(p.priceCents)}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        );
-      })}
+      {products.map((p, i) => (
+        <Panel key={p.slug} product={p} flip={i % 2 === 1} index={i} />
+      ))}
     </section>
+  );
+}
+
+function Panel({
+  product,
+  flip,
+  index,
+}: {
+  product: (typeof products)[number];
+  flip: boolean;
+  index: number;
+}) {
+  const add = useCart((s) => s.add);
+  const [just, setJust] = useState(false);
+
+  return (
+    <div className="relative overflow-hidden" style={{ backgroundColor: product.tone }}>
+      <div
+        className={`mx-auto flex min-h-[72svh] max-w-6xl flex-col items-center gap-8 px-5 py-16 sm:px-8 md:gap-14 ${
+          flip ? "md:flex-row-reverse" : "md:flex-row"
+        }`}
+      >
+        <div className="flex flex-1 justify-center">
+          <span className="jar-float block" style={{ animationDelay: `${index * 0.45}s` }}>
+            <img
+              src={product.jar}
+              alt={`${product.name} ${product.sizeLabel} jar`}
+              className="h-[38svh] w-auto object-contain drop-shadow-[0_34px_46px_rgba(0,0,0,0.55)] sm:h-[52svh]"
+              width={400}
+              height={640}
+              loading="lazy"
+            />
+          </span>
+        </div>
+
+        <div className={`flex-1 text-center ${flip ? "md:text-right" : "md:text-left"}`}>
+          <p className="t-meta text-[#f0e3cd]/70">
+            {String(index + 1).padStart(2, "0")} · {product.sizeLabel}
+          </p>
+          <ResolveHeading text={product.name} className="t-card mt-4 text-[#fbf3e4]" />
+          <p className="t-body mx-auto mt-5 max-w-[38ch] text-[#f0e3cd]/90 md:mx-0">
+            {product.lede}
+          </p>
+          <p className="t-body mt-4 text-[#f0e3cd]/70">{product.contains}</p>
+
+          <div
+            className={`mt-8 flex flex-wrap items-center justify-center gap-3 ${
+              flip ? "md:justify-end" : "md:justify-start"
+            }`}
+          >
+            <button
+              type="button"
+              onClick={() => {
+                add(product.slug, 1);
+                setJust(true);
+                window.setTimeout(() => setJust(false), 1400);
+              }}
+              className="t-ui inline-flex h-13 items-center rounded-full bg-[#fbf3e4] px-8 py-4 text-sm tracking-[0.16em] text-[#1c120a] uppercase transition-transform duration-200 hover:scale-[1.03] active:scale-[0.97]"
+            >
+              {just ? "In the crate" : `Add · ${formatUsd(product.priceCents)}`}
+            </button>
+            <Link
+              to="/shop/$slug"
+              params={{ slug: product.slug }}
+              className="t-ui inline-flex h-13 items-center rounded-full border border-[#fbf3e4]/45 px-8 py-4 text-sm tracking-[0.16em] text-[#fbf3e4] uppercase transition-colors duration-200 hover:bg-[#fbf3e4]/12"
+            >
+              The jar
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

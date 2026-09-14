@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { OpeningFilm } from "@/components/OpeningFilm";
 import { Reviews } from "@/components/Reviews";
-import { WoodsyBackdrop } from "@/components/buck/WoodsyBackdrop";
+import { JourneyBackdrop } from "@/components/buck/JourneyBackdrop";
 import { Punchline } from "@/components/buck/Punchline";
 import { SkuPan } from "@/components/buck/SkuPan";
 import { Differentiator } from "@/components/buck/Differentiator";
@@ -18,7 +18,8 @@ export const Route = createFileRoute("/")({ component: Home });
  *
  * The order below is locked -- punchline, shop now, SKU pan, differentiator,
  * the four NO cards, choose your grind, the 3 Pack, the why wheel, reviews,
- * newsletter. Everything after the reel floats over one fixed woodsy plate.
+ * newsletter. Everything after the reel floats over the journey south down
+ * the Columbia valley to Doc's workshop.
  *
  * The reel itself is finished. Build below it, not inside it.
  */
@@ -27,7 +28,7 @@ function Home() {
     <main>
       <OpeningFilm />
 
-      <WoodsyBackdrop>
+      <JourneyBackdrop>
         <Punchline />
         <SkuPan />
         <Differentiator />
@@ -37,7 +38,7 @@ function Home() {
         <WhyWheel />
         <Reviews />
         <Newsletter />
-      </WoodsyBackdrop>
+      </JourneyBackdrop>
     </main>
   );
 }

@@ -2,10 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
 import { formatUsd } from "@/lib/utils";
 import { usePrefersReducedMotion } from "@/lib/scroll";
+import { skuPan } from "@/data/buck";
 
 /**
  * The SKU pan: one jar at a time, big enough that the label reads, with arrows
@@ -78,35 +78,35 @@ export function SkuPan() {
   const product = products[active]!;
 
   return (
-    <section className="overflow-hidden py-16 sm:py-20" aria-label="The jars">
+    <section className="overflow-hidden py-20 sm:py-24" aria-label="The jars">
       <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-x-6 gap-y-4 px-5 sm:px-8">
         <div>
-          <p className="text-xs tracking-[0.28em] text-muted uppercase">Seven jars</p>
-          <p className="mt-1 font-display text-3xl">On the wall right now</p>
+          <p className="t-meta text-[#e9c98a]">{skuPan.eyebrow}</p>
+          <p className="t-section mt-3 text-[#fbf3e4]">{skuPan.heading}</p>
         </div>
         <div className="flex items-center gap-4">
-          <p className="font-display text-sm tracking-[0.22em] whitespace-nowrap text-muted tabular-nums">
+          <p className="t-meta whitespace-nowrap text-[#f0e3cd] tabular-nums">
             {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
           </p>
           <div className="flex gap-2">
-            <Button
-              variant="line"
-              size="sm"
+            <button
+              type="button"
               aria-label="Previous jar"
               disabled={active === 0}
               onClick={() => go(active - 1)}
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#fbf3e4]/40 text-lg text-[#fbf3e4] transition hover:bg-[#fbf3e4]/12 disabled:opacity-30"
             >
               ←
-            </Button>
-            <Button
-              variant="line"
-              size="sm"
+            </button>
+            <button
+              type="button"
               aria-label="Next jar"
               disabled={active === count - 1}
               onClick={() => go(active + 1)}
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#fbf3e4]/40 text-lg text-[#fbf3e4] transition hover:bg-[#fbf3e4]/12 disabled:opacity-30"
             >
               →
-            </Button>
+            </button>
           </div>
         </div>
       </div>
@@ -154,10 +154,8 @@ export function SkuPan() {
                   />
                 </span>
               </div>
-              <p className="mt-6 font-display text-2xl group-hover:text-walnut sm:text-3xl">
-                {p.name}
-              </p>
-              <p className="mt-1 text-sm text-muted">
+              <p className="t-card mt-7 text-[#fbf3e4]">{p.name}</p>
+              <p className="t-meta mt-3 text-[#e9c98a]">
                 {p.sizeLabel} · {formatUsd(p.priceCents)}
               </p>
             </Link>
@@ -165,7 +163,7 @@ export function SkuPan() {
         })}
       </div>
 
-      <p className="mx-auto mt-2 max-w-xl px-5 text-center text-sm leading-relaxed text-muted">
+      <p className="t-body mx-auto mt-6 max-w-[44ch] px-5 text-center text-[#f0e3cd]">
         {product.lede}
       </p>
     </section>

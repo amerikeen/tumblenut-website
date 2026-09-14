@@ -42,17 +42,17 @@ export function WhyWheel() {
         <div className="mx-auto max-w-3xl">
           <ResolveHeading
             text="Why Tumblenut"
-            className="text-center font-display text-4xl sm:text-5xl"
+            className="t-section text-center text-[#fbf3e4]"
           />
-          <ol className="mt-12 divide-y divide-rule border-y border-rule">
+          <ol className="mt-12 divide-y divide-[#fbf3e4]/20 border-y border-[#fbf3e4]/20">
             {whySpokes.map((s, i) => (
               <li key={s.id} className="flex gap-5 py-6">
-                <span className="font-display text-sm text-muted tabular-nums">
+                <span className="t-meta text-[#e9c98a] tabular-nums">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="font-display text-2xl">{s.title}</h3>
-                  <p className="mt-2 leading-relaxed text-walnut">{s.line}</p>
+                  <h3 className="t-card text-[#fbf3e4]">{s.title}</h3>
+                  <p className="t-body mt-3 text-[#f0e3cd]">{s.line}</p>
                 </div>
               </li>
             ))}
@@ -64,10 +64,10 @@ export function WhyWheel() {
 
   return (
     <section ref={ref} className="relative h-[260svh]" aria-label="Why Tumblenut">
-      <div className="sticky top-0 flex h-svh flex-col items-center justify-center overflow-hidden px-5 pt-16 pb-6 sm:px-8 sm:pt-20">
+      <div className="sticky top-0 flex h-svh flex-col items-center justify-center overflow-hidden px-5 pt-28 pb-8 sm:px-8 sm:pt-32">
         <ResolveHeading
           text="Why Tumblenut"
-          className="font-display text-3xl sm:text-5xl"
+          className="t-section text-[#fbf3e4]"
         />
 
         <div
@@ -75,9 +75,9 @@ export function WhyWheel() {
           style={{ ["--r" as string]: "min(38vw, 14.5rem)" }}
         >
           {/* The rim, and the notch that marks the top of the wheel. */}
-          <div className="absolute inset-[6%] rounded-full border border-rule/70" />
-          <div className="absolute inset-[6%] rounded-full border border-dashed border-rule/40" />
-          <div className="absolute top-[3%] left-1/2 h-4 w-px -translate-x-1/2 bg-barn" />
+          <div className="absolute inset-[6%] rounded-full border border-[#fbf3e4]/35" />
+          <div className="absolute inset-[6%] rounded-full border border-dashed border-[#fbf3e4]/20" />
+          <div className="absolute top-[3%] left-1/2 h-4 w-px -translate-x-1/2 bg-[#e9c98a]" />
 
           {whySpokes.map((s, i) => {
             const angle = ((i - active) * step - 90) * (Math.PI / 180);
@@ -89,8 +89,8 @@ export function WhyWheel() {
                 onClick={() => setManual(i)}
                 aria-pressed={on}
                 className={cn(
-                  "absolute top-1/2 left-1/2 w-28 rounded-full px-3 py-2 text-center font-display text-sm leading-tight transition-colors duration-300 sm:w-32 sm:text-base",
-                  on ? "bg-ink text-paper" : "text-muted hover:text-ink",
+                  "t-ui absolute top-1/2 left-1/2 w-28 rounded-full px-3 py-2 text-center text-sm leading-tight transition-colors duration-300 sm:w-32 sm:text-base",
+                  on ? "bg-[#fbf3e4] text-[#1c120a]" : "text-[#f0e3cd]/75 hover:text-[#fbf3e4]",
                 )}
                 style={{
                   transform: `translate(-50%, -50%) translate(calc(var(--r) * ${Math.cos(angle).toFixed(4)}), calc(var(--r) * ${Math.sin(angle).toFixed(4)}))`,
@@ -105,12 +105,12 @@ export function WhyWheel() {
 
           {/* The hub says what the spoke at the top means. */}
           <div className="absolute inset-[24%] flex flex-col items-center justify-center text-center">
-            <p className="font-display text-xs tracking-[0.3em] text-muted tabular-nums">
+            <p className="t-meta text-[0.75rem] text-[#e9c98a] tabular-nums">
               {String(active + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
             </p>
             <p
               key={spoke.id}
-              className="mt-3 text-sm leading-relaxed text-walnut motion-safe:animate-in motion-safe:fade-in sm:text-base"
+              className="t-body mt-4 text-[#f0e3cd] motion-safe:animate-in motion-safe:fade-in"
             >
               {spoke.line}
             </p>

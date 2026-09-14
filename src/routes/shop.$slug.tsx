@@ -21,7 +21,7 @@ function ProductPage() {
           The jars
         </Link>
         <span className="mx-2">/</span>
-        {product.shelf === "doc" ? "Doc's shelf" : "Cecil's shelf"}
+        {product.sizeLabel}
       </p>
 
       <div className="mt-8 grid items-center gap-10 md:grid-cols-2">

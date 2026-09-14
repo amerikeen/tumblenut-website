@@ -27,9 +27,9 @@ function Card({ review }: { review: Review }) {
         <source src={review.clip} type="video/mp4" />
       </video>
       <figcaption className="px-4 py-4">
-        <p className="text-sm leading-snug text-paper/90">{review.caption}</p>
+        <p className="t-body text-[0.95rem] text-[#f0e3cd]">{review.caption}</p>
         {PLACEHOLDER ? (
-          <p className="mt-2 text-[0.65rem] tracking-[0.18em] text-honey/80 uppercase">
+          <p className="t-meta mt-2 text-[0.7rem] text-[#e9c98a]/85">
             Sample clip
           </p>
         ) : null}
@@ -44,16 +44,16 @@ export function Reviews() {
 
   return (
     <section
-      className="overflow-hidden border-y border-rule py-20"
+      className="relative overflow-hidden py-24"
       aria-label="Reviews"
     >
       <div className="mx-auto max-w-6xl px-5 text-center sm:px-8">
         {PLACEHOLDER ? (
-          <p className="text-xs tracking-[0.28em] text-barn uppercase">
+          <p className="t-meta text-[#e9a07f]">
             Sample layout — not real reviews yet
           </p>
         ) : null}
-        <h2 className="mt-2 font-display text-4xl tracking-[0.04em] sm:text-5xl">
+        <h2 className="t-section mt-3 text-[#fbf3e4]">
           Reviews
         </h2>
       </div>
@@ -65,7 +65,7 @@ export function Reviews() {
       </div>
 
       {PLACEHOLDER ? (
-        <p className="mx-auto mt-8 max-w-xl px-5 text-center text-sm text-muted">
+        <p className="t-body mx-auto mt-8 max-w-[46ch] px-5 text-center text-[#f0e3cd]/80">
           These clips are stand-ins so the page can be built. Real reviews replace
           them before launch.
         </p>

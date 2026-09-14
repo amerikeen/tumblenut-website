@@ -2,9 +2,25 @@
 @import "tw-animate-css";
 
 @theme {
+  /* Stylish stays the site's voice in the Forest header/footer and the reel.
+     Below the reel the page speaks in wood type. */
   --font-display: "Stylish", "Palatino Linotype", Palatino, serif;
   --font-serif: "Stylish", "Palatino Linotype", Palatino, serif;
   --font-sans: "Stylish", "Palatino Linotype", Palatino, serif;
+
+  /* Heavy slab for anything that has to shout. Set it ALL CAPS, tight, huge. */
+  --font-slab: "Alfa Slab One", "Rockwell", Georgia, serif;
+  /* Everything meant to be read. Real weights, generous size. */
+  --font-body: "Archivo", "Inter", system-ui, sans-serif;
+
+  /* Impact comes from the GAP between display and body, not from making
+     everything big. Buck's runs roughly 5x; ours lands about the same, but
+     from a readable 17px body rather than their 14px. */
+  --step-hero: clamp(2.75rem, 8.5vw, 7rem);
+  --step-section: clamp(2.35rem, 6.5vw, 5rem);
+  --step-card: clamp(1.75rem, 3.6vw, 2.75rem);
+  --step-body: 1.0625rem;
+  --step-meta: 0.9375rem;
 
   --color-paper: #f4ebd8;
   --color-paper-deep: #e7d7bc;
@@ -126,5 +142,84 @@
 @media (prefers-reduced-motion: reduce) {
   .reel-line {
     animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   The voice below the reel.
+
+   Wood-type slab, ALL CAPS, set tight -- line-height under 1 and negative
+   tracking, which is the opposite of the Stylish chrome above it and the whole
+   reason it lands. Size does the shouting; the weight is a single 400.
+   --------------------------------------------------------------------------- */
+@layer components {
+  /* In the components layer on purpose: a Tailwind size utility on the
+     same element must be able to override these. Defined after the
+     utilities instead, .t-card silently beat text-[1.35rem]. */
+  .t-hero,
+  .t-section,
+  .t-card {
+    font-family: var(--font-slab);
+    font-weight: 400;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .t-hero {
+    font-size: var(--step-hero);
+    line-height: 0.88;
+    letter-spacing: -0.022em;
+  }
+  .t-section {
+    font-size: var(--step-section);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  .t-card {
+    font-size: var(--step-card);
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+  }
+
+  /* Meant to be read, so bigger than Buck's 14px, not smaller. */
+  .t-body {
+    font-family: var(--font-body);
+    font-size: var(--step-body);
+    line-height: 1.6;
+    letter-spacing: 0.002em;
+  }
+  .t-meta {
+    font-family: var(--font-body);
+    font-size: var(--step-meta);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .t-ui {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   The journey.
+
+   The reel is a drone descent into the valley. The page carries on travelling:
+   scrolling moves you south down the Columbia valley, along the river, to Doc's
+   workshop. Each plate cross-fades into the next, so the ground under the
+   sections is always moving and the page never cuts away from the film's world.
+   --------------------------------------------------------------------------- */
+.plate {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: opacity;
+  transition: opacity 700ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .plate {
+    transition: none;
   }
 }

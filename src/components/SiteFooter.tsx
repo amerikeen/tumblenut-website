@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="flex min-w-0 flex-col leading-none">
           <p className="text-[2rem] tracking-[0.22em]">TUMBLENUT</p>
           <p className="mt-3 text-[1.25rem] tracking-[0.32em] uppercase">Small batch nut butters</p>
-          <p className="mt-3 whitespace-nowrap text-[calc(0.875rem+1pt)] tracking-[0.04em] text-[#eadcc9]/85">
+          <p className="mt-3 text-[calc(0.875rem+1pt)] tracking-[0.04em] text-[#eadcc9]/85 sm:whitespace-nowrap">
             Made from pure ingredients, with flavors for everyone.
           </p>
         </div>

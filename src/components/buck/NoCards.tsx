@@ -4,27 +4,28 @@ import { noCards } from "@/data/buck";
 import { easeOut, usePrefersReducedMotion, useScrollProgress, windowed } from "@/lib/scroll";
 import { ResolveHeading } from "./ResolveHeading";
 
-/** Height of one header pill. Also the stack step — see the note below. */
-const PILL = 62;
-
 /**
- * The one pinned section, and the only one.
+ * The pinned card stack, rebuilt to the reference site's measured geometry
+ * rather than to a guess. What was measured off buckssauce.com:
  *
- * Each card is two pieces: a **header pill** and a **body panel** hanging under
- * it. Card i sits at `i * PILL` from the top, so when card i+1 lands it covers
- * card i's *body* and leaves its *pill* showing. The pills accumulate into a
- * clean column and the reader can still see every claim they have passed.
+ * - Card total height 369px; header pill exactly **80px**, cream, and the body
+ *   panel starts at 80px. **No overlap between pill and body** -- the previous
+ *   version pulled the body up over the pill with a negative margin, which cut
+ *   the pill's text in half. That was the bug.
+ * - The stack step equals the pill height, so landed pills sit perfectly flush
+ *   and every header stays legible.
+ * - Cards do NOT fly in from off-screen. They start spaced ~301px apart and
+ *   **compress upward** to the 80px step.
+ * - In flight each carries **±5° alternating** rotation (measured
+ *   cos 0.996195 / sin 0.0871557 = 5.00°) which straightens to 0 on landing.
+ * - Each card runs its own overlapping scroll window; the first card is already
+ *   in place and never moves.
  *
- * That two-piece split is the whole trick. A single solid card stacked this way
- * slices a paragraph in half and just looks broken.
- *
- * Cards fly in tilted and settle perfectly flush — the tilt is motion, not a
- * resting state.
- *
- * Under reduced motion there is no pin at all: four cards, one grid. Not a
- * pinned section with the animation switched off, which would leave the reader
- * scrolling three empty screens.
+ * Under reduced motion there is no pin: four cards, one list.
  */
+const PILL = 80;
+const START_GAP = 300;
+
 export function NoCards() {
   const [ref, progress] = useScrollProgress<HTMLElement>();
   const reduced = usePrefersReducedMotion();
@@ -37,11 +38,10 @@ export function NoCards() {
             text="What is not in the jar"
             className="t-section text-center text-[#fbf3e4]"
           />
-          <ul className="mt-14 grid gap-5 sm:grid-cols-2">
+          <ul className="mt-14 grid gap-6 sm:grid-cols-2">
             {noCards.map((card) => (
               <li key={card.id}>
-                <Pill card={card} />
-                <Body card={card} />
+                <Card card={card} />
               </li>
             ))}
           </ul>
@@ -51,34 +51,34 @@ export function NoCards() {
   }
 
   return (
-    <section ref={ref} className="relative h-[330svh]" aria-label="What is not in the jar">
+    <section ref={ref} className="relative h-[340svh]" aria-label="What is not in the jar">
       <div className="sticky top-0 flex h-svh flex-col overflow-hidden px-5 pt-28 pb-8 sm:px-8 sm:pt-32">
         <ResolveHeading
           text="What is not in the jar"
           className="t-section shrink-0 text-center text-[#fbf3e4]"
         />
 
-        <div className="flex min-h-0 flex-1 items-center justify-center">
-          <div
-            className="relative w-full max-w-md"
-            style={{ height: PILL * noCards.length + 210 }}
-          >
+        <div className="mt-10 flex min-h-0 flex-1 justify-center">
+          <div className="relative w-full max-w-lg">
             {noCards.map((card, i) => {
-              const t = easeOut(windowed(progress, 0.05 + i * 0.2, 0.33 + i * 0.2));
+              // The first card is already placed and never moves, as theirs is.
+              const t =
+                i === 0
+                  ? 1
+                  : easeOut(windowed(progress, (i - 1) * 0.2, (i - 1) * 0.2 + 0.52));
+              const rest = i * PILL;
+              const extra = (START_GAP - PILL) * i * (1 - t);
+              const tilt = (i % 2 === 1 ? 5 : -5) * (1 - t);
               return (
                 <article
                   key={card.id}
-                  className="absolute inset-x-0 will-change-transform"
+                  className="absolute inset-x-0 top-0 will-change-transform"
                   style={{
-                    top: i * PILL,
                     zIndex: i + 1,
-                    // Flies up from below, tilted, and settles flush at 0.
-                    transform: `translate3d(0, ${(1 - t) * 78}svh, 0) rotate(${((1 - t) * 6).toFixed(2)}deg)`,
-                    opacity: t < 0.02 ? 0 : 1,
+                    transform: `translate3d(0, ${rest + extra}px, 0) rotate(${tilt.toFixed(2)}deg)`,
                   }}
                 >
-                  <Pill card={card} />
-                  <Body card={card} />
+                  <Card card={card} />
                 </article>
               );
             })}
@@ -89,27 +89,24 @@ export function NoCards() {
   );
 }
 
-function Pill({ card }: { card: (typeof noCards)[number] }) {
+function Card({ card }: { card: (typeof noCards)[number] }) {
   return (
-    <div
-      className="flex items-center justify-center gap-3 rounded-full bg-[#fbf3e4] px-6 text-[#1c120a] shadow-[0_10px_30px_-12px_rgba(20,12,6,0.7)]"
-      style={{ height: PILL }}
-    >
-      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#9E3617]" />
-      {/* Never wraps: a pill is one line by definition, and the stack step is
-          uniform, so a second line would be clipped by the pill below. */}
-      <h3 className="t-card text-[clamp(0.95rem,3.2vw,1.45rem)] leading-none whitespace-nowrap">
-        {card.kicker} {card.title}
-      </h3>
-      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#9E3617]" />
-    </div>
-  );
-}
-
-function Body({ card }: { card: (typeof noCards)[number] }) {
-  return (
-    <div className="mx-2 -mt-6 rounded-3xl bg-[#1c120a] px-7 pt-12 pb-8 text-center shadow-[0_24px_50px_-20px_rgba(0,0,0,0.8)]">
-      <p className="t-body text-[#f0e3cd]">{card.body}</p>
+    <div>
+      {/* The pill. Exactly PILL tall, so the stack step lands it flush. */}
+      <div
+        className="relative z-10 flex items-center justify-between rounded-full bg-[#fbf3e4] px-7 text-[#1c120a] shadow-[0_10px_30px_-12px_rgba(20,12,6,0.7)]"
+        style={{ height: PILL }}
+      >
+        <span className="h-2 w-2 shrink-0 rounded-full bg-[#9E3617]" />
+        <h3 className="t-card text-[clamp(1rem,3.2vw,1.55rem)] leading-none whitespace-nowrap">
+          {card.kicker} {card.title}
+        </h3>
+        <span className="h-2 w-2 shrink-0 rounded-full bg-[#9E3617]" />
+      </div>
+      {/* The body. Starts where the pill ends -- never under it. */}
+      <div className="rounded-3xl bg-[#1c120a] px-8 pt-8 pb-9 text-center shadow-[0_24px_50px_-20px_rgba(0,0,0,0.8)]">
+        <p className="t-body text-[#f0e3cd]">{card.body}</p>
+      </div>
     </div>
   );
 }

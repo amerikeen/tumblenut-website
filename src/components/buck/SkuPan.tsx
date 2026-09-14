@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
 import { products } from "@/data/products";
 import { formatUsd } from "@/lib/utils";
 import { usePrefersReducedMotion } from "@/lib/scroll";
@@ -78,7 +77,7 @@ export function SkuPan() {
   const product = products[active]!;
 
   return (
-    <section className="overflow-hidden py-20 sm:py-24" aria-label="The jars">
+    <section id="the-range" className="overflow-hidden py-20 sm:py-24" aria-label="The jars">
       <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-x-6 gap-y-4 px-5 sm:px-8">
         <div>
           <p className="t-meta text-[#e9c98a]">{skuPan.eyebrow}</p>
@@ -119,11 +118,9 @@ export function SkuPan() {
           const offset = i - active;
           const near = Math.max(-2, Math.min(2, offset));
           return (
-            <Link
+            <div
               key={p.slug}
-              to="/shop/$slug"
-              params={{ slug: p.slug }}
-              className="group w-[76vw] shrink-0 snap-center text-center sm:w-[28rem]"
+              className="w-[76vw] shrink-0 snap-center text-center sm:w-[28rem]"
             >
               {/* Two elements on purpose: the float is a keyframe animation,
                   and a running animation outranks an inline transform. The
@@ -158,7 +155,7 @@ export function SkuPan() {
               <p className="t-meta mt-3 text-[1.1rem] text-[#e9c98a]">
                 {p.sizeLabel} · {formatUsd(p.priceCents)}
               </p>
-            </Link>
+            </div>
           );
         })}
       </div>

@@ -64,12 +64,6 @@ export function Reviews() {
         ))}
       </div>
 
-      {PLACEHOLDER ? (
-        <p className="t-body mx-auto mt-8 max-w-[46ch] px-5 text-center text-[#f0e3cd]/80">
-          These clips are stand-ins so the page can be built. Real reviews replace
-          them before launch.
-        </p>
-      ) : null}
     </section>
   );
 }

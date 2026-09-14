@@ -1,5 +1,6 @@
 import { ResolveHeading } from "./ResolveHeading";
 import { differentiator } from "@/data/buck";
+import { Icon } from "./Icon";
 
 /** The one section that argues rather than shows. Cream on the valley. */
 export function Differentiator() {
@@ -21,7 +22,11 @@ export function Differentiator() {
             text={differentiator.heading}
             className="t-section mt-5 text-[#fbf3e4]"
           />
-          <p className="t-body mt-7 max-w-[46ch] text-[#f0e3cd]">{differentiator.body}</p>
+          <p className="t-body mt-7 max-w-[46ch] text-[#f0e3cd]">
+            A peanut <Icon name="peanut" /> allergy should not mean no sandwich.
+            Pistachio <Icon name="pistachio" />, pecan, hazelnut, pepita — read the
+            label and pick the jar that belongs on your table.
+          </p>
         </div>
 
         <dl className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">

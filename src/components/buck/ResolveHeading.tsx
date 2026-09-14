@@ -5,18 +5,28 @@ import { cn } from "@/lib/utils";
 import { useInView, usePrefersReducedMotion } from "@/lib/scroll";
 
 /**
- * A heading whose letters resolve in on scroll, the way Buck's do.
+ * A heading whose characters rise and land, matching the reference site.
  *
- * The visible characters are split into spans, so the whole string carries an
- * `aria-label` and the split is hidden from assistive tech -- a screen reader
- * gets one clean heading, not forty letters. Under reduced motion the letters
- * are simply there.
+ * Measured off buckssauce.com rather than guessed at. Their titles carry
+ * `data-gsap-title-on-scroll` and split to
+ * `h2[aria-label] > div.line > span.block > div.word > div.char`, with each
+ * char resting at:
+ *
+ *     transform: translate(0px, 60px) scale(0.8, 0.5);  opacity: 0;
+ *
+ * and animating to identity. The **vertical squash** is the part that matters
+ * — `scaleY(0.5)` stretching back to 1 as the character rises is what reads as
+ * landing, rather than the plain fade-up this used to do. The horizontal 0.8
+ * narrows it slightly at the same time.
+ *
+ * The full string stays on `aria-label` and every split piece is aria-hidden,
+ * so a screen reader gets one clean heading — the same pattern they use.
  */
 export function ResolveHeading({
   text,
   as = "h2",
   className,
-  stagger = 18,
+  stagger = 24,
 }: {
   text: string;
   as?: "h1" | "h2" | "h3" | "p";
@@ -26,11 +36,10 @@ export function ResolveHeading({
   const [ref, seen] = useInView<HTMLHeadingElement>();
   const reduced = usePrefersReducedMotion();
   const words = text.split(" ");
-  // The stagger is per letter, but the whole heading has to land inside about
-  // half a second -- a 50-character line at a flat 18ms takes over a second to
-  // arrive, which reads as a page that has not finished loading.
+
+  // Cap the total so a long line still lands inside about a second.
   const visible = text.replace(/\s/g, "").length;
-  const step = Math.min(stagger, 420 / Math.max(1, visible));
+  const step = Math.min(stagger, 620 / Math.max(1, visible));
   let index = 0;
 
   return createElement(
@@ -41,16 +50,22 @@ export function ResolveHeading({
         <span key={`${word}-${w}`} className="inline-block whitespace-nowrap">
           {[...word].map((char, c) => {
             const delay = reduced ? 0 : index++ * step;
+            const resting = !seen && !reduced;
             return (
               <span
                 key={`${char}-${c}`}
                 className="inline-block will-change-[transform,opacity]"
                 style={{
-                  opacity: seen || reduced ? 1 : 0,
-                  transform: seen || reduced ? "none" : "translateY(0.4em) rotate(4deg)",
+                  opacity: resting ? 0 : 1,
+                  // 0.7em rather than a flat 60px, so it behaves the same on a
+                  // 112px hero and a 34px card title.
+                  transform: resting
+                    ? "translateY(0.7em) scale(0.8, 0.5)"
+                    : "translateY(0) scale(1, 1)",
+                  transformOrigin: "50% 100%",
                   transition: reduced
                     ? "none"
-                    : `opacity 420ms ease-out ${delay}ms, transform 520ms cubic-bezier(0.2,0.9,0.2,1) ${delay}ms`,
+                    : `opacity 420ms ease-out ${delay}ms, transform 820ms cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
                 }}
               >
                 {char}

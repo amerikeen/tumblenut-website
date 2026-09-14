@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { ResolveHeading } from "./ResolveHeading";
 import { punchline } from "@/data/buck";
 
@@ -24,12 +23,14 @@ export function Punchline() {
 
       <p className="t-body mt-8 max-w-[46ch] text-[#f0e3cd]">{punchline.body}</p>
 
-      <Link
-        to="/shop"
+      {/* The site is deliberately flat for now -- this scrolls, it does not
+          navigate. Sub-pages come back when there is something on them. */}
+      <a
+        href="#the-range"
         className="t-ui mt-10 inline-flex h-14 items-center rounded-full bg-[#fbf3e4] px-10 text-base tracking-[0.2em] text-[#1c120a] uppercase transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
       >
         {punchline.cta}
-      </Link>
+      </a>
     </section>
   );
 }

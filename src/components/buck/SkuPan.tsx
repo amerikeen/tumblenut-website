@@ -1,0 +1,173 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { products } from "@/data/products";
+import { formatUsd } from "@/lib/utils";
+import { usePrefersReducedMotion } from "@/lib/scroll";
+
+/**
+ * The SKU pan: one jar at a time, big enough that the label reads, with arrows
+ * and a counter.
+ *
+ * The rail is a real scroll container with snap points, so a thumb swipe works
+ * for free and the arrows just scroll it. Index comes from measuring which
+ * child is nearest the rail's centre, which stays correct however the reader
+ * got there.
+ *
+ * Jars are stills for now: they float, and tilt slightly toward the centre of
+ * the rail as they pass. When Grok's animated jars land, swap `product.jar` --
+ * never composite a flat die onto a 3D jar.
+ */
+export function SkuPan() {
+  const railRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const reduced = usePrefersReducedMotion();
+  const count = products.length;
+
+  const measure = useCallback(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const mid = rail.scrollLeft + rail.clientWidth / 2;
+    let best = 0;
+    let bestGap = Infinity;
+    Array.from(rail.children).forEach((node, i) => {
+      const el = node as HTMLElement;
+      const gap = Math.abs(el.offsetLeft + el.offsetWidth / 2 - mid);
+      if (gap < bestGap) {
+        bestGap = gap;
+        best = i;
+      }
+    });
+    setActive(best);
+  }, []);
+
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    let frame = 0;
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(() => ((frame = 0), measure()));
+    };
+    measure();
+    rail.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      rail.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [measure]);
+
+  const go = useCallback(
+    (next: number) => {
+      const rail = railRef.current;
+      if (!rail) return;
+      const clamped = Math.max(0, Math.min(products.length - 1, next));
+      const el = rail.children[clamped] as HTMLElement | undefined;
+      if (!el) return;
+      rail.scrollTo({
+        left: el.offsetLeft - (rail.clientWidth - el.offsetWidth) / 2,
+        behavior: reduced ? "auto" : "smooth",
+      });
+    },
+    [reduced],
+  );
+
+  const product = products[active]!;
+
+  return (
+    <section className="overflow-hidden py-16 sm:py-20" aria-label="The jars">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-x-6 gap-y-4 px-5 sm:px-8">
+        <div>
+          <p className="text-xs tracking-[0.28em] text-muted uppercase">Seven jars</p>
+          <p className="mt-1 font-display text-3xl">On the wall right now</p>
+        </div>
+        <div className="flex items-center gap-4">
+          <p className="font-display text-sm tracking-[0.22em] whitespace-nowrap text-muted tabular-nums">
+            {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+          </p>
+          <div className="flex gap-2">
+            <Button
+              variant="line"
+              size="sm"
+              aria-label="Previous jar"
+              disabled={active === 0}
+              onClick={() => go(active - 1)}
+            >
+              ←
+            </Button>
+            <Button
+              variant="line"
+              size="sm"
+              aria-label="Next jar"
+              disabled={active === count - 1}
+              onClick={() => go(active + 1)}
+            >
+              →
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        ref={railRef}
+        className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-[12vw] pb-6 [scrollbar-width:none] sm:gap-10 sm:px-[calc(50vw-14rem)] [&::-webkit-scrollbar]:hidden"
+      >
+        {products.map((p, i) => {
+          const offset = i - active;
+          const near = Math.max(-2, Math.min(2, offset));
+          return (
+            <Link
+              key={p.slug}
+              to="/shop/$slug"
+              params={{ slug: p.slug }}
+              className="group w-[76vw] shrink-0 snap-center text-center sm:w-[28rem]"
+            >
+              {/* Two elements on purpose: the float is a keyframe animation,
+                  and a running animation outranks an inline transform. The
+                  outer box carries the pan tilt, the inner one floats. */}
+              <div
+                className="flex h-[46vh] items-end justify-center sm:h-[58vh]"
+                style={{
+                  transform: reduced
+                    ? "none"
+                    : `rotate(${near * -3.5}deg) scale(${offset === 0 ? 1 : 0.86})`,
+                  opacity: offset === 0 ? 1 : 0.55,
+                  transition: reduced
+                    ? "none"
+                    : "transform 620ms cubic-bezier(0.2,0.9,0.2,1), opacity 420ms ease-out",
+                }}
+              >
+                <span
+                  className="jar-float flex h-full items-end"
+                  style={{ animationDelay: `${i * 0.4}s` }}
+                >
+                  <img
+                    src={p.jar}
+                    alt={`${p.name} ${p.sizeLabel} jar`}
+                    className="h-full w-auto max-w-full object-contain drop-shadow-[0_28px_40px_rgba(44,27,18,0.35)]"
+                    width={400}
+                    height={640}
+                    loading={i < 2 ? "eager" : "lazy"}
+                  />
+                </span>
+              </div>
+              <p className="mt-6 font-display text-2xl group-hover:text-walnut sm:text-3xl">
+                {p.name}
+              </p>
+              <p className="mt-1 text-sm text-muted">
+                {p.sizeLabel} · {formatUsd(p.priceCents)}
+              </p>
+            </Link>
+          );
+        })}
+      </div>
+
+      <p className="mx-auto mt-2 max-w-xl px-5 text-center text-sm leading-relaxed text-muted">
+        {product.lede}
+      </p>
+    </section>
+  );
+}

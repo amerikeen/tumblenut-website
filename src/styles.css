@@ -86,3 +86,24 @@
     animation: none;
   }
 }
+
+/* Jars float. A slow, shallow rise and fall so a still reads as a held object
+   rather than a cut-out pasted on the page. Held still for anyone who has asked
+   for less motion. */
+.jar-float {
+  animation: jar-float 7s ease-in-out infinite;
+}
+@keyframes jar-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jar-float {
+    animation: none;
+  }
+}

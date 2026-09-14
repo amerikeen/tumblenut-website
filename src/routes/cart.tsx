@@ -3,7 +3,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { JarFigure } from "@/components/JarFigure";
-import { cartItems, cartTotalCents, useCart } from "@/lib/cart";
+import {
+  cartDiscountCents,
+  cartItems,
+  cartSubtotalCents,
+  cartTotalCents,
+  packsIn,
+  useCart,
+} from "@/lib/cart";
 import { formatUsd } from "@/lib/utils";
 import { FACILITY_NOTE } from "@/data/products";
 import { useEffect, useState, type FormEvent } from "react";
@@ -19,6 +26,9 @@ function CartPage() {
   useEffect(() => setReady(true), []);
 
   const items = ready ? cartItems(lines) : [];
+  const subtotal = ready ? cartSubtotalCents(lines) : 0;
+  const discount = ready ? cartDiscountCents(lines) : 0;
+  const packs = ready ? packsIn(lines) : 0;
   const total = ready ? cartTotalCents(lines) : 0;
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -90,9 +100,31 @@ function CartPage() {
             ))}
           </ul>
           <aside className="h-fit rounded-lg border border-rule bg-cream p-5">
-            <p className="flex justify-between font-display text-xl">
+            <p className="flex justify-between text-sm text-muted">
+              <span>Subtotal</span>
+              <span className="tabular-nums">{formatUsd(subtotal)}</span>
+            </p>
+            {discount > 0 ? (
+              <p className="mt-2 flex justify-between text-sm text-barn">
+                <span>
+                  {packs > 1 ? `${packs} × 3 Pack` : "3 Pack"} saving
+                </span>
+                <span className="tabular-nums">−{formatUsd(discount)}</span>
+              </p>
+            ) : (
+              <p className="mt-2 text-xs leading-relaxed text-muted">
+                Any three jars takes $5 off. Add {3 - (items.reduce((n, r) => n + r.qty, 0) % 3)} more
+                and the saving appears here.
+              </p>
+            )}
+            <p className="mt-3 flex justify-between border-t border-rule pt-3 font-display text-xl">
               <span>Total</span>
               <span className="tabular-nums">{formatUsd(total)}</span>
+            </p>
+            <p className="mt-4 rounded-md border border-rule bg-paper px-3 py-3 text-xs leading-relaxed text-walnut">
+              Checkout is not open yet. The LLC and the bank account are still in
+              progress, so no card is taken and no payment runs — send the crate
+              and Doc will hold it and write back.
             </p>
             <p className="mt-3 text-xs leading-relaxed text-muted">{FACILITY_NOTE}</p>
             <form className="mt-6 flex flex-col gap-3" onSubmit={onSubmit}>

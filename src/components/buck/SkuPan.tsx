@@ -155,7 +155,7 @@ export function SkuPan() {
                 </span>
               </div>
               <p className="t-card mt-7 text-[#fbf3e4]">{p.name}</p>
-              <p className="t-meta mt-3 text-[#e9c98a]">
+              <p className="t-meta mt-3 text-[1.1rem] text-[#e9c98a]">
                 {p.sizeLabel} · {formatUsd(p.priceCents)}
               </p>
             </Link>
@@ -163,7 +163,7 @@ export function SkuPan() {
         })}
       </div>
 
-      <p className="t-body mx-auto mt-6 max-w-[44ch] px-5 text-center text-[#f0e3cd]">
+      <p className="t-lead mx-auto mt-6 max-w-[40ch] px-5 text-center text-[#fbf3e4]">
         {product.lede}
       </p>
     </section>

@@ -13,8 +13,8 @@ import { useState } from "react";
  *
  * The reference site does exactly this — a panel each, not a chooser and not a
  * grid of thumbnails. Each panel's field is the colour of that nut butter once
- * it is ground, so the range reads as seven distinct things rather than seven
- * variations on brown. The jar is big enough that the label can be read.
+ * it is ground, so the range reads as distinct things rather than variations
+ * on brown. Panel count follows the SKU list -- never hardcode it. The jar is big enough that the label can be read.
  *
  * Panels alternate side so the scroll has a rhythm instead of a rail.
  */
@@ -66,14 +66,14 @@ function Panel({
         </div>
 
         <div className={`flex-1 text-center ${flip ? "md:text-right" : "md:text-left"}`}>
-          <p className="t-meta text-[#f0e3cd]/70">
+          <p className="t-meta text-[1.05rem] text-[#f0e3cd]/80">
             {String(index + 1).padStart(2, "0")} · {product.sizeLabel}
           </p>
           <ResolveHeading text={product.name} className="t-card mt-4 text-[#fbf3e4]" />
-          <p className="t-body mx-auto mt-5 max-w-[38ch] text-[#f0e3cd]/90 md:mx-0">
+          <p className="t-lead mx-auto mt-5 max-w-[34ch] text-[#fbf3e4] md:mx-0">
             {product.lede}
           </p>
-          <p className="t-body mt-4 text-[#f0e3cd]/70">{product.contains}</p>
+          <p className="t-lead mt-4 text-[1.1rem] text-[#f0e3cd]/85">{product.contains}</p>
 
           <div
             className={`mt-8 flex flex-wrap items-center justify-center gap-3 ${
@@ -87,14 +87,14 @@ function Panel({
                 setJust(true);
                 window.setTimeout(() => setJust(false), 1400);
               }}
-              className="t-ui inline-flex h-13 items-center rounded-full bg-[#fbf3e4] px-8 py-4 text-sm tracking-[0.16em] text-[#1c120a] uppercase transition-transform duration-200 hover:scale-[1.03] active:scale-[0.97]"
+              className="t-ui inline-flex items-center rounded-full bg-[#fbf3e4] px-10 py-5 text-base tracking-[0.14em] text-[#1c120a] uppercase transition-transform duration-200 hover:scale-[1.03] active:scale-[0.97]"
             >
               {just ? "In the crate" : `Add · ${formatUsd(product.priceCents)}`}
             </button>
             <Link
               to="/shop/$slug"
               params={{ slug: product.slug }}
-              className="t-ui inline-flex h-13 items-center rounded-full border border-[#fbf3e4]/45 px-8 py-4 text-sm tracking-[0.16em] text-[#fbf3e4] uppercase transition-colors duration-200 hover:bg-[#fbf3e4]/12"
+              className="t-ui inline-flex items-center rounded-full border-2 border-[#fbf3e4]/55 px-10 py-5 text-base tracking-[0.14em] text-[#fbf3e4] uppercase transition-colors duration-200 hover:bg-[#fbf3e4]/15"
             >
               The jar
             </Link>

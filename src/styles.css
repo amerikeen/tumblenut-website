@@ -8,8 +8,8 @@
   --font-serif: "Stylish", "Palatino Linotype", Palatino, serif;
   --font-sans: "Stylish", "Palatino Linotype", Palatino, serif;
 
-  /* Heavy slab for anything that has to shout. Set it ALL CAPS, tight, huge. */
-  --font-slab: "Alfa Slab One", "Rockwell", Georgia, serif;
+  /* Condensed bold for anything that has to shout. ALL CAPS, tight, huge. */
+  --font-slab: "Oswald", "Arial Narrow", system-ui, sans-serif;
   /* Everything meant to be read. Real weights, generous size. */
   --font-body: "Archivo", "Inter", system-ui, sans-serif;
 
@@ -19,8 +19,9 @@
   --step-hero: clamp(2.75rem, 8.5vw, 7rem);
   --step-section: clamp(2.35rem, 6.5vw, 5rem);
   --step-card: clamp(1.75rem, 3.6vw, 2.75rem);
-  --step-body: 1.0625rem;
-  --step-meta: 0.9375rem;
+  --step-body: 1.25rem;
+  --step-lead: clamp(1.3rem, 1.9vw, 1.7rem);
+  --step-meta: 1rem;
 
   --color-paper: #f4ebd8;
   --color-paper-deep: #e7d7bc;
@@ -160,7 +161,7 @@
   .t-section,
   .t-card {
     font-family: var(--font-slab);
-    font-weight: 400;
+    font-weight: 700;
     text-transform: uppercase;
     text-wrap: balance;
   }
@@ -184,8 +185,16 @@
   .t-body {
     font-family: var(--font-body);
     font-size: var(--step-body);
-    line-height: 1.6;
+    line-height: 1.55;
     letter-spacing: 0.002em;
+  }
+  /* Anything a buyer reads to decide -- what is in the jar, what it tastes
+     like. Nobody should have to lean in for this. */
+  .t-lead {
+    font-family: var(--font-body);
+    font-size: var(--step-lead);
+    line-height: 1.45;
+    font-weight: 500;
   }
   .t-meta {
     font-family: var(--font-body);

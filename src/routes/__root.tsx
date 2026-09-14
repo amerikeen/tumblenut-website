@@ -30,9 +30,9 @@ export const Route = createRootRoute({
       {
         rel: "stylesheet",
         // Stylish stays for the Forest header/footer and the reel captions.
-        // Alfa Slab One is the display face below the reel -- heavy wood-type
-        // slab, letterpress rather than modern DTC. Archivo carries body and UI.
-        href: "https://fonts.googleapis.com/css2?family=Stylish&family=Alfa+Slab+One&family=Archivo:wght@400;500;600;700&display=swap",
+        // Oswald Bold is the display face below the reel. Archivo carries body
+        // and UI. Stylish stays on the Forest chrome and the reel captions.
+        href: "https://fonts.googleapis.com/css2?family=Stylish&family=Oswald:wght@600;700&family=Archivo:wght@400;500;600;700&display=swap",
       },
     ],
   }),

@@ -7,8 +7,18 @@
  * 40-60, which is the main reason the page read as flat next to it. Nothing
  * here should need a second breath.
  *
+ * **Never count.** No "two to four ingredients", no "seven jars", no counting
+ * sweeteners. Recipes and the SKU list both move, and every number here is a
+ * claim that quietly goes false when they do. Lean on "all natural", whatever
+ * the ingredients happen to be. Ingredient truth lives in the label maker in
+ * the kit repo -- never invent it, and never let copy outrun it.
+ *
  * **Honest.** Nothing may claim or imply that a jar is allergen-safe. Doc still
- * makes peanut butter. State what is in the jar; let the parent decide.
+ * makes peanut butter, every jar is packed in a shop that handles peanuts and
+ * tree nuts, and a peanut allergy is not a tree-nut allergy. So the offer is
+ * *more choices*, never *a safe choice* — we name what is in the jar and the
+ * parent decides. Watch for any line that drifts from "here is another option"
+ * into "your child can eat this"; that is the line that must never be crossed.
  */
 
 /* ---------------------------------------------------------------------------
@@ -57,25 +67,25 @@ export const journey: Plate[] = [
 export const PLATE_VEIL = 0.34;
 
 export const punchline = {
-  eyebrow: "Columbia, Tennessee",
-  heading: "Nut butter with nothing hiding in it",
-  body: "Stone ground in a shed off a dirt lane. Two to four ingredients. The oil rises because nothing is stopping it.",
-  cta: "Shop now",
+  eyebrow: "Small batch · Columbia, Tennessee",
+  heading: "More ways to make a nut butter sandwich",
+  body: "Doc still grinds peanuts. He also grinds pistachio, pecan, hazelnut and pepita — so there is more than one jar to pick from. Every label says exactly what is inside.",
+  cta: "See the jars",
 };
 
 export const skuPan = {
-  eyebrow: "Seven jars",
+  eyebrow: "The range",
   heading: "On the wall right now",
 };
 
 export const differentiator = {
-  eyebrow: "What is different",
-  heading: "The mill runs cold and slow",
-  body: "Most jars are ground hot and fast, then held together with palm oil. Ours separate. That is the point.",
+  eyebrow: "Why Doc bothered",
+  heading: "Nobody should sit out at lunch",
+  body: "A peanut allergy should not mean no sandwich. Pistachio, pecan, hazelnut, pepita — read the label and pick the jar that belongs on your table.",
   proof: [
-    { k: "Ingredients", v: "2–4" },
-    { k: "Batch", v: "40 lb" },
-    { k: "Miles to the mill", v: "0" },
+    { k: "Ingredients", v: "All natural" },
+    { k: "Made in", v: "Columbia, TN" },
+    { k: "Stir required", v: "Always" },
   ],
 };
 
@@ -96,13 +106,13 @@ export const noCards = [
     id: "junk",
     kicker: "No",
     title: "Junk",
-    body: "No palm oil, no stabilisers, no fillers. What is on the label is all of it.",
+    body: "No palm oil, no stabilisers, no fillers. Every ingredient is a natural one, and the label names all of them.",
   },
   {
     id: "gluten",
     kicker: "No",
     title: "Gluten",
-    body: "Nothing we grind has ever contained any. Nuts, seeds, salt, honey, maple, cacao.",
+    body: "Nothing on any of our labels has ever contained it. Nuts, seeds, salt, spice, honey, maple.",
   },
   {
     id: "seed-oils",
@@ -114,13 +124,13 @@ export const noCards = [
     id: "more-than-peanut",
     kicker: "And",
     title: "More than peanut",
-    body: "Pistachio. Pecan. Hazelnut. Almond. Pepita. Seven jars, one mill, one week.",
+    body: "Pistachio. Pecan. Hazelnut. Almond. Pepita. More than one way to fill a sandwich.",
   },
 ] as const;
 
 export const grind = {
   eyebrow: "Choose your grind",
-  heading: "Seven jars, no filler",
+  heading: "Pick the jar for your table",
 };
 
 export const threePack = {
@@ -143,7 +153,7 @@ export const whySpokes = [
   {
     id: "short-list",
     title: "Short list",
-    line: "Two to four ingredients. Read the whole label without turning the jar.",
+    line: "Every ingredient is one you already recognise. Read the whole label without turning the jar.",
   },
   {
     id: "stir-it",

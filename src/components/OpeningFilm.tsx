@@ -16,11 +16,6 @@ export function OpeningFilm() {
     setIndex((next + openingShots.length) % openingShots.length);
   }, []);
 
-  const skip = useCallback(() => {
-    setPlaying(false);
-    document.getElementById("after-film")?.scrollIntoView({ behavior: "smooth" });
-  }, []);
-
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
@@ -78,31 +73,31 @@ export function OpeningFilm() {
         ))}
       </ol>
 
+      {/* One line at the bottom, never two. The drone shot carries the place
+          card; every shot after it carries its own narration and nothing else.
+          A persistent location label sat unscrimmed over the sunlit path on the
+          workshop shot and fought the carved sign -- thin letterforms breaking
+          up over moving grass is what read as flicker.
+
+          There is no Scroll or Skip control. People scroll. */}
       <div className="absolute inset-x-0 bottom-0 z-10 px-8 pb-10 sm:px-12 sm:pb-12">
-        {!isAerial ? (
-          <p className="mb-12 max-w-3xl font-display text-[calc(1.65rem+6pt)] leading-snug tracking-[0.08em] text-[#eadcc9] sm:text-[calc(1.85rem+6pt)]">
+        {isAerial ? (
+          <p
+            key={shot.id}
+            className="reel-line font-display text-[0.9375rem] tracking-[0.5em] text-[#eadcc9] uppercase"
+          >
             {shot.line}
           </p>
-        ) : null}
-
-        <div className="grid grid-cols-3 items-end font-display text-[0.9375rem] tracking-[0.5em] uppercase text-[#eadcc9]">
-          <p className="justify-self-start">{isAerial ? shot.line : "Columbia, Tennessee"}</p>
-          <button
-            type="button"
-            className="justify-self-center tracking-[0.5em] hover:text-white"
-            onClick={skip}
+        ) : (
+          <p
+            key={shot.id}
+            className="reel-line max-w-3xl font-display text-[calc(1.65rem+6pt)] leading-snug tracking-[0.08em] text-[#eadcc9] sm:text-[calc(1.85rem+6pt)]"
           >
-            Scroll
-          </button>
-          <button
-            type="button"
-            className="justify-self-end tracking-[0.5em] hover:text-white"
-            onClick={skip}
-          >
-            Skip
-          </button>
-        </div>
+            {shot.line}
+          </p>
+        )}
       </div>
+
     </section>
   );
 }

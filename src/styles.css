@@ -107,3 +107,24 @@
     animation: none;
   }
 }
+
+/* The reel's caption fades in on each shot rather than cutting, so the change
+   reads as a change of frame and not a glitch. */
+.reel-line {
+  animation: reel-line 620ms ease-out both;
+}
+@keyframes reel-line {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel-line {
+    animation: none;
+  }
+}

@@ -47,6 +47,6 @@ export const openingShots: Shot[] = [
     src: "/brand/cinema/tasting-v2.mp4",
     poster: "/brand/cinema/tasting-v2.jpg",
     seconds: 6,
-    line: "Now Cecil can enjoy his favorite nut butters too!",
+    line: "One shelf for Doc. One shelf for Cecil.",
   },
 ];

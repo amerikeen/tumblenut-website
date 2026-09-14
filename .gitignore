@@ -18,3 +18,6 @@ public/brand/cinema/aerial-frame-01.jpg
 public/brand/cinema/aerial-frame-05.jpg
 
 .grok/
+
+# local build output
+.vercel/

@@ -33,7 +33,7 @@ export const openingShots: Shot[] = [
     src: "/brand/cinema/peanut-problem.mp4",
     poster: "/brand/cinema/peanut-problem.jpg",
     seconds: 4,
-    line: "Cecil can't eat peanuts. He can still keep Doc company.",
+    line: "Turns out Cecil reacts to peanuts.",
   },
   {
     id: "shelves",

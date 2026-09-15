@@ -304,7 +304,10 @@ button:hover .roll .roll-track,
 a:focus-visible .roll .roll-track,
 button:focus-visible .roll .roll-track,
 [data-active="true"] .roll .roll-track {
-  transform: translateY(-100%);
+  /* -50%, NOT -100%. The track holds two faces, so its own height is two
+     lines; -100% would scroll both of them past the window and leave it
+     empty. Half the track is exactly one face. */
+  transform: translateY(-50%);
 }
 @media (prefers-reduced-motion: reduce) {
   .roll-track { transition: none; }

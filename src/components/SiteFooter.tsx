@@ -38,7 +38,35 @@ export function SiteFooter() {
   const [sent, setSent] = useState(false);
 
   return (
-    <footer className="bg-[#3A5A40] px-3 pt-3 pb-3 sm:px-5 sm:pt-5" style={{ color: CREAM }}>
+    <footer
+      className="relative isolate overflow-hidden px-3 pt-3 pb-3 sm:px-5 sm:pt-5"
+      style={{ color: CREAM }}
+      data-chrome="dark"
+    >
+      {/* The forest slab is gone. The journey south ends at Doc's workshop, and
+          the page used to stop dead at a flat green block -- which read as a
+          different site once the green header went. Now the workshop carries on
+          behind the footer and the footer sits ON it, so the scroll arrives
+          somewhere instead of just ending.
+
+          The plate is the same interior the journey backdrop finishes on, so
+          the two genuinely line up rather than merely rhyming. */}
+      <div
+        className="absolute inset-0 -z-20 bg-cover bg-center"
+        style={{ backgroundImage: "url('/brand/scenes/workshop-interior.jpg')" }}
+        aria-hidden="true"
+      />
+      {/* Enough veil that dashed rules and body copy hold, not so much that the
+          shed disappears and we are back to a flat block in a different colour. */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(20,13,7,0.62) 0%, rgba(20,13,7,0.78) 45%, rgba(20,13,7,0.9) 100%)",
+        }}
+        aria-hidden="true"
+      />
+
       <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-[22fr_32fr_32fr_14fr]">
         {/* 1 — the mark, in its dashed box */}
         {/* The cast, filling the box rather than floating in it.
@@ -111,7 +139,12 @@ export function SiteFooter() {
               />
               <button
                 type="submit"
-                className="h-[52px] shrink-0 rounded-xl px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] uppercase"
+                /* inline-flex + items-center: TextRoll is an inline-block with a
+                   one-line clip window and `vertical-align: bottom`, so in a
+                   plain block button it sits on the text baseline rather than
+                   in the middle of the pill. Every control wrapping a roll
+                   needs to centre it explicitly. */
+                className="inline-flex h-[52px] shrink-0 items-center justify-center rounded-xl px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] uppercase"
                 style={{ backgroundColor: CREAM, color: "#1c120a" }}
               >
                 <TextRoll outlineColor="#1c120a">{newsletter.cta}</TextRoll>

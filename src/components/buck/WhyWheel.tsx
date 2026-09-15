@@ -102,18 +102,33 @@ export function WhyWheel() {
             text="Why Tumblenut"
             className="t-section text-[clamp(2.5rem,11vw,8rem)] leading-[0.85] text-[#fbf3e4]"
           />
-          <p className="t-lead mx-auto mt-6 max-w-[46ch] text-[#e9c98a]">
-            Doc grinds nut butter in small batches because there was no jar on the shelf that said
-            plainly what was in it.
-          </p>
         </div>
 
         {/* The wheel. A circle far wider than the screen; the stops ride its
             rim and the whole thing turns one step at a time. */}
         <div
-          className="pointer-events-none absolute top-[52svh] left-1/2 aspect-square w-[520vw] -translate-x-1/2 rounded-full border border-dashed border-[#fbf3e4]/18"
+          className="pointer-events-none absolute top-[52svh] left-1/2 aspect-square w-[520vw] -translate-x-1/2"
           style={{ ["--r" as string]: "260vw" }}
         >
+          <svg
+            viewBox="0 0 1000 1000"
+            className="absolute inset-0 h-full w-full"
+            aria-hidden="true"
+            preserveAspectRatio="none"
+          >
+            <circle
+              cx="500"
+              cy="500"
+              r="499"
+              fill="none"
+              stroke="#fbf3e4"
+              strokeOpacity="0.28"
+              strokeWidth="0.9"
+              strokeDasharray="1.1 6"
+              strokeLinecap="butt"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
           {whyStops.map((s, i) => {
             const theta = (i - position) * STEP_DEG;
             const near = Math.abs(i - position);
@@ -131,11 +146,33 @@ export function WhyWheel() {
                 }}
               >
                 <div className="flex flex-col items-center px-5 text-center">
-                  <p className="t-hero text-[clamp(3.5rem,12vw,7rem)] leading-[0.8] text-[#e9c98a] tabular-nums">
+                  {/* Outlined, and big enough to be furniture rather than a
+                      label -- theirs is the largest thing on the stop. */}
+                  <p
+                    className="t-hero text-[clamp(4.5rem,15vw,9rem)] leading-[0.8] tabular-nums"
+                    style={{
+                      color: "transparent",
+                      WebkitTextStrokeWidth: "2px",
+                      WebkitTextStrokeColor: "#f0e3cd",
+                    }}
+                  >
                     {String(i + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="t-card mt-5 text-[#fbf3e4]">{s.title}</h3>
-                  <p className="t-body mt-4 max-w-[38ch] text-[#f0e3cd]">{s.line}</p>
+                  {/* The title rides in a cream pill with a dot either side. */}
+                  <h3 className="mt-7 inline-flex items-center gap-4 rounded-xl bg-[#f4ebd8] px-7 py-3 text-[#1c120a]">
+                    <span
+                      className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#1c120a]"
+                      aria-hidden="true"
+                    />
+                    <span className="t-card text-[clamp(1.1rem,2.4vw,1.75rem)] leading-none">
+                      {s.title}
+                    </span>
+                    <span
+                      className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#1c120a]"
+                      aria-hidden="true"
+                    />
+                  </h3>
+                  <p className="t-lead mt-7 max-w-[34ch] text-[#f0e3cd]">{s.line}</p>
                 </div>
               </div>
             );

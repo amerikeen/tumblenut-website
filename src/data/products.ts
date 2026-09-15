@@ -12,6 +12,24 @@ export type Product = {
   lede: string;
   story: string;
   ingredients: string[];
+  /**
+   * How it tastes, in order. Editorial copy, NOT product truth -- these are
+   * tasting notes written from the recipe, not facts owned by the kit repo.
+   * Ingredients and prices still come from `amerikeen/tumblenut` and only
+   * from there.
+   */
+  /**
+   * The big line on the product page, set huge on its own.
+   *
+   * It must NOT restate `lede` -- the first build used the lede for both and
+   * every product page said the same sentence twice, once under the title and
+   * once at 5rem. Each hook is lifted from that product's own `story`, so it
+   * stays in Doc's voice and claims nothing the story does not already.
+   */
+  hook: string;
+  tasteProfile: string[];
+  /** What to eat it with. Serving suggestion, never a health or safety claim. */
+  eatWith: string;
   /** Which of the cast fronts this jar. Doc takes the peanut jars, Cecil the rest. */
   face: "doc" | "cecil";
   /** Ingredient cutout from /brand/catalog, floated beside the jar. */
@@ -51,6 +69,14 @@ export const products: Product[] = [
     lede: "Deep-roasted peanut, applewood smoked salt, a little honey. Like an old friend.",
     story:
       "The jar Doc ground for himself, back when there was only one. Deep roast, a crackle of smoked salt, honey just enough to round it. Stir it. That's not a suggestion.",
+    hook: "The jar that started the wall",
+    tasteProfile: [
+      "Deep roast, before anything else",
+      "Smoked salt cracks through the middle",
+      "Honey rounds it off, barely sweet",
+      "Finishes like the end of a good fire",
+    ],
+    eatWith: "Toast, apple slices, a spoon standing up in the jar, and the sandwich you already know.",
     ingredients: [
       "Peanuts",
       "J.Q. Dickinson Applewood smoked salt",
@@ -73,6 +99,14 @@ export const products: Product[] = [
     lede: "Peanut, chili, lime, honey, ghost pepper salt. Sweet w/ some kick.",
     story:
       "Doc did not stop making peanut butter. He just got bored of making only one kind. Firecracker is Classic Crunchy with chili, lime and its sleeves rolled up.",
+    hook: "Classic Crunchy with its sleeves rolled up",
+    tasteProfile: [
+      "Classic Crunchy, until the chili arrives",
+      "Lime cuts straight across the middle",
+      "Ghost pepper salt is a spark, not a blaze",
+      "Honey keeps it from picking a fight",
+    ],
+    eatWith: "Satay, cold noodles, grilled chicken, and anything that was about to be boring.",
     ingredients: [
       "Peanuts",
       "Chili",
@@ -97,6 +131,14 @@ export const products: Product[] = [
     lede: "Almonds. Bourbon barrel smoked salt. Still the whole list.",
     story:
       "The first jar Doc ground that had no peanut in it. Almonds from a smokehouse roast, nothing sweet, nothing extra. Two ingredients, and the label has room to spare.",
+    hook: "Two ingredients, and the label has room to spare",
+    tasteProfile: [
+      "Almond, dry and clean",
+      "Bourbon barrel smoke sits underneath",
+      "No sweetness anywhere in it",
+      "Finishes short, which is the point",
+    ],
+    eatWith: "Dark bread, sharp cheese, roast carrots, and a spoon before the coffee.",
     ingredients: [
       "Almonds",
       "J.Q. Dickinson Bourbon Barrel smoked salt",
@@ -118,6 +160,14 @@ export const products: Product[] = [
     lede: "Pumpkin seed, cinnamon, applewood smoked salt. Here for the holidays.",
     story:
       "The only seed jar on the wall. Toasted pepitas, a line of cinnamon, the same smoked salt Doc puts on everything else. Still packed in a shop that handles peanuts and tree nuts.",
+    hook: "The only seed jar on the wall",
+    tasteProfile: [
+      "Toasted pepita, green and earthy",
+      "Cinnamon over the top, not stirred through",
+      "Smoked salt keeps it savoury",
+      "Finishes drier than a nut butter",
+    ],
+    eatWith: "Oatmeal, yogurt, warm banana bread, and the back of a spoon in October.",
     ingredients: [
       "Pumpkin seeds",
       "Cinnamon",
@@ -140,6 +190,14 @@ export const products: Product[] = [
     lede: "Pistachio, honey, heirloom salt. Too good to mess with.",
     story:
       "A small jar because pistachios are not cheap and Doc is not a magician. Smooth, a little grassy, very green. The one Cecil wants on a heel of bread.",
+    hook: "A small jar, and no apologies for it",
+    tasteProfile: [
+      "Smooth before it is anything else",
+      "Grassy, and properly green",
+      "Honey just under the surface",
+      "Heirloom salt, then a clean finish",
+    ],
+    eatWith: "A heel of good bread, ricotta, figs, and not much else.",
     ingredients: [
       "Pistachios",
       "Organic Raw Honey",
@@ -162,6 +220,14 @@ export const products: Product[] = [
     lede: "Pecans, maple, bourbon barrel smoked salt. That's October.",
     story:
       "Maple in the mill and bourbon barrel smoked salt, darker flecks you can see through the glass. The tasting-spoon jar, and the one that never lasts the week.",
+    hook: "The one that never lasts the week",
+    tasteProfile: [
+      "Pecan, buttery and soft",
+      "Maple in the mill, not poured on top",
+      "Bourbon barrel smoke in the dark flecks",
+      "Finishes like October",
+    ],
+    eatWith: "Pancakes, roast sweet potato, vanilla ice cream, and the tasting spoon.",
     ingredients: [
       "Pecans",
       "Maple syrup",
@@ -184,6 +250,14 @@ export const products: Product[] = [
     lede: "Hazelnut, cacao, maple, heirloom salt. Dessert without the junk.",
     story:
       "Not a candy jar and not a health claim. Hazelnuts and cacao, ground until they give up, maple to finish. Doc eats it with a spoon like the rest of them.",
+    hook: "Not a candy jar, and not a health claim",
+    tasteProfile: [
+      "Hazelnut first, ground until it gives up",
+      "Cacao is bitter, not sweet",
+      "Maple to finish, lightly",
+      "Salt makes the chocolate louder",
+    ],
+    eatWith: "Sourdough, strawberries, espresso, and a spoon you did not plan on.",
     ingredients: [
       "Hazelnuts",
       "Triple Fat Cacao (100%)",

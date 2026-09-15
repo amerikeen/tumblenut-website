@@ -13,10 +13,22 @@ import { useScrollProgress } from "@/lib/scroll";
  * world, which is the point — the sections are dramatic, but they are dramatic
  * *in Columbia*.
  *
- * The plate holds its height and the content is pulled back over it. Doing it
- * the other way round -- a negative bottom margin on the sticky element --
- * leaves it with a zero-height margin box, so sticky never releases and its
- * painted screenful covers the footer.
+ * **The plate is fixed, not sticky.** It used to be `sticky top-0 h-svh` with
+ * the children pulled back over it by `-mt-[100svh]`, which worked but ended
+ * the scene exactly where the sequence ended -- so the footer had nothing
+ * behind it. Giving the footer its own copy of the same photograph was not the
+ * same thing: a second instance crops and scales independently, so it read as
+ * a separate panel that happened to use the same image rather than as the
+ * scene continuing.
+ *
+ * Fixed keeps one plate painting for the whole page, which means the footer
+ * can be a translucent panel laid over the *actual* workshop rather than over
+ * a replica of it. It also takes no space in layout, which is why the
+ * `-mt-[100svh]` pull-back is gone with it.
+ *
+ * The wrapper is no longer `isolate`: that created a stacking context and
+ * trapped the plate inside this component's box, which is the one thing it
+ * must escape.
  */
 export function JourneyBackdrop({ children }: { children: ReactNode }) {
   const [ref, progress] = useScrollProgress<HTMLDivElement>();
@@ -26,8 +38,8 @@ export function JourneyBackdrop({ children }: { children: ReactNode }) {
   const at = progress * span;
 
   return (
-    <div ref={ref} className="relative isolate" data-chrome="dark">
-      <div aria-hidden="true" className="pointer-events-none sticky top-0 -z-10 h-svh overflow-hidden">
+    <div ref={ref} className="relative" data-chrome="dark">
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         {journey.map((plate, i) => {
           // Full strength at its own stop, gone one stop either side.
           const d = Math.abs(at - i);
@@ -47,7 +59,7 @@ export function JourneyBackdrop({ children }: { children: ReactNode }) {
           style={{ backgroundColor: `rgba(28, 18, 10, ${PLATE_VEIL})` }}
         />
       </div>
-      <div className="-mt-[100svh]">{children}</div>
+      {children}
     </div>
   );
 }

@@ -39,34 +39,23 @@ export function SiteFooter() {
 
   return (
     <footer
-      className="relative isolate overflow-hidden px-3 pt-3 pb-3 sm:px-5 sm:pt-5"
-      style={{ color: CREAM }}
+      className="relative overflow-hidden px-3 pt-3 pb-3 sm:px-5 sm:pt-5"
+      /* A TRANSLUCENT PANEL, not a background image.
+         The first attempt gave the footer its own copy of the workshop plate.
+         That is not the same thing: a second instance crops and scales on its
+         own, so it read as a separate panel that happened to use the same
+         photograph. The journey plate is fixed now and paints the whole page,
+         so the footer only has to be dark enough to read and let the real
+         scene show through -- the footer genuinely covers the workshop rather
+         than imitating it.
+
+         The alpha also does the work on pages that have no backdrop at all.
+         Over the paper ground of /shop or /cart this same colour resolves to a
+         deep brown that cream type still sits on, so one value serves both
+         without branching. */
+      style={{ color: CREAM, backgroundColor: "rgba(20,13,7,0.82)" }}
       data-chrome="dark"
     >
-      {/* The forest slab is gone. The journey south ends at Doc's workshop, and
-          the page used to stop dead at a flat green block -- which read as a
-          different site once the green header went. Now the workshop carries on
-          behind the footer and the footer sits ON it, so the scroll arrives
-          somewhere instead of just ending.
-
-          The plate is the same interior the journey backdrop finishes on, so
-          the two genuinely line up rather than merely rhyming. */}
-      <div
-        className="absolute inset-0 -z-20 bg-cover bg-center"
-        style={{ backgroundImage: "url('/brand/scenes/workshop-interior.jpg')" }}
-        aria-hidden="true"
-      />
-      {/* Enough veil that dashed rules and body copy hold, not so much that the
-          shed disappears and we are back to a flat block in a different colour. */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(20,13,7,0.62) 0%, rgba(20,13,7,0.78) 45%, rgba(20,13,7,0.9) 100%)",
-        }}
-        aria-hidden="true"
-      />
-
       <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-[22fr_32fr_32fr_14fr]">
         {/* 1 — the mark, in its dashed box */}
         {/* The cast, filling the box rather than floating in it.

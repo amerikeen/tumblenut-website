@@ -68,7 +68,7 @@ export const products: Product[] = [
     contains: "Peanuts",
     lede: "Deep-roasted peanut, applewood smoked salt, a little honey. Like an old friend.",
     story:
-      "The jar Doc ground for himself, back when there was only one. Deep roast, a crackle of smoked salt, honey just enough to round it. Stir it. That's not a suggestion.",
+      "The jar Doc ground for himself, back when there was only one. Deep roast, a crackle of smoked salt, honey just enough to round it. Ground into glass, the way he has always done it.",
     hook: "The jar that started the wall",
     tasteProfile: [
       "Deep roast, before anything else",

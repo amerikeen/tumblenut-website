@@ -43,10 +43,10 @@ function CartPage() {
     return (
       <main data-chrome="light" className="mx-auto max-w-xl px-5 py-20 text-center sm:px-8">
         <p className="text-xs tracking-[0.32em] text-muted uppercase">The workshop</p>
-        <h1 className="mt-3 font-display text-4xl">Doc will stir a fresh batch.</h1>
+        <h1 className="mt-3 font-display text-4xl">Doc will grind a fresh batch.</h1>
         <p className="mt-4 leading-relaxed text-walnut">
           Thank you, {placed}. This crate is a workshop order — we'll pack it in Columbia and
-          send a note. No payment ran. Stir it when it lands.
+          send a note. No payment ran. It lands in glass.
         </p>
         <Link to="/shop" className="mt-8 inline-block">
           <Button variant="line">Back to the jars</Button>

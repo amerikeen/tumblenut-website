@@ -85,12 +85,12 @@ export const differentiator = {
   proof: [
     { k: "Ingredients", v: "All natural" },
     { k: "Made in", v: "Columbia, TN" },
-    { k: "Stir required", v: "Always" },
+    { k: "Packed in", v: "Glass" },
   ],
 };
 
 /**
- * The four NO cards.
+ * The five NO cards.
  *
  * Each is a header pill plus a body panel. When the next card lands it covers
  * the body and leaves the pill showing, so the pills stack into a clean column
@@ -118,7 +118,13 @@ export const noCards = [
     id: "seed-oils",
     kicker: "No",
     title: "Seed oils",
-    body: "The only oil is the one that came out of the nut. That is why you stir it.",
+    body: "The only oil is the one that came out of the nut. Nothing was added to hold it together.",
+  },
+  {
+    id: "plastic",
+    kicker: "No",
+    title: "Plastic",
+    body: "Glass and a steel lid. Nut butter is mostly oil, and glass gives oil nothing to take. It costs us more than a tub would. We pay it.",
   },
   {
     id: "more-than-peanut",
@@ -136,7 +142,7 @@ export const grind = {
 export const threePack = {
   eyebrow: "Build your 3 pack",
   heading: "Any three jars, five dollars off",
-  body: "Mix them however you like. One crate, straw, and a stir stick.",
+  body: "Mix them however you like. One crate, packing straw, three glass jars.",
 };
 
 /**
@@ -145,8 +151,15 @@ export const threePack = {
  * "Stone ground" is gone: the mill is a WEnutbutter WB02, which is not a stone
  * grinder, and a method claim that names the wrong machine is the same class
  * of error as an ingredient claim that names the wrong nut. What replaced it
- * talks about the result -- texture, freshness, the oil on top -- which stays
- * true whatever is bolted to the bench.
+ * talks about the result -- texture, freshness, the jar it goes into -- which
+ * stays true whatever is bolted to the bench.
+ *
+ * "Stir it" is gone from this list and from the whole site, on Jeff's call
+ * 2026-09-15. The front label already says "Give it a Stir!" -- it is a
+ * hardcoded element of label-sticker.tsx and every approved die carries the
+ * stir layer -- so the instruction reaches the customer with the jar in their
+ * hand, which is the only moment it is useful. Repeating it as a brand theme
+ * was harping. The glass stop took its place.
  *
  * "Maury County" is gone too. The pecans and the rest are not sourced near
  * Columbia, and a spoke headed with the county name implies they are. Columbia
@@ -173,9 +186,9 @@ export const whyStops = [
     line: "Pistachio, pecan, hazelnut, almond, pepita. Read the label and pick the jar that belongs on your table.",
   },
   {
-    id: "stir-it",
-    title: "Stir it",
-    line: "The oil on top is the proof, not the problem. Nothing was added to hold it together. One minute with a knife.",
+    id: "glass",
+    title: "Glass, not plastic",
+    line: "A mason jar and a steel lid cost more than a plastic tub would. Glass is inert — it trades nothing with what is inside it, and nut butter is mostly oil. Worth paying for.",
   },
 ];
 

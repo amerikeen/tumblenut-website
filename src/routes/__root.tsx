@@ -16,7 +16,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Tumblenut — small batch nut butters from a workshop in Maury County, Tennessee. Now Cecil can enjoy his favorite nut butters too!",
+          "Tumblenut — small batch nut butters from a workshop in Columbia, Tennessee. Now Cecil can enjoy his favorite nut butters too!",
       },
       { name: "theme-color", content: "#F4EBD8" },
     ],

@@ -1,6 +1,6 @@
 # Tumblenut
 
-Small-batch nut butters from a workshop in Maury County, Tennessee.
+Small-batch nut butters from a workshop in Columbia, Tennessee.
 
 This is a snapshot of the Grok-built site: Pixar-Tennessee film, Stylish type, Forest `#3A5A40` chrome, and the seven SKU jars.
 

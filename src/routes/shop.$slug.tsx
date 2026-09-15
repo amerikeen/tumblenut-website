@@ -146,7 +146,7 @@ function ProductPage() {
                   "every ingredient named" is the promise, not "safe". */}
               <div className="rounded-xl border border-[#d4c4a8] bg-[#fbf6ec] p-5 lg:col-span-2">
                 <ul className="grid grid-cols-2 gap-x-4 gap-y-3 lg:grid-cols-4">
-                  {["Small batch", "Maury County", "Ingredients named", "Glass jar"].map(
+                  {["Small batch", "Columbia, TN", "Ingredients named", "Glass jar"].map(
                     (b) => (
                       <li key={b} className="t-meta text-center text-[0.68rem] leading-snug text-[#7a6252]">
                         {b}

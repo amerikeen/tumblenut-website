@@ -17,7 +17,7 @@
  *
  * **Honest.** A retailer is exactly who would like to hear "safe for allergy
  * kids", and that is exactly what this page may never say. Every jar is packed
- * in a shop that handles peanuts and tree nuts. What we sell a stockist is a
+ * in a shop that handles peanuts and tree nuts. What we sell a partner is a
  * shelf where more customers find something they want -- more choices, never a
  * safe choice. Watch the WHO list especially: "schools and camps" reads as a
  * safety claim even when the words avoid it, which is why it is not there.
@@ -68,7 +68,7 @@ export const ladder: LadderCard[] = [
   {
     id: "what",
     question: "What?",
-    title: "What stockists get",
+    title: "What partners get",
     items: [
       "Wholesale pricing with room to make the shelf worth it",
       "Mixed cases, so the shelf is not a bet on one flavour",
@@ -84,7 +84,7 @@ export const ladder: LadderCard[] = [
     items: [
       "Specialty grocers and general stores",
       "Farmers markets and co-ops",
-      "Coffee shops and bakeries",
+      "Coffee shops, bakeries and smoothie bars",
       "Farm stands and gift shops",
       "Kitchens that field a lot of “what is in this?”",
       "Anyone tired of stocking one nut butter and calling it a section",

@@ -26,7 +26,7 @@ import { TextRoll } from "./chrome/TextRoll";
  */
 const FOOTER_NAV = [
   { to: "/shop", label: "Shop" },
-  { to: "/wholesale", label: "Become a stockist" },
+  { to: "/wholesale", label: "Become a partner" },
   { to: "/about", label: "About" },
   { to: "/stores", label: "Stores" },
   { to: "/contact", label: "Contact" },

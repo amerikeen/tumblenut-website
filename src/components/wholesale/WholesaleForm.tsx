@@ -144,7 +144,7 @@ export function WholesaleForm() {
                 <TextRoll outlineColor="#1c120a">{enquiry.cta}</TextRoll>
               </button>
 
-              {/* On every page in the footer, and again here. A stockist is
+              {/* On every page in the footer, and again here. A shop owner is
                   precisely the reader who must not be left to assume. */}
               <p className="t-body text-[0.9rem] leading-relaxed text-[#f0e3cd]/75">
                 {FACILITY_NOTE}

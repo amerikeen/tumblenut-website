@@ -1,55 +1,39 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { OpeningFilm } from "@/components/OpeningFilm";
-import { Button } from "@/components/ui/button";
-import { openingShots } from "@/data/film";
-import { FACILITY_NOTE } from "@/data/products";
+import { createFileRoute } from "@tanstack/react-router";
+import { PagePlaceholder } from "@/components/chrome/PagePlaceholder";
 
-export const Route = createFileRoute("/story")({ component: Story });
+/**
+ * STUBBED 2026-09-15, and deliberately so.
+ *
+ * What was here was a pre-rebuild page: Stylish serif headings, a plain article
+ * column, and no clearance for the floating lockup -- one of the dated cream
+ * pages Jeff asked not to be shown until the site reads like one thing.
+ *
+ * It was also carrying copy the rest of the site had already corrected. It
+ * said Cecil "can't go near a peanut", which is the line the reel dropped
+ * because it implied Cecil could not be in the workshop at all; the film now
+ * says he reacts to peanuts. A page nothing links to is exactly where a
+ * corrected line quietly survives.
+ *
+ * Nothing in the nav points here, so this is reachable only by an old link or
+ * a search result -- hence `noindex` and the honest holding page rather than a
+ * redirect, which would hide that the story page is still owed.
+ *
+ * The real page belongs on /about when that is written. Delete this file then;
+ * do not restore the old one.
+ */
+export const Route = createFileRoute("/story")({
+  component: Page,
+  head: () => ({
+    meta: [{ name: "robots", content: "noindex, follow" }],
+  }),
+});
 
-function Story() {
+function Page() {
   return (
-    <main data-chrome="light">
-      <OpeningFilm />
-      <article className="mx-auto max-w-2xl px-5 py-16 sm:px-8">
-        <p className="text-xs tracking-[0.32em] text-muted uppercase">Columbia, Tennessee</p>
-        <h1 className="mt-3 font-display text-4xl leading-tight">
-          Doc ground peanut butter in his workshop. Just for himself.
-        </h1>
-        <div className="mt-8 space-y-6 text-lg leading-relaxed text-walnut">
-          <p>
-            Cecil fell off a truck bound for the zoo and found his new home with Doc. Turns out
-            Cecil can't go near a peanut.
-          </p>
-          <p>
-            So Doc kept grinding peanuts — and started grinding everything else too. Pistachio,
-            pecan, hazelnut, almond, pepita. More ways to make a nut butter sandwich.
-          </p>
-          <p>
-            That is the whole story, and it has to stay honest. Classic Crunchy and Firecracker
-            Peanut are peanut jars. Smokehouse Almond, Lucky Pistachio, Harvest Pecan and Wild
-            Cacao are tree-nut jars. Pumpkin Patch is the seed jar. Every label names what is
-            inside. That is not the same as a promise that a jar is safe, and we will never make
-            that promise — you know your table better than we do.
-          </p>
-        </div>
-        <ol className="mt-12 space-y-4 border-t border-rule pt-10">
-          {openingShots.map((s, i) => (
-            <li key={s.id} className="flex gap-4">
-              <span className="font-display text-muted tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-              <span>{s.line}</span>
-            </li>
-          ))}
-        </ol>
-        <p className="mt-10 text-xs leading-relaxed text-muted">{FACILITY_NOTE}</p>
-        <Link to="/shop" className="mt-10 inline-block">
-          <Button>See the jars</Button>
-        </Link>
-      </article>
-      <img
-        src="/brand/cinema/tasting-v2.jpg"
-        alt="Doc and Cecil tasting pecan butter in the workshop"
-        className="aspect-video w-full object-cover"
-      />
-    </main>
+    <PagePlaceholder
+      eyebrow="The story"
+      heading="Doc and Cecil, properly"
+      body="This page is being rewritten. The short version is in the film on the home page, and the long one is coming to About — it has to be exactly right before it goes up, so it is coming rather than guessed at."
+    />
   );
 }

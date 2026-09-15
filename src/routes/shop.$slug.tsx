@@ -2,11 +2,24 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { AddToCart } from "@/components/AddToCart";
 import { JarFigure } from "@/components/JarFigure";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
+import { NotFound } from "@/components/chrome/NotFound";
 import { allergenLabel, FACILITY_NOTE, productBySlug, products } from "@/data/products";
 import { formatUsd } from "@/lib/utils";
 
 export const Route = createFileRoute("/shop/$slug")({
   component: ProductPage,
+  /**
+   * The slug check belongs HERE, not in the component.
+   *
+   * `notFound()` thrown during render did not resolve as a not-found -- it hit
+   * the error boundary instead, so /shop/anything-wrong rendered "Something
+   * went wrong!" with a Show Error button on a blank page. Thrown from the
+   * loader it is handled as what it actually is, and the branded 404 renders.
+   */
+  loader: ({ params }) => {
+    if (!productBySlug[params.slug]) throw notFound();
+  },
+  notFoundComponent: NotFound,
   head: ({ params }) => {
     const p = productBySlug[params.slug];
     if (!p) return {};

@@ -173,7 +173,7 @@ export const whyStops = [
   {
     id: "small-batch",
     title: "Small batches",
-    line: "Forty pounds at a time, ground the week it ships. Nothing sits in a warehouse getting old.",
+    line: "Ground the week it ships. Nothing sits in a warehouse getting old, and nothing is made to sit.",
   },
   {
     id: "every-ingredient-named",

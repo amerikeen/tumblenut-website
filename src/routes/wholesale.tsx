@@ -13,7 +13,7 @@ export const Route = createFileRoute("/wholesale")({
       {
         name: "description",
         content:
-          "Put Tumblenut on your shelf. Small-batch nut butters ground in Maury County, Tennessee, with every ingredient named on the label.",
+          "Put Tumblenut on your shelf. Small-batch nut butters ground in Columbia, Tennessee, with every ingredient named on the label.",
       },
     ],
   }),

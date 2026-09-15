@@ -41,7 +41,7 @@ export const hero = {
     { src: "/brand/cinema/tasting-v2.jpg", alt: "A jar open on the table, spoon in hand" },
   ],
   lede:
-    "Small batches, ground in Maury County. Every jar names what is in it, so a customer can read the label and decide for themselves.",
+    "Small batches, ground in Columbia, TN. Every jar names what is in it, so a customer can read the label and decide for themselves.",
 };
 
 export type LadderCard = {
@@ -74,7 +74,7 @@ export const ladder: LadderCard[] = [
       "Mixed cases, so the shelf is not a bet on one flavour",
       "Short lead times — the mill is a drive away, not a container away",
       "Shelf tags that name every ingredient, printed and ready to clip on",
-      "A direct line to Doc, who ground the batch and can answer for it",
+      "A direct line to the person who ground the batch and can answer for it",
     ],
   },
   {
@@ -94,14 +94,30 @@ export const ladder: LadderCard[] = [
 
 export const enquiry = {
   heading: "Let's talk",
+  /**
+   * NO CHARACTER IN THE FORM COPY, and this should not come back.
+   *
+   * It used to say "Doc reads these himself, and answers with what he can
+   * actually deliver." Doc is a squirrel. That is an operational claim about
+   * who handles a retailer's enquiry, made on the one page where a buyer is
+   * deciding whether this is a real business they can raise a PO against --
+   * and made above a form that is still stubbed and sends nowhere.
+   *
+   * The reference site is the tell: theirs says "faster than Doug can spot a
+   * bad sauce." Doug is a SIMILE, a unit of speed. They never claim he reads
+   * the form. Doc narrating the reel or fronting a jar is a character in a
+   * story; Doc answering trade mail is a fact that is not true.
+   *
+   * If a line like this is ever wanted, it takes a real person's name.
+   */
   intro:
-    "Tell us about the shelf. Doc reads these himself, and answers with what he can actually deliver.",
+    "Tell us about the shelf — the size of it, the town, and what your customers keep asking for. We answer with what we can actually deliver.",
   cta: "Send it",
   /** Shown after submit while WHOLESALE_LIVE is false. Says plainly what happened. */
   stubbed:
     "Nothing was sent — this form is not wired to an inbox yet, so there is no point pretending otherwise. Until it is, email is the honest route, and the address goes up the day it is being watched.",
   live:
-    "Got it. Doc will come back to you — usually within a couple of days, and always from a real person.",
+    "Got it. We will come back to you — usually within a couple of days, and always from a real person.",
   businessTypes: [
     "Specialty grocer or general store",
     "Farmers market or co-op",

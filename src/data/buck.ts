@@ -69,7 +69,7 @@ export const PLATE_VEIL = 0.34;
 export const punchline = {
   eyebrow: "Small batch · Columbia, Tennessee",
   heading: "More ways to make a nut butter sandwich",
-  body: "Doc still grinds peanuts. He also grinds pistachio, pecan, hazelnut and pepita — so there is more than one jar to pick from. Every label says exactly what is inside.",
+  body: "Doc still grinds peanuts. He also grinds pistachio, pecan, hazelnut and pepita. Every label says exactly what is inside.",
   cta: "See the jars",
 };
 
@@ -106,7 +106,7 @@ export const noCards = [
     id: "junk",
     kicker: "No",
     title: "Junk",
-    body: "No palm oil, no stabilisers, no fillers. Every ingredient is a natural one, and the label names all of them.",
+    body: "No palm oil, no stabilisers, no fillers. The label names all of it.",
   },
   {
     id: "gluten",
@@ -142,7 +142,7 @@ export const grind = {
 export const threePack = {
   eyebrow: "Build your 3 pack",
   heading: "Any three jars, five dollars off",
-  body: "Mix them however you like. One crate, packing straw, three glass jars.",
+  body: "One crate, packing straw, three glass jars.",
 };
 
 /**
@@ -173,7 +173,7 @@ export const whyStops = [
   {
     id: "small-batch",
     title: "Small batches",
-    line: "Ground the week it ships. Nothing sits in a warehouse getting old, and nothing is made to sit.",
+    line: "Ground the week it ships. Nothing is made to sit.",
   },
   {
     id: "every-ingredient-named",
@@ -183,12 +183,12 @@ export const whyStops = [
   {
     id: "more-than-peanut",
     title: "More than peanut",
-    line: "Pistachio, pecan, hazelnut, almond, pepita. Read the label and pick the jar that belongs on your table.",
+    line: "Pistachio, pecan, hazelnut, almond, pepita. Not one peanut jar and a shrug.",
   },
   {
     id: "glass",
     title: "Glass, not plastic",
-    line: "A mason jar and a steel lid cost more than a plastic tub would. Glass is inert — it trades nothing with what is inside it, and nut butter is mostly oil. Worth paying for.",
+    line: "Glass is inert, and nut butter is mostly oil. Costs more than a tub. Worth it.",
   },
 ];
 

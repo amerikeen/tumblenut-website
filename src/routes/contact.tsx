@@ -25,7 +25,7 @@ function Page() {
     <PagePlaceholder
       eyebrow="Contact"
       heading="Get in touch"
-      body="A proper contact form is coming. In the meantime, wholesale enquiries have their own page, and anything else can wait for the form rather than going to an address nobody is watching."
+      body="A proper contact form is coming. Wholesale enquiries: wholesale@tumblenut.com."
     />
   );
 }

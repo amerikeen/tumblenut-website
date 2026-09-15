@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { enquiry, WHOLESALE_LIVE } from "@/data/wholesale";
+import { enquiry, WHOLESALE_EMAIL, WHOLESALE_LIVE } from "@/data/wholesale";
 import { FACILITY_NOTE } from "@/data/products";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { TextRoll } from "@/components/chrome/TextRoll";
@@ -143,6 +143,16 @@ export function WholesaleForm() {
               >
                 <TextRoll outlineColor="#1c120a">{enquiry.cta}</TextRoll>
               </button>
+
+              {/* The submit is stubbed, so the address must be reachable without
+                  pressing it. A buyer who will not fill in a form will still
+                  send an email, and this is the only route that works today. */}
+              <a
+                href={`mailto:${WHOLESALE_EMAIL}`}
+                className="t-body text-center text-[0.9rem] text-[#f0e3cd]/75 underline underline-offset-4 hover:text-[#fbf3e4]"
+              >
+                {enquiry.orEmail}
+              </a>
 
               {/* On every page in the footer, and again here. A shop owner is
                   precisely the reader who must not be left to assume. */}

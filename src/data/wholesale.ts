@@ -24,13 +24,30 @@
  */
 
 /**
- * No inbox, no CRM, no form handler is wired behind the enquiry form.
+ * No form handler is wired behind the enquiry form. The SUBMIT is still stubbed.
  *
  * While this is false the form must not imply an enquiry was received or that
  * anyone will reply. Wire a real destination, post to it in WholesaleForm's
  * onSubmit, then flip this. Do not flip it to make the page feel finished.
  */
 export const WHOLESALE_LIVE = false;
+
+/**
+ * The trade address. One constant, because it is about to move.
+ *
+ * Owner 2026-09-15: Zoho with integrated CRM is being stood up over the next few
+ * days and this mailbox comes with it. Deliberately NOT a temporary forwarder --
+ * a stopgap we would rip out in a week is not worth the wiring.
+ *
+ * KNOWN GAP, RAISED AND ACCEPTED: tumblenut.com has no MX record yet, so until
+ * Zoho's records are in, mail to this address HARD BOUNCES. That is the one way
+ * this is worse than saying nothing -- a bounce reads as a dead business, where
+ * silence only reads as a new one. The exposure is a few days on a pre-launch
+ * domain with no trade traffic, which is why it ships anyway.
+ *
+ * When the enquiry POST lands, this address is the fallback, not the mechanism.
+ */
+export const WHOLESALE_EMAIL = "wholesale@tumblenut.com";
 
 export const hero = {
   heading: "Good shelves deserve more than one nut",
@@ -41,7 +58,7 @@ export const hero = {
     { src: "/brand/cinema/tasting-v2.jpg", alt: "A jar open on the table, spoon in hand" },
   ],
   lede:
-    "Small batches, ground in Columbia, TN. Every jar names what is in it, so a customer can read the label and decide for themselves.",
+    "Small batches, ground in Columbia, TN. Every jar names what is in it, so a customer can decide for themselves.",
 };
 
 export type LadderCard = {
@@ -110,12 +127,12 @@ export const enquiry = {
    *
    * If a line like this is ever wanted, it takes a real person's name.
    */
-  intro:
-    "Tell us about the shelf — the size of it, the town, and what your customers keep asking for. We answer with what we can actually deliver.",
+  intro: "Tell us about the shelf — the size of it, the town, and what your customers keep asking for.",
   cta: "Send it",
+  /** Under the form, so the address is reachable without submitting first. */
+  orEmail: `Or email ${WHOLESALE_EMAIL}`,
   /** Shown after submit while WHOLESALE_LIVE is false. Says plainly what happened. */
-  stubbed:
-    "Nothing was sent — this form is not wired to an inbox yet, so there is no point pretending otherwise. Until it is, email is the honest route, and the address goes up the day it is being watched.",
+  stubbed: `Nothing was sent — this form is not wired up yet. Email ${WHOLESALE_EMAIL} instead.`,
   live:
     "Got it. We will come back to you — usually within a couple of days, and always from a real person.",
   businessTypes: [

@@ -232,3 +232,80 @@
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   AMERIKEEN shield — the three animation wrappers, copied verbatim from
+   amerikeen-website's globals.css so the mark behaves identically on both
+   sites. Glow (3s) wraps float (4s) wraps rock (20s); they are nested rather
+   than combined because three transforms on one element fight each other.
+   --------------------------------------------------------------------------- */
+@keyframes shield-rock {
+  0% { transform: rotateY(-38deg); }
+  50% { transform: rotateY(38deg); }
+  100% { transform: rotateY(-38deg); }
+}
+@keyframes shield-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes shield-glow {
+  0%, 100% { filter: drop-shadow(0 4px 12px rgba(40, 100, 255, 0.4)); }
+  50% { filter: drop-shadow(0 6px 22px rgba(123, 192, 255, 0.85)); }
+}
+.shield-rock-wrap,
+.shield-float-wrap,
+.shield-glow-wrap {
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.shield-rock-wrap { animation: shield-rock 20s ease-in-out infinite; }
+.shield-float-wrap { animation: shield-float 4s ease-in-out infinite; }
+.shield-glow-wrap { animation: shield-glow 3s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .shield-rock-wrap,
+  .shield-float-wrap,
+  .shield-glow-wrap {
+    animation: none;
+  }
+}
+
+/* The filled -> outlined roll. See TextRoll.tsx for what was measured. */
+.roll {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  /* The window must be EXACTLY one face tall, or both copies show at once and
+     every label reads doubled. Height and the faces' line-height are the same
+     number on purpose -- change them together or not at all. */
+  height: 1.05em;
+  line-height: 1.05;
+}
+.roll-track {
+  display: block;
+  transition: transform 420ms cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+.roll-face {
+  display: block;
+  height: 1.05em;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+.roll-face-outline {
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+}
+.roll:hover .roll-track,
+a:hover .roll .roll-track,
+button:hover .roll .roll-track,
+a:focus-visible .roll .roll-track,
+button:focus-visible .roll .roll-track,
+[data-active="true"] .roll .roll-track {
+  transform: translateY(-100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .roll-track { transition: none; }
+}

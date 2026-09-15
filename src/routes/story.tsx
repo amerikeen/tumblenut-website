@@ -8,10 +8,10 @@ export const Route = createFileRoute("/story")({ component: Story });
 
 function Story() {
   return (
-    <main>
+    <main data-chrome="light">
       <OpeningFilm />
       <article className="mx-auto max-w-2xl px-5 py-16 sm:px-8">
-        <p className="text-xs tracking-[0.32em] text-muted uppercase">Maury County</p>
+        <p className="text-xs tracking-[0.32em] text-muted uppercase">Columbia, Tennessee</p>
         <h1 className="mt-3 font-display text-4xl leading-tight">
           Doc ground peanut butter in his workshop. Just for himself.
         </h1>
@@ -21,14 +21,15 @@ function Story() {
             Cecil can't go near a peanut.
           </p>
           <p>
-            So Doc kept grinding peanuts — and started grinding everything else too. One shelf for
-            Doc. One shelf for Cecil.
+            So Doc kept grinding peanuts — and started grinding everything else too. Pistachio,
+            pecan, hazelnut, almond, pepita. More ways to make a nut butter sandwich.
           </p>
           <p>
             That is the whole story, and it has to stay honest. Classic Crunchy and Firecracker
             Peanut are peanut jars. Smokehouse Almond, Lucky Pistachio, Harvest Pecan and Wild
-            Cacao are tree-nut jars. Pumpkin Patch is the seed jar. There is a shelf here for
-            Cecil. That is not the same as a promise that a jar is safe.
+            Cacao are tree-nut jars. Pumpkin Patch is the seed jar. Every label names what is
+            inside. That is not the same as a promise that a jar is safe, and we will never make
+            that promise — you know your table better than we do.
           </p>
         </div>
         <ol className="mt-12 space-y-4 border-t border-rule pt-10">

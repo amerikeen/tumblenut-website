@@ -15,7 +15,7 @@ function ProductPage() {
   const others = products.filter((p) => p.slug !== product.slug).slice(0, 4);
 
   return (
-    <main className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
+    <main data-chrome="light" className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
       <p className="text-xs tracking-[0.28em] text-muted uppercase">
         <Link to="/shop" className="hover:text-ink">
           The jars

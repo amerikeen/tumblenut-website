@@ -139,38 +139,61 @@ export const threePack = {
   body: "Mix them however you like. One crate, straw, and a stir stick.",
 };
 
-export const whySpokes = [
+/**
+ * Why Tumblenut, as four stops on the arc.
+ *
+ * "Stone ground" is gone: the mill is a WEnutbutter WB02, which is not a stone
+ * grinder, and a method claim that names the wrong machine is the same class
+ * of error as an ingredient claim that names the wrong nut. What replaced it
+ * talks about the result -- texture, freshness, the oil on top -- which stays
+ * true whatever is bolted to the bench.
+ *
+ * "Maury County" is gone too. The pecans and the rest are not sourced near
+ * Columbia, and a spoke headed with the county name implies they are. Columbia
+ * is named once, in the reel's opening card, and that is enough until there is
+ * an About page to say more.
+ *
+ * Four stops rather than the reference site's three, because that is what
+ * there is to say without padding. Keep each line to one breath.
+ */
+export const whyStops = [
   {
     id: "small-batch",
-    title: "Small batch",
-    line: "Forty pounds at a time, ground the week it ships.",
+    title: "Small batches",
+    line: "Forty pounds at a time, ground the week it ships. Nothing sits in a warehouse getting old.",
   },
   {
-    id: "stone-ground",
-    title: "Stone ground",
-    line: "Cold and slow, so the nut keeps its roast instead of cooking twice.",
+    id: "every-ingredient-named",
+    title: "Every ingredient named",
+    line: "The whole list is on the front of the jar. Nothing hides behind a word you would have to look up.",
   },
   {
-    id: "short-list",
-    title: "Short list",
-    line: "Every ingredient is one you already recognise. Read the whole label without turning the jar.",
+    id: "more-than-peanut",
+    title: "More than peanut",
+    line: "Pistachio, pecan, hazelnut, almond, pepita. Read the label and pick the jar that belongs on your table.",
   },
   {
     id: "stir-it",
     title: "Stir it",
-    line: "The oil on top is the proof, not the problem. One minute with a knife.",
-  },
-  {
-    id: "maury-county",
-    title: "Maury County",
-    line: "Columbia, Tennessee. The pecans come from nearer than you would think.",
-  },
-  {
-    id: "plainly-labelled",
-    title: "Plainly labelled",
-    line: "Every jar says what is in it, and what shop it was packed in.",
+    line: "The oil on top is the proof, not the problem. Nothing was added to hold it together. One minute with a knife.",
   },
 ];
+
+/**
+ * The range cards carry no colour field.
+ *
+ * They briefly did -- seven saturated tiles, copied from the reference site's
+ * grid. Jeff called it on 2026-09-14 and he was right about WHY theirs exists:
+ * every Bucks bottle is the same brown glass, so on a near-black page the
+ * bottles need a coloured card to sit on or they disappear. Our jars are glass
+ * full of differently coloured nut butter over a lit backdrop, so they already
+ * separate from the page and from each other. The tiles were solving a problem
+ * we do not have, and removing them let the range and the old SKU pan merge
+ * into one section instead of saying the same thing twice.
+ *
+ * `Product.tone` survives for the product pages, where one colour fills the
+ * screen behind a single jar and has a real job to do.
+ */
 
 /**
  * The newsletter has no discount — Jeff declined the percentage-off bribe on

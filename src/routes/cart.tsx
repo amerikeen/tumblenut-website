@@ -41,7 +41,7 @@ function CartPage() {
 
   if (placed) {
     return (
-      <main className="mx-auto max-w-xl px-5 py-20 text-center sm:px-8">
+      <main data-chrome="light" className="mx-auto max-w-xl px-5 py-20 text-center sm:px-8">
         <p className="text-xs tracking-[0.32em] text-muted uppercase">The workshop</p>
         <h1 className="mt-3 font-display text-4xl">Doc will stir a fresh batch.</h1>
         <p className="mt-4 leading-relaxed text-walnut">

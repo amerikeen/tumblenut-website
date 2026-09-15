@@ -26,7 +26,7 @@ export function JourneyBackdrop({ children }: { children: ReactNode }) {
   const at = progress * span;
 
   return (
-    <div ref={ref} className="relative isolate">
+    <div ref={ref} className="relative isolate" data-chrome="dark">
       <div aria-hidden="true" className="pointer-events-none sticky top-0 -z-10 h-svh overflow-hidden">
         {journey.map((plate, i) => {
           // Full strength at its own stop, gone one stop either side.

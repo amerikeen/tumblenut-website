@@ -30,7 +30,7 @@ export function OpeningFilm() {
   const isAerial = shot.id === "aerial";
 
   return (
-    <section className="relative isolate min-h-[calc(100svh-5.5rem)] overflow-hidden bg-ink text-[#eadcc9]">
+    <section className="relative isolate min-h-[calc(100svh-5.5rem)] overflow-hidden bg-ink text-[#eadcc9]" data-chrome="dark">
       <video
         key={shot.id}
         ref={videoRef}

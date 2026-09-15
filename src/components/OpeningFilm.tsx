@@ -29,8 +29,17 @@ export function OpeningFilm() {
 
   const isAerial = shot.id === "aerial";
 
+  // Full viewport, not 100svh minus a header. The 5.5rem that used to be
+  // subtracted below was the height of the old solid green header, which sat
+  // in the document and pushed the film down. The header is fixed now and
+  // occupies no layout space, so that subtraction left an 88px band at the
+  // bottom of the first screen -- through which the fixed journey plate was
+  // visible before you had scrolled anywhere.
   return (
-    <section className="relative isolate min-h-[calc(100svh-5.5rem)] overflow-hidden bg-ink text-[#eadcc9]" data-chrome="dark">
+    <section
+      className="relative isolate min-h-svh overflow-hidden bg-ink text-[#eadcc9]"
+      data-chrome="dark"
+    >
       <video
         key={shot.id}
         ref={videoRef}
@@ -97,7 +106,6 @@ export function OpeningFilm() {
           </p>
         )}
       </div>
-
     </section>
   );
 }

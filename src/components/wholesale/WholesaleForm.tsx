@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { enquiry, WHOLESALE_EMAIL, WHOLESALE_LIVE } from "@/data/wholesale";
+import { enquiry, TENNESSEE_ONLY, WHOLESALE_EMAIL, WHOLESALE_LIVE } from "@/data/wholesale";
 import { FACILITY_NOTE } from "@/data/products";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { TextRoll } from "@/components/chrome/TextRoll";
@@ -158,6 +158,13 @@ export function WholesaleForm() {
                   precisely the reader who must not be left to assume. */}
               <p className="t-body text-[0.9rem] leading-relaxed text-[#f0e3cd]/75">
                 {FACILITY_NOTE}
+              </p>
+
+              {/* Above the button, not below it. An out-of-state buyer should
+                  learn we cannot supply them BEFORE they type out their shelf,
+                  not in a reply a week later. */}
+              <p className="t-body text-[0.9rem] leading-relaxed text-[#f0e3cd]/75">
+                {TENNESSEE_ONLY}
               </p>
             </form>
           )}

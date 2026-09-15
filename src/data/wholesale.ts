@@ -49,6 +49,33 @@ export const WHOLESALE_LIVE = false;
  */
 export const WHOLESALE_EMAIL = "wholesale@tumblenut.com";
 
+/**
+ * TENNESSEE ONLY. This is a legal boundary, not a growth stage.
+ *
+ * Every jar is produced under the Tennessee Food Freedom Act (T.C.A. 53-1-118),
+ * which exempts homemade food from state licensing, permitting and inspection --
+ * and in exchange requires that the food be produced at the producer's private
+ * residence and **sold only within the state of Tennessee**. The moment a jar
+ * crosses a state line, FDA jurisdiction attaches and FDA does not recognise a
+ * state cottage-food exemption.
+ *
+ * TWO THINGS FOLLOW, and neither is optional:
+ *
+ * 1. Out-of-state partners cannot be taken on. Saying otherwise on this page
+ *    would be soliciting business we cannot legally fill.
+ * 2. Restaurants, food trucks and caterers cannot be taken on AT ALL, in state
+ *    or out. TFFA forbids homemade items being served or used as ingredients by
+ *    a food-service establishment, because those follow the Food Code and may
+ *    not source from uninspected producers. A sealed jar on a shop's retail
+ *    shelf is a different thing and is allowed -- which is the whole reason the
+ *    WHO list now says "with a retail shelf" and no longer says "smoothie bars"
+ *    or "kitchens".
+ *
+ * This lifts the day production moves to a licensed facility. Not before.
+ */
+export const TENNESSEE_ONLY =
+  "Tennessee shelves only for now — the law we produce under keeps our sales inside the state.";
+
 export const hero = {
   heading: "Good shelves deserve more than one nut",
   /** Three square plates, as theirs are. Outer two hide on mobile. */
@@ -92,6 +119,7 @@ export const ladder: LadderCard[] = [
       "Short lead times — the mill is a drive away, not a container away",
       "Shelf tags that name every ingredient, printed and ready to clip on",
       "A direct line to the person who ground the batch and can answer for it",
+      "Tennessee shelves — the law we produce under keeps sales in-state",
     ],
   },
   {
@@ -101,9 +129,8 @@ export const ladder: LadderCard[] = [
     items: [
       "Specialty grocers and general stores",
       "Farmers markets and co-ops",
-      "Coffee shops, bakeries and smoothie bars",
+      "Coffee shops and bakeries with a retail shelf",
       "Farm stands and gift shops",
-      "Kitchens that field a lot of “what is in this?”",
       "Anyone tired of stocking one nut butter and calling it a section",
     ],
   },
@@ -138,9 +165,8 @@ export const enquiry = {
   businessTypes: [
     "Specialty grocer or general store",
     "Farmers market or co-op",
-    "Coffee shop or bakery",
+    "Coffee shop or bakery with a retail shelf",
     "Farm stand or gift shop",
-    "Restaurant or kitchen",
     "Something else",
   ],
 };

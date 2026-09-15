@@ -258,13 +258,20 @@ function ProductPage() {
             {others.map((p) => (
               <li key={p.slug}>
                 <Link to="/shop/$slug" params={{ slug: p.slug }} className="group block">
-                  <div
-                    className="flex items-center justify-center rounded-xl py-6"
-                    style={{ backgroundColor: p.tone }}
-                  >
-                    <JarFigure product={p} />
+                  {/* NO tone tile behind these jars, matching /shop. The tile is
+                      the reference site's fix for bottles that are all identical
+                      brown glass on near-black; ours are glass full of
+                      differently coloured butter on paper and separate on their
+                      own. `tone` still earns its place in the hero above, where
+                      one colour fills a whole panel behind a single jar.
+                      Fixed-height cell so the row shares a baseline. */}
+                  <div className="flex h-[13rem] items-end justify-center">
+                    <JarFigure
+                      product={p}
+                      className="transition-transform duration-300 group-hover:-translate-y-1.5"
+                    />
                   </div>
-                  <p className="t-card mt-3 text-[1.35rem] text-[#2c1b12] group-hover:text-[#4a3224]">
+                  <p className="t-card mt-4 text-[1.35rem] text-[#2c1b12] group-hover:text-[#4a3224]">
                     {p.name}
                   </p>
                   <p className="t-body text-[0.95rem] text-[#7a6252]">

@@ -41,6 +41,24 @@ export const useCart = create<CartState>()(
   ),
 );
 
+/**
+ * NOTHING RECEIVES THE CRATE. `onSubmit` in `src/routes/cart.tsx` sets a
+ * confirmation and empties the store -- there is no fetch, no POST and no
+ * mailto. The form data is discarded.
+ *
+ * While this is false the page must not imply an order was received or that
+ * anyone will reply. It did both: the confirmation read "we will pack it in
+ * Columbia and write back" and the copy above the form said "send the crate and
+ * we will hold it and write back", on a domain that has no MX record. That is
+ * worse than a dead form, because a dead form only wastes a minute -- this told
+ * a customer their jars were coming.
+ *
+ * Same discipline as `WHOLESALE_LIVE` and `NEWSLETTER_LIVE`. Wire a real
+ * destination, post to it in onSubmit, then flip this. Do not flip it to make
+ * the page feel finished.
+ */
+export const CHECKOUT_LIVE = false;
+
 export function cartCount(lines: Record<string, number>) {
   return Object.values(lines).reduce((n, q) => n + q, 0);
 }
@@ -52,9 +70,7 @@ export function cartItems(lines: Record<string, number>) {
       if (!product) return null;
       return { product, qty, lineCents: product.priceCents * qty };
     })
-    .filter((row): row is { product: Product; qty: number; lineCents: number } =>
-      Boolean(row),
-    );
+    .filter((row): row is { product: Product; qty: number; lineCents: number } => Boolean(row));
 }
 
 export function cartSubtotalCents(lines: Record<string, number>) {

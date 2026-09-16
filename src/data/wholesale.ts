@@ -73,19 +73,32 @@ export const WHOLESALE_EMAIL = "wholesale@tumblenut.com";
  *
  * This lifts the day production moves to a licensed facility. Not before.
  */
-export const TENNESSEE_ONLY =
-  "Tennessee shelves only for now — the law we produce under keeps our sales inside the state.";
+/**
+ * ONE FACT, TWO AUDIENCES. The clause is shared so the two can never drift into
+ * saying different things; only the noun in front of it changes. "Shelves" is
+ * wholesale language and reads wrong on a cart, where the reader does not have
+ * one — that is an audience difference, not a different rule.
+ */
+const TENNESSEE_REASON = "the law we produce under keeps our sales inside the state.";
+
+/** Trade. /wholesale and the wholesale card on /contact. */
+export const TENNESSEE_ONLY = `Tennessee shelves only for now — ${TENNESSEE_REASON}`;
+
+/** Retail. /shop and /cart, where the reader is buying a jar, not stocking one. */
+export const TENNESSEE_ONLY_RETAIL = `We can only sell inside Tennessee for now — ${TENNESSEE_REASON}`;
 
 export const hero = {
   heading: "Good shelves deserve more than one nut",
   /** Three square plates, as theirs are. Outer two hide on mobile. */
   plates: [
     { src: "/brand/cinema/two-shelves.jpg", alt: "Jars lined up on the workshop shelves" },
-    { src: "/brand/scenes/workshop-interior.jpg", alt: "Inside the workshop with the mill running" },
+    {
+      src: "/brand/scenes/workshop-interior.jpg",
+      alt: "Inside the workshop with the mill running",
+    },
     { src: "/brand/cinema/tasting-v2.jpg", alt: "A jar open on the table, spoon in hand" },
   ],
-  lede:
-    "Small batches, ground in Columbia, TN. Every jar names what is in it, so a customer can decide for themselves.",
+  lede: "Small batches, ground in Columbia, TN. Every jar names what is in it, so a customer can decide for themselves.",
 };
 
 export type LadderCard = {
@@ -154,14 +167,14 @@ export const enquiry = {
    *
    * If a line like this is ever wanted, it takes a real person's name.
    */
-  intro: "Tell us about the shelf — the size of it, the town, and what your customers keep asking for.",
+  intro:
+    "Tell us about the shelf — the size of it, the town, and what your customers keep asking for.",
   cta: "Send it",
   /** Under the form, so the address is reachable without submitting first. */
   orEmail: `Or email ${WHOLESALE_EMAIL}`,
   /** Shown after submit while WHOLESALE_LIVE is false. Says plainly what happened. */
   stubbed: `Nothing was sent — this form is not wired up yet. Email ${WHOLESALE_EMAIL} instead.`,
-  live:
-    "Got it. We will come back to you — usually within a couple of days, and always from a real person.",
+  live: "Got it. We will come back to you — usually within a couple of days, and always from a real person.",
   businessTypes: [
     "Specialty grocer or general store",
     "Farmers market or co-op",

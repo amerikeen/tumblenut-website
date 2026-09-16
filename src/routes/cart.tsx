@@ -5,6 +5,7 @@ import { JarFigure } from "@/components/JarFigure";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { TextRoll } from "@/components/chrome/TextRoll";
 import {
+  CHECKOUT_LIVE,
   cartDiscountCents,
   cartItems,
   cartSubtotalCents,
@@ -15,6 +16,7 @@ import {
 } from "@/lib/cart";
 import { formatUsd } from "@/lib/utils";
 import { FACILITY_NOTE } from "@/data/products";
+import { TENNESSEE_ONLY_RETAIL, WHOLESALE_EMAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { useEffect, useState, type FormEvent } from "react";
 
@@ -28,7 +30,7 @@ export const Route = createFileRoute("/cart")({
     seo({
       title: "The crate — Tumblenut",
       description:
-        "The jars you have picked. Checkout is not open yet — the crate sends a note to the workshop instead of taking a card.",
+        "The jars you have picked. Checkout is not open yet — no card is taken and no payment runs.",
       robots: "noindex, follow",
     }),
 });
@@ -84,13 +86,27 @@ function CartPage() {
         <p className="t-meta text-[#7a6252]">The workshop</p>
         <ResolveHeading
           as="h1"
-          text="Doc will grind a fresh batch"
+          text={CHECKOUT_LIVE ? "Doc will grind a fresh batch" : "Nothing was sent"}
           className="t-section mt-5 max-w-[16ch] text-[#2c1b12]"
         />
-        <p className="t-lead mt-6 max-w-[48ch] text-[#4a3224]">
-          Thank you, {placed}. This crate is a workshop order — we will pack it in Columbia and
-          write back. No payment ran. It lands in glass.
-        </p>
+        {CHECKOUT_LIVE ? (
+          <p className="t-lead mt-6 max-w-[48ch] text-[#4a3224]">
+            Thank you, {placed}. This crate is a workshop order — we will pack it in Columbia and
+            write back. No payment ran. It lands in glass.
+          </p>
+        ) : (
+          <p className="t-lead mt-6 max-w-[48ch] text-[#4a3224]">
+            Sorry, {placed} — the crate is not wired up to anything yet, so that did not reach the
+            workshop and no payment ran. Email{" "}
+            <a
+              href={`mailto:${WHOLESALE_EMAIL}`}
+              className="underline decoration-[#d4c4a8] decoration-2 underline-offset-[6px] hover:decoration-[#2c1b12]"
+            >
+              {WHOLESALE_EMAIL}
+            </a>{" "}
+            and say which jars you were after.
+          </p>
+        )}
         <div className="mt-10">
           <Link to="/shop" className={SOLID}>
             <TextRoll outlineColor="#f4ebd8">Back to the jars</TextRoll>
@@ -176,9 +192,17 @@ function CartPage() {
               <span className="tabular-nums">{formatUsd(total)}</span>
             </p>
 
+            {/* ABOVE the button, not after it, for the same reason
+                TENNESSEE_ONLY sits above the wholesale submit: a reader should
+                learn the form goes nowhere BEFORE they type their name into it,
+                not in the confirmation afterwards. */}
             <p className="t-body mt-5 rounded-xl border border-[#d4c4a8] bg-[#f4ebd8] p-4 text-[0.85rem] leading-relaxed text-[#4a3224]">
               Checkout is not open yet. The LLC and the bank account are still in progress, so no
-              card is taken and no payment runs — send the crate and we will hold it and write back.
+              card is taken and no payment runs.{" "}
+              {CHECKOUT_LIVE
+                ? "Send the crate and we will hold it and write back."
+                : "This form is not wired up yet either — nothing is sent."}{" "}
+              {TENNESSEE_ONLY_RETAIL}
             </p>
 
             <form className="mt-6 flex flex-col gap-4" onSubmit={onSubmit}>

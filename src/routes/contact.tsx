@@ -115,8 +115,8 @@ function ContactPage() {
             Orders
           </h2>
           <p className="t-body mt-4 max-w-[46ch] text-[#4a3224]">
-            Checkout is not open yet. No card is taken and no payment runs — the crate sends a note
-            to the workshop and clears itself.
+            Checkout is not open yet, and the crate is not wired up to send anything — no card is
+            taken and no payment runs. Email the address above about jars.
           </p>
           <Link
             to="/cart"

@@ -172,6 +172,28 @@ export function shopGraph(products: Product[]) {
   });
 }
 
+/**
+ * FAQPage. The single highest-leverage node for citation: answer engines lift
+ * `acceptedAnswer` text close to verbatim, so these strings are the ones most
+ * likely to be quoted back at a stranger with our name on them. They come
+ * straight from `src/data/faq.ts` and must never be rewritten here.
+ */
+export function faqGraph(entries: Array<{ q: string; a: string }>) {
+  return graph({
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}/faq#faq`,
+    url: `${SITE_URL}/faq`,
+    name: "Frequently asked",
+    isPartOf: { "@id": SITE_ID },
+    about: { "@id": ORG_ID },
+    mainEntity: entries.map((e) => ({
+      "@type": "Question",
+      name: e.q,
+      acceptedAnswer: { "@type": "Answer", text: e.a },
+    })),
+  });
+}
+
 export const aboutGraph = graph({
   "@type": "AboutPage",
   "@id": `${SITE_URL}/about#about`,

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { JarFigure } from "@/components/JarFigure";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { products, FACILITY_NOTE } from "@/data/products";
+import { TENNESSEE_ONLY_RETAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { jsonLd, shopGraph } from "@/lib/structured-data";
 import { formatUsd } from "@/lib/utils";
@@ -50,6 +51,12 @@ function Shop() {
       <p className="t-lead mt-7 max-w-[46ch] text-[#4a3224]">
         Ground in small batches in Columbia, Tennessee. Every label names what is inside, so you can
         read it and pick the jar that belongs on your table.
+      </p>
+      {/* TFFA caps ALL sales to the state, not only wholesale, and until now
+          only /wholesale said so. A buyer should meet that before they fill a
+          crate, not after. Same constant the wholesale page uses. */}
+      <p className="t-body mt-5 max-w-[46ch] text-[0.95rem] text-[#7a6252]">
+        {TENNESSEE_ONLY_RETAIL}
       </p>
 
       <ul className="mt-16 grid grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4">

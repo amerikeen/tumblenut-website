@@ -66,7 +66,7 @@ export const OG_IMAGE = `${SITE_URL}/og.jpg`;
  * `/shop/$slug` is deliberately absent -- the product URLs come from
  * `src/data/products.ts` so a new SKU cannot ship without its sitemap entry.
  */
-export const INDEXABLE_ROUTES = ["/", "/shop", "/wholesale", "/about", "/contact"] as const;
+export const INDEXABLE_ROUTES = ["/", "/shop", "/wholesale", "/about", "/faq", "/contact"] as const;
 
 /**
  * Routes that carry `robots: noindex` and must stay out of the sitemap.

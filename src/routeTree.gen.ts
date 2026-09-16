@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as StoresRouteImport } from './routes/stores'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as WholesaleRouteImport } from './routes/wholesale'
@@ -37,6 +38,11 @@ const CartRoute = CartRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StoresRoute = StoresRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/stores': typeof StoresRoute
   '/story': typeof StoryRoute
   '/wholesale': typeof WholesaleRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/stores': typeof StoresRoute
   '/story': typeof StoryRoute
   '/wholesale': typeof WholesaleRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/stores': typeof StoresRoute
   '/story': typeof StoryRoute
   '/wholesale': typeof WholesaleRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/cart'
     | '/contact'
+    | '/faq'
     | '/stores'
     | '/story'
     | '/wholesale'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/cart'
     | '/contact'
+    | '/faq'
     | '/stores'
     | '/story'
     | '/wholesale'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/cart'
     | '/contact'
+    | '/faq'
     | '/stores'
     | '/story'
     | '/wholesale'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
   StoresRoute: typeof StoresRoute
   StoryRoute: typeof StoryRoute
   WholesaleRoute: typeof WholesaleRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stores': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
   StoresRoute: StoresRoute,
   StoryRoute: StoryRoute,
   WholesaleRoute: WholesaleRoute,

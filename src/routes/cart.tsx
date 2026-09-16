@@ -5,6 +5,15 @@ import { JarFigure } from "@/components/JarFigure";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { TextRoll } from "@/components/chrome/TextRoll";
 import {
+  ON_DARK_BODY,
+  ON_DARK_EYEBROW,
+  ON_DARK_FIELD,
+  ON_DARK_HEAD,
+  ON_DARK_MUTED,
+  PageBackdrop,
+  PLATES,
+} from "@/components/chrome/PageBackdrop";
+import {
   CHECKOUT_LIVE,
   cartDiscountCents,
   cartItems,
@@ -36,7 +45,7 @@ export const Route = createFileRoute("/cart")({
 });
 
 const SOLID =
-  "inline-flex h-[52px] items-center justify-center rounded-xl bg-[#2c1b12] px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] text-[#f4ebd8] uppercase";
+  "inline-flex h-[52px] items-center justify-center rounded-xl bg-[#fbf3e4] px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] text-[#1c120a] uppercase";
 
 /**
  * The crate.
@@ -47,7 +56,14 @@ const SOLID =
  * whatever section is beneath it, defaulting to the cream treatment when a page
  * declares nothing. So on this paper page the entire header rendered cream on
  * cream and was, in practice, invisible. The `pt-32` keeps the h1 clear of the
- * lockup.
+ * lockup. `PageBackdrop` now owns the `data-chrome` so that cannot recur.
+ *
+ * THE GROUND: `two-shelves.jpg` at 0.74. Doc at the mill with the jars ranked
+ * up on the shelves behind him -- the only plate in the set that shows STOCK,
+ * which is the right thing behind a page listing what you have taken off it.
+ * A character plate, so the veil is well past its 0.41 contrast floor: 0.74 is
+ * the value /wholesale arrived at for the same problem on a comparably close
+ * interior, and it is what stops the type sitting on Doc's face.
  *
  * CHECKOUT IS NOT OPEN and the copy has to keep saying so. No card is taken and
  * no payment runs; this sends a note and clears the crate. That is honest while
@@ -79,28 +95,29 @@ function CartPage() {
 
   if (placed) {
     return (
-      <main
-        data-chrome="light"
-        className="mx-auto flex min-h-[70svh] max-w-3xl flex-col justify-center px-5 pt-32 pb-20 sm:px-8"
+      <PageBackdrop
+        plate={PLATES.cart.src}
+        veil={PLATES.cart.veil}
+        className="mx-auto flex min-h-[78svh] max-w-3xl flex-col justify-center px-5 pt-32 pb-20 sm:px-8"
       >
-        <p className="t-meta text-[#7a6252]">The workshop</p>
+        <p className={`t-meta ${ON_DARK_EYEBROW}`}>The workshop</p>
         <ResolveHeading
           as="h1"
           text={CHECKOUT_LIVE ? "Doc will grind a fresh batch" : "Nothing was sent"}
-          className="t-section mt-5 max-w-[16ch] text-[#2c1b12]"
+          className={`t-section mt-5 max-w-[16ch] ${ON_DARK_HEAD}`}
         />
         {CHECKOUT_LIVE ? (
-          <p className="t-lead mt-6 max-w-[48ch] text-[#4a3224]">
+          <p className={`t-lead mt-6 max-w-[48ch] ${ON_DARK_BODY}`}>
             Thank you, {placed}. This crate is a workshop order — we will pack it in Columbia and
             write back. No payment ran. It lands in glass.
           </p>
         ) : (
-          <p className="t-lead mt-6 max-w-[48ch] text-[#4a3224]">
+          <p className={`t-lead mt-6 max-w-[48ch] ${ON_DARK_BODY}`}>
             Sorry, {placed} — the crate is not wired up to anything yet, so that did not reach the
             workshop and no payment ran. Email{" "}
             <a
               href={`mailto:${WHOLESALE_EMAIL}`}
-              className="underline decoration-[#d4c4a8] decoration-2 underline-offset-[6px] hover:decoration-[#2c1b12]"
+              className="underline decoration-[#c4a35a] decoration-2 underline-offset-[6px] hover:decoration-[#fbf3e4]"
             >
               {WHOLESALE_EMAIL}
             </a>{" "}
@@ -109,36 +126,43 @@ function CartPage() {
         )}
         <div className="mt-10">
           <Link to="/shop" className={SOLID}>
-            <TextRoll outlineColor="#f4ebd8">Back to the jars</TextRoll>
+            <TextRoll outlineColor="#1c120a">Back to the jars</TextRoll>
           </Link>
         </div>
-      </main>
+      </PageBackdrop>
     );
   }
 
   return (
-    <main data-chrome="light" className="mx-auto max-w-5xl px-5 pt-32 pb-20 sm:px-8 sm:pt-40">
-      <p className="t-meta text-[#7a6252]">Your order</p>
-      <ResolveHeading as="h1" text="The crate" className="t-hero mt-4 text-[#2c1b12]" />
+    <PageBackdrop
+      plate={PLATES.cart.src}
+      veil={PLATES.cart.veil}
+      className="mx-auto max-w-5xl px-5 pt-32 pb-20 sm:px-8 sm:pt-40"
+    >
+      <p className={`t-meta ${ON_DARK_EYEBROW}`}>Your order</p>
+      <ResolveHeading as="h1" text="The crate" className={`t-hero mt-4 ${ON_DARK_HEAD}`} />
 
       {items.length === 0 ? (
         <>
-          <p className="t-lead mt-7 max-w-[40ch] text-[#4a3224]">
+          <p className={`t-lead mt-7 max-w-[40ch] ${ON_DARK_BODY}`}>
             Empty. The shelves are still full.
           </p>
           <div className="mt-10">
             <Link to="/shop" className={SOLID}>
-              <TextRoll outlineColor="#f4ebd8">See the jars</TextRoll>
+              <TextRoll outlineColor="#1c120a">See the jars</TextRoll>
             </Link>
           </div>
         </>
       ) : (
         <div className="mt-14 grid gap-12 lg:grid-cols-[1fr_22rem]">
-          <ul className="border-t border-[#d4c4a8]">
+          {/* The lines sit on a panel for the same reason /faq's answers do:
+              a table of small type is the thing a moving photographic ground
+              is worst under. Translucent, so the shelves still read through. */}
+          <ul className="rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 px-5 sm:px-7">
             {items.map(({ product, qty, lineCents }) => (
               <li
                 key={product.slug}
-                className="flex items-center gap-5 border-b border-[#d4c4a8] py-6"
+                className="flex items-center gap-5 border-b border-[#f0e3cd]/25 py-6 last:border-b-0"
               >
                 <div className="w-20 shrink-0">
                   <JarFigure product={product} className="[&_img]:w-16" />
@@ -147,11 +171,11 @@ function CartPage() {
                   <Link
                     to="/shop/$slug"
                     params={{ slug: product.slug }}
-                    className="t-card text-[1.25rem] text-[#2c1b12] hover:text-[#4a3224]"
+                    className="t-card text-[1.25rem] text-[#fbf3e4] hover:text-[#e9c98a]"
                   >
                     {product.name}
                   </Link>
-                  <p className="t-body mt-1 text-[0.9rem] text-[#7a6252]">{product.sizeLabel}</p>
+                  <p className={`t-body mt-1 text-[0.9rem] ${ON_DARK_MUTED}`}>{product.sizeLabel}</p>
                 </div>
                 <label className="sr-only" htmlFor={`qty-${product.slug}`}>
                   Quantity for {product.name}
@@ -163,31 +187,31 @@ function CartPage() {
                   max={24}
                   value={qty}
                   onChange={(e) => setQty(product.slug, Number(e.target.value))}
-                  className="t-body h-12 w-16 rounded-xl border border-[#d4c4a8] bg-[#fbf6ec] px-2 text-center tabular-nums"
+                  className={`t-body h-12 w-16 px-2 text-center tabular-nums ${ON_DARK_FIELD}`}
                 />
-                <span className="t-body w-20 text-right tabular-nums text-[#2c1b12]">
+                <span className="t-body w-20 text-right tabular-nums text-[#fbf3e4]">
                   {formatUsd(lineCents)}
                 </span>
               </li>
             ))}
           </ul>
 
-          <aside className="h-fit rounded-xl border border-[#d4c4a8] bg-[#fbf6ec] p-6">
-            <p className="t-body flex justify-between text-[0.95rem] text-[#7a6252]">
+          <aside className="h-fit rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 p-6">
+            <p className={`t-body flex justify-between text-[0.95rem] ${ON_DARK_MUTED}`}>
               <span>Subtotal</span>
               <span className="tabular-nums">{formatUsd(subtotal)}</span>
             </p>
             {discount > 0 ? (
-              <p className="t-body mt-2 flex justify-between text-[0.95rem] text-[#8b3a2a]">
+              <p className="t-body mt-2 flex justify-between text-[0.95rem] text-[#e9a06a]">
                 <span>{packs > 1 ? `${packs} × 3 pack` : "3 pack"} saving</span>
                 <span className="tabular-nums">−{formatUsd(discount)}</span>
               </p>
             ) : (
-              <p className="t-body mt-2 text-[0.85rem] leading-relaxed text-[#7a6252]">
+              <p className={`t-body mt-2 text-[0.85rem] leading-relaxed ${ON_DARK_MUTED}`}>
                 Any three jars takes $5 off. Add {toNextPack} more and the saving appears here.
               </p>
             )}
-            <p className="t-card mt-4 flex justify-between border-t border-[#d4c4a8] pt-4 text-[1.35rem] text-[#2c1b12]">
+            <p className="t-card mt-4 flex justify-between border-t border-[#f0e3cd]/25 pt-4 text-[1.35rem] text-[#fbf3e4]">
               <span>Total</span>
               <span className="tabular-nums">{formatUsd(total)}</span>
             </p>
@@ -196,7 +220,7 @@ function CartPage() {
                 TENNESSEE_ONLY sits above the wholesale submit: a reader should
                 learn the form goes nowhere BEFORE they type their name into it,
                 not in the confirmation afterwards. */}
-            <p className="t-body mt-5 rounded-xl border border-[#d4c4a8] bg-[#f4ebd8] p-4 text-[0.85rem] leading-relaxed text-[#4a3224]">
+            <p className="t-body mt-5 rounded-xl border border-[#c4a35a]/55 bg-[#2c1b12]/70 p-4 text-[0.85rem] leading-relaxed text-[#f0e3cd]">
               Checkout is not open yet. The LLC and the bank account are still in progress, so no
               card is taken and no payment runs.{" "}
               {CHECKOUT_LIVE
@@ -209,28 +233,28 @@ function CartPage() {
               <Field id="name" name="name" label="Name" required />
               <Field id="email" name="email" label="Email" type="email" required />
               <div>
-                <label className="t-meta mb-2 block text-[0.68rem] text-[#7a6252]" htmlFor="note">
+                <label className={`t-meta mb-2 block text-[0.68rem] ${ON_DARK_EYEBROW}`} htmlFor="note">
                   Note for the workshop
                 </label>
                 <textarea
                   id="note"
                   name="note"
                   rows={3}
-                  className="t-body w-full rounded-xl border border-[#d4c4a8] bg-[#f4ebd8] px-4 py-3 text-[#2c1b12]"
+                  className={`t-body w-full px-4 py-3 ${ON_DARK_FIELD}`}
                 />
               </div>
               <button type="submit" className={`${SOLID} mt-1 w-full`}>
-                <TextRoll outlineColor="#f4ebd8">Send the crate</TextRoll>
+                <TextRoll outlineColor="#1c120a">Send the crate</TextRoll>
               </button>
             </form>
 
-            <p className="t-body mt-5 text-[0.8rem] leading-relaxed text-[#7a6252]">
+            <p className={`t-body mt-5 text-[0.8rem] leading-relaxed ${ON_DARK_MUTED}`}>
               {FACILITY_NOTE}
             </p>
           </aside>
         </div>
       )}
-    </main>
+    </PageBackdrop>
   );
 }
 
@@ -249,7 +273,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="t-meta mb-2 block text-[0.68rem] text-[#7a6252]" htmlFor={id}>
+      <label className={`t-meta mb-2 block text-[0.68rem] ${ON_DARK_EYEBROW}`} htmlFor={id}>
         {label}
       </label>
       <input
@@ -257,7 +281,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="t-body h-12 w-full rounded-xl border border-[#d4c4a8] bg-[#f4ebd8] px-4 text-[#2c1b12]"
+        className={`t-body h-12 w-full px-4 ${ON_DARK_FIELD}`}
       />
     </div>
   );

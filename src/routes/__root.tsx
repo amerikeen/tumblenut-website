@@ -87,7 +87,7 @@ function RootDocument() {
       <head>
         <HeadContent />
       </head>
-      <body className="min-h-svh bg-paper font-serif text-ink">
+      <body className="min-h-svh bg-paper font-body text-ink">
         <PreviewHostBridge />
         <AuthProvider>
           <SiteHeader />

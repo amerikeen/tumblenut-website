@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PagePlaceholder } from "@/components/chrome/PagePlaceholder";
+import { PLATES } from "@/components/chrome/PageBackdrop";
 
 /**
  * NOINDEX while this is a placeholder.
@@ -29,6 +30,10 @@ function Page() {
       eyebrow="Stores"
       heading="Where to find us"
       body="No shelves yet. When a shop, market or co-op starts carrying Tumblenut, they will be listed here with directions. Until then the jars come straight from the workshop."
+      /* The dirt lane, the truck pulling away, the barn up on the hill. The one
+         plate in the set that is a picture of arriving somewhere, on the one
+         page about where you go. */
+      plate={PLATES.stores}
     />
   );
 }

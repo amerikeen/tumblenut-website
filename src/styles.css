@@ -52,18 +52,28 @@
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+  /* The page default is ARCHIVO, not Stylish.
+     It used to be `--font-serif`, which meant anything without an explicit
+     `.t-*` class fell back to Stylish -- and that is where the stale serif
+     kept reappearing: prices in the 3-pack tiles, the "pick 3 more" line, any
+     new markup somebody added without thinking about type. Stylish is now
+     opt-in, and the only things that opt in are the locked chrome (the
+     wordmark and tagline in `SiteHeader`) and the reel captions in
+     `OpeningFilm`. Nothing else may. */
   body {
     background: var(--color-paper);
     color: var(--color-ink);
-    font-family: var(--font-serif);
+    font-family: var(--font-body);
     font-size: 1.125rem;
     line-height: 1.7;
   }
+  /* A heading with no `.t-*` class lands on Oswald, not the serif. The `.t-*`
+     classes live in the components layer and still win over this. */
   h1,
   h2,
   h3 {
     text-wrap: balance;
-    font-family: var(--font-display);
+    font-family: var(--font-slab);
     font-weight: 400;
     letter-spacing: 0.04em;
   }

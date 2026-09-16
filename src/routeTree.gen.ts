@@ -15,7 +15,6 @@ import { Route as CartRouteImport } from './routes/cart'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as StoresRouteImport } from './routes/stores'
-import { Route as StoryRouteImport } from './routes/story'
 import { Route as WholesaleRouteImport } from './routes/wholesale'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
 import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
@@ -50,11 +49,6 @@ const StoresRoute = StoresRouteImport.update({
   path: '/stores',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StoryRoute = StoryRouteImport.update({
-  id: '/story',
-  path: '/story',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const WholesaleRoute = WholesaleRouteImport.update({
   id: '/wholesale',
   path: '/wholesale',
@@ -78,7 +72,6 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/stores': typeof StoresRoute
-  '/story': typeof StoryRoute
   '/wholesale': typeof WholesaleRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/shop/': typeof ShopIndexRoute
@@ -90,7 +83,6 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/stores': typeof StoresRoute
-  '/story': typeof StoryRoute
   '/wholesale': typeof WholesaleRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/shop': typeof ShopIndexRoute
@@ -103,7 +95,6 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/stores': typeof StoresRoute
-  '/story': typeof StoryRoute
   '/wholesale': typeof WholesaleRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/shop/': typeof ShopIndexRoute
@@ -117,7 +108,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/stores'
-    | '/story'
     | '/wholesale'
     | '/shop/$slug'
     | '/shop/'
@@ -129,7 +119,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/stores'
-    | '/story'
     | '/wholesale'
     | '/shop/$slug'
     | '/shop'
@@ -141,7 +130,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/stores'
-    | '/story'
     | '/wholesale'
     | '/shop/$slug'
     | '/shop/'
@@ -154,7 +142,6 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   StoresRoute: typeof StoresRoute
-  StoryRoute: typeof StoryRoute
   WholesaleRoute: typeof WholesaleRoute
   ShopSlugRoute: typeof ShopSlugRoute
   ShopIndexRoute: typeof ShopIndexRoute
@@ -204,13 +191,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StoresRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/story': {
-      id: '/story'
-      path: '/story'
-      fullPath: '/story'
-      preLoaderRoute: typeof StoryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/wholesale': {
       id: '/wholesale'
       path: '/wholesale'
@@ -242,7 +222,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   StoresRoute: StoresRoute,
-  StoryRoute: StoryRoute,
   WholesaleRoute: WholesaleRoute,
   ShopSlugRoute: ShopSlugRoute,
   ShopIndexRoute: ShopIndexRoute,

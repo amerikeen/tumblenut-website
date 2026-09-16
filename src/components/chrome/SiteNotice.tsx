@@ -1,4 +1,11 @@
 import type { ReactNode } from "react";
+import {
+  ON_DARK_BODY,
+  ON_DARK_EYEBROW,
+  ON_DARK_HEAD,
+  PageBackdrop,
+  PLATES,
+} from "./PageBackdrop";
 
 /**
  * The shell every "this page has nothing on it" state shares.
@@ -18,35 +25,49 @@ import type { ReactNode } from "react";
  * `actions` is a slot rather than fixed buttons because the error state cannot
  * safely use router `Link`s -- if the router is what failed, a Link is another
  * throw. That path passes plain anchors.
+ *
+ * ## Why the plate is a prop
+ *
+ * Three callers, two plates. /stores gets `cecil-arrives.jpg` because it is the
+ * only frame in the set that is a picture of ARRIVING somewhere, and /stores is
+ * the one page about where you go. The 404 and the error page get `aerial.jpg`,
+ * the highest and emptiest frame we have: somebody who lands there is lost, and
+ * putting them a thousand feet up over the whole valley says so without
+ * apologising twice. Defaulting to the notice plate means a new caller that
+ * forgets the prop gets the lost-page treatment, which is the safe direction to
+ * fail in.
  */
 export function SiteNotice({
   eyebrow,
   heading,
   body,
   actions,
+  plate = PLATES.notice,
 }: {
   eyebrow: string;
   heading: string;
   body: string;
   actions?: ReactNode;
+  plate?: { src: string; veil: number };
 }) {
   return (
-    <main
-      data-chrome="light"
-      className="mx-auto flex min-h-[70svh] max-w-3xl flex-col justify-center px-5 py-32 sm:px-8"
+    <PageBackdrop
+      plate={plate.src}
+      veil={plate.veil}
+      className="mx-auto flex min-h-[78svh] max-w-3xl flex-col justify-center px-5 py-32 sm:px-8"
     >
-      <p className="t-meta text-[#7a6252]">{eyebrow}</p>
-      <h1 className="t-section mt-5 text-[#2c1b12]">{heading}</h1>
-      <p className="t-lead mt-6 max-w-[48ch] text-[#4a3224]">{body}</p>
+      <p className={`t-meta ${ON_DARK_EYEBROW}`}>{eyebrow}</p>
+      <h1 className={`t-section mt-5 ${ON_DARK_HEAD}`}>{heading}</h1>
+      <p className={`t-lead mt-6 max-w-[48ch] ${ON_DARK_BODY}`}>{body}</p>
       {actions ? <div className="mt-10 flex flex-wrap gap-3">{actions}</div> : null}
-    </main>
+    </PageBackdrop>
   );
 }
 
 /** The filled button, as a plain anchor. For states that cannot use a Link. */
 export const noticeSolid =
-  "inline-flex h-[52px] items-center rounded-xl bg-[#2c1b12] px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] text-[#f4ebd8] uppercase";
+  "inline-flex h-[52px] items-center rounded-xl bg-[#fbf3e4] px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] text-[#1c120a] uppercase";
 
 /** The outlined button, as a plain anchor. */
 export const noticeLine =
-  "inline-flex h-[52px] items-center rounded-xl border-2 border-[#2c1b12] px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] text-[#2c1b12] uppercase";
+  "inline-flex h-[52px] items-center rounded-xl border-2 border-[#f0e3cd] px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] text-[#fbf3e4] uppercase";

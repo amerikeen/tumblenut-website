@@ -28,6 +28,31 @@ import { useChromeTone } from "./chrome/useChromeTone";
  * at collapse. The bar is fixed and `pointer-events-none`, with interactivity
  * restored only on the controls, so the page scrolls under it everywhere the
  * chrome is just sitting there.
+ *
+ * ## The two lanes only swap at lg, and that is a fix, not a styling choice
+ *
+ * Measured 2026-09-16 at 390x844 on /faq, /stores, /cart, /contact and a 404:
+ * at the top of every one of them the word nav was `display: none` (it is
+ * `hidden lg:flex`) AND the control lane was parked at `translateY(-150px)`
+ * with `opacity: 0`, sitting at y = -138. The Menu button failed a hit test.
+ * So **a phone had no navigation at all until the reader scrolled 150px** —
+ * on every route, including the 404, which is the one page a lost visitor
+ * lands on and the one that most needs a way out.
+ *
+ * The cause was that the park transform is what hides lane A's replacement,
+ * but lane A does not exist below lg, so below lg the park was hiding the only
+ * controls there were. The swap now runs at `lg` and up only; below it the
+ * controls are simply always there, which is what the reference site does too
+ * (its phone header is mark + one CTA + a burger, with no word nav to swap).
+ *
+ * The wordmark still gives way on scroll at every width, so the dissolve the
+ * page is known for survives on a phone — it is the wordmark that dissolves
+ * there, and the word NAV that dissolves on a laptop.
+ *
+ * Below `sm` the tagline line is dropped and the wordmark steps down a size,
+ * because at 360-390px the full two-line lockup measures ~326px on its own and
+ * leaves no room for the controls beside it. Restore either one and the
+ * controls go back off the right edge.
  */
 const NAV = [
   { to: "/shop", label: "Shop" },
@@ -136,10 +161,13 @@ export function SiteHeader() {
                   transition: `max-width 520ms ${ease}, opacity 320ms ease-out`,
                 }}
               >
-                <span className="font-display text-[1.5rem] tracking-[0.22em] sm:text-[2rem]">
+                <span className="font-display text-[1.15rem] tracking-[0.18em] sm:text-[2rem] sm:tracking-[0.22em]">
                   TUMBLENUT
                 </span>
-                <span className="mt-2 font-display text-[0.8rem] tracking-[0.32em] uppercase sm:text-[1.05rem]">
+                {/* The tagline is the widest thing in the lockup — at 0.32em
+                    tracking it measures wider than the wordmark above it — so
+                    it comes off below sm to leave room for the controls. */}
+                <span className="mt-2 hidden font-display text-[0.8rem] tracking-[0.32em] uppercase sm:block sm:text-[1.05rem]">
                   Small batch nut butters
                 </span>
               </span>
@@ -177,15 +205,25 @@ export function SiteHeader() {
               </ul>
             </nav>
 
-            {/* Lane B — the condensed controls. Parked above, arrives on scroll.
-                Always present below lg, where there is no room for the list. */}
+            {/* Lane B — the condensed controls.
+                At lg and up it is parked above and arrives on scroll, swapping
+                with lane A. BELOW lg it never parks: lane A does not exist
+                there, so parking this left the page with no controls at all
+                until 150px of scroll. See the note at the top of this file.
+                The classes carry the breakpoint because an inline transform
+                cannot; the transition stays inline because it does not need
+                one. */}
             <div
-              className="absolute top-0 right-0 flex h-full items-stretch gap-2 sm:gap-2.5"
+              className={cn(
+                "absolute top-0 right-0 flex h-full translate-y-0 items-stretch gap-2 opacity-100 sm:gap-2.5",
+                collapsed
+                  ? "lg:translate-y-0 lg:opacity-100"
+                  : "lg:-translate-y-[150px] lg:opacity-0",
+              )}
               style={{
-                transform: collapsed ? "translateY(0)" : "translateY(-150px)",
-                opacity: collapsed ? 1 : 0,
                 transition: `transform 520ms ${ease}, opacity 260ms ease-out`,
               }}
+              data-collapsed={collapsed}
             >
               <Link
                 to="/shop"
@@ -209,7 +247,7 @@ export function SiteHeader() {
                 <BasketIcon />
                 {count > 0 ? (
                   <span
-                    className="absolute top-1 right-1 flex h-4 min-w-4 items-center justify-center rounded-full px-1 font-display text-[0.6rem] tabular-nums"
+                    className="absolute top-1 right-1 flex h-4 min-w-4 items-center justify-center rounded-full px-1 font-body text-[0.6rem] font-semibold tabular-nums"
                     style={{ backgroundColor: "#c4a35a", color: "#2c1b12" }}
                   >
                     {count}
@@ -291,7 +329,7 @@ function IconButton({
   children: React.ReactNode;
 }) {
   const cls =
-    "pointer-events-auto relative inline-flex h-full w-12 shrink-0 items-center justify-center rounded-xl border-2 sm:w-[3.75rem]";
+    "pointer-events-auto relative inline-flex h-full w-11 shrink-0 items-center justify-center rounded-xl border-2 sm:w-[3.75rem]";
   const style = {
     borderColor: tint,
     color: tint,

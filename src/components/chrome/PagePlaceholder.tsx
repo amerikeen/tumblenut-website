@@ -10,28 +10,34 @@ import { noticeLine, noticeSolid, SiteNotice } from "./SiteNotice";
  * written yet. Each of these should be deleted the day its real content lands
  * -- none of them should quietly become permanent. They are also `noindex`;
  * delete that head block with the placeholder.
+ *
+ * `plate` is forwarded rather than defaulted here, so a placeholder can stand
+ * on the ground its finished page will stand on. /stores already does.
  */
 export function PagePlaceholder({
   eyebrow,
   heading,
   body,
+  plate,
 }: {
   eyebrow: string;
   heading: string;
   body: string;
+  plate?: { src: string; veil: number };
 }) {
   return (
     <SiteNotice
       eyebrow={eyebrow}
       heading={heading}
       body={body}
+      plate={plate}
       actions={
         <>
           <Link to="/shop" className={noticeSolid}>
-            <TextRoll outlineColor="#f4ebd8">See the jars</TextRoll>
+            <TextRoll outlineColor="#1c120a">See the jars</TextRoll>
           </Link>
           <Link to="/" className={noticeLine}>
-            <TextRoll outlineColor="#2c1b12">Back home</TextRoll>
+            <TextRoll outlineColor="#fbf3e4">Back home</TextRoll>
           </Link>
         </>
       }

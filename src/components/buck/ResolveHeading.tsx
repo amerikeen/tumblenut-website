@@ -25,11 +25,20 @@ import { useInView, usePrefersReducedMotion } from "@/lib/scroll";
 export function ResolveHeading({
   text,
   as = "h2",
+  id,
   className,
   stagger = 24,
 }: {
   text: string;
   as?: "h1" | "h2" | "h3" | "p";
+  /**
+   * Forwarded to the heading element so a `<section aria-labelledby>` can point
+   * at it. Without this there was no way to name a section by a heading this
+   * component rendered, and /about carried four `aria-labelledby` attributes
+   * aimed at ids that existed nowhere on the page — which names the section
+   * exactly as well as omitting the attribute does, and does it silently.
+   */
+  id?: string;
   className?: string;
   stagger?: number;
 }) {
@@ -44,7 +53,7 @@ export function ResolveHeading({
 
   return createElement(
     as,
-    { ref, className: cn("text-balance", className), "aria-label": text },
+    { ref, id, className: cn("text-balance", className), "aria-label": text },
     <span aria-hidden="true">
       {words.map((word, w) => (
         <span key={`${word}-${w}`} className="inline-block whitespace-nowrap">

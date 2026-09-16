@@ -3,7 +3,17 @@ import { AddToCart } from "@/components/AddToCart";
 import { JarFigure } from "@/components/JarFigure";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { NotFound } from "@/components/chrome/NotFound";
+import {
+  ON_DARK_BODY,
+  ON_DARK_EYEBROW,
+  ON_DARK_HEAD,
+  ON_DARK_LINE,
+  ON_DARK_MUTED,
+  PageBackdrop,
+  PLATES,
+} from "@/components/chrome/PageBackdrop";
 import { allergenLabel, FACILITY_NOTE, productBySlug, products } from "@/data/products";
+import { PACK_DISCOUNT_CENTS, PACK_SIZE } from "@/lib/cart";
 import { seo } from "@/lib/seo";
 import { jsonLd, productGraph } from "@/lib/structured-data";
 import { formatUsd } from "@/lib/utils";
@@ -59,20 +69,41 @@ export const Route = createFileRoute("/shop/$slug")({
  * that floats in the vertical centre above a small grid of bordered cards --
  * Taste Profile, Pairs With, and a row of badges. Ours carries the same three.
  *
- * **Two departures, both deliberate.**
+ * Re-measured 2026-09-16, two of their bands were missing here and are now in:
  *
- * 1. **This page is paper, not near-black.** Theirs is dark because every Bucks
- *    bottle is the same brown glass and needs the contrast -- the same reason
- *    their SKU tiles are coloured, which we already declined. Our jars are
- *    photographed on cream and the shop index is paper; making one page in the
- *    flow dark would be importing a fix for a constraint we do not have.
+ *   - **Their band 2 is the bundle**, between the hero and the story. Every
+ *     product page on their site names the multi-buy before it tells you the
+ *     story. Ours only ever mentioned the 3 pack on the home page.
+ *   - **Their mobile buy bar** is a `fixed bottom-0 lg:hidden grid-cols-2`
+ *     strip. On a phone their Add-to-cart is always on screen; ours scrolled
+ *     away with the hero and never came back, on the one page whose entire job
+ *     is to sell one jar.
  *
- * 2. **There is no nutrition panel and there must not be one.** Their band 4 is
- *    a two-tab Ingredients / Nutrition module. We replicate the Ingredients tab
- *    and nothing else: TFFA exempts these jars, and a voluntary panel pulls
- *    them straight under 21 CFR 101.9. That is a legal posture, not a design
- *    preference -- do not add the second tab because the layout looks bare
- *    without it.
+ * **Three departures, all deliberate.**
+ *
+ * 1. **The page stands on `tasting-v2.jpg` at 0.78.** This is the reel's last
+ *    shot -- Doc spoon-feeding Cecil, the one carrying Jeff's closing line --
+ *    so every jar page ends the film it started on the home page. It is also
+ *    the closest interior in the set: two faces and a lit copper pot. Its
+ *    contrast floor measured 0.36 and it ships at 0.78, which is the heaviest
+ *    veil on the site and still the right one. Check any new type over the two
+ *    faces, not over the bench.
+ *
+ * 2. **`product.tone` is a wash now, not a full-bleed panel.** It used to fill
+ *    the whole left half, which was correct while the page was flat paper and
+ *    that block was the only colour on it. With a photograph behind the page
+ *    a solid block of saturated colour reads as a sticker laid on top. So the
+ *    tone survives as a radial wash inside a rounded card -- still the thing
+ *    that tells Harvest Pecan from Wild Cacao at a glance, which is the only
+ *    job it ever had. Matches what /shop's cards now do. (Jeff's call,
+ *    2026-09-16: shrink it to a card.)
+ *
+ * 3. **There is no nutrition panel and there must not be one.** Their band 4
+ *    is a two-tab Ingredients / Nutrition module. We replicate the Ingredients
+ *    tab and nothing else: TFFA exempts these jars, and a voluntary panel
+ *    pulls them straight under 21 CFR 101.9. That is a legal posture, not a
+ *    design preference -- do not add the second tab because the layout looks
+ *    bare without it.
  */
 function ProductPage() {
   const { slug } = Route.useParams();
@@ -81,17 +112,22 @@ function ProductPage() {
   const others = products.filter((p) => p.slug !== product.slug).slice(0, 4);
 
   return (
-    <main data-chrome="light">
+    <PageBackdrop plate={PLATES.product.src} veil={PLATES.product.veil}>
       {/* ---------------------------------------------------------------
           Band 1 -- the split screen.
           --------------------------------------------------------------- */}
       <section className="px-3 pt-24 pb-6 sm:px-5 sm:pt-28 lg:h-[calc(100svh-1.5rem)] lg:min-h-[46rem]">
         <div className="mx-auto flex h-full max-w-7xl flex-col gap-8 lg:grid lg:grid-cols-2 lg:gap-2.5">
-          {/* The jar, on its own field of the colour it actually grinds to. */}
-          <div
-            className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl lg:aspect-auto lg:h-full"
-            style={{ backgroundColor: product.tone }}
-          >
+          {/* The jar, on a card washed with the colour it actually grinds to. */}
+          <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/85 lg:aspect-auto lg:h-full">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background: `radial-gradient(62% 52% at 50% 62%, ${product.tone} 0%, transparent 74%)`,
+                opacity: 0.85,
+              }}
+            />
             {/* The ingredient, blown up into the corner as a texture. At 0.25
                 it read as a smudge nobody could identify; it either says what
                 is in the jar or it should not be there. */}
@@ -99,7 +135,7 @@ function ProductPage() {
               src={product.cutout}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute -right-10 -bottom-10 w-3/5 max-w-[20rem] opacity-40 mix-blend-luminosity"
+              className="pointer-events-none absolute -right-10 -bottom-10 w-3/5 max-w-[20rem] opacity-30 mix-blend-luminosity"
             />
             {/* NOT JarFigure here. That component pins the jar to w-36/w-40 so
                 every 70mm lid reads the same size across a grid -- correct on
@@ -110,15 +146,15 @@ function ProductPage() {
               alt={`${product.name} ${product.sizeLabel} mason jar`}
               width={400}
               height={640}
-              className="jar-float relative z-10 h-auto max-h-[72%] w-auto max-w-[62%] object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.45)]"
+              className="jar-float relative z-10 h-auto max-h-[72%] w-auto max-w-[62%] object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.55)]"
             />
           </div>
 
           {/* Everything else. Title floats centre, cards sit under it. */}
           <div className="relative flex h-full w-full flex-col">
-            <div className="flex grow flex-col items-center justify-center gap-6 text-center">
-              <p className="t-meta text-[#7a6252]">
-                <Link to="/shop" className="hover:text-ink">
+            <div className="flex grow flex-col items-center justify-center gap-6 py-4 text-center">
+              <p className={`t-meta ${ON_DARK_EYEBROW}`}>
+                <Link to="/shop" className="hover:text-[#fbf3e4]">
                   The jars
                 </Link>
                 <span className="mx-2">/</span>
@@ -127,16 +163,16 @@ function ProductPage() {
               <ResolveHeading
                 as="h1"
                 text={product.name}
-                className="t-hero max-w-[12ch] text-[#2c1b12]"
+                className={`t-hero max-w-[12ch] ${ON_DARK_HEAD}`}
               />
-              <p className="t-lead max-w-[34ch] text-[#4a3224]">{product.lede}</p>
+              <p className={`t-lead max-w-[34ch] ${ON_DARK_BODY}`}>{product.lede}</p>
             </div>
 
             <div className="mt-10 grid gap-2.5 lg:mt-0 lg:grid-cols-2">
               <Card title="Taste profile">
                 <ul className="flex flex-col gap-1.5">
                   {product.tasteProfile.map((line) => (
-                    <li key={line} className="t-body flex gap-2.5 text-[1rem] text-[#4a3224]">
+                    <li key={line} className={`t-body flex gap-2.5 text-[1rem] ${ON_DARK_BODY}`}>
                       <span
                         aria-hidden="true"
                         className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4a35a]"
@@ -148,18 +184,18 @@ function ProductPage() {
               </Card>
 
               <Card title="Eat it with">
-                <p className="t-body text-[1rem] text-[#4a3224]">{product.eatWith}</p>
+                <p className={`t-body text-[1rem] ${ON_DARK_BODY}`}>{product.eatWith}</p>
               </Card>
 
               {/* Badges. Every one of these is a plain fact about the jar.
                   Nothing here may drift into an allergen or health claim --
                   "every ingredient named" is the promise, not "safe". */}
-              <div className="rounded-xl border border-[#d4c4a8] bg-[#fbf6ec] p-5 lg:col-span-2">
+              <div className="rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 p-5 lg:col-span-2">
                 <ul className="grid grid-cols-2 gap-x-4 gap-y-3 lg:grid-cols-4">
                   {["Small batch", "Columbia, TN", "Ingredients named", "Glass jar"].map((b) => (
                     <li
                       key={b}
-                      className="t-meta text-center text-[0.68rem] leading-snug text-[#7a6252]"
+                      className={`t-meta text-center text-[0.62rem] leading-snug ${ON_DARK_MUTED}`}
                     >
                       {b}
                     </li>
@@ -168,15 +204,15 @@ function ProductPage() {
               </div>
 
               {/* What is in it, next to the button that buys it. */}
-              <div className="rounded-xl border border-[#2c1b12] bg-[#fbf6ec] p-5 lg:col-span-2">
+              <div className="rounded-xl border-2 border-[#f0e3cd]/55 bg-[#1c120a]/90 p-5 lg:col-span-2">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <p className="t-meta text-[0.72rem] text-[#7a6252]">Contains</p>
-                    <p className="t-body mt-1 text-[1rem] text-[#2c1b12]">
+                    <p className={`t-meta text-[0.66rem] ${ON_DARK_EYEBROW}`}>Contains</p>
+                    <p className={`t-body mt-1 text-[1rem] ${ON_DARK_HEAD}`}>
                       {product.allergens.map(allergenLabel).join(". ")}.
                     </p>
                   </div>
-                  <AddToCart product={product} />
+                  <AddToCart product={product} tone="dark" />
                 </div>
               </div>
             </div>
@@ -185,13 +221,40 @@ function ProductPage() {
       </section>
 
       {/* ---------------------------------------------------------------
-          Band 2 -- the story, as their big statement + two-column block.
+          Band 2 -- the bundle, exactly where theirs sits: after the hero
+          and before the story. Compact on purpose; the builder itself
+          lives on /shop and on the home page, and three copies of a
+          seven-jar picker would be three copies too many.
+          --------------------------------------------------------------- */}
+      <section className="px-3 py-3 sm:px-5" aria-label="Three jars, five dollars off">
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-6 overflow-hidden rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 px-6 py-10 text-center sm:px-12 lg:flex-row lg:justify-between lg:text-left">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-2.5 rounded-xl border border-dashed border-[#f0e3cd]/25"
+          />
+          <div className="relative">
+            <p className={`t-meta ${ON_DARK_EYEBROW}`}>Build your 3 pack</p>
+            <h2 className={`t-card mt-3 max-w-[16ch] text-[1.9rem] ${ON_DARK_HEAD}`}>
+              Any three jars, {formatUsd(PACK_DISCOUNT_CENTS)} off
+            </h2>
+            <p className={`t-body mt-3 max-w-[40ch] text-[0.95rem] ${ON_DARK_MUTED}`}>
+              One crate, packing straw, {PACK_SIZE} glass jars.
+            </p>
+          </div>
+          <Link to="/shop" className={`${ON_DARK_LINE} relative shrink-0`}>
+            Pick three
+          </Link>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------
+          Band 3 -- the story, as their big statement + two-column block.
           --------------------------------------------------------------- */}
       <section className="px-3 py-20 sm:px-5 sm:py-28">
         <div className="mx-auto max-w-6xl">
           <ResolveHeading
             text={product.hook}
-            className="t-section mx-auto max-w-[18ch] text-center text-[#2c1b12]"
+            className={`t-section mx-auto max-w-[18ch] text-center ${ON_DARK_HEAD}`}
             stagger={10}
           />
           <div className="mt-16 flex flex-col gap-2.5 lg:grid lg:grid-cols-2">
@@ -199,14 +262,16 @@ function ProductPage() {
               src="/brand/scenes/workshop-interior.jpg"
               alt="The workshop where the jars are ground"
               loading="lazy"
-              className="aspect-[20/19] w-full rounded-xl object-cover"
+              className="aspect-[20/19] w-full rounded-xl border border-[#f0e3cd]/25 object-cover"
             />
-            <div className="flex flex-col justify-center gap-8 rounded-xl border border-[#d4c4a8] bg-[#fbf6ec] p-8 lg:p-12">
-              <p className="t-lead text-[#4a3224]">{product.story}</p>
-              <p className="t-meta text-[#7a6252]">
+            <div className="flex flex-col justify-center gap-8 rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 p-8 lg:p-12">
+              <p className={`t-lead ${ON_DARK_BODY}`}>{product.story}</p>
+              <p className={`t-meta ${ON_DARK_EYEBROW}`}>
                 {product.sizeLabel}
                 <span className="mx-2">·</span>
-                <span className="tabular-nums text-[#2c1b12]">{formatUsd(product.priceCents)}</span>
+                <span className="tabular-nums text-[#fbf3e4]">
+                  {formatUsd(product.priceCents)}
+                </span>
               </p>
             </div>
           </div>
@@ -214,31 +279,33 @@ function ProductPage() {
       </section>
 
       {/* ---------------------------------------------------------------
-          Band 3 -- Ingredients. Their module has a second "Nutrition" tab.
+          Band 4 -- Ingredients. Their module has a second "Nutrition" tab.
           Ours does not, and must not. See the note at the top of this file.
           --------------------------------------------------------------- */}
       <section className="px-3 py-16 sm:px-5 sm:py-20">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="t-meta text-[#7a6252]">Starts with what it says</p>
-          <ResolveHeading text="In the jar" className="t-section mt-4 text-[#2c1b12]" />
+        <div className="mx-auto max-w-3xl rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 px-6 py-12 text-center sm:px-12">
+          <p className={`t-meta ${ON_DARK_EYEBROW}`}>Starts with what it says</p>
+          <ResolveHeading text="In the jar" className={`t-section mt-4 ${ON_DARK_HEAD}`} />
           <ul className="mt-10 flex flex-col">
             {product.ingredients.map((ing) => (
               <li
                 key={ing}
-                className="t-body border-b border-[#d4c4a8] py-3.5 text-[#2c1b12] first:border-t"
+                className={`t-body border-b border-[#f0e3cd]/25 py-3.5 first:border-t ${ON_DARK_HEAD}`}
               >
                 {ing}
               </li>
             ))}
           </ul>
-          <p className="t-body mx-auto mt-10 max-w-[52ch] text-[0.95rem] leading-relaxed text-[#7a6252]">
+          <p
+            className={`t-body mx-auto mt-10 max-w-[52ch] text-[0.95rem] leading-relaxed ${ON_DARK_MUTED}`}
+          >
             {FACILITY_NOTE}
           </p>
         </div>
       </section>
 
-      {/* Band 4 -- their two square plates, dashed rules above and below. */}
-      <section className="mx-auto grid max-w-6xl gap-2.5 border-y border-dashed border-[#d4c4a8] px-3 py-2.5 sm:px-5 lg:grid-cols-2">
+      {/* Band 5 -- their two square plates, dashed rules above and below. */}
+      <section className="mx-auto grid max-w-6xl gap-2.5 border-y border-dashed border-[#f0e3cd]/30 px-3 py-2.5 sm:px-5 lg:grid-cols-2">
         <img
           src="/brand/cinema/two-shelves.jpg"
           alt="The shelves in the workshop"
@@ -246,49 +313,61 @@ function ProductPage() {
           className="aspect-square w-full rounded-xl object-cover"
         />
         <img
-          src="/brand/cinema/tasting-v2.jpg"
-          alt="A jar open on the table"
+          src="/brand/scenes/workshop-exterior.jpg"
+          alt="The workshop from the lane, doors open"
           loading="lazy"
           className="aspect-square w-full rounded-xl object-cover"
         />
       </section>
 
-      {/* Band 5 -- their "choose your weapon" grid. */}
-      <section className="px-3 py-20 sm:px-5 sm:py-28">
+      {/* Band 6 -- their "choose your weapon" grid. */}
+      <section className="px-3 pt-20 pb-28 sm:px-5 sm:pt-28">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center justify-between gap-6 lg:flex-row">
-            <ResolveHeading text="Also on the wall" className="t-section text-[#2c1b12]" />
-            <Link
-              to="/shop"
-              className="t-ui inline-flex h-[52px] shrink-0 items-center rounded-xl border-2 border-[#2c1b12] px-7 text-[0.95rem] tracking-[0.1em] text-[#2c1b12] uppercase"
-            >
+            <ResolveHeading text="Also on the wall" className={`t-section ${ON_DARK_HEAD}`} />
+            <Link to="/shop" className={`${ON_DARK_LINE} shrink-0`}>
               See them all
             </Link>
           </div>
-          <ul className="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4">
+          <ul className="mt-12 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
             {others.map((p) => (
               <li key={p.slug}>
-                <Link to="/shop/$slug" params={{ slug: p.slug }} className="group block">
-                  {/* NO tone tile behind these jars, matching /shop. The tile is
-                      the reference site's fix for bottles that are all identical
-                      brown glass on near-black; ours are glass full of
-                      differently coloured butter on paper and separate on their
-                      own. `tone` still earns its place in the hero above, where
-                      one colour fills a whole panel behind a single jar.
+                <Link
+                  to="/shop/$slug"
+                  params={{ slug: p.slug }}
+                  className="group relative block h-full overflow-hidden rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 px-4 pt-6 pb-5 text-center"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-2.5 rounded-xl border border-dashed border-[#f0e3cd]/25"
+                  />
+                  {/* NO solid tone tile behind these jars, matching /shop and
+                      the hero above: a saturated block over a photograph reads
+                      as a sticker. The wash still separates one flavour from
+                      the next, which is the only job the tile ever did.
                       Fixed-height cell so the row shares a baseline. */}
-                  <div className="flex h-[13rem] items-end justify-center">
+                  <div className="relative flex h-[13rem] items-end justify-center">
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-[80%] opacity-60 blur-[2px]"
+                      style={{
+                        background: `radial-gradient(60% 55% at 50% 72%, ${p.tone} 0%, transparent 72%)`,
+                      }}
+                    />
                     <JarFigure
                       product={p}
-                      className="transition-transform duration-300 group-hover:-translate-y-1.5"
+                      className="relative transition-transform duration-300 group-hover:-translate-y-1.5 [&_img]:drop-shadow-[0_18px_28px_rgba(0,0,0,0.5)]"
                     />
                   </div>
-                  <p className="t-card mt-4 text-[1.35rem] text-[#2c1b12] group-hover:text-[#4a3224]">
+                  <p
+                    className={`t-card relative mt-4 text-[1.35rem] ${ON_DARK_HEAD} group-hover:text-[#e9c98a]`}
+                  >
                     {p.name}
                   </p>
-                  <p className="t-body text-[0.95rem] text-[#7a6252]">
+                  <p className={`t-body relative text-[0.92rem] ${ON_DARK_MUTED}`}>
                     {p.sizeLabel}
-                    <span className="mx-2">·</span>
-                    <span className="tabular-nums text-[#2c1b12]">{formatUsd(p.priceCents)}</span>
+                    <span className="mx-2 text-[#c4a35a]">·</span>
+                    <span className="tabular-nums text-[#fbf3e4]">{formatUsd(p.priceCents)}</span>
                   </p>
                 </Link>
               </li>
@@ -296,15 +375,40 @@ function ProductPage() {
           </ul>
         </div>
       </section>
-    </main>
+
+      {/* ---------------------------------------------------------------
+          Their mobile buy bar. Fixed to the bottom, phone only.
+
+          It sits BELOW the header's z-index and above the page, and it adds
+          the phone's bottom safe-area inset to its own padding so it clears
+          the home indicator rather than hiding under it. The page carries a
+          matching pb-28 above so the last row is never trapped behind it.
+          --------------------------------------------------------------- */}
+      <div
+        className="fixed inset-x-0 bottom-0 z-[9980] border-t border-[#f0e3cd]/25 bg-[#140d07]/95 px-4 pt-3 backdrop-blur-sm lg:hidden"
+        style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom, 0px))" }}
+      >
+        <div className="flex items-center justify-between gap-4">
+          <div className="min-w-0">
+            <p className={`t-meta truncate text-[0.62rem] ${ON_DARK_EYEBROW}`}>{product.name}</p>
+            <p className="t-body text-[1rem] tabular-nums text-[#fbf3e4]">
+              {formatUsd(product.priceCents)}
+              <span className="mx-2 text-[#c4a35a]">·</span>
+              <span className={ON_DARK_MUTED}>{product.sizeLabel}</span>
+            </p>
+          </div>
+          <AddToCart product={product} tone="dark" compact />
+        </div>
+      </div>
+    </PageBackdrop>
   );
 }
 
 /** Their card shell: rounded-xl, 1px border, p-5, heading over content. */
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-4 rounded-xl border border-[#d4c4a8] bg-[#fbf6ec] p-5">
-      <p className="t-card text-[1.35rem] text-[#2c1b12]">{title}</p>
+    <div className="flex flex-col gap-4 rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 p-5">
+      <p className={`t-card text-[1.35rem] ${ON_DARK_HEAD}`}>{title}</p>
       {children}
     </div>
   );

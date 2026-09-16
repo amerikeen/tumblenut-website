@@ -77,7 +77,7 @@ export function ThreePack() {
                   )}
                 >
                   {on ? (
-                    <span className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-ink font-display text-xs text-paper tabular-nums">
+                    <span className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-ink font-body text-xs font-semibold text-paper tabular-nums">
                       {slot}
                     </span>
                   ) : null}
@@ -93,7 +93,7 @@ export function ThreePack() {
                     height={640}
                     loading="lazy"
                   />
-                  <span className="mt-3 text-center font-display text-sm leading-tight">
+                  <span className="mt-3 text-center font-slab text-sm font-bold uppercase leading-tight">
                     {p.name}
                   </span>
                   <span className="mt-1 text-xs text-muted">{formatUsd(p.priceCents)}</span>
@@ -105,7 +105,7 @@ export function ThreePack() {
 
         <div className="mt-12 flex flex-col items-center gap-5 rounded-lg border border-rule bg-cream px-6 py-7 sm:flex-row sm:justify-between">
           <div className="text-center sm:text-left">
-            <p className="font-display text-xl">
+            <p className="font-slab text-xl font-bold uppercase">
               {picked.length} of {PACK_SIZE} picked
             </p>
             <p className="mt-1 text-sm text-muted">

@@ -82,7 +82,7 @@ export const INDEXABLE_ROUTES = ["/", "/shop", "/wholesale", "/about", "/faq", "
  *   anyway. Crawlable-plus-noindex is the only combination that actually keeps
  *   a page out of the index.
  */
-export const NOINDEX_ROUTES = ["/cart", "/stores", "/story"] as const;
+export const NOINDEX_ROUTES = ["/cart", "/stores"] as const;
 
 export type SeoInput = {
   /** The whole `<title>`, including the " — Tumblenut" suffix. */

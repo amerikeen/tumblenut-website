@@ -1,5 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
+import {
+  ON_DARK_BODY,
+  ON_DARK_EYEBROW,
+  ON_DARK_HEAD,
+  ON_DARK_MUTED,
+  PageBackdrop,
+  PLATES,
+} from "@/components/chrome/PageBackdrop";
 import { TENNESSEE_ONLY, WHOLESALE_EMAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { contactGraph, jsonLd } from "@/lib/structured-data";
@@ -43,31 +51,43 @@ export const Route = createFileRoute("/contact")({
  * named as such, but it is also the only real mailbox, so this page sends
  * everything there rather than inventing a hello@ that nobody owns. If a
  * dedicated consumer address lands with the Zoho mailbox, split them here.
+ *
+ * THE GROUND: `aerial-chimney-still.jpg` at 0.62, and rule 2 above is what
+ * chose it. Every other plate on the site has Doc or Cecil in it, and a
+ * backdrop with Doc in it says on this page exactly what the copy is forbidden
+ * from saying -- that he is the one who will write back. So the ground here had
+ * to be one of the three frames with nobody in them, and this is the sharpest
+ * of those at 1792px. It is also the most literal reading of the only real
+ * content on the page: Columbia, Tennessee, from above.
  */
 
-const CARD = "flex flex-col rounded-xl border-2 border-[#2c1b12]/15 bg-[#fbf6ec] p-7 sm:p-8";
+const CARD = "flex flex-col rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 p-7 sm:p-8";
 
 function ContactPage() {
   return (
-    <main data-chrome="light" className="mx-auto max-w-6xl px-5 pt-32 pb-24 sm:px-8 sm:pt-40">
-      <p className="t-meta text-[#7a6252]">Contact</p>
+    <PageBackdrop
+      plate={PLATES.contact.src}
+      veil={PLATES.contact.veil}
+      className="mx-auto max-w-6xl px-5 pt-32 pb-24 sm:px-8 sm:pt-40"
+    >
+      <p className={`t-meta ${ON_DARK_EYEBROW}`}>Contact</p>
       <ResolveHeading
         as="h1"
         text="Get in touch"
-        className="t-hero mt-4 max-w-[10ch] text-[#2c1b12]"
+        className={`t-hero mt-4 max-w-[10ch] ${ON_DARK_HEAD}`}
       />
-      <p className="t-lead mt-7 max-w-[46ch] text-[#4a3224]">
-        The workshop is in Columbia, Tennessee. Email is the way in — the address below is set up
-        for trade, and it is the right one for anything else too.
+      <p className={`t-lead mt-7 max-w-[46ch] ${ON_DARK_BODY}`}>
+        The workshop is in Columbia, Tennessee. Email is the way in — trade or not.
       </p>
 
       {/* The address, given its own panel. It is the only real thing on this
-          page, so it should not be one card among several. */}
+          page, so it should not be one card among several — which is also why
+          it takes the 2px border while the two below take a hairline. */}
       <section
         aria-labelledby="contact-address"
-        className="mt-14 rounded-xl border-2 border-[#2c1b12] p-7 sm:p-10"
+        className="mt-14 rounded-xl border-2 border-[#f0e3cd]/55 bg-[#1c120a]/90 p-7 sm:p-10"
       >
-        <h2 id="contact-address" className="t-meta text-[#7a6252]">
+        <h2 id="contact-address" className={`t-meta ${ON_DARK_EYEBROW}`}>
           Wholesale and trade
         </h2>
         <a
@@ -76,18 +96,19 @@ function ContactPage() {
              clamp floor the address broke across two lines as
              "wholesale@tumblenut" / ".com", which is a bad look on the one
              string this page exists to deliver. */
-          className="t-card mt-4 block break-words text-[1.35rem] text-[#2c1b12] underline decoration-[#d4c4a8] decoration-2 underline-offset-[6px] hover:decoration-[#2c1b12] sm:text-[2rem]"
+          className="t-card mt-4 block break-words text-[1.35rem] text-[#fbf3e4] underline decoration-[#c4a35a] decoration-2 underline-offset-[6px] hover:decoration-[#fbf3e4] sm:text-[2rem]"
         >
           {WHOLESALE_EMAIL}
         </a>
-        <p className="t-body mt-6 max-w-[52ch] text-[#4a3224]">
-          Tell us about the shelf — the size of it, the town, and what your customers keep asking
-          for.
+        <p className={`t-body mt-6 max-w-[52ch] ${ON_DARK_BODY}`}>
+          Tell us about the shelf — the size of it, and the town.
         </p>
-        <p className="t-body mt-3 max-w-[52ch] text-[0.95rem] text-[#7a6252]">{TENNESSEE_ONLY}</p>
+        <p className={`t-body mt-3 max-w-[52ch] text-[0.95rem] ${ON_DARK_MUTED}`}>
+          {TENNESSEE_ONLY}
+        </p>
         <Link
           to="/wholesale"
-          className="t-meta mt-7 inline-flex text-[#2c1b12] underline decoration-[#d4c4a8] decoration-2 underline-offset-[6px] hover:decoration-[#2c1b12]"
+          className="t-meta mt-7 inline-flex text-[#fbf3e4] underline decoration-[#c4a35a] decoration-2 underline-offset-[6px] hover:decoration-[#fbf3e4]"
         >
           What partners get →
         </Link>
@@ -95,37 +116,37 @@ function ContactPage() {
 
       <div className="mt-3 grid gap-3 lg:grid-cols-2">
         <section className={CARD} aria-labelledby="contact-jars">
-          <h2 id="contact-jars" className="t-card text-[1.6rem] text-[#2c1b12]">
+          <h2 id="contact-jars" className={`t-card text-[1.6rem] ${ON_DARK_HEAD}`}>
             What is in the jar
           </h2>
-          <p className="t-body mt-4 max-w-[46ch] text-[#4a3224]">
-            The whole ingredient list is on the front of the jar, and every jar&rsquo;s page carries
-            it in full. If the answer you want is in there, it is faster than an email.
+          <p className={`t-body mt-4 max-w-[46ch] ${ON_DARK_BODY}`}>
+            The whole list is on the front of every jar, and on its page here. Faster than an email.
           </p>
           <Link
             to="/shop"
-            className="t-meta mt-auto inline-flex pt-7 text-[#2c1b12] underline decoration-[#d4c4a8] decoration-2 underline-offset-[6px] hover:decoration-[#2c1b12]"
+            className="t-meta mt-auto inline-flex pt-7 text-[#fbf3e4] underline decoration-[#c4a35a] decoration-2 underline-offset-[6px] hover:decoration-[#fbf3e4]"
           >
             See the jars →
           </Link>
         </section>
 
         <section className={CARD} aria-labelledby="contact-orders">
-          <h2 id="contact-orders" className="t-card text-[1.6rem] text-[#2c1b12]">
+          <h2 id="contact-orders" className={`t-card text-[1.6rem] ${ON_DARK_HEAD}`}>
             Orders
           </h2>
-          <p className="t-body mt-4 max-w-[46ch] text-[#4a3224]">
-            Checkout is not open yet, and the crate is not wired up to send anything — no card is
-            taken and no payment runs. Email the address above about jars.
+          {/* The two clauses that may never be cut: checkout is not open, and
+              nothing is charged. Everything around them can go. */}
+          <p className={`t-body mt-4 max-w-[46ch] ${ON_DARK_BODY}`}>
+            Checkout is not open. No card is taken and no payment runs — email the address above.
           </p>
           <Link
             to="/cart"
-            className="t-meta mt-auto inline-flex pt-7 text-[#2c1b12] underline decoration-[#d4c4a8] decoration-2 underline-offset-[6px] hover:decoration-[#2c1b12]"
+            className="t-meta mt-auto inline-flex pt-7 text-[#fbf3e4] underline decoration-[#c4a35a] decoration-2 underline-offset-[6px] hover:decoration-[#fbf3e4]"
           >
             The crate →
           </Link>
         </section>
       </div>
-    </main>
+    </PageBackdrop>
   );
 }

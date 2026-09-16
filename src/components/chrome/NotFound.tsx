@@ -14,6 +14,9 @@ import { noticeLine, noticeSolid, SiteNotice } from "./SiteNotice";
  * stranger who lands here needs to know the difference between "this shop is
  * broken" and "this page is not up yet". It does not apologise twice or
  * promise a date.
+ *
+ * It takes `SiteNotice`'s default plate -- `aerial.jpg`, the highest and
+ * emptiest frame on the site -- which is also what the error page gets.
  */
 export function NotFound() {
   return (
@@ -24,10 +27,10 @@ export function NotFound() {
       actions={
         <>
           <Link to="/shop" className={noticeSolid}>
-            <TextRoll outlineColor="#f4ebd8">See the jars</TextRoll>
+            <TextRoll outlineColor="#1c120a">See the jars</TextRoll>
           </Link>
           <Link to="/" className={noticeLine}>
-            <TextRoll outlineColor="#2c1b12">Back home</TextRoll>
+            <TextRoll outlineColor="#fbf3e4">Back home</TextRoll>
           </Link>
         </>
       }

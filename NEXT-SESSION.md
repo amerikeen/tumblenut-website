@@ -6,7 +6,8 @@ Audited 2026-09-16 against the live site. Crawled all 17 routes.
 
 ```
 Read NEXT-SESSION.md. The job is item 1: no page may still be flat cream.
-Do not touch jar renders or back labels — those are Grok's (item 2).
+Do NOT touch the jar PNGs, their fringing, or back-label artwork — Grok is
+replacing those assets outright and any work on them is thrown away.
 ```
 
 ---
@@ -72,11 +73,17 @@ backdrop would take over.
 
 ---
 
-## 2. Chroma-key residue on every cutout asset  ← Grok, not Claude
+## 2. Chroma-key residue — measured for the Grok brief. DO NOT FIX IT HERE.
+
+**Jeff's call 2026-09-16: leave the jars alone.** They are stale and poor
+quality and Grok is replacing them outright shortly, so any cleanup pass on the
+current PNGs is work thrown away. **The next Claude session must not touch jar
+renders or back-label artwork.** The numbers below exist for one reason: to give
+the next Grok brief a measurable acceptance check instead of an adjective.
 
 Visible as a wine/magenta smear at the base of every jar. **It is baked into the
 PNGs, not CSS** — `JarFigure` applies only a neutral
-`drop-shadow(rgba(0,0,0,0.12) 0 3px 3px)`.
+`drop-shadow(rgba(0,0,0,0.12) 0 3px 3px)`, so no CSS change can remove it.
 
 Opaque pixels where red and blue both sit above green:
 
@@ -101,10 +108,11 @@ briefed and the delivered assets still have it, so saying it again the same way
 will not work — the next brief needs the numbers above and a named acceptance
 check, not an adjective.
 
-Interim option if Grok's turnaround is slow: a de-fringe pass (de-matte the
-magenta out of the edge pixels) is mechanical and safe on the existing PNGs. It
-does **not** touch the labels or the renders, so it does not cross into Grok's
-territory. Ask Jeff before doing it.
+**One thing to confirm with Jeff before the Grok brief goes out:** the jar
+replacement is scoped to jars. `doc-cutout.png` (1.72%, the worst of the ten)
+and `cecil-cutout.png` are **cast cutouts, not jars** — they render in the
+footer of all 17 routes. If the Grok pass only regenerates jars, the worst
+offender on the site survives it. Worth an explicit line in that brief.
 
 ---
 

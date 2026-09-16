@@ -122,9 +122,32 @@ export const noCards = [
   },
   {
     id: "plastic",
+    /**
+     * NOT "no possibility of microplastics", and this should not come back.
+     *
+     * Three things are wrong with the absolute:
+     *
+     * 1. THE LID. Every metal lid that seals food has a liner, and a mason
+     *    lid's is a plastisol sealing compound -- usually PVC based. It is in
+     *    contact with the contents at the rim. We have not verified ours, which
+     *    is the same reason BPA is not named anywhere on this site.
+     * 2. THE CHAIN. Nuts arrive in woven polypropylene sacks, go through a
+     *    grinder with plastic parts, and are funnelled with a plastic funnel.
+     *    "No possibility" is a claim about all of that, not just the jar.
+     * 3. IT IS ABSOLUTE. Absolutes are the claims that get tested. This brand
+     *    already refuses to say "safe for allergy kids" for exactly this
+     *    reason -- more choices, never a safe choice.
+     *
+     * The mechanism is true and ownable, so say the mechanism: oil pulls at
+     * plastic, glass has nothing to give it. The reader draws the conclusion
+     * themselves, which is stronger than being told it and cheaper to defend.
+     *
+     * The cost beat that used to close this card ("We pay it") now lives in
+     * the whyStops glass entry, so nothing was lost by tightening.
+     */
     kicker: "No",
     title: "Plastic",
-    body: "Glass and a steel lid. Nut butter is mostly oil, and glass gives oil nothing to take. It costs us more than a tub would. We pay it.",
+    body: "Glass and a steel lid. Oil pulls at plastic. Glass has nothing to give it.",
   },
   {
     id: "more-than-peanut",

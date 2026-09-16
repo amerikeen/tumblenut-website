@@ -1,8 +1,9 @@
 "use client";
 
 import type { Product } from "@/data/products";
-import { FACILITY_NOTE } from "@/data/products";
+
 import { cn } from "@/lib/utils";
+import { FacilityNote } from "@/components/chrome/FacilityNote";
 
 /**
  * A jar you can turn around. Front is the render, back is the ingredients.
@@ -55,7 +56,7 @@ export function JarFlip({
             </p>
             <p className="mt-2 t-meta text-[0.55rem] tracking-[0.14em]">Contains</p>
             <p className="t-body text-[0.68rem] leading-snug">{product.contains}</p>
-            <p className="mt-2 t-body text-[0.52rem] leading-tight opacity-75">{FACILITY_NOTE}</p>
+            <FacilityNote className="mt-2 text-[0.52rem] leading-tight opacity-75" />
           </div>
         </div>
       </div>

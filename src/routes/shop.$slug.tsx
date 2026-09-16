@@ -12,11 +12,12 @@ import {
   PageBackdrop,
   PLATES,
 } from "@/components/chrome/PageBackdrop";
-import { allergenLabel, FACILITY_NOTE, productBySlug, products } from "@/data/products";
+import { allergenLabel, productBySlug, products } from "@/data/products";
 import { PACK_DISCOUNT_CENTS, PACK_SIZE } from "@/lib/cart";
 import { seo } from "@/lib/seo";
 import { jsonLd, productGraph } from "@/lib/structured-data";
 import { formatUsd } from "@/lib/utils";
+import { FacilityNote } from "@/components/chrome/FacilityNote";
 
 export const Route = createFileRoute("/shop/$slug")({
   component: ProductPage,
@@ -298,11 +299,9 @@ function ProductPage() {
               </li>
             ))}
           </ul>
-          <p
-            className={`t-body mx-auto mt-10 max-w-[52ch] text-[0.95rem] leading-relaxed ${ON_DARK_MUTED}`}
-          >
-            {FACILITY_NOTE}
-          </p>
+          <FacilityNote
+            className={`mx-auto mt-10 max-w-[52ch] text-[0.95rem] leading-relaxed ${ON_DARK_MUTED}`}
+          />
         </div>
       </section>
 

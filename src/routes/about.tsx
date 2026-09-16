@@ -11,9 +11,10 @@ import {
   PageBackdrop,
   PLATES,
 } from "@/components/chrome/PageBackdrop";
-import { FACILITY_NOTE } from "@/data/products";
+
 import { seo } from "@/lib/seo";
 import { aboutGraph, jsonLd } from "@/lib/structured-data";
+import { FacilityNote } from "@/components/chrome/FacilityNote";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -246,11 +247,9 @@ function AboutPage() {
         {/* The constant, whole. It is written to stand on its own, and the first
             pass spliced it mid-sentence — which read "…and Packed in a facility
             that handles…". Quote it or leave it; do not conjugate it. */}
-        <p
-          className={`t-body mt-10 border-t border-dashed border-[#f0e3cd]/25 pt-6 text-[0.95rem] ${ON_DARK_MUTED}`}
-        >
-          {FACILITY_NOTE}
-        </p>
+        <FacilityNote
+          className={`mt-10 border-t border-dashed border-[#f0e3cd]/25 pt-6 text-[0.95rem] ${ON_DARK_MUTED}`}
+        />
       </section>
 
       <div className="mt-14 flex flex-wrap gap-3">

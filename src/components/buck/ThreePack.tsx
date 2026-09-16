@@ -91,7 +91,7 @@ export function ThreePack() {
 
           <div className="relative flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
             {/* ---------------- left: heading + picker ---------------- */}
-            <div className="lg:w-[46%]">
+            <div className="lg:w-[52%]">
               <h2 className="font-slab text-[clamp(2.4rem,6vw,4.4rem)] leading-[0.92] font-bold tracking-[-0.02em] uppercase">
                 <span className="block text-[#fbf3e4]">{threePack.lead}</span>
                 {/* The boxed number, exactly their move: the count is a chip,
@@ -116,13 +116,21 @@ export function ThreePack() {
                   "Smokehouse Almond". Four wraps to 4+3 and every tile is big
                   enough to read. Theirs is a single row only because they have
                   four SKUs. */}
-              <ul className="mt-10 grid grid-cols-4 gap-2.5">
+              <ul className="mt-10 grid grid-cols-4 gap-x-2 gap-y-6">
                 {products.map((p) => {
                   const count = picked.filter((s) => s === p.slug).length;
                   return (
-                    <li key={p.slug} className="flex min-w-0 flex-col gap-2">
-                      <span className="t-card text-center text-[0.72rem] leading-[1.05] text-[#f0e3cd]">
-                        {p.name}
+                    <li key={p.slug} className="flex min-w-0 flex-col items-center gap-2">
+                      {/* Stacked, a word per line. "Smokehouse Almond" on one
+                          line forced the type down to 0.72rem to fit the cell;
+                          broken over two it reads at 0.95rem in the same
+                          width. */}
+                      <span className="t-card text-center text-[0.95rem] leading-[1.02] text-[#f0e3cd]">
+                        {p.name.split(" ").map((w) => (
+                          <span key={w} className="block">
+                            {w}
+                          </span>
+                        ))}
                       </span>
                       <button
                         type="button"
@@ -133,11 +141,16 @@ export function ThreePack() {
                             ? `Pack is full`
                             : `Add ${p.name} to the ${PACK_SIZE} pack${count ? `, ${count} already in` : ""}`
                         }
+                        /* NO tone block behind the jar. It was a filled tile
+                           and Jeff pulled it: the jars float here the way they
+                           do on /shop, and the colour was fighting the plate
+                           behind the panel. Which means the tile is now just a
+                           hit area, so it gets no fill and no radius until you
+                           hover it. */
                         className={cn(
-                          "group relative flex aspect-[108/180] w-full items-start justify-center overflow-hidden rounded-xl transition",
-                          full ? "cursor-not-allowed opacity-45" : "hover:brightness-110",
+                          "group relative flex w-full items-end justify-center rounded-xl transition",
+                          full ? "cursor-not-allowed opacity-40" : "hover:bg-[#f0e3cd]/10",
                         )}
-                        style={{ backgroundColor: p.tone }}
                       >
                         <img
                           src={p.jar}
@@ -146,14 +159,14 @@ export function ThreePack() {
                           width={400}
                           height={640}
                           loading="lazy"
-                          className="pointer-events-none mt-[8%] h-auto w-[62%] object-contain transition-transform duration-300 group-hover:not-disabled:-translate-y-1"
+                          className="pointer-events-none h-auto w-full object-contain drop-shadow-[0_14px_22px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:not-disabled:-translate-y-1.5"
                         />
                         <span
                           className={cn(
-                            "absolute bottom-2 left-1/2 flex size-8 -translate-x-1/2 items-center justify-center rounded-full font-slab text-[0.95rem] font-bold tabular-nums",
+                            "absolute -bottom-1 left-1/2 flex size-8 -translate-x-1/2 items-center justify-center rounded-full font-slab text-[1rem] font-bold tabular-nums",
                             count
                               ? "bg-[#fbf3e4] text-[#1c120a]"
-                              : "bg-[#1c120a]/60 text-[#fbf3e4]",
+                              : "bg-[#241708] text-[#f0e3cd] ring-1 ring-[#f0e3cd]/35",
                           )}
                         >
                           {count || "+"}
@@ -166,7 +179,7 @@ export function ThreePack() {
             </div>
 
             {/* ---------------- right: the slots ---------------- */}
-            <div className="relative mx-auto aspect-square w-full max-w-[26rem] lg:mx-0 lg:w-[46%]">
+            <div className="relative mx-auto aspect-square w-full max-w-[38rem] lg:mx-0 lg:w-[46%]">
               <div aria-hidden="true" className="absolute inset-0 rounded-full bg-[#140d07]/70" />
 
               {/* One slot per pack position, standing on a shared baseline.
@@ -176,22 +189,40 @@ export function ThreePack() {
                   mistake rather than a stack. `items-end` on a row of
                   width-driven jars gives a shelf, and the size difference
                   between a 16oz and a 4oz is true. */}
-              <ul className="absolute inset-x-0 top-[17%] flex h-[40%] items-end justify-center gap-1.5 px-[17%]">
+              <ul className="absolute inset-x-0 top-[9%] flex h-[58%] items-end justify-center px-[7%]">
                 {Array.from({ length: PACK_SIZE }).map((_, i) => {
                   const slug = picked[i];
                   const p = slug ? products.find((x) => x.slug === slug) : undefined;
                   return (
                     <li
                       key={i}
-                      className="relative flex h-full flex-1 items-end justify-center"
-                      style={{ maxWidth: `${Math.min(26, 92 / PACK_SIZE)}%` }}
+                      /* Overlapped rather than spaced. Jeff asked for the
+                         jars twice the size, and four at that size do not fit
+                         the circle side by side -- theirs overlap for the same
+                         reason. Each slot but the first pulls left over its
+                         neighbour, and the stacking order runs left-to-right so
+                         the overlap reads as a row on a shelf. */
+                      className="relative flex h-full items-end justify-center"
+                      style={{
+                        width: `${Math.min(50, 168 / PACK_SIZE)}%`,
+                        marginLeft: i === 0 ? 0 : "-10%",
+                        zIndex: i,
+                      }}
                     >
                       {p ? (
                         /* The button wraps the jar rather than floating over the
                            slot, so the × sits on THIS jar's shoulder whatever
                            height it is. Anchored to the slot instead, it landed
                            on the neighbour when a 4oz sat beside a 16oz. */
-                        <span className="relative inline-flex items-end">
+                        <span
+                          className="relative inline-flex items-end origin-bottom"
+                          /* A small alternating tilt, like theirs. Rotated
+                             about the BASE so the jars still stand on the
+                             shared baseline instead of swinging off it. */
+                          style={{
+                            transform: `rotate(${TILTS[i % TILTS.length]}deg) scale(${DEPTH[i % DEPTH.length]})`,
+                          }}
+                        >
                           <img
                             src={p.jar}
                             alt={`${p.name}, position ${i + 1} of ${PACK_SIZE}`}
@@ -225,7 +256,7 @@ export function ThreePack() {
 
               {/* The CTA sits inside the circle on theirs. It counts down while
                   the pack is short, and only becomes a buy button when full. */}
-              <div className="absolute bottom-[12%] left-1/2 w-[68%] -translate-x-1/2">
+              <div className="absolute bottom-[7%] left-1/2 w-[66%] -translate-x-1/2">
                 <button
                   type="button"
                   disabled={!full}
@@ -281,6 +312,20 @@ export function ThreePack() {
  * rather than loaded. A 70mm lid over a straight body -- the same proportion
  * rule the jar renders follow, so a filled slot and an empty one line up.
  */
+/** The tilt each slot takes, in order. Small and alternating, so the row reads
+ *  as jars set down by hand rather than a rendered product grid. */
+const TILTS = [-5, 3, -3, 6];
+
+/**
+ * How far back each slot sits. The outer jars are a little smaller, which is
+ * what lets the jars be big at all: measured at a flat scale, the outer two
+ * pushed 36px and 24px past the circle's arc while the inner two had 98px of
+ * slack, because a chord narrows towards the top of a circle and that is
+ * exactly where a 16oz jar's shoulder is. Setting the outside back buys the
+ * size and reads as depth rather than as a fix. Theirs does the same thing.
+ */
+const DEPTH = [0.82, 1, 1, 0.82];
+
 function JarOutline() {
   return (
     <svg

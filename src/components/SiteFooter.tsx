@@ -2,10 +2,11 @@
 
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { FACILITY_NOTE } from "@/data/products";
+
 import { NEWSLETTER_LIVE, newsletter } from "@/data/buck";
 import { Logo3D } from "./Logo3D";
 import { TextRoll } from "./chrome/TextRoll";
+import { FacilityNote } from "@/components/chrome/FacilityNote";
 
 /**
  * The footer, on buckssauce.com's measured structure.
@@ -171,7 +172,7 @@ export function SiteFooter() {
           <p className="t-body text-[0.9rem] opacity-70">
             © {new Date().getFullYear()} Tumblenut. All rights reserved.
           </p>
-          <p className="t-body mt-2 text-[0.8rem] leading-snug opacity-60">{FACILITY_NOTE}</p>
+          <FacilityNote className="mt-2 text-[0.8rem] leading-snug opacity-60" />
         </div>
 
         <a

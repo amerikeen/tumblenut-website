@@ -25,10 +25,11 @@ import {
   useCart,
 } from "@/lib/cart";
 import { formatUsd } from "@/lib/utils";
-import { FACILITY_NOTE } from "@/data/products";
+
 import { TENNESSEE_ONLY_RETAIL, WHOLESALE_EMAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { useEffect, useState, type FormEvent } from "react";
+import { FacilityNote } from "@/components/chrome/FacilityNote";
 
 export const Route = createFileRoute("/cart")({
   component: CartPage,
@@ -249,9 +250,7 @@ function CartPage() {
               </button>
             </form>
 
-            <p className={`t-body mt-5 text-[0.8rem] leading-relaxed ${ON_DARK_MUTED}`}>
-              {FACILITY_NOTE}
-            </p>
+            <FacilityNote className={`mt-5 text-[0.8rem] leading-relaxed ${ON_DARK_MUTED}`} />
           </aside>
         </div>
       )}

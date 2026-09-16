@@ -45,8 +45,22 @@ export type Product = {
   tone: string;
 };
 
-export const FACILITY_NOTE =
-  "Packed in a facility that handles peanuts and tree nuts. The front of the jar is the whole list.";
+/**
+ * The allergen disclosure. This sentence is load-bearing and may not be
+ * reworded, shortened or merged into anything else.
+ */
+export const FACILITY_NOTE = "Packed in a facility that handles peanuts and tree nuts.";
+
+/**
+ * What we say instead of "safe". Deliberately a claim about the LABEL rather
+ * than about the contents, so there is no absolute in it to test.
+ *
+ * It is a SECOND LINE, not a continuation: rendered under the disclosure
+ * rather than running on after it (Jeff, 2026-09-16). Use `<FacilityNote />`
+ * rather than concatenating these two by hand -- that is how they ended up as
+ * one run-on string in the first place.
+ */
+export const LABEL_NOTE = "The front of the jar is the whole list.";
 
 /**
  * Product truth. Ingredients, prices and slugs all come from the label maker

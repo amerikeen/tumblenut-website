@@ -13,11 +13,12 @@ import {
   PLATES,
 } from "@/components/chrome/PageBackdrop";
 import { noCards } from "@/data/buck";
-import { products, FACILITY_NOTE, type Product } from "@/data/products";
+import { products, type Product } from "@/data/products";
 import { TENNESSEE_ONLY_RETAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { jsonLd, shopGraph } from "@/lib/structured-data";
 import { formatUsd } from "@/lib/utils";
+import { FacilityNote } from "@/components/chrome/FacilityNote";
 
 export const Route = createFileRoute("/shop/")({
   component: Shop,
@@ -181,9 +182,7 @@ function Shop() {
           <Link to="/stores" className={ON_DARK_LINE}>
             Where to find us
           </Link>
-          <p className={`t-body max-w-[58ch] text-[0.95rem] leading-relaxed ${ON_DARK_MUTED}`}>
-            {FACILITY_NOTE}
-          </p>
+          <FacilityNote className={`max-w-[58ch] text-[0.95rem] leading-relaxed ${ON_DARK_MUTED}`} />
         </div>
       </section>
     </PageBackdrop>

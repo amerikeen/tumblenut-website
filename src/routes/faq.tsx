@@ -11,10 +11,11 @@ import {
   PLATES,
 } from "@/components/chrome/PageBackdrop";
 import { faq } from "@/data/faq";
-import { FACILITY_NOTE } from "@/data/products";
+
 import { WHOLESALE_EMAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { faqGraph, jsonLd } from "@/lib/structured-data";
+import { FacilityNote } from "@/components/chrome/FacilityNote";
 
 export const Route = createFileRoute("/faq")({
   component: FaqPage,
@@ -94,9 +95,7 @@ function FaqPage() {
         ))}
       </dl>
 
-      <p className={`t-body mt-12 max-w-[58ch] text-[0.95rem] leading-relaxed ${ON_DARK_MUTED}`}>
-        {FACILITY_NOTE}
-      </p>
+      <FacilityNote className={`mt-12 max-w-[58ch] text-[0.95rem] leading-relaxed ${ON_DARK_MUTED}`} />
 
       <div className="mt-12 flex flex-wrap gap-3">
         <Link to="/shop" className={ON_DARK_SOLID}>

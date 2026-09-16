@@ -52,6 +52,21 @@ export const FACILITY_NOTE =
  * Product truth. Ingredients, prices and slugs all come from the label maker
  * in `amerikeen/tumblenut` -- never invent one, and never let copy outrun it.
  *
+ * **NEVER COUNT, AND NEVER CLAIM TO BE THE ONLY ONE.** A `hook` or `lede` may
+ * not state how many ingredients a jar has, how many jars are on the wall, or
+ * that a jar is the only anything. Recipes get reformulated and the lineup
+ * changes at launch, and every one of those numbers quietly goes false when
+ * they do -- on a page nobody thinks to re-read.
+ *
+ * Two were removed on 2026-09-16 (Jeff): smokehouse-almond said "Two
+ * ingredients, and the label has room to spare" while carrying exactly two,
+ * and pumpkin-patch said "The only seed jar on the wall". Say the IDEA instead
+ * -- a short label, a seasonal jar -- and it stays true through a reformulation.
+ *
+ * One exception, and it is history rather than a count: firecracker-peanut's
+ * story says Doc "got bored of making only one kind", which is about the past
+ * and cannot go false. `buck.ts` carries the same rule for the home page.
+ *
  * There is no `shelf` field. Doc's jars and Cecil's jars were a taxonomy the
  * site used to sort by, and it quietly implied a safe side of the wall. The
  * offer is more choices, never a safe choice: every jar names what is in it
@@ -131,7 +146,7 @@ export const products: Product[] = [
     lede: "Almonds. Bourbon barrel smoked salt. Still the whole list.",
     story:
       "The first jar Doc ground that had no peanut in it. Almonds from a smokehouse roast, nothing sweet, nothing extra.",
-    hook: "Two ingredients, and the label has room to spare",
+    hook: "The label has room to spare",
     tasteProfile: [
       "Almond, dry and clean",
       "Bourbon barrel smoke sits underneath",
@@ -160,7 +175,7 @@ export const products: Product[] = [
     lede: "Pumpkin seed, cinnamon, applewood smoked salt. Here for the holidays.",
     story:
       "Toasted pepitas, a line of cinnamon, the same smoked salt Doc puts on everything else.",
-    hook: "The only seed jar on the wall",
+    hook: "The jar that turns up with the cold",
     tasteProfile: [
       "Toasted pepita, green and earthy",
       "Cinnamon over the top, not stirred through",

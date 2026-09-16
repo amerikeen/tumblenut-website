@@ -3,16 +3,19 @@ import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { Icon } from "@/components/buck/Icon";
 import { FACILITY_NOTE } from "@/data/products";
 import { seo } from "@/lib/seo";
+import { aboutGraph, jsonLd } from "@/lib/structured-data";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
-  head: () =>
-    seo({
+  head: () => ({
+    ...seo({
       title: "The workshop — Tumblenut",
       description:
         "Doc grinds nut butter in Columbia, Tennessee. Cecil reacts to peanuts. That is why there is more than one jar on the wall.",
       path: "/about",
     }),
+    scripts: jsonLd(aboutGraph),
+  }),
 });
 
 /**

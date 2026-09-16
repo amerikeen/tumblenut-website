@@ -4,6 +4,7 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
+import { jsonLd, siteGraph } from "@/lib/structured-data";
 import appCss from "../styles.css?url";
 
 const APP_NAME = SITE_NAME;
@@ -55,6 +56,9 @@ export const Route = createRootRoute({
       { name: "twitter:description", content: SITE_DESCRIPTION },
       { name: "twitter:image", content: OG_IMAGE },
     ],
+    /* JSON-LD survives the platform injector -- it only strips <meta>. This is
+       the one piece of share/answer-engine markup the app genuinely owns. */
+    scripts: jsonLd(siteGraph),
     links: [
       /* .ico first for the crawlers and old browsers that ask for it by name;
          the SVG is declared with its type so anything modern prefers it. */

@@ -5,6 +5,7 @@ import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { NotFound } from "@/components/chrome/NotFound";
 import { allergenLabel, FACILITY_NOTE, productBySlug, products } from "@/data/products";
 import { seo } from "@/lib/seo";
+import { jsonLd, productGraph } from "@/lib/structured-data";
 import { formatUsd } from "@/lib/utils";
 
 export const Route = createFileRoute("/shop/$slug")({
@@ -27,11 +28,14 @@ export const Route = createFileRoute("/shop/$slug")({
   head: ({ params }) => {
     const p = productBySlug[params.slug];
     if (!p) return {};
-    return seo({
-      title: `${p.name} — Tumblenut`,
-      description: p.lede,
-      path: `/shop/${p.slug}`,
-    });
+    return {
+      ...seo({
+        title: `${p.name} — Tumblenut`,
+        description: p.lede,
+        path: `/shop/${p.slug}`,
+      }),
+      scripts: jsonLd(productGraph(p)),
+    };
   },
 });
 

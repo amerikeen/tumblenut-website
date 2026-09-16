@@ -2,16 +2,19 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { TENNESSEE_ONLY, WHOLESALE_EMAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
+import { contactGraph, jsonLd } from "@/lib/structured-data";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
-  head: () =>
-    seo({
+  head: () => ({
+    ...seo({
       title: "Get in touch — Tumblenut",
       description:
         "Reach the workshop in Columbia, Tennessee. Trade enquiries go to wholesale@tumblenut.com.",
       path: "/contact",
     }),
+    scripts: jsonLd(contactGraph),
+  }),
 });
 
 /**

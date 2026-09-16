@@ -3,17 +3,20 @@ import { JarFigure } from "@/components/JarFigure";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { products, FACILITY_NOTE } from "@/data/products";
 import { seo } from "@/lib/seo";
+import { jsonLd, shopGraph } from "@/lib/structured-data";
 import { formatUsd } from "@/lib/utils";
 
 export const Route = createFileRoute("/shop/")({
   component: Shop,
-  head: () =>
-    seo({
+  head: () => ({
+    ...seo({
       title: "The jars — Tumblenut",
       description:
         "Every Tumblenut jar, ground in small batches in Columbia, Tennessee, with every ingredient named on the label.",
       path: "/shop",
     }),
+    scripts: jsonLd(shopGraph(products)),
+  }),
 });
 
 /**
@@ -60,9 +63,14 @@ function Shop() {
                   className="transition-transform duration-300 group-hover:-translate-y-1.5"
                 />
               </div>
-              <p className="t-card mt-5 text-[1.35rem] text-[#2c1b12] group-hover:text-[#4a3224]">
+              {/* A HEADING, not a styled <p>. The wall was 107 words with one
+                  h2 on it (the footer's), so the only page that enumerates the
+                  whole range gave a parser no structure to hang the names on.
+                  `.t-card` is a class and still beats the element selector in
+                  styles.css, so nothing moves visually. */}
+              <h2 className="t-card mt-5 text-[1.35rem] text-[#2c1b12] group-hover:text-[#4a3224]">
                 {p.name}
-              </p>
+              </h2>
               <p className="t-body mt-1 text-[0.95rem] text-[#7a6252]">
                 {p.sizeLabel}
                 <span className="mx-2 text-[#d4c4a8]">·</span>

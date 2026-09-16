@@ -31,7 +31,7 @@ import { cn } from "@/lib/utils";
  * 2. **Subject suppression.** A plate with a character near full height needs
  *    considerably more than the contrast floor, because type sitting legibly
  *    ON A FACE still reads as a mistake. `workshop-interior.jpg` clears 4.5:1
- *    at 0.34; /wholesale needed 0.74 before its lede stopped sitting on Doc.
+ *    at 0.60; /wholesale needed 0.74 before its lede stopped sitting on Doc.
  *
  * ## Measure the brightest pixel at the real crop, not the image's percentile
  *
@@ -90,24 +90,34 @@ export function PageBackdrop({
  * clears 4.5:1 under `#fbf3e4`. `veil` is what actually ships.
  *
  * Where the two are close, contrast is what set the number (the landscapes, all
- * at 0.62). Where `veil` is far above `floor`, a character near full height is
- * the reason and no amount of arithmetic would have found it: `shop` and
- * `product` clear contrast at 0.34 and 0.36 and still need 0.74 and 0.78.
+ * at 0.62). Where `veil` runs above `floor`, a character near full height is the
+ * reason and no amount of arithmetic would have found it: `shop`, `cart` and
+ * `product` all clear contrast at 0.60 and still ship at 0.74-0.78.
+ *
+ * Every plate on the site measures a 0.60 floor, which is not a coincidence --
+ * they are all graded to the same warm key, so the brightest highlight lands in
+ * the same place. Treat 0.62 as the site's contrast minimum and anything above
+ * it as a judgement about the subject.
  *
  * Plate assignments confirmed by Jeff on 2026-09-16 against a rendered contact
  * sheet. The veils are measured, not chosen — re-measure, do not re-guess.
  */
 export const PLATES = {
   /** /shop. Doc pointing at the shelf — the wall the page is about. */
-  shop: { src: "/brand/scenes/workshop-interior.jpg", veil: 0.74, floor: 0.34 },
-  /** /shop/$slug, all seven. The reel's last shot: Doc spoon-feeding Cecil. */
-  product: { src: "/brand/cinema/tasting-v2.jpg", veil: 0.78, floor: 0.36 },
+  shop: { src: "/brand/scenes/workshop-interior.jpg", veil: 0.74, floor: 0.6 },
+  /** /shop/$slug, all seven. The tail of the reel's last shot: Doc with both
+   *  fists in the air, and BOTH characters' eyes open. Pulled at 5.125s of
+   *  tasting-v2.mp4 (Jeff, 2026-09-16). The old `tasting-v2.jpg` still had Doc
+   *  mid-blink with his eyes shut, which is the thing this rule exists to
+   *  stop: no still on this site may show either character with eyes
+   *  partially or fully closed. Check any replacement frame for that first. */
+  product: { src: "/brand/cinema/tasting-hands-up.jpg", veil: 0.78, floor: 0.6 },
   /** /about. The page is called "The workshop"; this is the workshop. */
   about: { src: "/brand/scenes/workshop-exterior.jpg", veil: 0.62, floor: 0.593 },
   /** /contact. Nobody in frame — Doc does not read the mail. */
   contact: { src: "/brand/cinema/aerial-chimney-still.jpg", veil: 0.62, floor: 0.593 },
   /** /cart. Doc at the mill with the stock ranked up behind him. */
-  cart: { src: "/brand/cinema/two-shelves.jpg", veil: 0.74, floor: 0.41 },
+  cart: { src: "/brand/cinema/two-shelves.jpg", veil: 0.74, floor: 0.6 },
   /** /faq. The plainest page on the site wants the quietest ground. */
   faq: { src: "/brand/scenes/backdrop-valley.jpg", veil: 0.62, floor: 0.594 },
   /** /stores. The only plate that is a picture of arriving somewhere. */

@@ -96,7 +96,7 @@ export const hero = {
       src: "/brand/scenes/workshop-interior.jpg",
       alt: "Inside the workshop with the mill running",
     },
-    { src: "/brand/cinema/tasting-v2.jpg", alt: "A jar open on the table, spoon in hand" },
+    { src: "/brand/cinema/tasting-hands-up.jpg", alt: "Doc and Cecil at the bench, the jars filled" },
   ],
   lede: "Small batches, ground in Columbia, TN. Every jar names what is in it, so a customer can decide for themselves.",
 };

@@ -31,7 +31,7 @@ export const openingShots: Shot[] = [
   {
     id: "peanut",
     src: "/brand/cinema/peanut-problem.mp4",
-    poster: "/brand/cinema/peanut-problem.jpg",
+    poster: "/brand/cinema/peanut-problem-open.jpg",
     seconds: 4,
     line: "Turns out Cecil reacts to peanuts.",
   },
@@ -45,7 +45,7 @@ export const openingShots: Shot[] = [
   {
     id: "tasting",
     src: "/brand/cinema/tasting-v2.mp4",
-    poster: "/brand/cinema/tasting-v2.jpg",
+    poster: "/brand/cinema/tasting-hands-up.jpg",
     seconds: 6,
     line: "Now Cecil can enjoy his favorite nut butters too!",
   },

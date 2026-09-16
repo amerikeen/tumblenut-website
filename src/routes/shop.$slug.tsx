@@ -81,13 +81,15 @@ export const Route = createFileRoute("/shop/$slug")({
  *
  * **Three departures, all deliberate.**
  *
- * 1. **The page stands on `tasting-v2.jpg` at 0.78.** This is the reel's last
- *    shot -- Doc spoon-feeding Cecil, the one carrying Jeff's closing line --
- *    so every jar page ends the film it started on the home page. It is also
- *    the closest interior in the set: two faces and a lit copper pot. Its
- *    contrast floor measured 0.36 and it ships at 0.78, which is the heaviest
- *    veil on the site and still the right one. Check any new type over the two
- *    faces, not over the bench.
+ * 1. **The page stands on `tasting-hands-up.jpg` at 0.78.** It is the TAIL of
+ *    the reel's last shot -- Doc with both fists in the air, the beat that
+ *    carries Jeff's closing line -- so every jar page ends the film it started
+ *    on the home page. Pulled at 5.125s of `tasting-v2.mp4` on 2026-09-16,
+ *    replacing `tasting-v2.jpg`, which caught Doc mid-blink with his eyes
+ *    shut. **No still on this site may show either character with their eyes
+ *    partially or fully closed** -- check that on any frame before you swap it
+ *    in. It is also the closest interior in the set: two faces and a lit
+ *    copper pot, so check new type over the FACES, not over the bench.
  *
  * 2. **`product.tone` is a wash now, not a full-bleed panel.** It used to fill
  *    the whole left half, which was correct while the page was flat paper and

@@ -46,7 +46,7 @@ export type Product = {
 };
 
 export const FACILITY_NOTE =
-  "Packed in a facility that handles peanuts and tree nuts. We state what is in the jar. You decide for your table.";
+  "Packed in a facility that handles peanuts and tree nuts. The front of the jar is the whole list.";
 
 /**
  * Product truth. Ingredients, prices and slugs all come from the label maker
@@ -130,7 +130,7 @@ export const products: Product[] = [
     contains: "Almonds (tree nuts)",
     lede: "Almonds. Bourbon barrel smoked salt. Still the whole list.",
     story:
-      "The first jar Doc ground that had no peanut in it. Almonds from a smokehouse roast, nothing sweet, nothing extra. Two ingredients, and the label has room to spare.",
+      "The first jar Doc ground that had no peanut in it. Almonds from a smokehouse roast, nothing sweet, nothing extra.",
     hook: "Two ingredients, and the label has room to spare",
     tasteProfile: [
       "Almond, dry and clean",
@@ -159,7 +159,7 @@ export const products: Product[] = [
     contains: "Pumpkin seeds",
     lede: "Pumpkin seed, cinnamon, applewood smoked salt. Here for the holidays.",
     story:
-      "The only seed jar on the wall. Toasted pepitas, a line of cinnamon, the same smoked salt Doc puts on everything else. Still packed in a shop that handles peanuts and tree nuts.",
+      "Toasted pepitas, a line of cinnamon, the same smoked salt Doc puts on everything else.",
     hook: "The only seed jar on the wall",
     tasteProfile: [
       "Toasted pepita, green and earthy",
@@ -219,7 +219,7 @@ export const products: Product[] = [
     contains: "Pecans (tree nuts)",
     lede: "Pecans, maple, bourbon barrel smoked salt. That's October.",
     story:
-      "Maple in the mill and bourbon barrel smoked salt, darker flecks you can see through the glass. The tasting-spoon jar, and the one that never lasts the week.",
+      "Maple in the mill and bourbon barrel smoked salt, darker flecks you can see through the glass. The tasting-spoon jar.",
     hook: "The one that never lasts the week",
     tasteProfile: [
       "Pecan, buttery and soft",
@@ -249,7 +249,7 @@ export const products: Product[] = [
     contains: "Hazelnuts (tree nuts)",
     lede: "Hazelnut, cacao, maple, heirloom salt. Dessert without the junk.",
     story:
-      "Not a candy jar and not a health claim. Hazelnuts and cacao, ground until they give up, maple to finish. Doc eats it with a spoon like the rest of them.",
+      "Hazelnuts and cacao, ground until they give up, maple to finish. Doc eats it with a spoon like the rest of them.",
     hook: "Not a candy jar, and not a health claim",
     tasteProfile: [
       "Hazelnut first, ground until it gives up",

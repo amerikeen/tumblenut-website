@@ -8,8 +8,24 @@ import { NoCards } from "@/components/buck/NoCards";
 import { ChooseYourGrind } from "@/components/buck/ChooseYourGrind";
 import { ThreePack } from "@/components/buck/ThreePack";
 import { WhyWheel } from "@/components/buck/WhyWheel";
+import { seo } from "@/lib/seo";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+  component: Home,
+  /**
+   * The home page had no head of its own and inherited the root's, so the one
+   * page most likely to be linked to shared the generic site title with every
+   * placeholder. The title is what the platform injector turns into og:title --
+   * see `src/lib/seo.ts` -- so this is also the home page's share card.
+   */
+  head: () =>
+    seo({
+      title: "Tumblenut — small batch nut butters from Columbia, Tennessee",
+      description:
+        "Doc still grinds peanuts — and almond, pistachio, pecan, hazelnut and pepita besides. Small batches, ground in Columbia, Tennessee, every ingredient named.",
+      path: "/",
+    }),
+});
 
 /**
  * The home page: the locked hero reel, then the Buck sequence.

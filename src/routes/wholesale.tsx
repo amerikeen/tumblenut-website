@@ -4,19 +4,17 @@ import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { QuestionLadder } from "@/components/wholesale/QuestionLadder";
 import { WholesaleForm } from "@/components/wholesale/WholesaleForm";
 import { hero } from "@/data/wholesale";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/wholesale")({
   component: Wholesale,
-  head: () => ({
-    meta: [
-      { title: "Wholesale — Tumblenut" },
-      {
-        name: "description",
-        content:
-          "Put Tumblenut on your shelf. Small-batch nut butters ground in Columbia, Tennessee, with every ingredient named on the label.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Wholesale — Tumblenut",
+      description:
+        "Put Tumblenut on your shelf. Small-batch nut butters ground in Columbia, Tennessee, with every ingredient named on the label.",
+      path: "/wholesale",
+    }),
 });
 
 /**
@@ -78,7 +76,7 @@ function Wholesale() {
                 }`}
               />
             ))}
-            </div>
+          </div>
         </div>
       </section>
 

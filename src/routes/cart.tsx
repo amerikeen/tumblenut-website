@@ -15,16 +15,22 @@ import {
 } from "@/lib/cart";
 import { formatUsd } from "@/lib/utils";
 import { FACILITY_NOTE } from "@/data/products";
+import { seo } from "@/lib/seo";
 import { useEffect, useState, type FormEvent } from "react";
 
 export const Route = createFileRoute("/cart")({
   component: CartPage,
-  head: () => ({
-    meta: [
-      { title: "The crate — Tumblenut" },
-      { name: "robots", content: "noindex, follow" },
-    ],
-  }),
+  /* noindex and therefore no canonical: a session view has nothing for a
+     stranger to land on. The description is here for the link preview when
+     somebody sends their crate to themselves, and it has to keep saying that
+     checkout is not open -- see the note on CartPage. */
+  head: () =>
+    seo({
+      title: "The crate — Tumblenut",
+      description:
+        "The jars you have picked. Checkout is not open yet — the crate sends a note to the workshop instead of taking a card.",
+      robots: "noindex, follow",
+    }),
 });
 
 const SOLID =
@@ -172,18 +178,14 @@ function CartPage() {
 
             <p className="t-body mt-5 rounded-xl border border-[#d4c4a8] bg-[#f4ebd8] p-4 text-[0.85rem] leading-relaxed text-[#4a3224]">
               Checkout is not open yet. The LLC and the bank account are still in progress, so no
-              card is taken and no payment runs — send the crate and we will hold it and write
-              back.
+              card is taken and no payment runs — send the crate and we will hold it and write back.
             </p>
 
             <form className="mt-6 flex flex-col gap-4" onSubmit={onSubmit}>
               <Field id="name" name="name" label="Name" required />
               <Field id="email" name="email" label="Email" type="email" required />
               <div>
-                <label
-                  className="t-meta mb-2 block text-[0.68rem] text-[#7a6252]"
-                  htmlFor="note"
-                >
+                <label className="t-meta mb-2 block text-[0.68rem] text-[#7a6252]" htmlFor="note">
                   Note for the workshop
                 </label>
                 <textarea

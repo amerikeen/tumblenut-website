@@ -3,9 +3,10 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { OG_IMAGE, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "Tumblenut";
+const APP_NAME = SITE_NAME;
 
 export const Route = createRootRoute({
   head: () => ({
@@ -13,14 +14,51 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: APP_NAME },
-      {
-        name: "description",
-        content:
-          "Tumblenut — small batch nut butters from a workshop in Columbia, Tennessee. Now Cecil can enjoy his favorite nut butters too!",
-      },
+      { name: "description", content: SITE_DESCRIPTION },
       { name: "theme-color", content: "#F4EBD8" },
+
+      /**
+       * This one is not decoration and must not be deleted as duplication.
+       *
+       * `src/lib/og/site.json` deliberately no longer sets `title`, so that the
+       * platform injector falls through to each page's own `<title>` for
+       * og:title. The cost of that is `normalizeHeadContext` resolving its
+       * `appName` -- which it computes WITHOUT the document title -- to the
+       * DEFAULT_APP_NAME "Grok App", and stamping it here. It only stamps the
+       * tag when the document does not already carry one, so carrying our own
+       * is what keeps an iOS home-screen icon reading Tumblenut.
+       *
+       * (The webmanifest is a separate, still-broken story: it is generated per
+       * request from the Host header, `tumblenut.com` is not a `*.grok.me`
+       * host, and it already served `"name": "Grok App"` before any of this.
+       * Fixing that means not using /__grok/manifest.webmanifest.)
+       */
+      { name: "apple-mobile-web-app-title", content: APP_NAME },
+
+      /**
+       * SITE-WIDE SHARE DEFAULTS. The deployed head does not use them -- the
+       * platform middleware strips every og:/twitter: meta and injects its own.
+       * See the table at the top of `src/lib/seo.ts` before changing anything
+       * here expecting a different link preview.
+       */
+      { property: "og:site_name", content: SITE_NAME },
+      { property: "og:type", content: "website" },
+      { property: "og:title", content: APP_NAME },
+      { property: "og:description", content: SITE_DESCRIPTION },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Tumblenut jars on the workshop shelf" },
+      { property: "og:locale", content: "en_US" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: APP_NAME },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
+      /* .ico first for the crawlers and old browsers that ask for it by name;
+         the SVG is declared with its type so anything modern prefers it. */
+      { rel: "icon", href: "/favicon.ico", sizes: "32x32" },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "stylesheet", href: appCss },
       { rel: "manifest", href: "/__grok/manifest.webmanifest" },

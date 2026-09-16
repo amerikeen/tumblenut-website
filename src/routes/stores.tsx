@@ -16,7 +16,10 @@ import { PagePlaceholder } from "@/components/chrome/PagePlaceholder";
 export const Route = createFileRoute("/stores")({
   component: Page,
   head: () => ({
-    meta: [{ name: "robots", content: "noindex, follow" }],
+    meta: [
+      { title: "Where to find us — Tumblenut" },
+      { name: "robots", content: "noindex, follow" },
+    ],
   }),
 });
 

@@ -1,0 +1,11 @@
+# Tumblenut — https://tumblenut.com
+
+# /cart, /stores and /story are NOT disallowed here on purpose. They carry
+# `noindex, follow` in their route heads, and a crawler that is blocked from
+# fetching a page never reads its noindex — Google files the bare URL instead.
+# Crawlable plus noindex is the only pairing that actually keeps them out.
+User-agent: *
+Allow: /
+Disallow: /auth/
+
+Sitemap: https://tumblenut.com/sitemap.xml

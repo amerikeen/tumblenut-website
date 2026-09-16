@@ -4,6 +4,7 @@ import { JarFigure } from "@/components/JarFigure";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { NotFound } from "@/components/chrome/NotFound";
 import { allergenLabel, FACILITY_NOTE, productBySlug, products } from "@/data/products";
+import { seo } from "@/lib/seo";
 import { formatUsd } from "@/lib/utils";
 
 export const Route = createFileRoute("/shop/$slug")({
@@ -20,15 +21,17 @@ export const Route = createFileRoute("/shop/$slug")({
     if (!productBySlug[params.slug]) throw notFound();
   },
   notFoundComponent: NotFound,
+  /* No head at all on a slug that does not resolve: the loader has already
+     thrown notFound(), and titling a 404 after the URL somebody mistyped is how
+     a junk URL ends up in the index with a plausible-looking name. */
   head: ({ params }) => {
     const p = productBySlug[params.slug];
     if (!p) return {};
-    return {
-      meta: [
-        { title: `${p.name} — Tumblenut` },
-        { name: "description", content: p.lede },
-      ],
-    };
+    return seo({
+      title: `${p.name} — Tumblenut`,
+      description: p.lede,
+      path: `/shop/${p.slug}`,
+    });
   },
 });
 
@@ -130,7 +133,10 @@ function ProductPage() {
                 <ul className="flex flex-col gap-1.5">
                   {product.tasteProfile.map((line) => (
                     <li key={line} className="t-body flex gap-2.5 text-[1rem] text-[#4a3224]">
-                      <span aria-hidden="true" className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4a35a]" />
+                      <span
+                        aria-hidden="true"
+                        className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c4a35a]"
+                      />
                       <span>{line}</span>
                     </li>
                   ))}
@@ -146,13 +152,14 @@ function ProductPage() {
                   "every ingredient named" is the promise, not "safe". */}
               <div className="rounded-xl border border-[#d4c4a8] bg-[#fbf6ec] p-5 lg:col-span-2">
                 <ul className="grid grid-cols-2 gap-x-4 gap-y-3 lg:grid-cols-4">
-                  {["Small batch", "Columbia, TN", "Ingredients named", "Glass jar"].map(
-                    (b) => (
-                      <li key={b} className="t-meta text-center text-[0.68rem] leading-snug text-[#7a6252]">
-                        {b}
-                      </li>
-                    ),
-                  )}
+                  {["Small batch", "Columbia, TN", "Ingredients named", "Glass jar"].map((b) => (
+                    <li
+                      key={b}
+                      className="t-meta text-center text-[0.68rem] leading-snug text-[#7a6252]"
+                    >
+                      {b}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
@@ -298,4 +305,3 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
     </div>
   );
 }
-

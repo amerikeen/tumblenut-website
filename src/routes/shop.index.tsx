@@ -2,20 +2,18 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { JarFigure } from "@/components/JarFigure";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { products, FACILITY_NOTE } from "@/data/products";
+import { seo } from "@/lib/seo";
 import { formatUsd } from "@/lib/utils";
 
 export const Route = createFileRoute("/shop/")({
   component: Shop,
-  head: () => ({
-    meta: [
-      { title: "The jars — Tumblenut" },
-      {
-        name: "description",
-        content:
-          "Every Tumblenut jar, ground in small batches in Columbia, Tennessee, with every ingredient named on the label.",
-      },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "The jars — Tumblenut",
+      description:
+        "Every Tumblenut jar, ground in small batches in Columbia, Tennessee, with every ingredient named on the label.",
+      path: "/shop",
+    }),
 });
 
 /**
@@ -47,8 +45,8 @@ function Shop() {
         className="t-hero mt-4 max-w-[14ch] text-[#2c1b12]"
       />
       <p className="t-lead mt-7 max-w-[46ch] text-[#4a3224]">
-        Ground in small batches in Columbia, Tennessee. Every label names what is inside, so you
-        can read it and pick the jar that belongs on your table.
+        Ground in small batches in Columbia, Tennessee. Every label names what is inside, so you can
+        read it and pick the jar that belongs on your table.
       </p>
 
       <ul className="mt-16 grid grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4">

@@ -33,6 +33,8 @@ import { WHOLESALE_EMAIL } from "./wholesale";
 
 export type FaqEntry = { id: string; q: string; a: string };
 
+import { PACK_OFFER } from "@/lib/cart";
+
 export const faq: FaqEntry[] = [
   {
     id: "whats-in-it",
@@ -55,7 +57,7 @@ export const faq: FaqEntry[] = [
        sentence that survives a launch and quietly becomes a lie. */
     q: "Can I order online yet?",
     a: CHECKOUT_LIVE
-      ? "Yes. Fill the crate and check out — any three jars takes five dollars off, however you mix them."
+      ? `Yes. Fill the crate and check out — ${PACK_OFFER.toLowerCase()}, however you mix them.`
       : `Not yet. The crate works and the prices are real, but checkout is not open: no card is taken, no payment runs, and the form is not wired up to send anything. Email ${WHOLESALE_EMAIL} and say which jars you were after.`,
   },
   {

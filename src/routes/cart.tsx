@@ -19,6 +19,7 @@ import {
   cartItems,
   cartSubtotalCents,
   cartTotalCents,
+  PACK_OFFER,
   packsIn,
   PACK_SIZE,
   useCart,
@@ -203,12 +204,12 @@ function CartPage() {
             </p>
             {discount > 0 ? (
               <p className="t-body mt-2 flex justify-between text-[0.95rem] text-[#e9a06a]">
-                <span>{packs > 1 ? `${packs} × 3 pack` : "3 pack"} saving</span>
+                <span>{packs > 1 ? `${packs} × ${PACK_SIZE} pack` : `${PACK_SIZE} pack`} saving</span>
                 <span className="tabular-nums">−{formatUsd(discount)}</span>
               </p>
             ) : (
               <p className={`t-body mt-2 text-[0.85rem] leading-relaxed ${ON_DARK_MUTED}`}>
-                Any three jars takes $5 off. Add {toNextPack} more and the saving appears here.
+                {PACK_OFFER}. Add {toNextPack} more and the saving appears here.
               </p>
             )}
             <p className="t-card mt-4 flex justify-between border-t border-[#f0e3cd]/25 pt-4 text-[1.35rem] text-[#fbf3e4]">

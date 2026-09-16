@@ -228,16 +228,16 @@ function ProductPage() {
           lives on /shop and on the home page, and three copies of a
           seven-jar picker would be three copies too many.
           --------------------------------------------------------------- */}
-      <section className="px-3 py-3 sm:px-5" aria-label="Three jars, five dollars off">
+      <section className="px-3 py-3 sm:px-5" aria-label={`${PACK_SIZE} jars, ${formatUsd(PACK_DISCOUNT_CENTS)} off`}>
         <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-6 overflow-hidden rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 px-6 py-10 text-center sm:px-12 lg:flex-row lg:justify-between lg:text-left">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-2.5 rounded-xl border border-dashed border-[#f0e3cd]/25"
           />
           <div className="relative">
-            <p className={`t-meta ${ON_DARK_EYEBROW}`}>Build your 3 pack</p>
+            <p className={`t-meta ${ON_DARK_EYEBROW}`}>Build your {PACK_SIZE} pack</p>
             <h2 className={`t-card mt-3 max-w-[16ch] text-[1.9rem] ${ON_DARK_HEAD}`}>
-              Any three jars, {formatUsd(PACK_DISCOUNT_CENTS)} off
+              Any {PACK_SIZE} jars, {formatUsd(PACK_DISCOUNT_CENTS)} off
             </h2>
             <p className={`t-body mt-3 max-w-[40ch] text-[0.95rem] ${ON_DARK_MUTED}`}>
               One crate, packing straw, {PACK_SIZE} glass jars.

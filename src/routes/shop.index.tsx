@@ -159,7 +159,7 @@ function Shop() {
       {/* ---------------------------------------------------------------
           4 — the bundle. Theirs sits on /shop and on every product page;
           ours was only ever on the home page, so the one page a buyer picks
-          jars on never mentioned that three of them is five dollars off.
+          jars on never mentioned the multi-buy at all.
           `ThreePack` is the home page's component, unchanged: it already
           carries its own scrim and is already built for cream on dark.
           --------------------------------------------------------------- */}

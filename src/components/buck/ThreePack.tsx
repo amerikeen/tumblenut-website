@@ -1,20 +1,58 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
 import { PACK_DISCOUNT_CENTS, PACK_SIZE, useCart } from "@/lib/cart";
 import { cn, formatUsd } from "@/lib/utils";
 import { threePack } from "@/data/buck";
-import { ResolveHeading } from "./ResolveHeading";
 
 /**
- * Build your 3 Pack: pick any three jars, five dollars off.
+ * Build your pack, rebuilt 2026-09-16 on buckssauce.com's measured bundle
+ * module. Their interaction, our brand.
  *
- * The button really does fill the crate -- the discount then falls out of the
- * cart maths in src/lib/cart.ts rather than being a promise this component
- * makes on its own. Checkout is still stubbed: the crate page says so.
+ * ## What was measured, by driving theirs
+ *
+ * Their module is two columns inside one rounded panel with an inset dashed
+ * rule (`inset-2.5`, `border-dashed`). Left: a three-line heading and a row of
+ * picker tiles. Right: a circle holding one SLOT PER PACK POSITION.
+ *
+ * Clicking through it recorded this, which is the whole point of the section
+ * and the thing ours was missing:
+ *
+ *     empty       one dashed bottle OUTLINE per slot
+ *                 CTA "Add N more", disabled
+ *                 every tile badge reads "+"
+ *     one pick    that jar fills a slot and gains an × to remove it
+ *                 tile badge "+" -> "1"
+ *                 CTA "Add 2 more", still disabled
+ *     full        CTA "Add to cart" + the price, enabled
+ *
+ * So the slots are the feedback. The old version had a grid of seven jars and
+ * a "0 of 3 picked" line underneath, which told you the same number without
+ * ever showing you the pack you were building.
+ *
+ * ## What is ours, not theirs
+ *
+ * **Jars, not bottles, and seven of them.** They have four SKUs and a single
+ * `flex` row fits. Seven does not, so the row wraps into a grid below `sm`.
+ *
+ * **`product.tone` is the tile fill.** This is the one place on the site where
+ * a saturated block behind the jar is right: the tiles are small, they sit on
+ * a dark panel rather than on a photograph, and the colour is what lets you
+ * tell one 4oz jar from another at this size. /shop and the product hero still
+ * use the tone as a wash, for the reasons recorded there.
+ *
+ * **The outline is a drawn mason jar**, not a bottle and not an image: a 70mm
+ * lid over a straight body, which is the silhouette every jar on this site
+ * shares. Drawing it keeps it crisp at any size and costs no request.
+ *
+ * ## Quantities
+ *
+ * Picking the same jar twice is allowed and the badge counts it, because
+ * a pack is a count of JARS, not of flavours -- theirs behaves the same way. The discount falls out of the cart maths in `src/lib/cart.ts` rather
+ * than being a promise this component makes on its own. Checkout is still
+ * stubbed; the crate page says so.
  */
 export function ThreePack() {
   const addMany = useCart((s) => s.addMany);
@@ -22,128 +60,244 @@ export function ThreePack() {
   const [sent, setSent] = useState(false);
 
   const full = picked.length === PACK_SIZE;
-  const subtotal = useMemo(
-    () =>
-      picked.reduce(
-        (n, slug) => n + (products.find((p) => p.slug === slug)?.priceCents ?? 0),
-        0,
-      ),
-    [picked],
+  const remaining = PACK_SIZE - picked.length;
+  const subtotal = picked.reduce(
+    (n, slug) => n + (products.find((p) => p.slug === slug)?.priceCents ?? 0),
+    0,
   );
+  const total = Math.max(0, subtotal - PACK_DISCOUNT_CENTS);
 
-  function toggle(slug: string) {
+  function add(slug: string) {
     setSent(false);
-    setPicked((cur) => {
-      if (cur.includes(slug)) return cur.filter((s) => s !== slug);
-      if (cur.length >= PACK_SIZE) return [...cur.slice(1), slug];
-      return [...cur, slug];
-    });
+    setPicked((cur) => (cur.length >= PACK_SIZE ? cur : [...cur, slug]));
+  }
+  function removeAt(i: number) {
+    setSent(false);
+    setPicked((cur) => cur.filter((_, n) => n !== i));
   }
 
   return (
-    <section
-      aria-label="Build your 3 Pack"
-      className="relative px-5 py-24 sm:px-8 sm:py-28"
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[#1c120a]/55"
-      />
-      <div className="relative mx-auto max-w-6xl">
-        <div className="text-center">
-          <p className="t-meta text-[#e9c98a]">{threePack.eyebrow}</p>
-          <ResolveHeading
-            text={threePack.heading}
-            className="t-section mt-5 text-[#fbf3e4]"
-          />
-          <p className="t-body mx-auto mt-6 max-w-[46ch] text-[#f0e3cd]">{threePack.body}</p>
-        </div>
+    <section aria-label={`Build your ${PACK_SIZE} pack`} className="relative px-3 py-20 sm:px-5 sm:py-24">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[#1c120a]/55" />
 
-        <ul className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
-          {products.map((p) => {
-            const on = picked.includes(p.slug);
-            const slot = picked.indexOf(p.slug) + 1;
-            return (
-              <li key={p.slug}>
+      <div className="relative mx-auto max-w-6xl">
+        {/* Their panel: one rounded box, a faint fill, and an inset dashed rule
+            that makes it read as a printed coupon rather than a div. */}
+        <div className="relative overflow-hidden rounded-xl bg-[#f0e3cd]/10 px-6 py-12 sm:px-10 lg:px-14 lg:py-16">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-2.5 rounded-xl border border-dashed border-[#f0e3cd]/30"
+          />
+
+          <div className="relative flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+            {/* ---------------- left: heading + picker ---------------- */}
+            <div className="lg:w-[46%]">
+              <h2 className="font-slab text-[clamp(2.4rem,6vw,4.4rem)] leading-[0.92] font-bold tracking-[-0.02em] uppercase">
+                <span className="block text-[#fbf3e4]">{threePack.lead}</span>
+                {/* The boxed number, exactly their move: the count is a chip,
+                    so the line reads as a form you are filling in. */}
+                <span className="mt-1 flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center rounded-xl bg-[#fbf3e4] px-4 py-0.5 text-[#1c120a]">
+                    {PACK_SIZE}
+                  </span>
+                  <span className="text-[#fbf3e4]">Pack &amp;</span>
+                </span>
+                {/* Outlined, not filled -- their third line is stroked text. */}
+                <span
+                  className="mt-1 block text-transparent"
+                  style={{ WebkitTextStroke: "2px #fbf3e4" }}
+                >
+                  Save {formatUsd(PACK_DISCOUNT_CENTS)}
+                </span>
+              </h2>
+
+              {/* FOUR across, not seven. Seven in this column gave ~54px cells: the
+                  jar images came out as slivers and "Firecracker Peanut" ran into
+                  "Smokehouse Almond". Four wraps to 4+3 and every tile is big
+                  enough to read. Theirs is a single row only because they have
+                  four SKUs. */}
+              <ul className="mt-10 grid grid-cols-4 gap-2.5">
+                {products.map((p) => {
+                  const count = picked.filter((s) => s === p.slug).length;
+                  return (
+                    <li key={p.slug} className="flex min-w-0 flex-col gap-2">
+                      <span className="t-card text-center text-[0.72rem] leading-[1.05] text-[#f0e3cd]">
+                        {p.name}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => add(p.slug)}
+                        disabled={full}
+                        aria-label={
+                          full
+                            ? `Pack is full`
+                            : `Add ${p.name} to the ${PACK_SIZE} pack${count ? `, ${count} already in` : ""}`
+                        }
+                        className={cn(
+                          "group relative flex aspect-[108/180] w-full items-start justify-center overflow-hidden rounded-xl transition",
+                          full ? "cursor-not-allowed opacity-45" : "hover:brightness-110",
+                        )}
+                        style={{ backgroundColor: p.tone }}
+                      >
+                        <img
+                          src={p.jar}
+                          alt=""
+                          aria-hidden="true"
+                          width={400}
+                          height={640}
+                          loading="lazy"
+                          className="pointer-events-none mt-[8%] h-auto w-[62%] object-contain transition-transform duration-300 group-hover:not-disabled:-translate-y-1"
+                        />
+                        <span
+                          className={cn(
+                            "absolute bottom-2 left-1/2 flex size-8 -translate-x-1/2 items-center justify-center rounded-full font-slab text-[0.95rem] font-bold tabular-nums",
+                            count
+                              ? "bg-[#fbf3e4] text-[#1c120a]"
+                              : "bg-[#1c120a]/60 text-[#fbf3e4]",
+                          )}
+                        >
+                          {count || "+"}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {/* ---------------- right: the slots ---------------- */}
+            <div className="relative mx-auto aspect-square w-full max-w-[26rem] lg:mx-0 lg:w-[46%]">
+              <div aria-hidden="true" className="absolute inset-0 rounded-full bg-[#140d07]/70" />
+
+              {/* One slot per pack position, standing on a shared baseline.
+                  Theirs raises the middle bottle because all four of their
+                  bottles are identical; ours are 16oz, 8oz and 4oz jars of
+                  genuinely different heights, so a raised middle read as a
+                  mistake rather than a stack. `items-end` on a row of
+                  width-driven jars gives a shelf, and the size difference
+                  between a 16oz and a 4oz is true. */}
+              <ul className="absolute inset-x-0 top-[17%] flex h-[40%] items-end justify-center gap-1.5 px-[17%]">
+                {Array.from({ length: PACK_SIZE }).map((_, i) => {
+                  const slug = picked[i];
+                  const p = slug ? products.find((x) => x.slug === slug) : undefined;
+                  return (
+                    <li
+                      key={i}
+                      className="relative flex h-full flex-1 items-end justify-center"
+                      style={{ maxWidth: `${Math.min(26, 92 / PACK_SIZE)}%` }}
+                    >
+                      {p ? (
+                        /* The button wraps the jar rather than floating over the
+                           slot, so the × sits on THIS jar's shoulder whatever
+                           height it is. Anchored to the slot instead, it landed
+                           on the neighbour when a 4oz sat beside a 16oz. */
+                        <span className="relative inline-flex items-end">
+                          <img
+                            src={p.jar}
+                            alt={`${p.name}, position ${i + 1} of ${PACK_SIZE}`}
+                            width={400}
+                            height={640}
+                            className="h-auto max-h-full w-full object-contain object-bottom drop-shadow-[0_18px_28px_rgba(0,0,0,0.55)]"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeAt(i)}
+                            aria-label={`Remove ${p.name} from the ${PACK_SIZE} pack`}
+                            className="absolute -top-2.5 -right-2 z-20 flex size-7 items-center justify-center rounded-full bg-[#fbf3e4] text-[#1c120a] shadow-md transition hover:bg-white"
+                          >
+                            <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+                              <path
+                                d="M6 6l12 12M18 6 6 18"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                          </button>
+                        </span>
+                      ) : (
+                        <JarOutline />
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+
+              {/* The CTA sits inside the circle on theirs. It counts down while
+                  the pack is short, and only becomes a buy button when full. */}
+              <div className="absolute bottom-[12%] left-1/2 w-[68%] -translate-x-1/2">
                 <button
                   type="button"
-                  onClick={() => toggle(p.slug)}
-                  aria-pressed={on}
+                  disabled={!full}
+                  onClick={() => {
+                    addMany(picked);
+                    setPicked([]);
+                    setSent(true);
+                  }}
                   className={cn(
-                    "relative flex w-full flex-col items-center rounded-lg border px-3 pt-4 pb-3 transition-colors duration-200",
-                    on
-                      ? "border-walnut bg-cream"
-                      : "border-rule bg-paper/60 hover:border-walnut/60 hover:bg-cream/70",
+                    "flex h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-xl font-slab text-[0.95rem] font-bold tracking-[0.08em] uppercase transition",
+                    full
+                      ? "bg-[#fbf3e4] text-[#1c120a] hover:bg-white"
+                      : "cursor-not-allowed bg-[#fbf3e4]/25 text-[#f0e3cd]/60",
                   )}
                 >
-                  {on ? (
-                    <span className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-ink font-body text-xs font-semibold text-paper tabular-nums">
-                      {slot}
+                  {full ? (
+                    <>
+                      <span>Add to cart</span>
+                      <span className="tabular-nums">{formatUsd(total)}</span>
+                    </>
+                  ) : (
+                    <span>
+                      Add {remaining} more
                     </span>
-                  ) : null}
-                  <img
-                    src={p.jar}
-                    alt=""
-                    aria-hidden="true"
-                    className={cn(
-                      "h-28 w-auto object-contain transition-transform duration-300 sm:h-32",
-                      on ? "-rotate-2 scale-105" : "",
-                    )}
-                    width={400}
-                    height={640}
-                    loading="lazy"
-                  />
-                  <span className="mt-3 text-center font-slab text-sm font-bold uppercase leading-tight">
-                    {p.name}
-                  </span>
-                  <span className="mt-1 text-xs text-muted">{formatUsd(p.priceCents)}</span>
+                  )}
                 </button>
-              </li>
-            );
-          })}
-        </ul>
-
-        <div className="mt-12 flex flex-col items-center gap-5 rounded-lg border border-rule bg-cream px-6 py-7 sm:flex-row sm:justify-between">
-          <div className="text-center sm:text-left">
-            <p className="font-slab text-xl font-bold uppercase">
-              {picked.length} of {PACK_SIZE} picked
-            </p>
-            <p className="mt-1 text-sm text-muted">
-              {full ? (
-                <>
-                  <span className="line-through">{formatUsd(subtotal)}</span>{" "}
-                  <span className="text-ink">
-                    {formatUsd(Math.max(0, subtotal - PACK_DISCOUNT_CENTS))}
-                  </span>{" "}
-                  — {formatUsd(PACK_DISCOUNT_CENTS)} off in the crate
-                </>
-              ) : (
-                <>Pick {PACK_SIZE - picked.length} more and {formatUsd(PACK_DISCOUNT_CENTS)} comes off.</>
-              )}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {sent ? (
-              <Link to="/cart">
-                <Button variant="line">See the crate →</Button>
-              </Link>
-            ) : null}
-            <Button
-              type="button"
-              size="lg"
-              disabled={!full}
-              onClick={() => {
-                addMany(picked);
-                setPicked([]);
-                setSent(true);
-              }}
-            >
-              {sent ? "Added to the crate" : "Add the 3 Pack"}
-            </Button>
+                {/* One live region, so a screen reader hears the pack fill
+                    without the button text having to be polite about it. */}
+                <p aria-live="polite" className="sr-only">
+                  {full
+                    ? `Pack complete, ${formatUsd(total)} with ${formatUsd(PACK_DISCOUNT_CENTS)} off.`
+                    : `${picked.length} of ${PACK_SIZE} picked.`}
+                </p>
+                {sent ? (
+                  <p className="t-body mt-3 text-center text-[0.9rem] text-[#f0e3cd]">
+                    In the crate.{" "}
+                    <Link to="/cart" className="underline underline-offset-4 hover:text-[#fbf3e4]">
+                      See it →
+                    </Link>
+                  </p>
+                ) : null}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * An empty slot: the mason silhouette every jar on this site shares, drawn
+ * rather than loaded. A 70mm lid over a straight body -- the same proportion
+ * rule the jar renders follow, so a filled slot and an empty one line up.
+ */
+function JarOutline() {
+  return (
+    <svg
+      viewBox="0 0 100 160"
+      className="h-auto max-h-full w-full text-[#f0e3cd]/35"
+      fill="none"
+      aria-hidden="true"
+    >
+      <rect x="26" y="6" width="48" height="18" rx="4" stroke="currentColor" strokeWidth="3"
+            strokeDasharray="7 6" />
+      <path
+        d="M30 24v8c0 4-14 8-14 20v80a10 10 0 0 0 10 10h48a10 10 0 0 0 10-10V52c0-12-14-16-14-20v-8"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeDasharray="7 6"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

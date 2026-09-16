@@ -162,10 +162,21 @@ export const grind = {
   heading: "Pick the jar for your table",
 };
 
+/**
+ * The bundle module's heading builds itself: "Build your" + a boxed PACK_SIZE
+ * + "Pack &" + "Save <discount>". So the only copy it needs is the first line.
+ *
+ * `eyebrow` used to read "Build your 3 pack", which printed the count twice
+ * once the boxed chip went in -- the heading rendered "BUILD YOUR 3 PACK" and
+ * then "3 PACK &" directly under it. It also hardcoded the 3 and the five
+ * dollars, both of which now come from PACK_SIZE and PACK_DISCOUNT_CENTS and
+ * cannot drift from the cart maths.
+ *
+ * `body` ("One crate, packing straw, three glass jars.") is gone on Jeff's
+ * call 2026-09-16: it added nothing the slots do not already show.
+ */
 export const threePack = {
-  eyebrow: "Build your 3 pack",
-  heading: "Any three jars, five dollars off",
-  body: "One crate, packing straw, three glass jars.",
+  lead: "Build your",
 };
 
 /**

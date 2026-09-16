@@ -1,3 +1,4 @@
+import { formatUsd } from "@/lib/utils";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { products, productBySlug, type Product } from "@/data/products";
@@ -78,16 +79,26 @@ export function cartSubtotalCents(lines: Record<string, number>) {
 }
 
 /**
- * The 3 Pack: any three jars, five dollars off.
+ * The multi-buy: any PACK_SIZE jars, PACK_DISCOUNT_CENTS off.
  *
  * The saving is a property of the crate, not a separate product -- every
- * complete group of three jars takes another $5 off, however the reader
- * assembled it. Someone who adds three jars one at a time from the shop gets
- * the same deal as someone who used the builder, which is the only version of
- * this that does not feel like a trick.
+ * complete group takes another discount off, however the reader assembled it.
+ * Someone who adds the jars one at a time from the shop gets the same deal as
+ * someone who used the builder, which is the only version of this that does
+ * not feel like a trick.
+ *
+ * **CHANGE THE SIZE OR THE DISCOUNT HERE AND NOWHERE ELSE.** Both numbers were
+ * spelled out in prose in six places -- the builder's heading and aria-labels,
+ * the crate page's saving line and its hint, the FAQ answer, and the product
+ * page's bundle band -- so moving from a 3 pack to a 4 pack meant finding all
+ * of them. They all read `PACK_OFFER` or the constants now. Jeff moved this
+ * from 3/$5.00 to 4/$6.00 on 2026-09-16 and nothing else had to be touched.
  */
-export const PACK_SIZE = 3;
-export const PACK_DISCOUNT_CENTS = 500;
+export const PACK_SIZE = 4;
+export const PACK_DISCOUNT_CENTS = 600;
+
+/** The offer as one sentence, so no page writes its own version of it. */
+export const PACK_OFFER = `Any ${PACK_SIZE} jars takes ${formatUsd(PACK_DISCOUNT_CENTS)} off`;
 
 export function packsIn(lines: Record<string, number>) {
   return Math.floor(cartCount(lines) / PACK_SIZE);

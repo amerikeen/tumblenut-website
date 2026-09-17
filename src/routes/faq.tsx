@@ -229,8 +229,40 @@ const FAQ_ICON: Record<string, React.ReactNode> = {
     <Icon name="ingredient-pile" className="h-8 w-8 object-contain translate-y-0" />
   ),
   allergy: <Icon name="peanut" className="h-[1.5rem] w-auto" />,
-  shipping: <Icon name="tennessee" className="h-8 w-8 object-contain translate-y-0" />,
+  /* Sized up from the shared h-8: a thin wood sliver reads as a smudge at
+     32px. Object-contain keeps it proportional, so the actual rendered
+     height stays well under the 64px box -- it is wide, not tall. */
+  shipping: <Icon name="tennessee" className="h-16 w-16 object-contain translate-y-0" />,
   ordering: <Icon name="crate" className="h-8 w-8 object-contain translate-y-0" />,
-  gluten: <Icon name="wheat" className="h-8 w-8 object-contain translate-y-0" />,
-  glass: <Icon name="mason-jar" className="h-8 w-8 object-contain translate-y-0" />,
+  /* One wheat.png stalk read as a stray mark, not wheat. Three copies of
+     the same asset, rotated and offset, fake a cluster without a second
+     Grok render -- cheaper than a regen and reads the same at this size. */
+  gluten: (
+    <span className="relative flex h-11 w-11 items-center justify-center">
+      <Icon
+        name="wheat"
+        className="absolute h-9 w-9 -translate-x-1.5 -rotate-12 object-contain opacity-80"
+      />
+      <Icon
+        name="wheat"
+        className="absolute h-9 w-9 translate-x-1.5 rotate-12 object-contain opacity-80"
+      />
+      <Icon name="wheat" className="absolute h-10 w-10 object-contain" />
+    </span>
+  ),
+  /* A near-white jar on a near-black plate has nothing to hold onto. Same
+     radial-wash trick ChooseYourGrind and JarWall already use behind every
+     jar, just smaller and centred on the icon instead of a whole card. */
+  glass: (
+    <span className="relative flex h-8 w-8 items-center justify-center">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-[-55%] rounded-full opacity-80 blur-[5px]"
+        style={{
+          background: "radial-gradient(circle, rgba(233,201,138,0.6) 0%, transparent 70%)",
+        }}
+      />
+      <Icon name="mason-jar" className="relative h-8 w-8 object-contain translate-y-0" />
+    </span>
+  ),
 };

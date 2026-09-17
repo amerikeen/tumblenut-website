@@ -117,8 +117,20 @@ function ProductPage() {
     <PageBackdrop plate={PLATES.product.src} veil={PLATES.product.veil}>
       {/* ---------------------------------------------------------------
           Band 1 -- the split screen.
-          --------------------------------------------------------------- */}
-      <section className="px-3 pt-24 pb-6 sm:px-5 sm:pt-28 lg:h-[calc(100svh-1.5rem)] lg:min-h-[46rem]">
+
+          `lg:h-[...]` used to be a hard height, not a floor. Measured at
+          1280x800: the right column's content (title, lede, the two cards
+          plus the badge row and Contains/Add-to-cart row) runs 770px tall,
+          which is taller than that viewport's `100svh-1.5rem` (776px) has
+          room for once you also count the section's own padding -- so it
+          overflowed the section's box with nothing to clip it, and Band 2
+          right below started exactly where the box (not the content) ended.
+          The result was Band 2's panel painted directly over the tail of
+          Band 1's content, semi-opaque, on any screen short enough (a
+          laptop, not just a phone) that the copy didn't fit one viewport.
+          `min-h` instead of `h` lets the section grow past one viewport
+          when content demands it, which pushes Band 2 down instead. */}
+      <section className="px-3 pt-24 pb-6 sm:px-5 sm:pt-28 lg:min-h-[calc(100svh-1.5rem)]">
         <div className="mx-auto flex h-full max-w-7xl flex-col gap-8 lg:grid lg:grid-cols-2 lg:gap-2.5">
           {/* The jar, on a card washed with the colour it actually grinds to. */}
           <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/85 lg:aspect-auto lg:h-full">

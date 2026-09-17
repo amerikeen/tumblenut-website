@@ -126,7 +126,7 @@ export function SiteFooter() {
                 type="email"
                 required
                 placeholder={newsletter.placeholder}
-                className="h-[52px] min-w-0 flex-1 rounded-xl border-2 border-current bg-transparent px-4 font-body text-[1rem] placeholder:text-current/50 focus:outline-none"
+                className="h-16 min-w-0 flex-1 rounded-xl border-2 border-current bg-transparent px-4 font-body text-[1rem] placeholder:text-current/50 focus:outline-none"
               />
               <button
                 type="submit"

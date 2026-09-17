@@ -50,6 +50,18 @@ export const WHOLESALE_LIVE = false;
 export const WHOLESALE_EMAIL = "wholesale@tumblenut.com";
 
 /**
+ * The order address. Split from `WHOLESALE_EMAIL` on 2026-09-17 (Jeff): one
+ * inbox for the trade channel, a separate one for anything a retail buyer
+ * would email about -- checkout being closed today, and order confirmations
+ * once it opens. Use this anywhere the reader is a buyer, not a retailer;
+ * `WHOLESALE_EMAIL` stays the trade/shelf-stocking address exclusively.
+ *
+ * Same MX gap as `WHOLESALE_EMAIL` above until Zoho's records land -- mail
+ * here hard bounces until then too.
+ */
+export const ORDERS_EMAIL = "orders@tumblenut.com";
+
+/**
  * TENNESSEE ONLY. This is a legal boundary, not a growth stage.
  *
  * Every jar is produced under the Tennessee Food Freedom Act (T.C.A. 53-1-118),

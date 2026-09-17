@@ -34,7 +34,7 @@
  * left out of the visitor-facing copy entirely.
  */
 import { CHECKOUT_LIVE } from "@/lib/cart";
-import { WHOLESALE_EMAIL } from "./wholesale";
+import { ORDERS_EMAIL } from "./wholesale";
 
 export type FaqEntry = { id: string; q: string; a: string };
 
@@ -63,7 +63,7 @@ export const faq: FaqEntry[] = [
     q: "Can I order online yet?",
     a: CHECKOUT_LIVE
       ? `Yes. Fill the crate and check out: ${PACK_OFFER.toLowerCase()}, mixed however you like.`
-      : `Not yet. The crate works and the prices are real, but checkout is not open: no card is taken, nothing is sent. Email ${WHOLESALE_EMAIL} and say which jars you want.`,
+      : `Not yet. The crate works and the prices are real, but checkout is not open: no card is taken, nothing is sent. Email ${ORDERS_EMAIL} and say which jars you want.`,
   },
   {
     id: "gluten",

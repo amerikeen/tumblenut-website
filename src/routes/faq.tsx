@@ -10,7 +10,6 @@ import {
   ON_DARK_BODY,
   ON_DARK_EYEBROW,
   ON_DARK_HEAD,
-  ON_DARK_LINE,
   ON_DARK_MUTED,
   ON_DARK_SOLID,
   PageBackdrop,
@@ -18,7 +17,6 @@ import {
 } from "@/components/chrome/PageBackdrop";
 import { faq, type FaqEntry } from "@/data/faq";
 
-import { WHOLESALE_EMAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { faqGraph, jsonLd } from "@/lib/structured-data";
 import { FacilityNote } from "@/components/chrome/FacilityNote";
@@ -115,14 +113,12 @@ function FaqPage() {
         <Link to="/shop" className={ON_DARK_SOLID}>
           <TextRoll outlineColor="#1c120a">See the jars</TextRoll>
         </Link>
-        {/* Not "Ask something else" -- every other mailto CTA on the site
-            (cart.tsx, contact.tsx, WholesaleForm) shows the address itself as
-            its label, so a visitor whose browser has no mail client still
-            has something to read and copy. An opaque label here was the one
-            mailto dead end on the site: a failed click left nothing behind. */}
-        <a href={`mailto:${WHOLESALE_EMAIL}`} className={ON_DARK_LINE}>
-          <TextRoll outlineColor="#fbf3e4">{`Email ${WHOLESALE_EMAIL}`}</TextRoll>
-        </a>
+        {/* Jeff, 2026-09-17: pulled the "Email wholesale@tumblenut.com" CTA
+            that sat here -- neither mailbox has a live MX record yet (see
+            the note on WHOLESALE_EMAIL / ORDERS_EMAIL in data/wholesale.ts),
+            so the button worked but the mail behind it did not. Put it back
+            once Zoho's records land, and bring ORDERS_EMAIL along with it
+            rather than shipping wholesale@ alone a second time. */}
       </div>
     </PageBackdrop>
   );

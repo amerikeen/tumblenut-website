@@ -8,7 +8,7 @@ import {
   PageBackdrop,
   PLATES,
 } from "@/components/chrome/PageBackdrop";
-import { TENNESSEE_ONLY, WHOLESALE_EMAIL } from "@/data/wholesale";
+import { ORDERS_EMAIL, TENNESSEE_ONLY, WHOLESALE_EMAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { contactGraph, jsonLd } from "@/lib/structured-data";
 
@@ -47,10 +47,12 @@ export const Route = createFileRoute("/contact")({
  *    handling correspondence is a fact that is not true. Doc belongs on the
  *    jar, in the reel and on /about — not here.
  *
- * ONE ADDRESS, TWO AUDIENCES. `WHOLESALE_EMAIL` is set up for trade and is
- * named as such, but it is also the only real mailbox, so this page sends
- * everything there rather than inventing a hello@ that nobody owns. If a
- * dedicated consumer address lands with the Zoho mailbox, split them here.
+ * TWO ADDRESSES, TWO AUDIENCES, as of 2026-09-17. `WHOLESALE_EMAIL` is
+ * trade only; `ORDERS_EMAIL` is for a retail buyer -- today that means the
+ * closed-checkout message below, later it is where order confirmations come
+ * from. Before this split there was one mailbox for everyone; do not
+ * collapse them back into each other without asking, the split was Jeff's
+ * call, not a bug fix.
  *
  * THE GROUND: `aerial-chimney-still.jpg` at 0.62, and rule 2 above is what
  * chose it. Every other plate on the site has Doc or Cecil in it, and a
@@ -135,9 +137,21 @@ function ContactPage() {
             Orders
           </h2>
           {/* The two clauses that may never be cut: checkout is not open, and
-              nothing is charged. Everything around them can go. */}
+              nothing is charged. Everything around them can go.
+
+              "The address above" pointed at WHOLESALE_EMAIL before the split
+              on 2026-09-17 -- now wrong, since that address is trade-only.
+              Orders gets its own address, shown inline rather than referred
+              to, same pattern as the wholesale panel above it. */}
           <p className={`t-body mt-4 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Checkout is not open. No card is taken and no payment runs. Email the address above.
+            Checkout is not open. No card is taken and no payment runs. Email{" "}
+            <a
+              href={`mailto:${ORDERS_EMAIL}`}
+              className="underline decoration-[#c4a35a] decoration-2 underline-offset-[6px] hover:decoration-[#fbf3e4]"
+            >
+              {ORDERS_EMAIL}
+            </a>{" "}
+            and say which jars you want.
           </p>
           <Link
             to="/cart"

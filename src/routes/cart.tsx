@@ -26,7 +26,7 @@ import {
 } from "@/lib/cart";
 import { formatUsd } from "@/lib/utils";
 
-import { TENNESSEE_ONLY_RETAIL, WHOLESALE_EMAIL } from "@/data/wholesale";
+import { ORDERS_EMAIL, TENNESSEE_ONLY_RETAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { useEffect, useState, type FormEvent } from "react";
 import { FacilityNote } from "@/components/chrome/FacilityNote";
@@ -118,10 +118,10 @@ function CartPage() {
             Sorry, {placed} — the crate is not wired up to anything yet, so that did not reach the
             workshop and no payment ran. Email{" "}
             <a
-              href={`mailto:${WHOLESALE_EMAIL}`}
+              href={`mailto:${ORDERS_EMAIL}`}
               className="underline decoration-[#c4a35a] decoration-2 underline-offset-[6px] hover:decoration-[#fbf3e4]"
             >
-              {WHOLESALE_EMAIL}
+              {ORDERS_EMAIL}
             </a>{" "}
             and say which jars you were after.
           </p>

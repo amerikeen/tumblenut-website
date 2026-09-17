@@ -72,7 +72,15 @@ function Card({ product }: { product: Product }) {
 
   // A 4oz jar should not pretend to be a 16oz one. Same box, honest heights,
   // all three standing on the same shelf line.
-  const jarHeight = product.size === "16oz" ? "100%" : product.size === "8oz" ? "86%" : "72%";
+  //
+  // These were 86%/72% against the old jar set. Against the new one -- now
+  // autocropped tight to each jar's own content, so the box-relative
+  // percentage is the ONLY source of headroom left, nothing from leftover
+  // canvas padding -- that read as a gap between the lede and the jar, not
+  // as "a smaller jar sitting on the same shelf." Raised until the gap reads
+  // as breathing room rather than dead space, keeping just enough
+  // difference that a 4oz jar still looks like a 4oz jar next to a 16oz one.
+  const jarHeight = product.size === "16oz" ? "100%" : product.size === "8oz" ? "95%" : "91%";
 
   return (
     <div className="group/card relative flex min-h-[34rem] flex-col items-center gap-6 px-3 pt-4 pb-[7.5rem] text-[#fbf3e4]">
@@ -110,12 +118,21 @@ function Card({ product }: { product: Product }) {
           names still carry (they are heavy and large) but the lede sits at
           0.95rem over a lit photograph, which it loses. A shadow is enough --
           darkening the plate under the whole section would cost the backdrop
-          the warmth it was graded for. */}
+          the warmth it was graded for.
+
+          `pr-12` here, and `max-w` instead of a fixed `w` on the heading: at
+          the 4-up desktop width each card is ~280px, the heading's old fixed
+          7.9em (252.8px) box left only ~14px clear on each side, and the
+          flip button's own hit zone (its 40px plus the `right-4` offset --
+          56px total) sat entirely inside that box. Not a two-line edge case;
+          measured overlap on every card, wrapped or not. The 48px right
+          inset clears the button; `max-w` lets the heading still wrap at a
+          full 7.9em on any card wide enough to have room for it. */}
       <div
-        className="pointer-events-none relative z-[2] w-full text-center"
+        className="pointer-events-none relative z-[2] w-full pr-12 text-center"
         style={{ textShadow: "0 2px 10px rgba(14,8,4,0.8), 0 1px 3px rgba(14,8,4,0.9)" }}
       >
-        <h3 className="t-card mx-auto w-[7.9em] text-[clamp(1.5rem,2.4vw,2rem)] leading-[0.9]">
+        <h3 className="t-card mx-auto w-full max-w-[7.9em] text-[clamp(1.5rem,2.4vw,2rem)] leading-[0.9]">
           {product.name}
         </h3>
         <p className="t-body mt-3 text-[0.95rem] leading-snug opacity-95">{product.lede}</p>

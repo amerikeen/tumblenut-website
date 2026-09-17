@@ -126,7 +126,13 @@ export function SiteFooter() {
                 type="email"
                 required
                 placeholder={newsletter.placeholder}
-                className="h-16 min-w-0 flex-1 rounded-xl border-2 border-current bg-transparent px-4 font-body text-[1rem] placeholder:text-current/50 focus:outline-none"
+                /* [appearance:none] -- Tailwind's preflight only resets
+                   `appearance` on [type=button/reset/submit], not plain text
+                   inputs. iOS Safari renders a bare `type="email"` with its
+                   own native control chrome, which can silently fight an
+                   explicit CSS height. Belt-and-suspenders since our own
+                   testing runs on Chromium, not WebKit. */
+                className="h-16 min-w-0 flex-1 appearance-none rounded-xl border-2 border-current bg-transparent px-4 font-body text-[1rem] placeholder:text-current/50 focus:outline-none"
               />
               <button
                 type="submit"

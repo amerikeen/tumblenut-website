@@ -70,8 +70,9 @@ export const Route = createFileRoute("/about")({
  * was pulled from the Doc section below: a legible menu of flavours we do not
  * sell is inventing product truth in set dressing.
  *
- * `cecil-arrives.jpg` and `two-shelves.jpg` were never in the running for the
- * ground here, because both are already inline plates further down the page.
+ * `cecil-arrives.jpg` and `workshop-interior.jpg` were never in the running
+ * for the ground here, because both are already inline plates further down
+ * the page.
  */
 
 /* The frame the inline plates sit in. On a photographic ground this can no
@@ -125,23 +126,18 @@ function AboutPage() {
           <ResolveHeading
             as="h2"
             id="about-doc"
-            text="Douglas Y. Tumblenut"
+            text={`Douglas ‘Doc’ Tumblenut`}
             className={`t-section mt-4 ${ON_DARK_HEAD}`}
           />
           <p className={`t-body mt-7 max-w-[46ch] ${ON_DARK_BODY}`}>
-            The Y stands for nothing. Ask him and you will get an answer, and it will not be the
-            answer he gave last time. The title is self-awarded, and he would be offended you asked
-            which institution granted it.
+            Doc, because he is always mid-experiment. Most combinations land on purpose; the tail
+            gets credit for the rest.
           </p>
           <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Faded denim overalls, a trucker cap worn askew with the patch on the front, goggles
-            pushed up on the brim. The goggles come down only when something is about to go wrong,
-            which is a useful thing to watch for. The tail has its own agenda and is responsible for
-            most of it.
+            Overalls, a cap worn askew, goggles pushed up until something is about to go wrong.
           </p>
           <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            He is genuinely good at this and a genuine disaster at everything surrounding it. Those
-            are not the same thing, and only the first one ends up in the jar.
+            Grinds like it is the only thing that matters. Built Cecil a whole shelf to prove it.
           </p>
         </div>
       </section>
@@ -168,25 +164,31 @@ function AboutPage() {
             className={`t-section mt-4 ${ON_DARK_HEAD}`}
           />
           <p className={`t-body mt-7 max-w-[46ch] ${ON_DARK_BODY}`}>
-            He fell off a truck bound for the zoo, wandered onto Doc&rsquo;s land and never left.
-            Low, wide, deliberate, dry. He says one line to Doc&rsquo;s many and his is usually the
-            one worth writing down.
+            Fell off a truck bound for the zoo, wandered onto Doc&rsquo;s land, and stayed. First
+            in line for a taste of whatever Doc is grinding, and never shy about how he feels
+            about it.
           </p>
           <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Cecil reacts to peanuts. That is said once and then it is simply true — he is never in
-            trouble for a laugh and the allergy is never the joke. It is only the reason the wall
-            grew.
+            Cecil reacts to peanuts — said once, then simply true. Never the joke. It is the reason
+            the wall grew.
           </p>
         </div>
       </section>
 
       {/* The argument. The heart of the page, so it gets the full width and a
-          plate under it rather than sitting in a column like the two above. */}
+          plate under it rather than sitting in a column like the two above.
+
+          two-shelves.jpg -- the "shelves" scene's poster in the reel -- only
+          ever shows the grind, never a shelf, which argues nothing for a
+          section called "Why the wall grew". workshop-interior.jpg is Doc
+          pointing at the wall of jars with Cecil beside him, both characters'
+          eyes open -- already the home page's closing plate and /shop's
+          backdrop, and the frame that actually makes this section's case. */}
       <section aria-labelledby="about-why" className="mt-24">
         <div className={PLATE}>
           <img
-            src="/brand/cinema/two-shelves.jpg"
-            alt="Jars lined up along the workshop shelves"
+            src="/brand/scenes/workshop-interior.jpg"
+            alt="Doc pointing at the wall of jars, Cecil beside him"
             className="h-full w-full object-cover"
             loading="lazy"
           />

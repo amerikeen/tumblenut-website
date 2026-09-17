@@ -18,15 +18,20 @@
  *
  * 2. **"Gluten free" is a REGULATED claim** — FDA 21 CFR 101.91, a 20ppm
  *    testing-and-facility threshold, not a recipe question. buck.ts already
- *    writes the NO GLUTEN card at recipe level on purpose. This answer says
- *    plainly that we do not make the claim and then gives the recipe fact,
- *    which is more useful to the reader than the claim would have been.
+ *    writes the NO GLUTEN card at recipe level on purpose. The answer never
+ *    makes the claim; it states the recipe fact instead, plainly, with no
+ *    citation and no hedge in the visible copy.
  *
  * 3. **Never count.** No jar count, no ingredient count, no batch size.
  *
- * The answers are deliberately concrete — a named statute, a named threshold,
- * a flat "no" on shipping. That is also what gets a page quoted rather than
- * paraphrased, which is the whole reason this page carries FAQPage markup.
+ * Jeff's call, 2026-09-17: no answer on this page names a statute, a
+ * threshold, or the operational reason behind a limit (TFFA, "not a
+ * licensed facility yet," "skips state inspection"). That reasoning is real
+ * and lives in code comments and `src/data/wholesale.ts`, but spelling it
+ * out to a first-time visitor reads as a business justifying itself, not
+ * answering a question. The shipping answer states the fact — Tennessee
+ * only, for now — the same way buckssauce states theirs, with the "why"
+ * left out of the visitor-facing copy entirely.
  */
 import { CHECKOUT_LIVE } from "@/lib/cart";
 import { WHOLESALE_EMAIL } from "./wholesale";
@@ -49,7 +54,7 @@ export const faq: FaqEntry[] = [
   {
     id: "shipping",
     q: "Do you ship outside Tennessee?",
-    a: "No. Every jar is made under the Tennessee Food Freedom Act, which lets a small producer skip state licensing and inspection, in exchange for producing at a private residence and selling only inside Tennessee. That changes once production moves to a licensed facility, not before.",
+    a: "No, not yet. We ship only to Tennessee addresses for now. We plan to ship outside our state as operations grow.",
   },
   {
     id: "ordering",

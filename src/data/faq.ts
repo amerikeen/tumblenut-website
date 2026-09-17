@@ -63,7 +63,7 @@ export const faq: FaqEntry[] = [
   {
     id: "gluten",
     q: "Is it gluten free?",
-    a: "No wheat in anything we make — nuts, seeds, salt, spice, honey, maple, that is the whole list. We just do not print “gluten free” on the label.",
+    a: "No wheat in anything we grind — just nuts, seeds, salt, and a little honey or maple. Clean, small-batch, nothing to hide.",
   },
   {
     id: "glass",

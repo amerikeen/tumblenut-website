@@ -157,11 +157,6 @@ export const noCards = [
   },
 ] as const;
 
-export const grind = {
-  eyebrow: "Choose your grind",
-  heading: "Pick the jar for your table",
-};
-
 /**
  * The bundle module's heading builds itself: "Build your" + a boxed PACK_SIZE
  * + "Pack &" + "Save <discount>". So the only copy it needs is the first line.

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { products, type Product } from "@/data/products";
-import { grind } from "@/data/buck";
 import { formatUsd } from "@/lib/utils";
 import { useCart } from "@/lib/cart";
 import { ResolveHeading } from "./ResolveHeading";
@@ -44,9 +43,10 @@ export function ChooseYourGrind() {
     >
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-center text-center">
-          <p className="t-meta text-[#e9c98a]">{grind.eyebrow}</p>
-          {/* Their two-tone heading: a solid line, then one huge outlined word
-              that runs the full width of the container. */}
+          {/* No eyebrow here -- "Choose your grind" over a heading that
+              already says "Choose your / Grind" was the same words twice.
+              Their two-tone heading: a solid line, then one huge outlined
+              word that runs the full width of the container. */}
           <ResolveHeading text="Choose your" className="t-section mt-5 text-[#fbf3e4]" />
           <ResolveHeading
             as="p"

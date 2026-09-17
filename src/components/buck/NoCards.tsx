@@ -59,9 +59,9 @@ export function NoCards() {
             className="t-section text-center text-[#fbf3e4]"
           />
           <ul className="mt-14 grid gap-6 sm:grid-cols-2">
-            {noCards.map((card) => (
+            {noCards.map((card, i) => (
               <li key={card.id}>
-                <Card card={card} />
+                <Card card={card} index={i} />
               </li>
             ))}
           </ul>
@@ -77,7 +77,12 @@ export function NoCards() {
       style={{ height: `${tall}svh` }}
       aria-label="What is not in the jar"
     >
-      <div className="sticky top-0 flex h-svh flex-col overflow-hidden px-5 pt-28 pb-8 sm:px-8 sm:pt-32">
+      {/* h-[118svh], not h-svh: the landed stack's last card sits within ~10px
+          of the clip boundary at h-svh (measured), so a two-line heading wrap
+          or a shorter viewport clips its body text. The extra 18% is below
+          the fold -- sticky keeps top at 0, so nothing visible moves -- it
+          only gives overflow-hidden more room before it cuts anything. */}
+      <div className="sticky top-0 flex h-[118svh] flex-col overflow-hidden px-5 pt-28 pb-8 sm:px-8 sm:pt-32">
         <ResolveHeading
           text="What is not in the jar"
           className="t-section shrink-0 text-center text-[#fbf3e4]"
@@ -105,7 +110,7 @@ export function NoCards() {
                     transform: `translate3d(0, ${rest + extra}px, 0) rotate(${tilt.toFixed(2)}deg)`,
                   }}
                 >
-                  <Card card={card} />
+                  <Card card={card} index={i} />
                 </article>
               );
             })}
@@ -116,12 +121,16 @@ export function NoCards() {
   );
 }
 
-function Card({ card }: { card: (typeof noCards)[number] }) {
+function Card({ card, index }: { card: (typeof noCards)[number]; index: number }) {
   return (
     <div>
-      {/* The pill. Exactly PILL tall, so the stack step lands it flush. */}
+      {/* The pill. Exactly PILL tall, so the stack step lands it flush.
+          Alternates cream and white so five stacked pills of the same
+          near-white don't read as one flat slab. */}
       <div
-        className="relative z-10 flex items-center justify-between rounded-full bg-[#fbf3e4] px-7 text-[#1c120a] shadow-[0_10px_30px_-12px_rgba(20,12,6,0.7)]"
+        className={`relative z-10 flex items-center justify-between rounded-full px-7 text-[#1c120a] shadow-[0_10px_30px_-12px_rgba(20,12,6,0.7)] ${
+          index % 2 === 0 ? "bg-[#fbf3e4]" : "bg-white"
+        }`}
         style={{ height: PILL }}
       >
         <span className="h-2 w-2 shrink-0 rounded-full bg-[#9E3617]" />

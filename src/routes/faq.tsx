@@ -229,10 +229,34 @@ const FAQ_ICON: Record<string, React.ReactNode> = {
     <Icon name="ingredient-pile" className="h-8 w-8 object-contain translate-y-0" />
   ),
   allergy: <Icon name="peanut" className="h-[1.5rem] w-auto" />,
-  /* Sized up from the shared h-8: a thin wood sliver reads as a smudge at
-     32px. Object-contain keeps it proportional, so the actual rendered
-     height stays well under the 64px box -- it is wide, not tall. */
-  shipping: <Icon name="tennessee" className="h-16 w-16 object-contain translate-y-0" />,
+  /* Jeff: the wood-cutout state shape was still hard to place even at 2x.
+     Swapped for the actual Tennessee flag emblem -- the tristar roundel,
+     white stars on a blue field -- since real color contrast against a
+     near-black panel does more than any amount of scaling a beige sliver
+     could. Built as SVG, not a Grok render: a state flag's geometry is
+     exact and well documented, so hand-coding it is both free and more
+     accurate than asking an image model to approximate it. */
+  shipping: (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-9 w-9">
+      <circle cx="12" cy="12" r="9.4" fill="#16337a" stroke="#fbf3e4" strokeWidth="1.3" />
+      <g stroke="#fbf3e4" strokeWidth="0.55" strokeLinecap="round" opacity="0.85">
+        <path d="M12 12 12 4.1" />
+        <path d="M12 12 5.1 16.4" />
+        <path d="M12 12 18.9 16.4" />
+      </g>
+      <g fill="#fbf3e4">
+        <g transform="translate(12,8) scale(0.185) translate(-10,-10)">
+          <polygon points="10,1 12.6,7.1 19,7.6 14.1,11.9 15.6,18.2 10,14.7 4.4,18.2 5.9,11.9 1,7.6 7.4,7.1" />
+        </g>
+        <g transform="translate(8.3,14.7) scale(0.185) translate(-10,-10)">
+          <polygon points="10,1 12.6,7.1 19,7.6 14.1,11.9 15.6,18.2 10,14.7 4.4,18.2 5.9,11.9 1,7.6 7.4,7.1" />
+        </g>
+        <g transform="translate(15.7,14.7) scale(0.185) translate(-10,-10)">
+          <polygon points="10,1 12.6,7.1 19,7.6 14.1,11.9 15.6,18.2 10,14.7 4.4,18.2 5.9,11.9 1,7.6 7.4,7.1" />
+        </g>
+      </g>
+    </svg>
+  ),
   ordering: <Icon name="crate" className="h-8 w-8 object-contain translate-y-0" />,
   /* One wheat.png stalk read as a stray mark, not wheat. Three copies of
      the same asset, rotated and offset, fake a cluster without a second

@@ -174,6 +174,16 @@ are **cast cutouts, not jars** — they render in the header and footer of all 1
 routes. If the Grok pass only regenerates jars, the worst offender on the site
 survives it. Worth an explicit line in that brief.
 
+**RESOLVED 2026-09-16, brief written.** Jeff's call: one brief, two prompts —
+jars and cutouts ship together but generated with different reference
+attachments (die + Classic Crunchy for jars, `doc-MASTER.png` for cutouts).
+The brief is `tumblenut/art/GROK-JAR-AND-CUTOUT-REPLACEMENT-BRIEF.md` (kit
+repo — dies are source of truth there). It replaces the "no magenta fringe"
+adjective with a runnable acceptance check: opaque pixels where R>G and B>G
+(the measured chroma residue signature) must be ≤0.05% of opaque pixels, down
+from today's 0.27%-1.72%. Script is in the brief. Do not accept delivered
+assets on "looks cleaner" — run the script.
+
 ---
 
 ## 5. Open questions for Jeff

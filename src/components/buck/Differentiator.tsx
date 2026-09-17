@@ -24,7 +24,7 @@ export function Differentiator() {
           />
           <p className="t-body mt-7 max-w-[46ch] text-[#f0e3cd]">
             Doc still grinds peanut <Icon name="peanut" />, plus almond,
-            pistachio <Icon name="pistachio" />, pecan, hazelnut and pepita —
+            pistachio <Icon name="pistachio" />, pecan, hazelnut and pepita:
             a real jar for a peanut allergy, never stacked with sugar and
             fillers.
           </p>

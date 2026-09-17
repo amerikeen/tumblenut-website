@@ -169,7 +169,7 @@ function AboutPage() {
             about it.
           </p>
           <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Cecil reacts to peanuts — said once, then simply true. Never the joke. It is the reason
+            Cecil reacts to peanuts. Said once, then simply true. Never the joke. It is the reason
             the wall grew.
           </p>
         </div>
@@ -209,7 +209,7 @@ function AboutPage() {
               turned up, and Cecil could not have any.
             </p>
             <p className={`t-body mt-5 max-w-[48ch] ${ON_DARK_BODY}`}>
-              So Doc kept grinding peanuts — Classic Crunchy and Firecracker are still his — and
+              So Doc kept grinding peanuts (Classic Crunchy and Firecracker are still his) and
               started grinding everything else too. Almond <Icon name="almond" />. Pistachio. Pecan.
               Hazelnut. Pepita. Not a replacement for the peanut jar. A shelf beside it.
             </p>
@@ -244,7 +244,7 @@ function AboutPage() {
           <p className={`t-body max-w-[46ch] ${ON_DARK_BODY}`}>
             What we do instead is name everything. The whole list is on the front of the jar, not
             hidden on the back and not behind a word you would have to look up. Read it, and decide
-            for your own table. That is the offer — more choices, made plain.
+            for your own table. That is the offer: more choices, made plain.
           </p>
         </div>
         {/* The constant, whole. It is written to stand on its own, and the first

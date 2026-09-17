@@ -103,8 +103,8 @@ function FaqPage() {
           which is the one thing the file-level comment above says this page
           must never lose. */}
       <dl className={`mt-14 rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 px-6 sm:px-10`}>
-        {faq.map((entry) => (
-          <FaqRow key={entry.id} entry={entry} />
+        {faq.map((entry, index) => (
+          <FaqRow key={entry.id} entry={entry} index={index} />
         ))}
       </dl>
 
@@ -139,7 +139,7 @@ function FaqPage() {
  * invalid HTML. `<h2><button>` is the WAI-ARIA accordion-header pattern and
  * keeps the question a real heading in the outline either way.
  */
-function FaqRow({ entry }: { entry: FaqEntry }) {
+function FaqRow({ entry, index }: { entry: FaqEntry; index: number }) {
   const [open, setOpen] = useState(false);
   const answerId = useId();
   const reduced = usePrefersReducedMotion();
@@ -155,8 +155,20 @@ function FaqRow({ entry }: { entry: FaqEntry }) {
             aria-controls={answerId}
             className="flex w-full items-center gap-4 py-7 text-left sm:gap-5"
           >
-            <span className={`flex h-9 w-9 shrink-0 items-center justify-center ${ON_DARK_EYEBROW}`}>
-              {FAQ_ICON[entry.id]}
+            {/* A per-row delay staggers the idle wiggle instead of six icons
+                ticking in lockstep. The allergy row's peanut carries an extra,
+                static 45deg tilt on an inner wrapper -- transforms on nested
+                elements compose, so it wiggles around that tilt rather than
+                around upright. */}
+            <span
+              className={`flex h-9 w-9 shrink-0 items-center justify-center icon-wiggle ${ON_DARK_EYEBROW}`}
+              style={{ animationDelay: `${index * 0.15}s` }}
+            >
+              {entry.id === "allergy" ? (
+                <span className="inline-flex rotate-45">{FAQ_ICON[entry.id]}</span>
+              ) : (
+                FAQ_ICON[entry.id]
+              )}
             </span>
             <span
               className={`t-card flex-1 text-[1.25rem] sm:text-[1.7rem] ${ON_DARK_HEAD}`}

@@ -77,7 +77,7 @@ function ContactPage() {
         className={`t-hero mt-4 max-w-[10ch] ${ON_DARK_HEAD}`}
       />
       <p className={`t-lead mt-7 max-w-[46ch] ${ON_DARK_BODY}`}>
-        The workshop is in Columbia, Tennessee. Email is the way in — trade or not.
+        The workshop is in Columbia, Tennessee. Email is the way in, trade or not.
       </p>
 
       {/* The address, given its own panel. It is the only real thing on this
@@ -101,7 +101,7 @@ function ContactPage() {
           {WHOLESALE_EMAIL}
         </a>
         <p className={`t-body mt-6 max-w-[52ch] ${ON_DARK_BODY}`}>
-          Tell us about the shelf — the size of it, and the town.
+          Tell us about the shelf: the size of it, and the town.
         </p>
         <p className={`t-body mt-3 max-w-[52ch] text-[0.95rem] ${ON_DARK_MUTED}`}>
           {TENNESSEE_ONLY}
@@ -137,7 +137,7 @@ function ContactPage() {
           {/* The two clauses that may never be cut: checkout is not open, and
               nothing is charged. Everything around them can go. */}
           <p className={`t-body mt-4 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Checkout is not open. No card is taken and no payment runs — email the address above.
+            Checkout is not open. No card is taken and no payment runs. Email the address above.
           </p>
           <Link
             to="/cart"

@@ -81,7 +81,7 @@ export const skuPan = {
 export const differentiator = {
   eyebrow: "Why Doc bothered",
   heading: "More than peanut. Never a sugar bomb.",
-  body: "Doc still grinds peanut, plus almond, pistachio, pecan, hazelnut and pepita — a real jar for a peanut allergy, never stacked with sugar and fillers.",
+  body: "Doc still grinds peanut, plus almond, pistachio, pecan, hazelnut and pepita: a real jar for a peanut allergy, never stacked with sugar and fillers.",
   proof: [
     { k: "Ingredients", v: "All natural" },
     { k: "Made in", v: "Columbia, TN" },
@@ -251,6 +251,6 @@ export const newsletter = {
   body: "Email goes in. Batch news comes out.",
   placeholder: "you@somewhere.com",
   cta: "Get on the list",
-  stubbed: "Noted. The list opens with the first batch — there is no mailer behind this box yet.",
+  stubbed: "Noted. The list opens with the first batch. There is no mailer behind this box yet.",
   live: "You're on the list.",
 };

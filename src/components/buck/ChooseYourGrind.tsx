@@ -56,8 +56,8 @@ export function ChooseYourGrind() {
         </div>
 
         <div className="mt-12 flex flex-col gap-2.5 sm:grid sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((p) => (
-            <Card key={p.slug} product={p} />
+          {products.map((p, index) => (
+            <Card key={p.slug} product={p} index={index} />
           ))}
         </div>
       </div>
@@ -65,7 +65,21 @@ export function ChooseYourGrind() {
   );
 }
 
-function Card({ product }: { product: Product }) {
+/* A fixed tilt per card would have every ingredient lean the same way, which
+   read as a template rather than nuts scattered on a shelf. Cycled by index
+   rather than randomised at render, so the layout is stable and identical
+   server- and client-side. */
+const CUTOUT_ROTATIONS = [
+  "rotate-[-6deg]",
+  "rotate-[5deg]",
+  "rotate-[-9deg]",
+  "rotate-[7deg]",
+  "rotate-[-4deg]",
+  "rotate-[8deg]",
+  "rotate-[-3deg]",
+];
+
+function Card({ product, index }: { product: Product; index: number }) {
   const add = useCart((s) => s.add);
   const [back, setBack] = useState(false);
   const [just, setJust] = useState(false);
@@ -144,7 +158,7 @@ function Card({ product }: { product: Product }) {
           src={product.cutout}
           alt=""
           aria-hidden="true"
-          className="absolute right-0 bottom-[6%] z-0 w-[4.25rem] translate-x-[38%] rotate-3 object-contain transition-transform duration-500 group-hover/card:translate-x-[26%]"
+          className={`absolute right-0 bottom-[6%] z-0 h-[4.25rem] w-[4.25rem] translate-x-[38%] object-contain transition-transform duration-500 group-hover/card:translate-x-[26%] ${CUTOUT_ROTATIONS[index % CUTOUT_ROTATIONS.length]}`}
         />
         {/* The shadow the jar stands on. */}
         <div

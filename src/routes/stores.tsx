@@ -56,7 +56,7 @@ function Page() {
           className={`t-section mx-auto max-w-[14ch] ${ON_DARK_HEAD}`}
         />
         <p className={`t-lead mx-auto mt-6 max-w-[40ch] ${ON_DARK_BODY}`}>
-          Tell us about the shelf — the size of it, and the town.
+          Tell us about the shelf: the size of it, and the town.
         </p>
         <div className="mt-9 flex justify-center">
           <Link to="/wholesale" className={ON_DARK_SOLID}>

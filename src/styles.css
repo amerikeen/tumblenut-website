@@ -322,3 +322,16 @@ button:focus-visible .roll .roll-track,
 @media (prefers-reduced-motion: reduce) {
   .roll-track { transition: none; }
 }
+
+/* FAQ question icons: a small idle wiggle so the row reads as alive before
+   it's opened. Amplitude stays under 10deg -- a wink, not a jitter. */
+@keyframes icon-wiggle {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+.icon-wiggle {
+  animation: icon-wiggle 2.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .icon-wiggle { animation: none; }
+}

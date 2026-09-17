@@ -167,7 +167,7 @@ function CartPage() {
                 className="flex items-center gap-5 border-b border-[#f0e3cd]/25 py-6 last:border-b-0"
               >
                 <div className="w-20 shrink-0">
-                  <JarFigure product={product} className="[&_img]:w-16" />
+                  <JarFigure product={product} height="4.5rem" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <Link

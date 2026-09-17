@@ -256,7 +256,7 @@ function ProductPage() {
             </p>
           </div>
           <Link to="/shop" className={`${ON_DARK_LINE} relative shrink-0`}>
-            Pick three
+            Pick {PACK_SIZE}
           </Link>
         </div>
       </section>

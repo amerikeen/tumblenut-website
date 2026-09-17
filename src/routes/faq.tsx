@@ -220,67 +220,17 @@ function FaqRow({ entry, index }: { entry: FaqEntry; index: number }) {
   );
 }
 
-/** One line-icon per topic, drawn to match the site's other UI svgs (the
- *  jar-flip control, the wholesale ladder's checkmark): stroke only,
- *  currentColor, no fill. The allergy row reuses the peanut icon already
- *  used elsewhere for the same subject rather than inventing a new mark. */
+/** Per-row catalog icons, photoreal cutouts matching `catalog/peanut.png`.
+ *  The five line-stroke SVGs that used to sit next to the peanut are replaced
+ *  so the row reads as one set. The allergy row still uses the peanut already
+ *  used elsewhere for the same subject. */
 const FAQ_ICON: Record<string, React.ReactNode> = {
   "whats-in-it": (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-[1.35rem] w-[1.35rem]">
-      <path
-        d="M4 6h16M4 12h16M4 18h11"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
+    <Icon name="ingredient-pile" className="h-8 w-8 object-contain translate-y-0" />
   ),
   allergy: <Icon name="peanut" className="h-[1.5rem] w-auto" />,
-  shipping: (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-[1.35rem] w-[1.35rem]">
-      <path
-        d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="9" r="2.4" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  ),
-  ordering: (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-[1.35rem] w-[1.35rem]">
-      <path
-        d="M3 4h2l2.2 12.2A2 2 0 0 0 9.2 18h7.6a2 2 0 0 0 2-1.6L20.5 8H6.2"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="9.5" cy="20.5" r="1.3" fill="currentColor" />
-      <circle cx="17" cy="20.5" r="1.3" fill="currentColor" />
-    </svg>
-  ),
-  gluten: (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-[1.35rem] w-[1.35rem]">
-      <path
-        d="M12 21V4M12 7.2 9.3 9.6M12 7.2l2.7 2.4M12 12.4 9.3 14.8M12 12.4l2.7 2.4M12 17.4l-2.1 1.9"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-  glass: (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-[1.35rem] w-[1.35rem]">
-      <path
-        d="M9 2.5h6M9.5 2.5v2.7c0 .5-.2 1-.6 1.3L7.4 8.2A2.6 2.6 0 0 0 6.5 10.2V19a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-8.8a2.6 2.6 0 0 0-.9-2L15.1 6.5a1.8 1.8 0 0 1-.6-1.3V2.5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
+  shipping: <Icon name="tennessee" className="h-8 w-8 object-contain translate-y-0" />,
+  ordering: <Icon name="crate" className="h-8 w-8 object-contain translate-y-0" />,
+  gluten: <Icon name="wheat" className="h-8 w-8 object-contain translate-y-0" />,
+  glass: <Icon name="mason-jar" className="h-8 w-8 object-contain translate-y-0" />,
 };

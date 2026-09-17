@@ -244,14 +244,18 @@ const FAQ_ICON: Record<string, React.ReactNode> = {
         <path d="M12 12 5.1 16.4" />
         <path d="M12 12 18.9 16.4" />
       </g>
+      {/* Jeff: on the real flag the three stars nearly fill the circle and
+          nearly touch each other -- these were too small and too spread
+          out. Scale roughly doubled (0.185 -> 0.42) and pulled in closer
+          to center (radius ~4.6 -> 3.6) to match. */}
       <g fill="#fbf3e4">
-        <g transform="translate(12,8) scale(0.185) translate(-10,-10)">
+        <g transform="translate(12,8.4) scale(0.42) translate(-10,-10)">
           <polygon points="10,1 12.6,7.1 19,7.6 14.1,11.9 15.6,18.2 10,14.7 4.4,18.2 5.9,11.9 1,7.6 7.4,7.1" />
         </g>
-        <g transform="translate(8.3,14.7) scale(0.185) translate(-10,-10)">
+        <g transform="translate(8.88,13.8) scale(0.42) translate(-10,-10)">
           <polygon points="10,1 12.6,7.1 19,7.6 14.1,11.9 15.6,18.2 10,14.7 4.4,18.2 5.9,11.9 1,7.6 7.4,7.1" />
         </g>
-        <g transform="translate(15.7,14.7) scale(0.185) translate(-10,-10)">
+        <g transform="translate(15.12,13.8) scale(0.42) translate(-10,-10)">
           <polygon points="10,1 12.6,7.1 19,7.6 14.1,11.9 15.6,18.2 10,14.7 4.4,18.2 5.9,11.9 1,7.6 7.4,7.1" />
         </g>
       </g>

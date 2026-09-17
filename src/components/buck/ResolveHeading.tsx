@@ -28,6 +28,8 @@ export function ResolveHeading({
   id,
   className,
   stagger = 24,
+  outlineFrom,
+  outlineClassName,
 }: {
   text: string;
   as?: "h1" | "h2" | "h3" | "p";
@@ -41,6 +43,18 @@ export function ResolveHeading({
   id?: string;
   className?: string;
   stagger?: number;
+  /**
+   * The word index (0-based) from which words render outlined instead of
+   * solid, matching the reference site's two-tone titles ("Choose your" /
+   * huge outlined "Grind") without splitting into a second element. That
+   * older pattern gives each piece its own `aria-label`, so a screen reader
+   * hears two fragments instead of one heading — fine for a decorative
+   * word, wrong on a page whose whole job is being the thing a crawler or
+   * answer engine quotes. One `<h1>`, one full `aria-label`, styling split
+   * per word instead.
+   */
+  outlineFrom?: number;
+  outlineClassName?: string;
 }) {
   const [ref, seen] = useInView<HTMLHeadingElement>();
   const reduced = usePrefersReducedMotion();
@@ -56,7 +70,13 @@ export function ResolveHeading({
     { ref, id, className: cn("text-balance", className), "aria-label": text },
     <span aria-hidden="true">
       {words.map((word, w) => (
-        <span key={`${word}-${w}`} className="inline-block whitespace-nowrap">
+        <span
+          key={`${word}-${w}`}
+          className={cn(
+            "inline-block whitespace-nowrap",
+            outlineFrom !== undefined && w >= outlineFrom && outlineClassName,
+          )}
+        >
           {[...word].map((char, c) => {
             const delay = reduced ? 0 : index++ * step;
             const resting = !seen && !reduced;

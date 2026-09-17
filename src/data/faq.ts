@@ -39,17 +39,17 @@ export const faq: FaqEntry[] = [
   {
     id: "whats-in-it",
     q: "What is actually in the jars?",
-    a: "Nuts or seeds, salt, and whatever the flavour needs — spice, honey, maple. No palm oil, no stabilisers, and no added oil to hold it together; the only oil is the one that came out of the nut. The whole list is printed on the front of the jar, and every jar's page carries it in full.",
+    a: "Nuts or seeds, salt, and whatever the flavour needs — honey, maple, a spice. No palm oil, no stabilisers, no added oil; the only oil is the one that came out of the nut. The full list is on the jar.",
   },
   {
     id: "allergy",
     q: "Is it safe for someone with a nut allergy?",
-    a: "We do not say safe, and we are not going to. Doc still makes peanut butter, most of the rest of the wall is tree nuts, and a peanut allergy is not a tree-nut allergy. Every jar is packed in a facility that handles peanuts and tree nuts. What we do instead is name every ingredient on the front of the jar, so you can read it and decide for your own table.",
+    a: "We do not say safe. Doc grinds one nut at a time and cleans the equipment before switching — but the jars are still packed in a facility that handles peanuts and tree nuts, and a peanut allergy is not a tree-nut allergy. We name every ingredient on the front so you can read it and decide.",
   },
   {
     id: "shipping",
     q: "Do you ship outside Tennessee?",
-    a: "No. Every jar is made under the Tennessee Food Freedom Act, which lets a small producer sell without state licensing, permitting or inspection — in exchange for producing at a private residence and selling only inside the state. That changes the day production moves to a licensed facility, and not before.",
+    a: "No. Every jar is made under the Tennessee Food Freedom Act, which lets a small producer skip state licensing and inspection — in exchange for producing at a private residence and selling only inside Tennessee. That changes once production moves to a licensed facility, not before.",
   },
   {
     id: "ordering",
@@ -57,17 +57,17 @@ export const faq: FaqEntry[] = [
        sentence that survives a launch and quietly becomes a lie. */
     q: "Can I order online yet?",
     a: CHECKOUT_LIVE
-      ? `Yes. Fill the crate and check out — ${PACK_OFFER.toLowerCase()}, however you mix them.`
-      : `Not yet. The crate works and the prices are real, but checkout is not open: no card is taken, no payment runs, and the form is not wired up to send anything. Email ${WHOLESALE_EMAIL} and say which jars you were after.`,
+      ? `Yes. Fill the crate and check out — ${PACK_OFFER.toLowerCase()}, mixed however you like.`
+      : `Not yet. The crate works and the prices are real, but checkout is not open — no card is taken, nothing is sent. Email ${WHOLESALE_EMAIL} and say which jars you want.`,
   },
   {
     id: "gluten",
     q: "Is it gluten free?",
-    a: "We do not put “gluten free” on a label. It is a regulated claim — FDA 21 CFR 101.91 sets a 20ppm threshold, which is a testing and facility question, not only a recipe one. What we can tell you is the recipe: nothing on any of our labels has ever contained gluten. Nuts, seeds, salt, spice, honey, maple.",
+    a: "We do not put “gluten free” on a label. What we can tell you: nothing we have ever made has contained gluten. Nuts, seeds, salt, spice, honey, maple.",
   },
   {
     id: "glass",
     q: "Why glass instead of a plastic tub?",
-    a: "Glass is inert and nut butter is mostly oil. Oil pulls at plastic; glass has nothing to give it. It costs more than a tub. Worth it.",
+    a: "Glass is inert, and nut butter is mostly oil — oil pulls at plastic, glass has nothing to give it. Costs more than a tub. Worth it.",
   },
 ];

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { Icon } from "@/components/buck/Icon";
+import { JarWall } from "@/components/buck/JarWall";
 import {
   ON_DARK_BODY,
   ON_DARK_EYEBROW,
@@ -260,6 +261,12 @@ function AboutPage() {
           Become a partner
         </Link>
       </div>
+
+      {/* The page ends on the range, which is the reference site's actual
+          signature -- their four-up closes /shop, /about and every product
+          page. Before this, the longest page on the site finished without
+          showing a single jar. */}
+      <JarWall heading="The wall itself" className="pt-24 pb-4" />
     </PageBackdrop>
   );
 }

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { TextRoll } from "./TextRoll";
 import { noticeLine, noticeSolid, SiteNotice } from "./SiteNotice";
@@ -19,11 +20,13 @@ export function PagePlaceholder({
   heading,
   body,
   plate,
+  children,
 }: {
   eyebrow: string;
   heading: string;
   body: string;
   plate?: { src: string; veil: number };
+  children?: ReactNode;
 }) {
   return (
     <SiteNotice
@@ -41,6 +44,8 @@ export function PagePlaceholder({
           </Link>
         </>
       }
-    />
+    >
+      {children}
+    </SiteNotice>
   );
 }

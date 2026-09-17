@@ -1,6 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { PagePlaceholder } from "@/components/chrome/PagePlaceholder";
-import { PLATES } from "@/components/chrome/PageBackdrop";
+import { ON_DARK_BODY, ON_DARK_HEAD, ON_DARK_SOLID, PLATES } from "@/components/chrome/PageBackdrop";
 
 /**
  * NOINDEX while this is a placeholder.
@@ -34,6 +35,35 @@ function Page() {
          plate in the set that is a picture of arriving somewhere, on the one
          page about where you go. */
       plate={PLATES.stores}
-    />
+    >
+      {/* Their /find-us closes on "WANT BUCKS ON YOUR SHELVES?", and that band
+          is the one part of their page that ports with zero stockists. The
+          store LIST does not: a two-column grid of shops is their page because
+          they have ten of them and we have none, and an empty table is not the
+          same page, it is a dead end with a heading on it. This turns the dead
+          end into the one useful thing a visitor here can actually do.
+
+          WHEN THE FIRST SHELF LANDS, this page becomes the list and this band
+          moves to the bottom of it -- do not leave the list out because the
+          band is already here. */}
+      <section
+        aria-label="Stock Tumblenut"
+        className="mt-20 rounded-xl border-2 border-[#f0e3cd]/55 bg-[#1c120a]/90 p-8 text-center sm:p-12"
+      >
+        <ResolveHeading
+          as="h2"
+          text="Want Tumblenut on your shelf?"
+          className={`t-section mx-auto max-w-[14ch] ${ON_DARK_HEAD}`}
+        />
+        <p className={`t-lead mx-auto mt-6 max-w-[40ch] ${ON_DARK_BODY}`}>
+          Tell us about the shelf — the size of it, and the town.
+        </p>
+        <div className="mt-9 flex justify-center">
+          <Link to="/wholesale" className={ON_DARK_SOLID}>
+            Become a partner
+          </Link>
+        </div>
+      </section>
+    </PagePlaceholder>
   );
 }

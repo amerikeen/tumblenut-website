@@ -42,12 +42,15 @@ export function SiteNotice({
   heading,
   body,
   actions,
+  children,
   plate = PLATES.notice,
 }: {
   eyebrow: string;
   heading: string;
   body: string;
   actions?: ReactNode;
+  /** Anything that follows the actions. /stores uses it for its closing band. */
+  children?: ReactNode;
   plate?: { src: string; veil: number };
 }) {
   return (
@@ -60,6 +63,7 @@ export function SiteNotice({
       <h1 className={`t-section mt-5 ${ON_DARK_HEAD}`}>{heading}</h1>
       <p className={`t-lead mt-6 max-w-[48ch] ${ON_DARK_BODY}`}>{body}</p>
       {actions ? <div className="mt-10 flex flex-wrap gap-3">{actions}</div> : null}
+      {children}
     </PageBackdrop>
   );
 }

@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { AddToCart } from "@/components/AddToCart";
-import { JarFigure } from "@/components/JarFigure";
+import { JarWall } from "@/components/buck/JarWall";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { NotFound } from "@/components/chrome/NotFound";
 import {
@@ -12,7 +12,7 @@ import {
   PageBackdrop,
   PLATES,
 } from "@/components/chrome/PageBackdrop";
-import { allergenLabel, productBySlug, products } from "@/data/products";
+import { allergenLabel, productBySlug } from "@/data/products";
 import { PACK_DISCOUNT_CENTS, PACK_SIZE } from "@/lib/cart";
 import { seo } from "@/lib/seo";
 import { jsonLd, productGraph } from "@/lib/structured-data";
@@ -112,7 +112,6 @@ function ProductPage() {
   const { slug } = Route.useParams();
   const product = productBySlug[slug];
   if (!product) throw notFound();
-  const others = products.filter((p) => p.slug !== product.slug).slice(0, 4);
 
   return (
     <PageBackdrop plate={PLATES.product.src} veil={PLATES.product.veil}>
@@ -321,61 +320,9 @@ function ProductPage() {
         />
       </section>
 
-      {/* Band 6 -- their "choose your weapon" grid. */}
-      <section className="px-3 pt-20 pb-28 sm:px-5 sm:pt-28">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col items-center justify-between gap-6 lg:flex-row">
-            <ResolveHeading text="Also on the wall" className={`t-section ${ON_DARK_HEAD}`} />
-            <Link to="/shop" className={`${ON_DARK_LINE} shrink-0`}>
-              See them all
-            </Link>
-          </div>
-          <ul className="mt-12 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
-            {others.map((p) => (
-              <li key={p.slug}>
-                <Link
-                  to="/shop/$slug"
-                  params={{ slug: p.slug }}
-                  className="group relative block h-full overflow-hidden rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 px-4 pt-6 pb-5 text-center"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-2.5 rounded-xl border border-dashed border-[#f0e3cd]/25"
-                  />
-                  {/* NO solid tone tile behind these jars, matching /shop and
-                      the hero above: a saturated block over a photograph reads
-                      as a sticker. The wash still separates one flavour from
-                      the next, which is the only job the tile ever did.
-                      Fixed-height cell so the row shares a baseline. */}
-                  <div className="relative flex h-[13rem] items-end justify-center">
-                    <span
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-x-0 bottom-0 h-[80%] opacity-60 blur-[2px]"
-                      style={{
-                        background: `radial-gradient(60% 55% at 50% 72%, ${p.tone} 0%, transparent 72%)`,
-                      }}
-                    />
-                    <JarFigure
-                      product={p}
-                      className="relative transition-transform duration-300 group-hover:-translate-y-1.5 [&_img]:drop-shadow-[0_18px_28px_rgba(0,0,0,0.5)]"
-                    />
-                  </div>
-                  <p
-                    className={`t-card relative mt-4 text-[1.35rem] ${ON_DARK_HEAD} group-hover:text-[#e9c98a]`}
-                  >
-                    {p.name}
-                  </p>
-                  <p className={`t-body relative text-[0.92rem] ${ON_DARK_MUTED}`}>
-                    {p.sizeLabel}
-                    <span className="mx-2 text-[#c4a35a]">·</span>
-                    <span className="tabular-nums text-[#fbf3e4]">{formatUsd(p.priceCents)}</span>
-                  </p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      {/* Band 6 -- their "choose your weapon" grid, which closes this page,
+          /about and /shop alike. Shared: `JarWall`. */}
+      <JarWall exclude={product.slug} />
 
       {/* ---------------------------------------------------------------
           Their mobile buy bar. Fixed to the bottom, phone only.

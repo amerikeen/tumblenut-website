@@ -63,7 +63,7 @@ export const faq: FaqEntry[] = [
     q: "Can I order online yet?",
     a: CHECKOUT_LIVE
       ? `Yes. Fill the crate and check out: ${PACK_OFFER.toLowerCase()}, mixed however you like.`
-      : `Not yet. The crate works and the prices are real, but checkout is not open: no card is taken, nothing is sent. Email ${ORDERS_EMAIL} and say which jars you want.`,
+      : `Not yet. The site is in soft launch right now. Online ordering will be possible very soon. In the meantime, email ${ORDERS_EMAIL} with your order.`,
   },
   {
     id: "gluten",

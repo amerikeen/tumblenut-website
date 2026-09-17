@@ -73,13 +73,14 @@ function FaqPage() {
       veil={PLATES.faq.veil}
       className="mx-auto max-w-5xl px-5 pt-32 pb-24 sm:px-8 sm:pt-40"
     >
-      <p className={`t-meta ${ON_DARK_EYEBROW}`}>Questions</p>
-      {/* Their two-tone title, the same device as "Choose your" / outlined
-          "Grind": one word solid, the rest outlined. Kept to a single h1
-          here rather than a second split element -- this is the page whose
-          entire job is being the thing a crawler or answer engine quotes,
-          so the full "Frequently Asked Questions" stays on one aria-label
-          instead of fragmenting across two headings for a styling choice.
+      {/* No "Questions" eyebrow above this one -- it said the same word the
+          heading says a line below it. Their two-tone title, the same
+          device as "Choose your" / outlined "Grind": one word solid, the
+          rest outlined. Kept to a single h1 here rather than a second split
+          element -- this is the page whose entire job is being the thing a
+          crawler or answer engine quotes, so the full "Frequently Asked
+          Questions" stays on one aria-label instead of fragmenting across
+          two headings for a styling choice.
           `max-w-[11ch]` is narrower than "Asked Questions" together at this
           size, which is what forces the third word onto its own line. */}
       <ResolveHeading

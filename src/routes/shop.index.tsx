@@ -3,6 +3,7 @@ import { AddToCart } from "@/components/AddToCart";
 import { ThreePack } from "@/components/buck/ThreePack";
 import { Icon } from "@/components/buck/Icon";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
+import { TextRoll } from "@/components/chrome/TextRoll";
 import {
   ON_DARK_BODY,
   ON_DARK_EYEBROW,
@@ -180,7 +181,7 @@ function Shop() {
             No shelves yet. The first one to carry it gets listed here.
           </p>
           <Link to="/stores" className={ON_DARK_LINE}>
-            Where to find us
+            <TextRoll outlineColor="#fbf3e4">Where to find us</TextRoll>
           </Link>
           <FacilityNote className={`max-w-[58ch] text-[0.95rem] leading-relaxed ${ON_DARK_MUTED}`} />
         </div>
@@ -203,6 +204,14 @@ function Shop() {
  * on. `.t-card` is a class and still beats the element selector in styles.css,
  * so nothing moves visually.
  */
+/** Same 91/95/100% scale `JarFigure` and `ChooseYourGrind` use: a 4oz jar
+ *  still reads as smaller next to a 16oz one, just not broken. */
+const JAR_HEIGHT_SCALE: Record<Product["size"], string> = {
+  "16oz": "100%",
+  "8oz": "95%",
+  "4oz": "91%",
+};
+
 function JarCard({ product, priority }: { product: Product; priority?: boolean }) {
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 px-5 pt-7 pb-5">
@@ -225,7 +234,15 @@ function JarCard({ product, priority }: { product: Product; priority?: boolean }
         </h2>
 
         {/* `product.tone` as a wash, not a tile. Fixed-height cell so the 4oz
-            and 16oz PNGs share a baseline across the row. */}
+            and 16oz PNGs share a baseline across the row.
+
+            The image used to be sized by WIDTH (`w-32`) with auto height, which
+            let a 16oz jar's natural aspect ratio render taller than this box
+            and overflow straight up into the title above it -- there was no
+            real gap between "flavour" and "jar", the jar was drawn on top of
+            it. Height-driven now, scaled 91/95/100% by size the same way
+            `JarFigure` and `ChooseYourGrind` are, so every jar sits inside the
+            box with room above it. */}
         <div className="relative mt-4 flex h-[15rem] w-full items-end justify-center">
           <div
             aria-hidden="true"
@@ -240,7 +257,8 @@ function JarCard({ product, priority }: { product: Product; priority?: boolean }
             width={400}
             height={640}
             loading={priority ? "eager" : "lazy"}
-            className="relative h-auto w-32 object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:-translate-y-1.5 sm:w-36"
+            className="relative w-auto object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:-translate-y-1.5"
+            style={{ height: JAR_HEIGHT_SCALE[product.size] }}
           />
         </div>
 

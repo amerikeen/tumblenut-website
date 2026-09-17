@@ -3,6 +3,7 @@ import { AddToCart } from "@/components/AddToCart";
 import { JarWall } from "@/components/buck/JarWall";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { NotFound } from "@/components/chrome/NotFound";
+import { TextRoll } from "@/components/chrome/TextRoll";
 import {
   ON_DARK_BODY,
   ON_DARK_EYEBROW,
@@ -256,7 +257,7 @@ function ProductPage() {
             </p>
           </div>
           <Link to="/shop" className={`${ON_DARK_LINE} relative shrink-0`}>
-            Pick {PACK_SIZE}
+            <TextRoll outlineColor="#fbf3e4">{`Pick ${PACK_SIZE}`}</TextRoll>
           </Link>
         </div>
       </section>

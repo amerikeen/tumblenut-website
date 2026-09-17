@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { PagePlaceholder } from "@/components/chrome/PagePlaceholder";
+import { TextRoll } from "@/components/chrome/TextRoll";
 import { ON_DARK_BODY, ON_DARK_HEAD, ON_DARK_SOLID, PLATES } from "@/components/chrome/PageBackdrop";
 
 /**
@@ -60,7 +61,7 @@ function Page() {
         </p>
         <div className="mt-9 flex justify-center">
           <Link to="/wholesale" className={ON_DARK_SOLID}>
-            Become a partner
+            <TextRoll outlineColor="#1c120a">Become a partner</TextRoll>
           </Link>
         </div>
       </section>

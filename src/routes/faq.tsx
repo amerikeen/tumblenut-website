@@ -5,6 +5,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { Icon } from "@/components/buck/Icon";
 import { usePrefersReducedMotion } from "@/lib/scroll";
+import { TextRoll } from "@/components/chrome/TextRoll";
 import {
   ON_DARK_BODY,
   ON_DARK_EYEBROW,
@@ -112,10 +113,15 @@ function FaqPage() {
 
       <div className="mt-12 flex flex-wrap gap-3">
         <Link to="/shop" className={ON_DARK_SOLID}>
-          See the jars
+          <TextRoll outlineColor="#1c120a">See the jars</TextRoll>
         </Link>
+        {/* Not "Ask something else" -- every other mailto CTA on the site
+            (cart.tsx, contact.tsx, WholesaleForm) shows the address itself as
+            its label, so a visitor whose browser has no mail client still
+            has something to read and copy. An opaque label here was the one
+            mailto dead end on the site: a failed click left nothing behind. */}
         <a href={`mailto:${WHOLESALE_EMAIL}`} className={ON_DARK_LINE}>
-          Ask something else
+          <TextRoll outlineColor="#fbf3e4">{`Email ${WHOLESALE_EMAIL}`}</TextRoll>
         </a>
       </div>
     </PageBackdrop>

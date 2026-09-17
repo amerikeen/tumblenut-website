@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { JarFigure } from "@/components/JarFigure";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
+import { TextRoll } from "@/components/chrome/TextRoll";
 import { ON_DARK_HEAD, ON_DARK_LINE, ON_DARK_MUTED } from "@/components/chrome/PageBackdrop";
 import { products, type Product } from "@/data/products";
 import { formatUsd } from "@/lib/utils";
@@ -45,7 +46,7 @@ export function JarWall({
         <div className="flex flex-col items-center justify-between gap-6 lg:flex-row">
           <ResolveHeading text={heading} className={`t-section ${ON_DARK_HEAD}`} />
           <Link to="/shop" className={`${ON_DARK_LINE} shrink-0`}>
-            See them all
+            <TextRoll outlineColor="#fbf3e4">See them all</TextRoll>
           </Link>
         </div>
 

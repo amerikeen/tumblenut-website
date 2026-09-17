@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { Icon } from "@/components/buck/Icon";
 import { JarWall } from "@/components/buck/JarWall";
+import { TextRoll } from "@/components/chrome/TextRoll";
 import {
   ON_DARK_BODY,
   ON_DARK_EYEBROW,
@@ -257,10 +258,10 @@ function AboutPage() {
 
       <div className="mt-14 flex flex-wrap gap-3">
         <Link to="/shop" className={ON_DARK_SOLID}>
-          See the jars
+          <TextRoll outlineColor="#1c120a">See the jars</TextRoll>
         </Link>
         <Link to="/wholesale" className={ON_DARK_LINE}>
-          Become a partner
+          <TextRoll outlineColor="#fbf3e4">Become a partner</TextRoll>
         </Link>
       </div>
 

@@ -81,7 +81,7 @@ export const skuPan = {
 export const differentiator = {
   eyebrow: "Why Doc bothered",
   heading: "More than peanut. Never a sugar bomb.",
-  body: "Doc still grinds peanut, plus pistachio, pecan, hazelnut and pepita — a real jar for a peanut allergy, never stacked with sugar and fillers.",
+  body: "Doc still grinds peanut, plus almond, pistachio, pecan, hazelnut and pepita — a real jar for a peanut allergy, never stacked with sugar and fillers.",
   proof: [
     { k: "Ingredients", v: "All natural" },
     { k: "Made in", v: "Columbia, TN" },

@@ -135,7 +135,8 @@ function Card({ card, index }: { card: (typeof noCards)[number]; index: number }
       >
         <span className="h-2 w-2 shrink-0 rounded-full bg-[#9E3617]" />
         <h3 className="t-card text-[clamp(1rem,3.2vw,1.55rem)] leading-none whitespace-nowrap">
-          {card.kicker} {card.title}
+          {card.kicker ? `${card.kicker} ` : ""}
+          {card.title}
         </h3>
         <span className="h-2 w-2 shrink-0 rounded-full bg-[#9E3617]" />
       </div>

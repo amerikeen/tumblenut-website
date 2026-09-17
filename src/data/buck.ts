@@ -151,7 +151,7 @@ export const noCards = [
   },
   {
     id: "more-than-peanut",
-    kicker: "And",
+    kicker: "",
     title: "More than peanut",
     body: "Pistachio. Pecan. Hazelnut. Almond. Pepita. More than one way to fill a sandwich.",
   },

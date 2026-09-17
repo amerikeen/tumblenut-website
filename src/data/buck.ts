@@ -80,8 +80,8 @@ export const skuPan = {
 
 export const differentiator = {
   eyebrow: "Why Doc bothered",
-  heading: "Nobody should sit out at lunch",
-  body: "A peanut allergy should not mean no sandwich. Pistachio, pecan, hazelnut, pepita — read the label and pick the jar that belongs on your table.",
+  heading: "More than peanut. Never a sugar bomb.",
+  body: "Doc still grinds peanut, plus pistachio, pecan, hazelnut and pepita — a real jar for a peanut allergy, never stacked with sugar and fillers.",
   proof: [
     { k: "Ingredients", v: "All natural" },
     { k: "Made in", v: "Columbia, TN" },

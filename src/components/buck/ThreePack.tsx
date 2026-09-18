@@ -200,29 +200,28 @@ export function ThreePack() {
                          jars twice the size, and four at that size do not fit
                          the circle side by side -- theirs overlap for the same
                          reason. Each slot but the first pulls left over its
-                         neighbour, and the stacking order runs left-to-right so
-                         the overlap reads as a row on a shelf. */
+                         neighbour, and paint order runs left-to-right (plain
+                         DOM order -- no zIndex needed here) so the overlap
+                         reads as a row on a shelf. */
                       className="relative flex h-full items-end justify-center"
-                      style={{
-                        width: `${Math.min(50, 168 / PACK_SIZE)}%`,
-                        marginLeft: i === 0 ? 0 : "-10%",
-                        zIndex: i,
-                      }}
+                      style={slotStyle(i)}
                     >
                       {p ? (
-                        /* The button wraps the jar rather than floating over the
-                           slot, so the × sits on THIS jar's shoulder whatever
-                           height it is. Anchored to the slot instead, it landed
-                           on the neighbour when a 4oz sat beside a 16oz. */
-                        <span
-                          className="relative inline-flex items-end origin-bottom"
-                          /* A small alternating tilt, like theirs. Rotated
-                             about the BASE so the jars still stand on the
-                             shared baseline instead of swinging off it. */
-                          style={{
-                            transform: `rotate(${TILTS[i % TILTS.length]}deg) scale(${DEPTH[i % DEPTH.length]})`,
-                          }}
-                        >
+                        /* Just the jar here, rotated as a rigid unit. The
+                           remove button used to live inside this same
+                           rotated span, but `transform` always opens its own
+                           stacking context, and that trapped the button's
+                           z-index under whichever *slot* (not descendant)
+                           painted later -- z-20 only wins fights inside its
+                           own stacking context, and one span per jar meant
+                           one context per jar. Slot i's × couldn't rise above
+                           slot i+1's jar no matter what z-index it carried.
+                           The remove-button overlay below duplicates this
+                           same rotated span, but as its own layer that paints
+                           after every jar here, so the fix is "escape the
+                           context" rather than "win a z-index fight that
+                           can't be won from inside it". */
+                        <span className="relative inline-flex items-end origin-bottom" style={slotTiltStyle(i)}>
                           <img
                             src={p.jar}
                             alt={`${p.name}, position ${i + 1} of ${PACK_SIZE}`}
@@ -230,11 +229,53 @@ export function ThreePack() {
                             height={640}
                             className="h-auto max-h-full w-full object-contain object-bottom drop-shadow-[0_18px_28px_rgba(0,0,0,0.55)]"
                           />
+                        </span>
+                      ) : (
+                        <JarOutline />
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+
+              {/* Remove-button overlay: the same slot geometry as the jar
+                  list above (same slotStyle/slotTiltStyle per index), but a
+                  separate <ul> painted after it with one z-index on the
+                  whole layer instead of one per slot. That's what lets every
+                  × win its hit test regardless of which neighbouring jar
+                  would otherwise sit on top of it -- see the long comment
+                  above. `pointer-events-none` on the layer means clicks miss
+                  everywhere except the buttons themselves, which opt back in
+                  with `pointer-events-auto`, so picking a jar on the left
+                  panel and hovering the slots underneath still work
+                  untouched. The invisible jar image in each slot exists only
+                  to reproduce the real jar's rendered height, so the ×
+                  lands on THIS jar's shoulder and not a fixed offset that's
+                  wrong for a 4oz sitting where a 16oz used to be. */}
+              {picked.length > 0 ? (
+                <ul
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 top-[9%] z-30 flex h-[58%] items-end justify-center px-[7%]"
+                >
+                  {Array.from({ length: PACK_SIZE }).map((_, i) => {
+                    const slug = picked[i];
+                    const p = slug ? products.find((x) => x.slug === slug) : undefined;
+                    if (!p) return <li key={i} style={slotStyle(i)} />;
+                    return (
+                      <li key={i} className="relative flex h-full items-end justify-center" style={slotStyle(i)}>
+                        <span className="relative inline-flex items-end origin-bottom" style={slotTiltStyle(i)}>
+                          <img
+                            src={p.jar}
+                            alt=""
+                            width={400}
+                            height={640}
+                            className="invisible h-auto max-h-full w-full object-contain object-bottom"
+                          />
                           <button
                             type="button"
                             onClick={() => removeAt(i)}
                             aria-label={`Remove ${p.name} from the ${PACK_SIZE} pack`}
-                            className="absolute -top-2.5 -right-2 z-20 flex size-7 items-center justify-center rounded-full bg-[#fbf3e4] text-[#1c120a] shadow-md transition hover:bg-white"
+                            className="pointer-events-auto absolute -top-2.5 -right-2 flex size-7 items-center justify-center rounded-full bg-[#fbf3e4] text-[#1c120a] shadow-md transition hover:bg-white"
                           >
                             <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
                               <path
@@ -246,13 +287,11 @@ export function ThreePack() {
                             </svg>
                           </button>
                         </span>
-                      ) : (
-                        <JarOutline />
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : null}
 
               {/* The CTA sits inside the circle on theirs. It counts down while
                   the pack is short, and only becomes a buy button when full. */}
@@ -325,6 +364,18 @@ const TILTS = [-5, 3, -3, 6];
  * size and reads as depth rather than as a fix. Theirs does the same thing.
  */
 const DEPTH = [0.82, 1, 1, 0.82];
+
+/** Shared slot geometry so the jar layer and the remove-button overlay stay
+ *  pixel-identical -- both read from the same two functions per index. */
+function slotStyle(i: number) {
+  return {
+    width: `${Math.min(50, 168 / PACK_SIZE)}%`,
+    marginLeft: i === 0 ? 0 : "-10%",
+  };
+}
+function slotTiltStyle(i: number) {
+  return { transform: `rotate(${TILTS[i % TILTS.length]}deg) scale(${DEPTH[i % DEPTH.length]})` };
+}
 
 function JarOutline() {
   return (

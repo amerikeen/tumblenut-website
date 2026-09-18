@@ -80,7 +80,10 @@ export function JarWall({
                 >
                   {p.name}
                 </p>
-                <p className={`t-body relative text-[0.92rem] ${ON_DARK_MUTED}`}>
+                {/* font-slab (Oswald) for size + price, matching /shop --
+                    see the comment there for why it's a utility add, not a
+                    .t-body rewrite. */}
+                <p className={`t-body relative font-slab font-semibold text-[0.92rem] ${ON_DARK_MUTED}`}>
                   {p.sizeLabel}
                   <span className="mx-2 text-[#c4a35a]">·</span>
                   <span className="tabular-nums text-[#fbf3e4]">{formatUsd(p.priceCents)}</span>

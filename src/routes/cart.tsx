@@ -177,7 +177,9 @@ function CartPage() {
                   >
                     {product.name}
                   </Link>
-                  <p className={`t-body mt-1 text-[0.9rem] ${ON_DARK_MUTED}`}>{product.sizeLabel}</p>
+                  <p className={`t-body mt-1 font-slab font-semibold text-[0.9rem] ${ON_DARK_MUTED}`}>
+                    {product.sizeLabel}
+                  </p>
                 </div>
                 <label className="sr-only" htmlFor={`qty-${product.slug}`}>
                   Quantity for {product.name}
@@ -189,9 +191,9 @@ function CartPage() {
                   max={24}
                   value={qty}
                   onChange={(e) => setQty(product.slug, Number(e.target.value))}
-                  className={`t-body h-12 w-16 px-2 text-center tabular-nums ${ON_DARK_FIELD}`}
+                  className={`t-body h-12 w-16 px-2 text-center font-slab font-semibold tabular-nums ${ON_DARK_FIELD}`}
                 />
-                <span className="t-body w-20 text-right tabular-nums text-[#fbf3e4]">
+                <span className="t-body w-20 text-right font-slab font-semibold tabular-nums text-[#fbf3e4]">
                   {formatUsd(lineCents)}
                 </span>
               </li>
@@ -201,12 +203,12 @@ function CartPage() {
           <aside className="h-fit rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 p-6">
             <p className={`t-body flex justify-between text-[0.95rem] ${ON_DARK_MUTED}`}>
               <span>Subtotal</span>
-              <span className="tabular-nums">{formatUsd(subtotal)}</span>
+              <span className="font-slab font-semibold tabular-nums">{formatUsd(subtotal)}</span>
             </p>
             {discount > 0 ? (
               <p className="t-body mt-2 flex justify-between text-[0.95rem] text-[#e9a06a]">
                 <span>{packs > 1 ? `${packs} × ${PACK_SIZE} pack` : `${PACK_SIZE} pack`} saving</span>
-                <span className="tabular-nums">−{formatUsd(discount)}</span>
+                <span className="font-slab font-semibold tabular-nums">−{formatUsd(discount)}</span>
               </p>
             ) : (
               <p className={`t-body mt-2 text-[0.85rem] leading-relaxed ${ON_DARK_MUTED}`}>

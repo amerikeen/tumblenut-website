@@ -152,7 +152,8 @@ export function SkuPan() {
                 </span>
               </div>
               <p className="t-card mt-7 text-[#fbf3e4]">{p.name}</p>
-              <p className="t-meta mt-3 text-[1.1rem] text-[#e9c98a]">
+              {/* font-slab for size + price, matching /shop and the jar wall. */}
+              <p className="t-meta mt-3 font-slab text-[1.1rem] text-[#e9c98a]">
                 {p.sizeLabel} · {formatUsd(p.priceCents)}
               </p>
             </div>

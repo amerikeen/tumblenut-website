@@ -191,7 +191,7 @@ function Card({ product, index }: { product: Product; index: number }) {
           className="t-ui flex h-[50px] items-center justify-between rounded-xl bg-[#fbf3e4] px-5 text-[0.95rem] tracking-[0.1em] text-[#1c120a] uppercase transition hover:bg-white"
         >
           <span>{just ? "In the crate" : "Add to cart"}</span>
-          <span className="tabular-nums">{formatUsd(product.priceCents)}</span>
+          <span className="font-slab font-semibold tabular-nums">{formatUsd(product.priceCents)}</span>
         </button>
         <Link
           to="/shop/$slug"

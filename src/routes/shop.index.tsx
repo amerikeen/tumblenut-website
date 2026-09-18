@@ -262,7 +262,12 @@ function JarCard({ product, priority }: { product: Product; priority?: boolean }
           />
         </div>
 
-        <p className={`t-body mt-4 text-[0.92rem] ${ON_DARK_MUTED}`}>
+        {/* Oswald, not Archivo, for size + price -- Jeff's call 2026-09-18,
+            matching buckssauce.com's cleaner numerals. font-slab is a
+            utility (Tailwind's @theme auto-generates it from --font-slab),
+            so it wins over .t-body's font-family in the cascade without
+            disturbing .t-body's size/line-height/tracking. */}
+        <p className={`t-body mt-4 font-slab font-semibold text-[0.92rem] ${ON_DARK_MUTED}`}>
           {product.sizeLabel}
           <span className="mx-2 text-[#c4a35a]">·</span>
           <span className="tabular-nums text-[#fbf3e4]">{formatUsd(product.priceCents)}</span>

@@ -281,7 +281,7 @@ function ProductPage() {
             />
             <div className="flex flex-col justify-center gap-8 rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 p-8 lg:p-12">
               <p className={`t-lead ${ON_DARK_BODY}`}>{product.story}</p>
-              <p className={`t-meta ${ON_DARK_EYEBROW}`}>
+              <p className={`t-meta font-slab ${ON_DARK_EYEBROW}`}>
                 {product.sizeLabel}
                 <span className="mx-2">·</span>
                 <span className="tabular-nums text-[#fbf3e4]">
@@ -352,7 +352,7 @@ function ProductPage() {
         <div className="flex items-center justify-between gap-4">
           <div className="min-w-0">
             <p className={`t-meta truncate text-[0.62rem] ${ON_DARK_EYEBROW}`}>{product.name}</p>
-            <p className="t-body text-[1rem] tabular-nums text-[#fbf3e4]">
+            <p className="t-body font-slab font-semibold text-[1rem] tabular-nums text-[#fbf3e4]">
               {formatUsd(product.priceCents)}
               <span className="mx-2 text-[#c4a35a]">·</span>
               <span className={ON_DARK_MUTED}>{product.sizeLabel}</span>

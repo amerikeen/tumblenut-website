@@ -1,62 +1,46 @@
-TUMBLENUT — Doc + Cecil canonical cutout pack
-==============================================
-Approved lockup (olive Cecil, Smokehouse jar, real-alpha PNG).
-Source: Doc Cecil Group Cutout (pre-alpha), magenta keyed.
+TUMBLENUT — Doc + Cecil canonical pack (rebuild)
+================================================
+3D      = approved Pixar lockup (olive Cecil, Smokehouse jar)
+BW_2D   = approved black graphic. Hats + embroidery.
+COLOR_2D = same 2D drawing with brand color fills.
+The old posterized "2D" from the first pack is gone.
 
-WHAT TO USE WHEN
-----------------
-WEBSITE HEADER (tiny, ~56px tall)
-  USE:  web/Doc_Cecil_Canonical_2D_web-header-56h.png
-        web/Doc_Cecil_Canonical_2D_web-header-56h@2x.png  (retina)
-  WHY:  3D fur dies at this size. 2D reads as two mascots.
-  ALT:  web/Doc_Cecil_Canonical_3D_web-header-56h.png if you want the 3D anyway.
+WHAT TO USE
+-----------
+WEBSITE HEADER (tiny)
+  web/Doc_Cecil_BW_2D_web-header-56h@2x.png
+  or  web/Doc_Cecil_COLOR_2D_web-header-56h@2x.png
 
-WEBSITE HERO / ABOUT / WHOLESALE (large)
-  USE:  web/Doc_Cecil_Canonical_3D_web-hero-1200w.png
+WEBSITE HERO / ABOUT
+  web/Doc_Cecil_3D_web-hero-1200w.png
   MASTER: 3D/Doc_Cecil_Canonical_3D_Cutout.png
 
-BUSINESS CARDS
-  USE:  2D/Doc_Cecil_Canonical_2D_Cutout.png  (or hat-crop if space is tight)
-  Print from 2D/Doc_Cecil_Canonical_2D_print-300dpi.png
+T-SHIRTS / SWEATS (art above wordmark)
+  COLOR: merch-layouts/Doc_Cecil_COLOR_2D_tshirt-over-wordmark_transparent.png
+  3D:    merch-layouts/Doc_Cecil_3D_tshirt-over-wordmark_transparent.png
+  1-ink: merch-layouts/Doc_Cecil_BW_2D_tshirt-over-wordmark_transparent.png
+  Set TUMBLENUT / SMALL BATCH NUT BUTTERS in the brand display face.
 
-T-SHIRTS / SWEATSHIRTS (cutout above wordmark + tagline)
-  ARTBOARD: merch-layouts/Doc_Cecil_Tshirt_cutout-over-wordmark_transparent.png
-  CREAM GARMENT proof:  ..._cream.png / .jpg
-  BLACK GARMENT proof:  ..._black.png / .jpg
-  NOTE: Wordmark on the site is live type (TUMBLENUT / Small batch nut butters).
-        These layouts use a stand-in sans. Your printer should set TUMBLENUT
-        in the brand display face with wide tracking.
+HATS
+  ART: embroidery-silkscreen/Doc_Cecil_Embroidery_1color-black.png
+  MOCK: merch-layouts/Doc_Cecil_BW_2D_trucker-hat-mock.jpg
+  Shop punches DST/PES. We do not ship machine files.
 
-HATS (embroidery, small canvas)
-  USE:  embroidery-silkscreen/Doc_Cecil_Hat_heads-crop_8color.png
-  3D crop: 3D/Doc_Cecil_Canonical_3D_hat-crop.png
-  Full bodies will not fit a cap. Heads+jar crop is the hat file.
-
-EMBROIDERY (shop digitizes this — we do not ship DST/PES)
-  START HERE: embroidery-silkscreen/Doc_Cecil_Embroidery_8color.png
-  More detail: ..._12color.png
-  2D easier stitch: .../Doc_Cecil_2D_Embroidery_8color.png
-  The shop will punch DST/PES/EXP from these. Send the 8-color first.
+EMBROIDERY
+  embroidery-silkscreen/Doc_Cecil_Embroidery_1color-black.png
+  Black thread; garment shows through the cutouts.
 
 SILKSCREEN
-  USE:  embroidery-silkscreen/Doc_Cecil_Embroidery_6color-silkscreen.png
-  Plus the matching .svg (PNG wrapped in SVG for placement).
-  Spot colors will be matched at the shop from this plate.
+  1-color: same BW file
+  Full color: embroidery-silkscreen/Doc_Cecil_Silkscreen_COLOR_2D.png
 
-BANNERS / POSTERS / FARMERS-MARKET SIGN
-  USE:  3D/Doc_Cecil_Canonical_3D_banner-large.png
-        3D/Doc_Cecil_Canonical_3D_print-300dpi.png
-        3D/Doc_Cecil_Canonical_3D_print.pdf
+BANNERS
+  3D/Doc_Cecil_Canonical_3D_banner.png
+  3D/Doc_Cecil_Canonical_3D_print.pdf
 
-MASTER FILES (do not resample these for print)
-  3D/Doc_Cecil_Canonical_3D_Cutout.png     full-res transparent 3D
-  2D/Doc_Cecil_Canonical_2D_Cutout.png     flattened graphic of the same pose
+MASTERS
+  3D/Doc_Cecil_Canonical_3D_Cutout.png
+  BW_2D/Doc_Cecil_Canonical_BW_2D.png
+  COLOR_2D/Doc_Cecil_Canonical_COLOR_2D.png
 
-VECTOR NOTE
-  True outline-vector of the photoreal 3D is not useful (it becomes a
-  muddy trace). SVG files in this pack are the PNG embedded in SVG so
-  designers can drop them in Illustrator/Figma. For stitched/printed
-  merch, use the limited-color PNGs; the shop builds real vectors/punches.
-
-DO NOT USE
-  The splotchy lockup-13.png from earlier keys. This pack replaces it.
+SVGs are PNG-in-SVG for Illustrator/Figma. BW_2D is the stitch plate.

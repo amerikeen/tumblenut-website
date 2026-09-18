@@ -138,18 +138,29 @@ export function SiteHeader() {
             aria-label="Tumblenut, home"
           >
             <span className="flex items-center gap-2.5">
-              <span className="relative flex shrink-0 items-end">
+              {/* The composed lockup, not the two solo cutouts side by side.
+                  It crossfades from the flat colour version to the flat BW
+                  outline as the header collapses on scroll -- the same
+                  render-style downshift buckssauce.com's mark goes through,
+                  done with a fade instead of a crop. Both source images are
+                  Grok's own 56h header crop, so the two frames share a crop
+                  and the fade has nothing to jump across. 3D was ruled out
+                  here on 2026-09-16: a photoreal render doesn't hold up at
+                  this height, which is why the footer gets it instead. */}
+              <span className="relative flex h-11 w-auto shrink-0 items-end sm:h-14">
                 <img
-                  src="/brand/cast/doc-cutout.png"
+                  src="/brand/cast/lockup-color.png"
                   alt=""
                   aria-hidden="true"
                   className="h-11 w-auto object-contain sm:h-14"
+                  style={{ opacity: collapsed ? 0 : 1, transition: "opacity 420ms ease-out" }}
                 />
                 <img
-                  src="/brand/cast/cecil-cutout.png"
+                  src="/brand/cast/lockup-bw.png"
                   alt=""
                   aria-hidden="true"
-                  className="-ml-2.5 h-8 w-auto object-contain sm:h-10"
+                  className="absolute inset-0 h-11 w-auto object-contain sm:h-14"
+                  style={{ opacity: collapsed ? 1 : 0, transition: "opacity 420ms ease-out" }}
                 />
               </span>
               {/* The wordmark is what gives way; the cast never does. */}

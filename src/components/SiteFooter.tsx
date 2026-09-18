@@ -60,12 +60,12 @@ export function SiteFooter() {
     >
       <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-[22fr_32fr_32fr_14fr]">
         {/* 1 — the mark, in its dashed box */}
-        {/* The cast, filling the box rather than floating in it.
-            Sized in percentages of the box width, not fixed pixels, because
-            width is the binding constraint here: Doc is a tall 644x1508 and
-            Cecil a squat 1032x1128, so side by side the pair is a landscape
-            object in a portrait box. They are bottom-anchored so they stand on
-            the box floor instead of hovering in the middle of it. */}
+        {/* The composed 3D lockup, not the two solo cutouts side by side.
+            The footer has the room the header doesn't, so it keeps the
+            photoreal render (decided 2026-09-16, built 2026-09-18 once Grok
+            delivered a lockup that actually held the pose). Bottom-anchored
+            so it stands on the box floor instead of hovering in the middle
+            of it. */}
         <div className="flex min-h-[13rem] items-end justify-center rounded-xl border border-dashed border-current/30 p-2.5">
           <Link
             to="/"
@@ -73,16 +73,10 @@ export function SiteFooter() {
             className="flex w-full items-end justify-center"
           >
             <img
-              src="/brand/cast/doc-cutout.png"
+              src="/brand/cast/lockup-3d.png"
               alt=""
               aria-hidden="true"
-              className="h-auto w-[44%] object-contain object-bottom"
-            />
-            <img
-              src="/brand/cast/cecil-cutout.png"
-              alt=""
-              aria-hidden="true"
-              className="-ml-[6%] h-auto w-[62%] object-contain object-bottom"
+              className="h-auto w-[78%] object-contain object-bottom"
             />
           </Link>
         </div>

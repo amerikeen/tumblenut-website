@@ -54,7 +54,18 @@ export const Route = createFileRoute("/about")({
  *    "Back when there was only one" is the exception and it is not really one:
  *    it is history, it is already Classic Crunchy's shipped story copy, and it
  *    cannot go false.
- * 3. **It may not describe Doc's colour.** The character bible and the 3D art
+ * 3. **The cast copy is written for a five-year-old.** Jeff's call 2026-09-18:
+ *    the previous version "reads of AI". It did. "Most combinations land on
+ *    purpose; the tail gets credit for the rest" needs an adult to unpack an
+ *    inversion, and "Said once, then simply true. Never the joke." was copy
+ *    commenting on its own restraint, which is the clearest tell of the lot.
+ *    The bar now: short sentences, concrete nouns, no irony, no subordinate
+ *    clauses, nothing self-referential. A child should finish each block
+ *    wanting to know more about the character, because the YouTube films are
+ *    what this page feeds. Brevity is the whole register, same as the
+ *    reference site.
+ *
+ * 4. **It may not describe Doc's colour.** The character bible and the 3D art
  *    disagree — the bible's flat 2D canon is a grizzled gray-brown Eastern gray
  *    squirrel, the approved renders are rust. Costume, build and the tail are
  *    stable across both, so the copy sticks to those.
@@ -96,9 +107,8 @@ function AboutPage() {
         className={`t-hero mt-4 max-w-[10ch] ${ON_DARK_HEAD}`}
       />
       <p className={`t-lead mt-7 max-w-[50ch] ${ON_DARK_BODY}`}>
-        Doc grinds nut butter in a workshop in Columbia, Tennessee. Cecil reacts to peanuts{" "}
-        <Icon name="peanut" />. Between those two facts is the whole reason there is more than one
-        jar on the wall.
+        Doc makes nut butter. Peanuts make Cecil sick <Icon name="peanut" />. That is why there is
+        a whole wall of jars instead of just one.
       </p>
 
       {/* Doc stands on a plate rather than filling one.
@@ -131,14 +141,13 @@ function AboutPage() {
             className={`t-section mt-4 ${ON_DARK_HEAD}`}
           />
           <p className={`t-body mt-7 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Doc, because he is always mid-experiment. Most combinations land on purpose; the tail
-            gets credit for the rest.
+            Doc is a squirrel. He grinds nut butter in his workshop.
           </p>
           <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Overalls, a cap worn askew, goggles pushed up until something is about to go wrong.
+            Cap on crooked. Goggles up. Overalls full of crumbs.
           </p>
           <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Grinds like it is the only thing that matters. Built Cecil a whole shelf to prove it.
+            He tries something new almost every day. Some of it works.
           </p>
         </div>
       </section>
@@ -157,7 +166,7 @@ function AboutPage() {
           />
         </div>
         <div className="lg:order-1">
-          <p className={`t-meta ${ON_DARK_EYEBROW}`}>Chief taster</p>
+          <p className={`t-meta ${ON_DARK_EYEBROW}`}>Chief Taster</p>
           <ResolveHeading
             as="h2"
             id="about-cecil"
@@ -165,13 +174,13 @@ function AboutPage() {
             className={`t-section mt-4 ${ON_DARK_HEAD}`}
           />
           <p className={`t-body mt-7 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Fell off a truck bound for the zoo, wandered onto Doc&rsquo;s land, and stayed. First
-            in line for a taste of whatever Doc is grinding, and never shy about how he feels
-            about it.
+            Cecil is a tortoise. He fell off a truck and never left.
           </p>
           <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Cecil reacts to peanuts. Said once, then simply true. Never the joke. It is the reason
-            the wall grew.
+            He tastes everything Doc makes. His face says the rest.
+          </p>
+          <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
+            Peanuts make Cecil sick. So Doc learned to grind other nuts.
           </p>
         </div>
       </section>

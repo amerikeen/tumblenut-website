@@ -92,7 +92,10 @@ export const products: Product[] = [
     name: "Classic Crunchy",
     size: "16oz",
     sizeLabel: "16 oz (454g)",
-    priceCents: 1599,
+    // Repriced 2026-09-18: from $15.99. Real landed cost (uncosted items
+    // included) is $4.96, not the $3.90 this was priced against -- see
+    // cost-model.ts's recWhy on this SKU for the full number.
+    priceCents: 1749,
     allergens: ["peanut"],
     contains: "Peanuts",
     lede: "Deep-roasted peanut, applewood smoked salt, a little honey. Like an old friend.",
@@ -122,7 +125,8 @@ export const products: Product[] = [
     name: "Firecracker Peanut",
     size: "16oz",
     sizeLabel: "16 oz (454g)",
-    priceCents: 1699,
+    // Repriced 2026-09-18: from $16.99. Real landed cost is $5.08.
+    priceCents: 1799,
     allergens: ["peanut"],
     contains: "Peanuts",
     lede: "Peanut, chili, lime, honey, ghost pepper salt. Sweet w/ some kick.",
@@ -154,6 +158,12 @@ export const products: Product[] = [
     name: "Smokehouse Almond",
     size: "16oz",
     sizeLabel: "16 oz (454g)",
+    // UNCHANGED 2026-09-18 on purpose, unlike the rest of this file. Real
+    // landed cost ($8.65) would need $30+ to hold 3.5x -- Jeff rejected
+    // that outright as uncompetitive against Kroger's $6.99. This is a
+    // sourcing problem (almond at $5.38/lb foodservice), not a sticker
+    // problem. See cost-model.ts's recWhy on this SKU. Do not reprice
+    // until a real almond quote lands.
     priceCents: 1699,
     allergens: ["tree-nut"],
     contains: "Almonds (tree nuts)",
@@ -183,7 +193,8 @@ export const products: Product[] = [
     name: "Pumpkin Patch",
     size: "8oz",
     sizeLabel: "8 oz (227g)",
-    priceCents: 1499,
+    // Repriced 2026-09-18: from $14.99. Real landed cost is $5.49.
+    priceCents: 1949,
     allergens: ["seed"],
     contains: "Pumpkin seeds",
     lede: "Pumpkin seed, cinnamon, applewood smoked salt. Here for the holidays.",
@@ -213,7 +224,11 @@ export const products: Product[] = [
     name: "Lucky Pistachio",
     size: "4oz",
     sizeLabel: "4 oz (113g)",
-    priceCents: 1699,
+    // Repriced 2026-09-18: from $16.99. Real landed cost is $6.52; $22.99
+    // holds 3.5x but sits above every real 8oz pistachio-butter comp found
+    // ($2.00-3.02/oz vs. $5.75/oz here) -- a market test, Jeff's call, eyes
+    // open. See cost-model.ts's recWhy on this SKU.
+    priceCents: 2299,
     allergens: ["tree-nut"],
     contains: "Pistachios (tree nuts)",
     lede: "Pistachio, honey, heirloom salt. Too good to mess with.",
@@ -243,7 +258,11 @@ export const products: Product[] = [
     name: "Harvest Pecan",
     size: "4oz",
     sizeLabel: "4 oz (113g)",
-    priceCents: 1499,
+    // Repriced 2026-09-18: from $14.99. Real landed cost is $5.06; $17.99
+    // holds 3.5x but sits above most real 8oz pecan-butter comps found
+    // ($1.45-2.69/oz vs. $4.50/oz here) -- a market test, Jeff's call, eyes
+    // open. See cost-model.ts's recWhy on this SKU.
+    priceCents: 1799,
     allergens: ["tree-nut"],
     contains: "Pecans (tree nuts)",
     lede: "Pecans, maple, bourbon barrel smoked salt. That's October.",
@@ -273,7 +292,8 @@ export const products: Product[] = [
     name: "Wild Cacao",
     size: "4oz",
     sizeLabel: "4 oz (113g)",
-    priceCents: 1899,
+    // Repriced 2026-09-18: from $18.99. Real landed cost is $6.41.
+    priceCents: 2249,
     allergens: ["tree-nut"],
     contains: "Hazelnuts (tree nuts)",
     lede: "Hazelnut, cacao, maple, heirloom salt. Dessert without the junk.",

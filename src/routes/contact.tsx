@@ -112,7 +112,7 @@ function ContactPage() {
           to="/wholesale"
           className="t-meta mt-7 inline-flex text-[#fbf3e4] underline decoration-[#c4a35a] decoration-2 underline-offset-[6px] hover:decoration-[#fbf3e4]"
         >
-          What partners get →
+          What wholesalers get →
         </Link>
       </section>
 

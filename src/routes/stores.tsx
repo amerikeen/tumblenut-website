@@ -61,7 +61,7 @@ function Page() {
         </p>
         <div className="mt-9 flex justify-center">
           <Link to="/wholesale" className={ON_DARK_SOLID}>
-            <TextRoll outlineColor="#1c120a">Become a partner</TextRoll>
+            <TextRoll outlineColor="#1c120a">Become a wholesaler</TextRoll>
           </Link>
         </div>
       </section>

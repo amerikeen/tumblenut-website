@@ -17,7 +17,7 @@
  *
  * **Honest.** A retailer is exactly who would like to hear "safe for allergy
  * kids", and that is exactly what this page may never say. Every jar is packed
- * in a shop that handles peanuts and tree nuts. What we sell a partner is a
+ * in a shop that handles peanuts and tree nuts. What we sell a wholesaler is a
  * shelf where more customers find something they want -- more choices, never a
  * safe choice. Watch the WHO list especially: "schools and camps" reads as a
  * safety claim even when the words avoid it, which is why it is not there.
@@ -73,7 +73,7 @@ export const ORDERS_EMAIL = "orders@tumblenut.com";
  *
  * TWO THINGS FOLLOW, and neither is optional:
  *
- * 1. Out-of-state partners cannot be taken on. Saying otherwise on this page
+ * 1. Out-of-state wholesalers cannot be taken on. Saying otherwise on this page
  *    would be soliciting business we cannot legally fill.
  * 2. Restaurants, food trucks and caterers cannot be taken on AT ALL, in state
  *    or out. TFFA forbids homemade items being served or used as ingredients by
@@ -137,7 +137,7 @@ export const ladder: LadderCard[] = [
   {
     id: "what",
     question: "What?",
-    title: "What partners get",
+    title: "What wholesalers get",
     items: [
       "Wholesale pricing with room to make the shelf worth it",
       "Mixed cases, so the shelf is not a bet on one flavour",

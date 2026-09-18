@@ -27,7 +27,7 @@ import { FacilityNote } from "@/components/chrome/FacilityNote";
  */
 const FOOTER_NAV = [
   { to: "/shop", label: "Shop" },
-  { to: "/wholesale", label: "Become a partner" },
+  { to: "/wholesale", label: "Become a wholesaler" },
   { to: "/about", label: "About" },
   { to: "/faq", label: "FAQ" },
   { to: "/stores", label: "Stores" },

@@ -8,7 +8,6 @@ import {
   ON_DARK_EYEBROW,
   ON_DARK_HEAD,
   ON_DARK_LINE,
-  ON_DARK_MUTED,
   ON_DARK_SOLID,
   PageBackdrop,
   PLATES,
@@ -16,7 +15,6 @@ import {
 
 import { seo } from "@/lib/seo";
 import { aboutGraph, jsonLd } from "@/lib/structured-data";
-import { FacilityNote } from "@/components/chrome/FacilityNote";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -48,8 +46,14 @@ export const Route = createFileRoute("/about")({
  *    well-meant sentence drifts from "here is another option" into "your child
  *    can eat this". Doc never stopped making peanut butter, most of the rest
  *    are tree-nut jars, a peanut allergy is not a tree-nut allergy, and every
- *    jar is packed in a shop handling both. "What we do not say" below exists
- *    to make that explicit rather than leave it to the footer.
+ *    jar is packed in a shop handling both.
+ *
+ *    The page used to make this explicit itself, in a dedicated "What we do
+ *    not say" section -- Jeff pulled it 2026-09-18, too wordy for language no
+ *    other nut-butter site carries, and likely to become the YouTube slate
+ *    once that channel has content. The rule above still binds the whole
+ *    page; it is just carried by `FacilityNote` in the footer (and
+ *    everywhere else on the site) now instead of a block here.
  * 2. **It may not count.** No SKU count, no ingredient count, no batch size.
  *    "Back when there was only one" is the exception and it is not really one:
  *    it is history, it is already Classic Crunchy's shipped story copy, and it
@@ -234,47 +238,12 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* The honesty block. This is the page's load-bearing section: it states
-          the limit out loud instead of leaving it to the footer, which is the
-          only way the sections above are allowed to be as warm as they are.
-          It keeps the heavy outline AND takes a panel fill, because it is the
-          one block on the page that must not be skimmed past. */}
-      <section
-        aria-labelledby="about-honest"
-        className="mt-24 rounded-xl border-2 border-[#f0e3cd]/55 bg-[#1c120a]/90 p-8 sm:p-12"
-      >
-        <ResolveHeading
-          as="h2"
-          id="about-honest"
-          text="What we do not say"
-          className={`t-section ${ON_DARK_HEAD}`}
-        />
-        <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:gap-14">
-          <p className={`t-body max-w-[46ch] ${ON_DARK_BODY}`}>
-            We do not say safe. Doc never stopped making peanut butter, most of the rest of the wall
-            is tree nuts, and a peanut allergy is not a tree-nut allergy. Anything here that sounded
-            like a promise would be one we could not keep.
-          </p>
-          <p className={`t-body max-w-[46ch] ${ON_DARK_BODY}`}>
-            What we do instead is name everything. The whole list is on the front of the jar, not
-            hidden on the back and not behind a word you would have to look up. Read it, and decide
-            for your own table. That is the offer: more choices, made plain.
-          </p>
-        </div>
-        {/* The constant, whole. It is written to stand on its own, and the first
-            pass spliced it mid-sentence — which read "…and Packed in a facility
-            that handles…". Quote it or leave it; do not conjugate it. */}
-        <FacilityNote
-          className={`mt-10 border-t border-dashed border-[#f0e3cd]/25 pt-6 text-[0.95rem] ${ON_DARK_MUTED}`}
-        />
-      </section>
-
       <div className="mt-14 flex flex-wrap gap-3">
         <Link to="/shop" className={ON_DARK_SOLID}>
           <TextRoll outlineColor="#1c120a">See the jars</TextRoll>
         </Link>
         <Link to="/wholesale" className={ON_DARK_LINE}>
-          <TextRoll outlineColor="#fbf3e4">Become a partner</TextRoll>
+          <TextRoll outlineColor="#fbf3e4">Become a wholesaler</TextRoll>
         </Link>
       </div>
 

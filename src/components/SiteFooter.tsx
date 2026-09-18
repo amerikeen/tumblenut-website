@@ -126,20 +126,40 @@ export function SiteFooter() {
                 type="email"
                 required
                 placeholder={newsletter.placeholder}
-                /* Tailwind's `appearance-none` utility compiles to
-                   unprefixed `appearance: none` only (confirmed in the
-                   shipped CSS) -- WebKit versions before Safari 15.4 only
-                   honor the `-webkit-appearance` prefixed property, so a
-                   bare utility class can silently no-op on older iOS. Set
-                   both explicitly via inline style so there's no reliance
-                   on Tailwind's output for this specific property, and pin
-                   height as a literal px value (not the `h-16` utility) as
-                   a second, independent path to the same 64px, in case the
-                   two are being resolved differently under WebKit's own
-                   cascade. Still not confirmed as the actual cause -- see
-                   the note in the commit this change ships in. */
-                style={{ WebkitAppearance: "none", appearance: "none", height: "64px" }}
-                className="min-w-0 flex-1 rounded-xl border-2 border-current bg-transparent px-4 font-body text-[1rem] placeholder:text-current/50 focus:outline-none"
+                /* `w-full` and `h-[52px]` are load-bearing. Measured
+                   2026-09-18 after Jeff and his mother both reported a narrow
+                   field on their phones, which never reproduced on desktop.
+
+                   BELOW `sm` THIS ROW IS `flex-col`, and that changes what the
+                   flex utilities do:
+
+                   - `flex-1` is `flex: 1 1 0%`. In a COLUMN container the
+                     basis applies to the MAIN axis, which is now height. So it
+                     overrode the declared height and collapsed the field to
+                     21.5px, while contributing nothing at all to width.
+                   - width was then left entirely to `align-items: stretch`.
+                     Chromium stretches form controls there, so it measured a
+                     correct 351px and looked fine to me. WebKit does not
+                     reliably stretch them, so on iOS it falls back to the
+                     intrinsic width of `size=20`, which measures 207px in a
+                     351px column. That is the narrow field they saw.
+
+                   Removing stretch in Chromium reproduces it exactly: 351px
+                   becomes 207px. So the field never had a width of its own; it
+                   was borrowing one.
+
+                   The earlier `-webkit-appearance` + inline `height: 64px`
+                   attempt was a guess at a cause nobody had measured, and its
+                   own comment said so. The height never applied (computed
+                   21.5px against a declared 64px), which was the clue. The
+                   prefixed appearance reset stays because killing iOS's native
+                   control styling is genuinely wanted, just not the bug.
+
+                   52px, not 64px, so it matches its own submit button. At 390px
+                   the footer runs 43px nav links, a 52px submit and 72px
+                   buttons; the input was the lone 22px outlier. */
+                style={{ WebkitAppearance: "none", appearance: "none" }}
+                className="h-[52px] w-full rounded-xl border-2 border-current bg-transparent px-4 font-body text-[1rem] placeholder:text-current/50 focus:outline-none sm:min-w-0 sm:flex-1"
               />
               <button
                 type="submit"
@@ -148,7 +168,11 @@ export function SiteFooter() {
                    plain block button it sits on the text baseline rather than
                    in the middle of the pill. Every control wrapping a roll
                    needs to centre it explicitly. */
-                className="inline-flex h-[52px] shrink-0 items-center justify-center rounded-xl px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] uppercase"
+                /* `w-full sm:w-auto` for the same reason as the input above:
+                   stacked, this button's width was also coming from
+                   `align-items: stretch` alone. Measured 351px with it and
+                   179px without, so WebKit would shrink it too. */
+                className="inline-flex h-[52px] w-full shrink-0 items-center justify-center rounded-xl px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] uppercase sm:w-auto"
                 style={{ backgroundColor: CREAM, color: "#1c120a" }}
               >
                 <TextRoll outlineColor="#1c120a">{newsletter.cta}</TextRoll>

@@ -126,13 +126,20 @@ export function SiteFooter() {
                 type="email"
                 required
                 placeholder={newsletter.placeholder}
-                /* [appearance:none] -- Tailwind's preflight only resets
-                   `appearance` on [type=button/reset/submit], not plain text
-                   inputs. iOS Safari renders a bare `type="email"` with its
-                   own native control chrome, which can silently fight an
-                   explicit CSS height. Belt-and-suspenders since our own
-                   testing runs on Chromium, not WebKit. */
-                className="h-16 min-w-0 flex-1 appearance-none rounded-xl border-2 border-current bg-transparent px-4 font-body text-[1rem] placeholder:text-current/50 focus:outline-none"
+                /* Tailwind's `appearance-none` utility compiles to
+                   unprefixed `appearance: none` only (confirmed in the
+                   shipped CSS) -- WebKit versions before Safari 15.4 only
+                   honor the `-webkit-appearance` prefixed property, so a
+                   bare utility class can silently no-op on older iOS. Set
+                   both explicitly via inline style so there's no reliance
+                   on Tailwind's output for this specific property, and pin
+                   height as a literal px value (not the `h-16` utility) as
+                   a second, independent path to the same 64px, in case the
+                   two are being resolved differently under WebKit's own
+                   cascade. Still not confirmed as the actual cause -- see
+                   the note in the commit this change ships in. */
+                style={{ WebkitAppearance: "none", appearance: "none", height: "64px" }}
+                className="min-w-0 flex-1 rounded-xl border-2 border-current bg-transparent px-4 font-body text-[1rem] placeholder:text-current/50 focus:outline-none"
               />
               <button
                 type="submit"

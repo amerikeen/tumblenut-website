@@ -13,7 +13,7 @@ https://tumblenut.com/brand/cast/doc-hero-cutout.png
 # #13 pose bible (replicate this EXACT geometry)
 https://github.com/amerikeen/tumblenut-website/raw/main/exports/lockup-13-pose.jpg
 
-# Jars (Lucky Pistachio is the clean-glass bible — do not regenerate it)
+# Jars (Pumpkin Patch is the clean-glass bible — do not regenerate it)
 https://github.com/amerikeen/tumblenut-website/raw/main/exports/jars-3d/jar-16oz-classic-crunchy-hero.png
 https://github.com/amerikeen/tumblenut-website/raw/main/exports/jars-3d/jar-16oz-firecracker-peanut-hero.png
 https://github.com/amerikeen/tumblenut-website/raw/main/exports/jars-3d/jar-16oz-smokehouse-almond-hero.png
@@ -40,9 +40,8 @@ When files are done, **git push** to `amerikeen/tumblenut-website` (`exports/…
 - Doc is **~30% taller** than Cecil (ratio ≈ 1.28), shared foot line, **bushy tail**.
 - Only **Classic Crunchy** has crunchy chunks. All other fills are creamy.
 - 16oz (Classic, Firecracker, Smokehouse) = identical jar + label dimensions.
-- 8oz Pumpkin Patch = clearly shorter than 16oz.
-- 4oz (Lucky, Harvest Pecan, Wild Cacao) = Lucky’s size.
-- Do not touch Lucky Pistachio except as a reference.
+- 8oz Pumpkin Patch = clearly shorter than 16oz. **Do not touch this file.**
+- 4oz (Lucky, Harvest Pecan, Wild Cacao) = same size as each other (current Lucky box is the 4oz size target).
 - Skip original requests 12 (crouched) and 14 (icon crop).
 
 ---
@@ -51,18 +50,21 @@ When files are done, **git push** to `amerikeen/tumblenut-website` (`exports/…
 
 ### 1) Six jars — clean glass only
 
-Lucky Pistachio already has **clear glass under the lid** (no magenta film). Re-render/re-key the other six so the neck matches Lucky. Keep fill color, texture, jar geometry, and labels.
+**Pumpkin Patch is already clean** (clear glass under the lid, no magenta). Do **not** regenerate it. It is the neck-QA bible and the 8oz size bible.
 
-| File | Size | Fill / label |
-|---|---|---|
-| jar-16oz-classic-crunchy-hero.png | 16oz | Crunchy peanut chunks; CLASSIC CRUNCHY |
-| jar-16oz-firecracker-peanut-hero.png | 16oz same box as Classic | Chili-orange creamy. Spell **FIRECRACKER PEANUT** |
-| jar-16oz-smokehouse-almond-hero.png | 16oz same box | Light-brown toasted almond, creamy, not orange, not a hue hack |
-| jar-8oz-pumpkin-patch-hero.png | 8oz medium | Greenish pepita, creamy |
-| jar-4oz-harvest-pecan-hero.png | 4oz = Lucky | Light brown pecan, creamy |
-| jar-4oz-wild-cacao-hero.png | 4oz = Lucky | Dark cacao, creamy. Spell **WILD CACAO** |
+Re-render/re-key the **other six** so the neck matches Pumpkin. Keep fill color, texture, jar geometry, and labels. **Lucky Pistachio has magenta in the glass under the lid — it must be cleaned.**
 
-QA: checkerboard through the empty glass between lid and fill. No magenta, no gray fringe. Then push and pause.
+| File | Size | Action | Fill / label |
+|---|---|---|---|
+| jar-8oz-pumpkin-patch-hero.png | 8oz | **DO NOT TOUCH** | Greenish pepita, creamy |
+| jar-16oz-classic-crunchy-hero.png | 16oz | Clean glass | Crunchy peanut chunks; CLASSIC CRUNCHY |
+| jar-16oz-firecracker-peanut-hero.png | 16oz same box as Classic | Clean glass | Chili-orange creamy. Spell **FIRECRACKER PEANUT** |
+| jar-16oz-smokehouse-almond-hero.png | 16oz same box | Clean glass | Light-brown toasted almond, creamy, not orange, not a hue hack |
+| jar-4oz-lucky-pistachio-hero.png | 4oz | Clean glass (has magenta now) | Green pistachio, creamy |
+| jar-4oz-harvest-pecan-hero.png | 4oz = Lucky | Clean glass | Light brown pecan, creamy |
+| jar-4oz-wild-cacao-hero.png | 4oz = Lucky | Clean glass | Dark cacao, creamy. Spell **WILD CACAO** |
+
+QA: checkerboard through the empty glass between lid and fill, matching Pumpkin Patch. No magenta, no gray fringe. Then push and pause.
 
 ### 2) Cast
 

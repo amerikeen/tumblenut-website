@@ -54,16 +54,24 @@ export const Route = createFileRoute("/about")({
  *    "Back when there was only one" is the exception and it is not really one:
  *    it is history, it is already Classic Crunchy's shipped story copy, and it
  *    cannot go false.
- * 3. **The cast copy is written for a five-year-old.** Jeff's call 2026-09-18:
- *    the previous version "reads of AI". It did. "Most combinations land on
- *    purpose; the tail gets credit for the rest" needs an adult to unpack an
- *    inversion, and "Said once, then simply true. Never the joke." was copy
+ * 3. **The cast copy is a Pixar-style intro in about 40 words.** Jeff's brief,
+ *    2026-09-18, arrived in two passes and the second corrected the first.
+ *
+ *    First pass: the old copy "reads of AI". It did. "Most combinations land
+ *    on purpose; the tail gets credit for the rest" needs an adult to unpack
+ *    an inversion, and "Said once, then simply true. Never the joke." was copy
  *    commenting on its own restraint, which is the clearest tell of the lot.
- *    The bar now: short sentences, concrete nouns, no irony, no subordinate
- *    clauses, nothing self-referential. A child should finish each block
- *    wanting to know more about the character, because the YouTube films are
- *    what this page feeds. Brevity is the whole register, same as the
- *    reference site.
+ *
+ *    Second pass, and this is the operative one: writing it plainer produced
+ *    "Doc is a squirrel" / "Cecil is a tortoise", and Jeff pulled it. The art
+ *    already says what they are, so a sentence spending itself on species is
+ *    a wasted sentence. **Do not state what the picture states.**
+ *
+ *    The bar: roughly 40 words each, written the way a film would introduce
+ *    them. It must line up with the reel the visitor has just watched (Doc's
+ *    grinder is shot 2, Cecil's arrival shot 3, the peanut reaction shot 4,
+ *    the wall shot 5), and it must leave them wanting the story rather than
+ *    feeling told it. The YouTube films are what this page feeds.
  *
  * 4. **It may not describe Doc's colour.** The character bible and the 3D art
  *    disagree — the bible's flat 2D canon is a grizzled gray-brown Eastern gray
@@ -141,13 +149,11 @@ function AboutPage() {
             className={`t-section mt-4 ${ON_DARK_HEAD}`}
           />
           <p className={`t-body mt-7 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Doc is a squirrel. He grinds nut butter in his workshop.
+            Doc found an old grinder, fixed it up, and started making nut butter for himself. One
+            jar. Then a tortoise turned up, and one jar was never going to be enough.
           </p>
           <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Cap on crooked. Goggles up. Overalls full of crumbs.
-          </p>
-          <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            He tries something new almost every day. Some of it works.
+            He has been inventing ever since.
           </p>
         </div>
       </section>
@@ -174,13 +180,11 @@ function AboutPage() {
             className={`t-section mt-4 ${ON_DARK_HEAD}`}
           />
           <p className={`t-body mt-7 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Cecil is a tortoise. He fell off a truck and never left.
+            Cecil fell off a truck bound for the zoo and decided Doc&rsquo;s place looked better.
+            He tastes every batch, and he cannot hide a single opinion.
           </p>
           <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            He tastes everything Doc makes. His face says the rest.
-          </p>
-          <p className={`t-body mt-5 max-w-[46ch] ${ON_DARK_BODY}`}>
-            Peanuts make Cecil sick. So Doc learned to grind other nuts.
+            The peanut one made him sick. That is how the wall got built.
           </p>
         </div>
       </section>

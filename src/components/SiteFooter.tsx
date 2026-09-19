@@ -77,18 +77,31 @@ export function SiteFooter() {
             filling the box. `h-full` on the image chases the box's actual
             (grid-stretched, therefore definite) height instead, so the
             image is exactly as large as the box's height and width both
-            allow. Bottom-anchored so it stands on the box floor. */}
-        <div className="flex min-h-[13rem] items-end justify-center rounded-xl border border-dashed border-current/30 p-2.5">
+            allow.
+
+            CENTERED, not bottom-anchored. The box's aspect ratio (tall,
+            stretched to match the nav list) doesn't match the lockup's own
+            (wide, ~1.22:1), so `object-contain` always leaves slack on one
+            axis -- which axis, and how much, shifts with viewport width as
+            the nav column's row heights and the grid's own column widths
+            change. Bottom-anchoring (`items-end`) dumped that entire slack
+            above the pair, which read as an oversized gap once the axis
+            flipped to being height-bound. Centering (`items-center`) splits
+            whatever slack there is evenly top and bottom instead, so the
+            box's padding reads even on both edges regardless of which axis
+            is doing the constraining at a given width. Jeff's call
+            2026-09-18. */}
+        <div className="flex min-h-[13rem] items-center justify-center rounded-xl border border-dashed border-current/30 p-2.5">
           <Link
             to="/"
             aria-label="Tumblenut, home"
-            className="flex h-full w-full items-end justify-center"
+            className="flex h-full w-full items-center justify-center"
           >
             <img
               src="/brand/cast/lockup-3d.png"
               alt=""
               aria-hidden="true"
-              className="h-full max-w-full object-contain object-bottom"
+              className="h-full max-w-full object-contain"
             />
           </Link>
         </div>

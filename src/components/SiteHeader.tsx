@@ -139,24 +139,27 @@ export function SiteHeader() {
           >
             <span className="flex items-center gap-2.5">
               {/* The composed lockup, not the two solo cutouts side by side.
-                  It crossfades from the flat colour version to the flat BW
-                  outline as the header collapses on scroll -- the same
-                  render-style downshift buckssauce.com's mark goes through,
-                  done with a fade instead of a crop. Both source images are
-                  Grok's own 56h header crop, so the two frames share a crop
-                  and the fade has nothing to jump across. 3D was ruled out
-                  here on 2026-09-16: a photoreal render doesn't hold up at
-                  this height, which is why the footer gets it instead. */}
+                  3D at rest -- everything else on the site is 3D-rendered
+                  (the jars, the cinema plates), and the flat COLOR_2D mark
+                  read as a style mismatch sitting next to it. On scroll it
+                  crossfades to a CREAM recolor of the BW_2D outline, not the
+                  outline's own near-black ink: every `data-chrome` on this
+                  site is "dark" (grep confirms "light" is dead code), so the
+                  header text is always cream, and the original black line
+                  art was invisible against the same dark ground it always
+                  sits on. Both source images are Grok's own 56h header crop,
+                  so the two frames share a crop and the fade has nothing to
+                  jump across. */}
               <span className="relative flex h-11 w-auto shrink-0 items-end sm:h-14">
                 <img
-                  src="/brand/cast/lockup-color.png"
+                  src="/brand/cast/lockup-3d-header.png"
                   alt=""
                   aria-hidden="true"
                   className="h-11 w-auto object-contain sm:h-14"
                   style={{ opacity: collapsed ? 0 : 1, transition: "opacity 420ms ease-out" }}
                 />
                 <img
-                  src="/brand/cast/lockup-bw.png"
+                  src="/brand/cast/lockup-cream.png"
                   alt=""
                   aria-hidden="true"
                   className="absolute inset-0 h-11 w-auto object-contain sm:h-14"

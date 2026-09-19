@@ -63,20 +63,26 @@ export function SiteFooter() {
         {/* The composed 3D lockup, not the two solo cutouts side by side.
             The footer has the room the header doesn't, so it keeps the
             photoreal render (decided 2026-09-16, built 2026-09-18 once Grok
-            delivered a lockup that actually held the pose). Bottom-anchored
-            so it stands on the box floor instead of hovering in the middle
-            of it. */}
+            delivered a lockup that actually held the pose). Sized off the
+            box's HEIGHT, not a fixed width percentage -- this box is a grid
+            item stretched to match the tallest column (the nav list), which
+            leaves it taller than the lockup's own aspect ratio needs, so a
+            width-based size left empty headroom above the pair instead of
+            filling the box. `h-full` on the image chases the box's actual
+            (grid-stretched, therefore definite) height instead, so the
+            image is exactly as large as the box's height and width both
+            allow. Bottom-anchored so it stands on the box floor. */}
         <div className="flex min-h-[13rem] items-end justify-center rounded-xl border border-dashed border-current/30 p-2.5">
           <Link
             to="/"
             aria-label="Tumblenut, home"
-            className="flex w-full items-end justify-center"
+            className="flex h-full w-full items-end justify-center"
           >
             <img
               src="/brand/cast/lockup-3d.png"
               alt=""
               aria-hidden="true"
-              className="h-auto w-[78%] object-contain object-bottom"
+              className="h-full max-w-full object-contain object-bottom"
             />
           </Link>
         </div>

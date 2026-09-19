@@ -27,7 +27,7 @@ import { FacilityNote } from "@/components/chrome/FacilityNote";
  */
 const FOOTER_NAV = [
   { to: "/shop", label: "Shop" },
-  { to: "/wholesale", label: "Become a wholesaler" },
+  { to: "/wholesale", label: "Wholesale" },
   { to: "/about", label: "About" },
   { to: "/faq", label: "FAQ" },
   { to: "/stores", label: "Stores" },
@@ -58,7 +58,13 @@ export function SiteFooter() {
       style={{ color: CREAM, backgroundColor: "rgba(20,13,7,0.82)" }}
       data-chrome="dark"
     >
-      <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-[22fr_32fr_32fr_14fr]">
+      {/* Column split was 22/32/32/14. Widened the mark's box to 30fr and gave
+          up the difference from the nav column (32 -> 24) so the lockup has
+          more room -- the newsletter and button columns (32fr, 14fr) are
+          untouched, so their pixel widths do not move. The nav column can
+          afford it: "Become a wholesaler" shortened to "Wholesale" the same
+          pass, so the narrower column isn't fighting its own longest label. */}
+      <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-[30fr_24fr_32fr_14fr]">
         {/* 1 — the mark, in its dashed box */}
         {/* The composed 3D lockup, not the two solo cutouts side by side.
             The footer has the room the header doesn't, so it keeps the

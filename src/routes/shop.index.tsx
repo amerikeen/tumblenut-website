@@ -96,11 +96,11 @@ function Shop() {
           <p className={`t-meta ${ON_DARK_EYEBROW}`}>The jars</p>
           <ResolveHeading
             as="h1"
-            text="On the wall right now"
+            text="Our current lineup"
             className={`t-hero max-w-[14ch] ${ON_DARK_HEAD}`}
           />
           <p className={`t-lead max-w-[46ch] ${ON_DARK_BODY}`}>
-            Ground in small batches in Columbia, Tennessee. Every label names what is inside.
+            Ground in small batches in Columbia, Tennessee.
           </p>
           {/* TFFA caps ALL sales to the state, not only wholesale, and until
               the 2026-09-15 pass only /wholesale said so. A buyer should meet

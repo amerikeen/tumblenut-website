@@ -25,3 +25,7 @@ Wordmark in layouts is a stand-in — TUMBLENUT / SMALL BATCH NUT BUTTERS
 in Stylish (brand display face), forest #3A5A40 on cream #EADCC9.
 
 Do not drop the bushy tail. Do not add a second tail.
+
+1-color embroidery files (interior definition, not silhouettes):
+  Doc_Canonical_Hands_On_Overalls_Embroidery_1color-black.png
+  Doc_canonical_celebration_Embroidery_1color-black.png

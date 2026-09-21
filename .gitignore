@@ -21,3 +21,10 @@ public/brand/cinema/aerial-frame-05.jpg
 
 # local build output
 .vercel/
+
+# Canonical art packs. Their home is the folder that wraps this repo, not this
+# repo -- Vercel clones this on every production build. Four of them (290MB)
+# were removed on 2026-09-21; the outer repo made the same call in c9f8ecf.
+# Ship the unpacked files the site actually serves under public/brand/, not the
+# archive they arrived in.
+exports/cast/*.zip

@@ -1,16 +1,28 @@
-TUMBLENUT — Doc canonical cutouts (loose masters)
+TUMBLENUT — Doc canonical cutouts pack
+======================================
+TWO SOURCES ONLY. Every other file is that source, resized or retyped.
+Do not regenerate Doc. These are the approved 3D lockups.
 
-3D cutouts:
-  Doc_Canonical_Hands_On_Overalls_Cutout.png
-  Doc_canonical_celebration_cutout.png
+  Hands_On_Overalls/Doc_Canonical_Hands_On_Overalls_Cutout.png
+      fists on overall straps, straight-on, real-alpha
 
-1-color embroidery (interior definition, not silhouettes):
-  Doc_Canonical_Hands_On_Overalls_Embroidery_1color-black.png
-  Doc_canonical_celebration_Embroidery_1color-black.png
+  Celebration/Doc_canonical_celebration_Cutout.png
+      excited fists beside bib (brass buttons showing), real-alpha
 
-2D color silkscreen (same die as 1-color, in color):
-  Doc_Canonical_Hands_On_Overalls_Silkscreen_COLOR_2D.png
-  Doc_canonical_celebration_Silkscreen_COLOR_2D.png
+No brand wordmark or tagline on any cutout. Hat patch (DOC TUMBLENUT)
+and bib patch (DOC + peanut) stay — those are the character.
 
-Full pack (print, web, hat crops, t-shirt layouts):
-  ../Doc_Canonical_Cutouts_Pack.zip
+WHAT TO USE
+-----------
+Header:     web/*_web-header-56h@2x.png
+Hero:       web/*_web-hero-1200w.png
+Hats/emb:   embroidery-silkscreen/*_Embroidery_1color-black.png
+            (hat front crop: *_Hat_heads-crop.png)
+Color 2D:   embroidery-silkscreen/*_Silkscreen_COLOR_2D.png
+Shirt:      merch-layouts/*_tshirt_transparent.png
+            merch-layouts/*_tshirt_cream.png
+Print:      */*_Cutout_print-2400w.png  (and *_print.pdf)
+Proofs:     */*_Cutout_proof-cream.jpg / *_proof-white.jpg
+
+SVGs are PNG wrapped in SVG. Shop punches DST/PES from the 1-color black.
+Do not drop the bushy tail. Do not add a second tail.

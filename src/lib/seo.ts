@@ -8,9 +8,13 @@
  * og:title, og:description, og:image(+:width/:height), og:type, og:url,
  * og:site_name, twitter:card, twitter:title, twitter:image, twitter:description
  * -- and then injects the platform's own set from `src/lib/og/site.json` plus
- * the document's `<title>`. Measured against the live tumblenut.com head on
- * 2026-09-15, which carried exactly four share tags: twitter:card, og:title,
- * og:image and its two dimensions. No og:description at all.
+ * the document's `<title>`. Re-measured as a scraper against the live
+ * tumblenut.com head on 2026-09-21: six share tags -- twitter:card, og:title,
+ * og:description, og:image and its two dimensions. The 2026-09-15 reading here
+ * used to say "no og:description at all"; that is no longer true, the platform
+ * now emits it from site.json's `description`, and the line was corrected
+ * rather than deleted so nobody re-derives the old conclusion from the old
+ * date. Re-measure before trusting either reading.
  *
  * So the division of labour is:
  *

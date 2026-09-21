@@ -36,8 +36,9 @@ real -- the top of Doc's hat sits PAD from the top, Cecil's shell PAD from the
 right, the type column PAD from the left, and the pair is grounded on the
 bottom edge. The wordmark then drops MARK_DROP below the hat crown.
 
-Type never collides with the art: each line is measured against the art's own
-alpha in that line's rows, and only shrinks if the art genuinely crowds it.
+The wordmark is flush to the left margin; the tagline is centred under the rule
+beneath it. Type never collides with the art: each line is measured against the
+art's own alpha in that line's rows, and only shrinks if the art crowds it.
 """
 from pathlib import Path
 
@@ -105,6 +106,21 @@ def paper(w, h, seed=11):
     return Image.fromarray(np.clip(base, 0, 255).astype(np.uint8), "RGB")
 
 
+def spaced_ink_extent(font, text, track):
+    """Left and right edge of the INK a letterspaced string actually paints,
+    relative to its draw origin. Not the same as the advance width: glyphs
+    carry side bearings, so centring on the advance leaves the line visibly
+    off-axis. The wordmark's rule and the tagline are both aligned to this.
+    """
+    x, left, right = 0.0, None, None
+    for char in text:
+        x0, _, x1, _ = font.getbbox(char)
+        left = x + x0 if left is None else min(left, x + x0)
+        right = x + x1 if right is None else max(right, x + x1)
+        x += font.getlength(char) + track
+    return (left or 0.0), (right or 0.0)
+
+
 def spaced_width(font, text, track):
     return sum(font.getlength(c) for c in text) + track * (len(text) - 1) if text else 0
 
@@ -150,12 +166,24 @@ def build():
         return fm, fb, rule, rule + 30
 
     fm, fb, rule_y, tag_top = metrics()
-    while (spaced_width(fm, MARK, mark_size * MARK_TRACK) - mark_size * MARK_TRACK
+    while (spaced_ink_extent(fm, MARK, mark_size * MARK_TRACK)[1]
+           - spaced_ink_extent(fm, MARK, mark_size * MARK_TRACK)[0]
            > free(mark_top, mark_top + mark_size)) and mark_size > 40:
         mark_size -= 1
         fm, fb, rule_y, tag_top = metrics()
-    while (spaced_width(fb, TAGLINE, body_size * BODY_TRACK) - body_size * BODY_TRACK
-           > free(tag_top, tag_top + body_size)) and body_size > 14:
+    def mark_ink():
+        return spaced_ink_extent(fm, MARK, mark_size * MARK_TRACK)
+
+    def tag_ink():
+        return spaced_ink_extent(fb, TAGLINE, body_size * BODY_TRACK)
+
+    # The tagline is centred under the rule, so what has to clear the art is the
+    # distance from the left margin out to the tagline's RIGHT ink edge.
+    def tag_right_reach():
+        ml, mr = mark_ink(); tl, tr = tag_ink()
+        return (mr - ml) / 2 + (tr - tl) / 2
+
+    while tag_right_reach() > free(tag_top, tag_top + body_size) and body_size > 14:
         body_size -= 1
         fm, fb, rule_y, tag_top = metrics()
 
@@ -163,11 +191,17 @@ def build():
     mark_track, body_track = mark_size * MARK_TRACK, body_size * BODY_TRACK
 
     # Align by glyph INK, not by the draw origin, so MARK_DROP means what it says.
-    draw_spaced(draw, (PAD, mark_top - fm.getbbox(MARK)[1]), MARK, fm, INK + (255,), mark_track)
-    draw.line([(PAD, rule_y),
-               (PAD + spaced_width(fm, MARK, mark_track) - mark_track, rule_y)],
-              fill=HONEY + (185,), width=2)
-    draw_spaced(draw, (PAD, tag_top - fb.getbbox(TAGLINE)[1]), TAGLINE, fb,
+    # Wordmark flush left, then the rule spanning exactly its ink, then the
+    # tagline centred on that same axis -- all three share one centre.
+    mark_l, mark_r = mark_ink()
+    draw_spaced(draw, (PAD - mark_l, mark_top - fm.getbbox(MARK)[1]), MARK, fm,
+                INK + (255,), mark_track)
+    rule_x0, rule_x1 = PAD, PAD + (mark_r - mark_l)
+    draw.line([(rule_x0, rule_y), (rule_x1, rule_y)], fill=HONEY + (185,), width=2)
+
+    tag_l, tag_r = tag_ink()
+    tag_x = (rule_x0 + rule_x1) / 2 - (tag_l + tag_r) / 2
+    draw_spaced(draw, (tag_x, tag_top - fb.getbbox(TAGLINE)[1]), TAGLINE, fb,
                 WALNUT + (255,), body_track)
 
     return img.convert("RGB"), (art_w, art_h, mark_size, body_size)

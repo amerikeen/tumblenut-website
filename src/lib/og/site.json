@@ -2,5 +2,5 @@
   "_note": "Read by the platform bake as strict JSON (no comments) -- see src/lib/seo.ts. 'title' is deliberately ABSENT so og:title falls through to each page's own <title>; adding it back freezes every share card to one name.",
   "card": "custom",
   "color": "F3EDE0",
-  "description": "Tumblenut — small batch nut butters from a workshop in Columbia, Tennessee. Now Cecil can enjoy his favorite nut butters too!"
+  "description": "Small batch nut butters from a workshop in Columbia, Tennessee. Now Cecil can enjoy his favorite nut butters too!"
 }

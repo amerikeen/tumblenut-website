@@ -53,9 +53,16 @@ export const SITE_NAME = "Tumblenut";
  * The closing sentence is Jeff's, off the end of the reel. It is not a safety
  * claim and must not be edited into one: Cecil having favourites he can enjoy
  * is a fact about the range, not a promise about any jar.
+ *
+ * It opens "Small batch nut butters", NOT "Tumblenut -- small batch...". The
+ * brand-name prefix was dropped 2026-09-21: it carried an em dash (Jeff reads
+ * one in every line as an AI tell), and it duplicated a name the clients that
+ * show this text already print beside it. Google Messages strips exactly that
+ * prefix off og:title on its own, which is the shape this now matches. Do not
+ * put it back.
  */
 export const SITE_DESCRIPTION =
-  "Tumblenut — small batch nut butters from a workshop in Columbia, Tennessee. Now Cecil can enjoy his favorite nut butters too!";
+  "Small batch nut butters from a workshop in Columbia, Tennessee. Now Cecil can enjoy his favorite nut butters too!";
 
 /** The 1200x630 card in public/. Absolute, because scrapers do not resolve relatives. */
 export const OG_IMAGE = `${SITE_URL}/og.jpg`;

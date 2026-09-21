@@ -9,24 +9,35 @@ The platform middleware (server/middleware/grok-pwa.ts) strips every og:/twitter
 meta the app emits and re-injects its own. og:image is pinned to the on-disk card
 at /og.jpg (scripts/grok-pwa-shared.mjs -> ogCardPublicPath), with site.json
 carrying card:"custom". So the share card IS this file. Editing og: tags in a
-route changes nothing on the deployed site. See src/lib/seo.ts for the full map
-of which tag is owned by what.
+route changes nothing on the deployed site. src/lib/seo.ts has the full map of
+which tag is owned by what.
 
-INPUTS
-  Art   public/brand/cast/lockup-3d.png -- the canonical Doc+Cecil pose. Verified
-        pixel-identical to Doc_Cecil_Canonical_Pack/3D/Doc_Cecil_Canonical_3D_Cutout.png
-        resampled to 1400w, so this repo-local copy is the canonical master.
-        The pose is locked; this script only ever scales it.
-  Type  Stylish-Subset.ttf -- Stylish (Google Fonts) subset to the glyphs below.
-        Stylish is the face SiteHeader locks the wordmark and tagline to.
-  Paper --color-paper / --color-paper-deep, from src/styles.css.
+WHAT THE CARD SAYS, AND WHY IT SAYS SO LITTLE
+A link preview is three zones, and we only own the first:
 
-LAYOUT IS SOLVED, NOT EYEBALLED
-Doc's tail is the widest thing on the art's left side -- it reaches 0.026 of the
-bounding box at mid-height, against 0.204 up in the head rows. Sizing the cast by
-eye runs the tagline straight into it. So the cast is scaled to the largest size
-at which its left-most opaque pixel still clears the type column, and the type
-keeps its locked sizes rather than shrinking to fit.
+    picture      this file                        identical in every app
+    bold line    og:title, i.e. the page <title>  also the Google result headline
+    grey line    the DOMAIN, drawn by the client  not a tag; we cannot change it
+
+Measured in Google Messages on 2026-09-21: the bold line already renders "small
+batch nut butters from Columbia, Tennessee" and the grey line already renders
+"tumblenut.com". og:description ships but that client ignores it entirely
+(Facebook, LinkedIn and Slack do show it). So a card carrying the location or
+the URL is repeating the app verbatim. Jeff's call the same day: keep the
+wordmark and the tagline, drop the location and the URL. The tagline stays
+because the image also travels with no text at all -- a screenshot, a repost --
+and then it is the only thing saying what is in the jar.
+
+LAYOUT
+One padding value frames everything. The art is cropped to its ALPHA BOX first:
+the source PNG carries 33/23/33/27px of transparent margin, so positioning the
+file rect would put the visible art at margins nobody chose. Cropped, PAD is
+real -- the top of Doc's hat sits PAD from the top, Cecil's shell PAD from the
+right, the type column PAD from the left, and the pair is grounded on the
+bottom edge. The wordmark then drops MARK_DROP below the hat crown.
+
+Type never collides with the art: each line is measured against the art's own
+alpha in that line's rows, and only shrinks if the art genuinely crowds it.
 """
 from pathlib import Path
 
@@ -41,35 +52,39 @@ OUT = REPO / "public" / "og.jpg"
 
 W, H = 1200, 630                       # the size seo.ts advertises in og:image:width/height
 PAPER, PAPER_DEEP = (244, 235, 216), (231, 215, 188)
-INK, WALNUT, HONEY, BARN = (44, 27, 18), (74, 50, 36), (196, 163, 90), (139, 58, 42)
+INK, WALNUT, HONEY = (44, 27, 18), (74, 50, 36), (196, 163, 90)
 
-MARGIN_L, GUTTER = 66, 30              # left type margin; clear paper between type and cast
-BLEED = 0                              # px of the pair allowed off the right edge. Jeff's
-                                       # call 2026-09-21: keep the pair whole, crop nothing.
+PAD = 40                               # the one frame value: art top + right, type left
+GUTTER = 34                            # clear paper between the type column and the art
+MARK_DROP = 26                         # wordmark ink starts this far under the hat crown
 
-MARK = "TUMBLENUT"
-LINES = [("SMALL BATCH NUT BUTTERS", WALNUT),
-         ("COLUMBIA, TENNESSEE", WALNUT),
-         ("TUMBLENUT.COM", BARN)]
-MARK_SIZE, MARK_TRACK = 84, 0.14       # tracking in em, echoing SiteHeader's 0.22/0.32
+MARK, TAGLINE = "TUMBLENUT", "SMALL BATCH NUT BUTTERS"
+MARK_SIZE, MARK_TRACK = 84, 0.14       # tracking in em, echoing SiteHeader's 0.22 / 0.32
 BODY_SIZE, BODY_TRACK = 28, 0.25
+
+# Cropped to the alpha box, so the rect we position is the visible art. Verified
+# pixel-identical to Doc_Cecil_Canonical_Pack/3D/Doc_Cecil_Canonical_3D_Cutout.png
+# resampled to 1400w. The pose is locked; this script only ever scales it.
+_RAW = Image.open(CAST).convert("RGBA")
+ART = _RAW.crop(_RAW.getchannel("A").getbbox())
 
 
 def assert_glyphs_present():
-    """The font is a SUBSET. A character missing from it renders as a blank box
-    or, worse, as nothing at all -- the first build of this card silently
-    dropped the "I" and shipped "COLUMB A, TENNESSEE". Fail loudly instead.
+    """The font is a SUBSET. A character missing from it renders as nothing at
+    all -- the first build of this card silently dropped the "I" and shipped
+    "COLUMB A, TENNESSEE". Fail loudly instead. The subset deliberately still
+    carries the glyphs for copy since removed, so lines can be added back.
     Re-subset with: python3 -m fontTools.subset Stylish-Regular.ttf --text="..."
     """
     from fontTools.ttLib import TTFont
 
     cmap = TTFont(str(FONT)).getBestCmap()
-    needed = set(MARK) | {c for text, _ in LINES for c in text}
+    needed = set(MARK) | set(TAGLINE)
     missing = sorted(c for c in needed if ord(c) not in cmap)
     if missing:
         raise SystemExit(
             f"{FONT.name} has no glyph for {missing!r}. Re-subset it with every "
-            f"character in MARK and LINES: {''.join(sorted(needed))!r}"
+            f"character in MARK and TAGLINE: {''.join(sorted(needed))!r}"
         )
 
 
@@ -101,68 +116,66 @@ def draw_spaced(draw, xy, text, font, fill, track):
         x += font.getlength(char) + track
 
 
-def type_column_width():
-    """Widest line in the type lockup at its locked sizes."""
-    mark = ImageFont.truetype(str(FONT), MARK_SIZE)
-    body = ImageFont.truetype(str(FONT), BODY_SIZE)
-    return max(spaced_width(mark, MARK, MARK_SIZE * MARK_TRACK),
-               *(spaced_width(body, t, BODY_SIZE * BODY_TRACK) for t, _ in LINES))
-
-
-def solve_cast():
-    """Largest cast whose left-most pixel -- the tail tip -- still clears the type."""
-    src = Image.open(CAST).convert("RGBA")
-    alpha = np.asarray(src.getchannel("A"))
-    tail = np.where((alpha > 16).any(axis=0))[0].min() / src.width
-
-    clear_x = MARGIN_L + type_column_width() + GUTTER
-    # x = clear_x - tail*w and x + w <= W + BLEED  =>  w <= (W + BLEED - clear_x)/(1 - tail)
-    w = int((W + BLEED - clear_x) / (1 - tail))
-    h = round(src.height * w / src.width)
-    return src.resize((w, h), Image.LANCZOS), round(clear_x - tail * w), w, h
-
-
 def build():
-    img = paper(W, H).convert("RGBA")
-    art, x, w, h = solve_cast()
+    # Art: ink top at PAD, ink right at W-PAD, grounded on the bottom edge.
+    art_h = H - PAD
+    art_w = round(ART.width * art_h / ART.height)
+    art_x, art_y = W - PAD - art_w, PAD
+    art = ART.resize((art_w, art_h), Image.LANCZOS)
 
-    # Contact shadow from the art's own alpha, so the pair sits on the paper
-    # rather than floating on it.
-    shadow_h = max(14, h // 12)
-    shadow = Image.new("RGBA", (w, shadow_h), (0, 0, 0, 0))
-    shadow.putalpha(art.getchannel("A").resize((w, shadow_h), Image.LANCZOS)
+    img = paper(W, H).convert("RGBA")
+    shadow_h = max(14, art_h // 12)
+    shadow = Image.new("RGBA", (art_w, shadow_h), (0, 0, 0, 0))
+    shadow.putalpha(art.getchannel("A").resize((art_w, shadow_h), Image.LANCZOS)
                     .point(lambda p: int(p * .26)))
     img.alpha_composite(shadow.filter(ImageFilter.GaussianBlur(shadow_h / 3.2)),
-                        (x, H - shadow_h))
-    img.alpha_composite(art, (x, H - h))          # grounded on the bottom edge
+                        (art_x, H - shadow_h))
+    img.alpha_composite(art, (art_x, art_y))
+
+    alpha = np.asarray(art.getchannel("A"))
+
+    def free(y0, y1):
+        """Type width available between the left margin and the art, in rows y0..y1."""
+        band = alpha[max(0, y0 - art_y):max(0, y1 - art_y)]
+        cols = np.where((band > 16).any(axis=0))[0]
+        return (art_x + int(cols.min()) if cols.size else W) - GUTTER - PAD
+
+    mark_size, body_size = MARK_SIZE, BODY_SIZE
+    mark_top = PAD + MARK_DROP
+
+    def metrics():
+        fm = ImageFont.truetype(str(FONT), mark_size)
+        fb = ImageFont.truetype(str(FONT), body_size)
+        rule = mark_top + round(mark_size * 0.86)
+        return fm, fb, rule, rule + 30
+
+    fm, fb, rule_y, tag_top = metrics()
+    while (spaced_width(fm, MARK, mark_size * MARK_TRACK) - mark_size * MARK_TRACK
+           > free(mark_top, mark_top + mark_size)) and mark_size > 40:
+        mark_size -= 1
+        fm, fb, rule_y, tag_top = metrics()
+    while (spaced_width(fb, TAGLINE, body_size * BODY_TRACK) - body_size * BODY_TRACK
+           > free(tag_top, tag_top + body_size)) and body_size > 14:
+        body_size -= 1
+        fm, fb, rule_y, tag_top = metrics()
 
     draw = ImageDraw.Draw(img, "RGBA")
-    mark_font = ImageFont.truetype(str(FONT), MARK_SIZE)
-    mark_track = MARK_SIZE * MARK_TRACK
+    mark_track, body_track = mark_size * MARK_TRACK, body_size * BODY_TRACK
 
-    block_h = round(MARK_SIZE * 1.30) + 40 + 2 * 46 + 58
-    top = round((H - block_h) / 2) - 8            # centred, with a touch of optical lift
-
-    draw_spaced(draw, (MARGIN_L, top), MARK, mark_font, INK + (255,), mark_track)
-    rule_y = top + round(MARK_SIZE * 1.30)
-    draw.line([(MARGIN_L, rule_y),
-               (MARGIN_L + spaced_width(mark_font, MARK, mark_track) - mark_track, rule_y)],
+    # Align by glyph INK, not by the draw origin, so MARK_DROP means what it says.
+    draw_spaced(draw, (PAD, mark_top - fm.getbbox(MARK)[1]), MARK, fm, INK + (255,), mark_track)
+    draw.line([(PAD, rule_y),
+               (PAD + spaced_width(fm, MARK, mark_track) - mark_track, rule_y)],
               fill=HONEY + (185,), width=2)
+    draw_spaced(draw, (PAD, tag_top - fb.getbbox(TAGLINE)[1]), TAGLINE, fb,
+                WALNUT + (255,), body_track)
 
-    body_font = ImageFont.truetype(str(FONT), BODY_SIZE)
-    body_track = BODY_SIZE * BODY_TRACK
-    y = rule_y + 40
-    for i, (text, color) in enumerate(LINES):
-        draw_spaced(draw, (MARGIN_L, y + (12 if i == 2 else 0)),
-                    text, body_font, color + (255,), body_track)
-        y += 46 if i == 0 else 58
-
-    return img.convert("RGB"), (w, h, x)
+    return img.convert("RGB"), (art_w, art_h, mark_size, body_size)
 
 
 if __name__ == "__main__":
     assert_glyphs_present()
-    card, (w, h, x) = build()
+    card, (w, h, mark, body) = build()
     card.save(OUT, "JPEG", quality=90, optimize=True, progressive=True)
-    print(f"cast {w}x{h} at x={x} ({max(0, x + w - W)}px off-canvas)")
+    print(f"art ink {w}x{h} at pad {PAD}; wordmark {mark}px, tagline {body}px")
     print(f"wrote {OUT.relative_to(REPO)}  {OUT.stat().st_size // 1024} KB  {W}x{H}")

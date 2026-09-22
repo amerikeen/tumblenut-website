@@ -184,7 +184,7 @@ function ProductPage() {
             </div>
 
             <div className="mt-10 grid gap-2.5 lg:mt-0 lg:grid-cols-2">
-              <Card title="Taste profile">
+              <Card title="How it tastes">
                 <ul className="flex flex-col gap-1.5">
                   {product.tasteProfile.map((line) => (
                     <li key={line} className={`t-body flex gap-2.5 text-[1rem] ${ON_DARK_BODY}`}>
@@ -207,7 +207,7 @@ function ProductPage() {
                   "every ingredient named" is the promise, not "safe". */}
               <div className="rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 p-5 lg:col-span-2">
                 <ul className="grid grid-cols-2 gap-x-4 gap-y-3 lg:grid-cols-4">
-                  {["Small batch", "Columbia, TN", "Ingredients named", "Glass jar"].map((b) => (
+                  {["Small batch", "Columbia, TN", "Every ingredient named", "Glass jar"].map((b) => (
                     <li
                       key={b}
                       className={`t-meta text-center text-[0.62rem] leading-snug ${ON_DARK_MUTED}`}
@@ -299,7 +299,7 @@ function ProductPage() {
           --------------------------------------------------------------- */}
       <section className="px-3 py-16 sm:px-5 sm:py-20">
         <div className="mx-auto max-w-3xl rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 px-6 py-12 text-center sm:px-12">
-          <p className={`t-meta ${ON_DARK_EYEBROW}`}>Starts with what it says</p>
+          <p className={`t-meta ${ON_DARK_EYEBROW}`}>Everything that is in it</p>
           <ResolveHeading text="In the jar" className={`t-section mt-4 ${ON_DARK_HEAD}`} />
           <ul className="mt-10 flex flex-col">
             {product.ingredients.map((ing) => (

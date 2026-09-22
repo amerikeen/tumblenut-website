@@ -44,7 +44,7 @@ export const Route = createFileRoute("/")({
     seo({
       title: "Nut butters beyond peanut, ground in Columbia, Tennessee",
       description:
-        "Doc still grinds peanuts, and almond, pistachio, pecan, hazelnut and pepita besides. Small batches, ground in Columbia, Tennessee, every ingredient named.",
+        "Doc still grinds peanuts, and almond, pistachio, pecan, hazelnut and pumpkin seed besides. Small batches, ground in Columbia, Tennessee, every ingredient named.",
       path: "/",
     }),
 });

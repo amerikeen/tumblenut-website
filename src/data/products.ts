@@ -9,6 +9,22 @@ export type Product = {
   priceCents: number;
   allergens: Allergen[];
   contains: string;
+  /**
+   * DO NOT EDIT A LEDE AS COPY. It is PRINTED ON THE JAR.
+   *
+   * Every `lede` is the descriptor line on that SKU's approved die in
+   * `public/brand/dies/`, and on the 3D jar render beside it on the product
+   * page. Change the string here and the page contradicts the label the
+   * reader is looking at, in the same viewport.
+   *
+   * Caught on 2026-09-21: a plain-language pass rewrote five of these
+   * ("That's October" -> "Tastes like fall" and four more) and the product
+   * page then disagreed with its own jar art. All five were put back.
+   *
+   * A lede changes only when the die changes, and dies are approved artwork
+   * that lives in the kit repo. `hook`, `story`, `tasteProfile` and `eatWith`
+   * are website copy and are free to edit.
+   */
   lede: string;
   story: string;
   ingredients: string[];
@@ -100,15 +116,15 @@ export const products: Product[] = [
     contains: "Peanuts",
     lede: "Deep-roasted peanut, applewood smoked salt, a little honey. Like an old friend.",
     story:
-      "The jar Doc ground for himself, back when there was only one. Deep roast, a crackle of smoked salt, honey just enough to round it. Ground into glass, the way he has always done it.",
-    hook: "The jar that started the wall",
+      "This is the jar Doc made for himself, back when he only made one. Dark roast, smoked salt you can taste, and just enough honey to soften it. Ground fresh and packed straight into glass.",
+    hook: "The first jar Doc ever made",
     tasteProfile: [
-      "Deep roast, before anything else",
-      "Smoked salt cracks through the middle",
-      "Honey rounds it off, barely sweet",
-      "Finishes like the end of a good fire",
+      "Roasted dark, so you taste peanut first",
+      "Smoked salt comes through in the middle",
+      "A little honey, just enough to soften it",
+      "Ends warm and smoky",
     ],
-    eatWith: "Toast, apple slices, a spoon standing up in the jar, and the sandwich you already know.",
+    eatWith: "Toast, apple slices, straight off a spoon, and the peanut butter sandwich you already make.",
     ingredients: [
       "Peanuts",
       "J.Q. Dickinson Applewood smoked salt",
@@ -131,15 +147,15 @@ export const products: Product[] = [
     contains: "Peanuts",
     lede: "Peanut, chili, lime, honey, ghost pepper salt. Sweet w/ some kick.",
     story:
-      "Doc did not stop making peanut butter. He just got bored of making only one kind. Firecracker is Classic Crunchy with chili, lime and its sleeves rolled up.",
-    hook: "Classic Crunchy with its sleeves rolled up",
+      "Doc did not stop making peanut butter. He just got tired of making one kind. This is Classic Crunchy with chili and lime added, and it bites back.",
+    hook: "Classic Crunchy, turned up hot",
     tasteProfile: [
-      "Classic Crunchy, until the chili arrives",
-      "Lime cuts straight across the middle",
-      "Ghost pepper salt is a spark, not a blaze",
-      "Honey keeps it from picking a fight",
+      "Tastes like Classic Crunchy until the chili hits",
+      "Lime cuts right through the middle",
+      "Ghost pepper salt gives it a spark, not a burn",
+      "Honey keeps the heat from taking over",
     ],
-    eatWith: "Satay, cold noodles, grilled chicken, and anything that was about to be boring.",
+    eatWith: "Cold noodles, grilled chicken, dipping sauce, or anything that needs waking up.",
     ingredients: [
       "Peanuts",
       "Chili",
@@ -169,15 +185,15 @@ export const products: Product[] = [
     contains: "Almonds (tree nuts)",
     lede: "Almonds. Bourbon barrel smoked salt. Still the whole list.",
     story:
-      "The first jar Doc ground that had no peanut in it. Almonds from a smokehouse roast, nothing sweet, nothing extra.",
-    hook: "The label has room to spare",
+      "The first jar Doc made with no peanut in it. Smoked almonds and salt. Nothing sweet in it.",
+    hook: "A short list, and nothing sweet",
     tasteProfile: [
-      "Almond, dry and clean",
-      "Bourbon barrel smoke sits underneath",
-      "No sweetness anywhere in it",
-      "Finishes short, which is the point",
+      "Plain almond, dry and clean",
+      "Smoke from the salt sits underneath",
+      "No sweetness at all",
+      "Ends quick and clean",
     ],
-    eatWith: "Dark bread, sharp cheese, roast carrots, and a spoon before the coffee.",
+    eatWith: "Dark bread, sharp cheese, roasted carrots, or a spoonful with coffee.",
     ingredients: [
       "Almonds",
       "J.Q. Dickinson Bourbon Barrel smoked salt",
@@ -199,15 +215,15 @@ export const products: Product[] = [
     contains: "Pumpkin seeds",
     lede: "Pumpkin seed, cinnamon, applewood smoked salt. Here for the holidays.",
     story:
-      "Toasted pepitas, a line of cinnamon, the same smoked salt Doc puts on everything else.",
-    hook: "The jar that turns up with the cold",
+      "Toasted pumpkin seeds, a line of cinnamon, and the same smoked salt Doc uses on everything else.",
+    hook: "Shows up when the weather turns",
     tasteProfile: [
-      "Toasted pepita, green and earthy",
-      "Cinnamon over the top, not stirred through",
-      "Smoked salt keeps it savoury",
-      "Finishes drier than a nut butter",
+      "Toasted pumpkin seed, green and earthy",
+      "Cinnamon sits on top instead of mixed in",
+      "Smoked salt keeps it from tasting like dessert",
+      "Ends drier than a nut butter",
     ],
-    eatWith: "Oatmeal, yogurt, warm banana bread, and the back of a spoon in October.",
+    eatWith: "Oatmeal, yogurt, warm banana bread, or straight off the spoon.",
     ingredients: [
       "Pumpkin seeds",
       "Cinnamon",
@@ -233,15 +249,15 @@ export const products: Product[] = [
     contains: "Pistachios (tree nuts)",
     lede: "Pistachio, honey, heirloom salt. Too good to mess with.",
     story:
-      "A small jar because pistachios are not cheap and Doc is not a magician. Smooth, a little grassy, very green. The one Cecil wants on a heel of bread.",
-    hook: "A small jar, and no apologies for it",
+      "It is a small jar because pistachios cost a lot. Smooth, a little grassy, and very green. Cecil wants his on the end of a loaf.",
+    hook: "A small jar, and here is why",
     tasteProfile: [
-      "Smooth before it is anything else",
-      "Grassy, and properly green",
-      "Honey just under the surface",
-      "Heirloom salt, then a clean finish",
+      "Smooth first, before anything else",
+      "Grassy, and really green",
+      "A little honey underneath",
+      "Salt, then a clean finish",
     ],
-    eatWith: "A heel of good bread, ricotta, figs, and not much else.",
+    eatWith: "Good bread, soft cheese, or fresh figs. It does not need much.",
     ingredients: [
       "Pistachios",
       "Organic Raw Honey",
@@ -267,15 +283,15 @@ export const products: Product[] = [
     contains: "Pecans (tree nuts)",
     lede: "Pecans, maple, bourbon barrel smoked salt. That's October.",
     story:
-      "Maple in the mill and bourbon barrel smoked salt, darker flecks you can see through the glass. The tasting-spoon jar.",
+      "Maple goes in with the pecans, not on top. The dark flecks are the smoked salt, and you can see them right through the glass.",
     hook: "The one that never lasts the week",
     tasteProfile: [
       "Pecan, buttery and soft",
-      "Maple in the mill, not poured on top",
-      "Bourbon barrel smoke in the dark flecks",
-      "Finishes like October",
+      "Maple ground in, not poured on top",
+      "Smoke from the salt in the dark flecks",
+      "Ends sweet and a little smoky",
     ],
-    eatWith: "Pancakes, roast sweet potato, vanilla ice cream, and the tasting spoon.",
+    eatWith: "Pancakes, roasted sweet potato, vanilla ice cream, or straight off the spoon.",
     ingredients: [
       "Pecans",
       "Maple syrup",
@@ -298,15 +314,15 @@ export const products: Product[] = [
     contains: "Hazelnuts (tree nuts)",
     lede: "Hazelnut, cacao, maple, heirloom salt. Dessert without the junk.",
     story:
-      "Hazelnuts and cacao, ground until they give up, maple to finish. Doc eats it with a spoon like the rest of them.",
-    hook: "Not a candy jar, and not a health claim",
+      "Hazelnuts and cacao ground together until smooth, with maple stirred in at the end. Doc eats it with a spoon, same as the rest.",
+    hook: "Chocolate taste, without the candy",
     tasteProfile: [
-      "Hazelnut first, ground until it gives up",
-      "Cacao is bitter, not sweet",
-      "Maple to finish, lightly",
-      "Salt makes the chocolate louder",
+      "Hazelnut first, ground smooth",
+      "The cacao is bitter, not sweet",
+      "A little maple at the end",
+      "Salt brings the chocolate out",
     ],
-    eatWith: "Sourdough, strawberries, espresso, and a spoon you did not plan on.",
+    eatWith: "Sourdough, strawberries, black coffee, and one more spoonful than you planned.",
     ingredients: [
       "Hazelnuts",
       "Triple Fat Cacao (100%)",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { enquiry, TENNESSEE_ONLY, WHOLESALE_EMAIL, WHOLESALE_LIVE } from "@/data/wholesale";
+import { inquiry, TENNESSEE_ONLY, WHOLESALE_EMAIL, WHOLESALE_LIVE } from "@/data/wholesale";
 
 import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { TextRoll } from "@/components/chrome/TextRoll";
@@ -48,7 +48,7 @@ export function WholesaleForm() {
   return (
     <section
       className="relative px-3 pt-16 pb-28 sm:px-5"
-      aria-label="Wholesale enquiry"
+      aria-label="Wholesale inquiry"
       data-chrome="dark"
     >
       <div className="mx-auto max-w-6xl">
@@ -66,7 +66,7 @@ export function WholesaleForm() {
         {/* Pulled up over the plate, as theirs is. */}
         <div className="relative -mt-24 flex flex-col items-center sm:-mt-36 lg:-mt-48">
           <ResolveHeading
-            text={enquiry.heading}
+            text={inquiry.heading}
             className="t-section text-center text-[#fbf3e4]"
           />
 
@@ -75,14 +75,14 @@ export function WholesaleForm() {
               role="status"
               className="t-body mt-10 max-w-[52ch] rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 p-8 text-center text-[#f0e3cd]"
             >
-              {WHOLESALE_LIVE ? enquiry.live : enquiry.stubbed}
+              {WHOLESALE_LIVE ? inquiry.live : inquiry.stubbed}
             </p>
           ) : (
             <form
               onSubmit={onSubmit}
               className="mt-10 flex w-full max-w-xl flex-col gap-5 rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 px-5 py-10 sm:px-8"
             >
-              <p className="t-body text-[#f0e3cd]">{enquiry.intro}</p>
+              <p className="t-body text-[#f0e3cd]">{inquiry.intro}</p>
 
               <Field id="w-name" name="name" label="Your name" placeholder="Name" required />
               <Field
@@ -115,7 +115,7 @@ export function WholesaleForm() {
                   <option value="" disabled>
                     What kind of business?
                   </option>
-                  {enquiry.businessTypes.map((t) => (
+                  {inquiry.businessTypes.map((t) => (
                     <option key={t} value={t} className="bg-[#1c120a]">
                       {t}
                     </option>
@@ -142,7 +142,7 @@ export function WholesaleForm() {
                 type="submit"
                 className="mt-1 inline-flex h-[52px] items-center justify-center rounded-xl bg-[#fbf3e4] px-7 font-slab text-[0.95rem] font-bold tracking-[0.1em] text-[#1c120a] uppercase"
               >
-                <TextRoll outlineColor="#1c120a">{enquiry.cta}</TextRoll>
+                <TextRoll outlineColor="#1c120a">{inquiry.cta}</TextRoll>
               </button>
 
               {/* The submit is stubbed, so the address must be reachable without
@@ -152,7 +152,7 @@ export function WholesaleForm() {
                 href={`mailto:${WHOLESALE_EMAIL}`}
                 className="t-body text-center text-[0.9rem] text-[#f0e3cd]/75 underline underline-offset-4 hover:text-[#fbf3e4]"
               >
-                {enquiry.orEmail}
+                {inquiry.orEmail}
               </a>
 
               {/* On every page in the footer, and again here. A shop owner is

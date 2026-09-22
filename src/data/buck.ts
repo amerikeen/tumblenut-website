@@ -73,7 +73,7 @@ export const PLATE_VEIL = 0.34;
 export const punchline = {
   eyebrow: "Small batch · Columbia, Tennessee",
   heading: "More ways to make a nut butter sandwich",
-  body: "Doc still grinds peanuts. He also grinds pistachio, pecan, hazelnut and pepita. Every label says exactly what is inside.",
+  body: "Doc still grinds peanuts. He also grinds pistachio, pecan, hazelnut and pumpkin seed. Every label says exactly what is inside.",
   cta: "See the jars",
 };
 
@@ -143,7 +143,7 @@ export const noCards = [
     id: "junk",
     kicker: "No",
     title: "Junk",
-    body: "No palm oil, no stabilisers, no fillers. The label names all of it.",
+    body: "No palm oil, no stabilizers, no fillers. The label names all of it.",
   },
   {
     id: "gluten",
@@ -190,7 +190,7 @@ export const noCards = [
     id: "more-than-peanut",
     kicker: "",
     title: "More than peanut",
-    body: "Pistachio. Pecan. Hazelnut. Almond. Pepita. More than one way to fill a sandwich.",
+    body: "Pistachio. Pecan. Hazelnut. Almond. Pumpkin seed. More than one way to fill a sandwich.",
   },
 ] as const;
 
@@ -249,7 +249,7 @@ export const whyStops = [
   {
     id: "more-than-peanut",
     title: "More than peanut",
-    line: "Pistachio, pecan, hazelnut, almond, pepita. Not one peanut jar and a shrug.",
+    line: "Pistachio, pecan, hazelnut, almond, pumpkin seed. Not one peanut jar and a shrug.",
   },
   {
     id: "glass",

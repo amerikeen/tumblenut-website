@@ -44,7 +44,7 @@ export const faq: FaqEntry[] = [
   {
     id: "whats-in-it",
     q: "What is actually in the jars?",
-    a: "Nuts or seeds, salt, and whatever the flavour needs: honey, maple, a spice. No palm oil, no stabilisers, no added oil; the only oil is the one that came out of the nut. The full list is on the jar.",
+    a: "Nuts or seeds, salt, and whatever the flavor needs: honey, maple, a spice. No palm oil, no stabilizers, no added oil; the only oil is the one that came out of the nut. The full list is on the jar.",
   },
   {
     id: "allergy",

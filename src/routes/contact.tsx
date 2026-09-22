@@ -18,7 +18,7 @@ export const Route = createFileRoute("/contact")({
     ...seo({
       title: "Get in touch — Tumblenut",
       description:
-        "Reach the workshop in Columbia, Tennessee. Trade enquiries go to wholesale@tumblenut.com.",
+        "Reach the workshop in Columbia, Tennessee. Trade questions go to wholesale@tumblenut.com.",
       path: "/contact",
     }),
     scripts: jsonLd(contactGraph),

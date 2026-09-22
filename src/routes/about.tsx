@@ -229,7 +229,7 @@ function AboutPage() {
             <p className={`t-body mt-5 max-w-[48ch] ${ON_DARK_BODY}`}>
               So Doc kept grinding peanuts (Classic Crunchy and Firecracker are still his) and
               started grinding everything else too. Almond <Icon name="almond" />. Pistachio. Pecan.
-              Hazelnut. Pepita. Not a replacement for the peanut jar. A shelf beside it.
+              Hazelnut. Pumpkin seed. Not a replacement for the peanut jar. A shelf beside it.
             </p>
             <p className={`t-card mt-10 max-w-[18ch] text-[1.9rem] ${ON_DARK_HEAD}`}>
               More than peanut. Never a sugar bomb.

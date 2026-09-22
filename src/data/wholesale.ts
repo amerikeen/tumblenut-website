@@ -91,16 +91,16 @@ export const ORDERS_EMAIL = "orders@tumblenut.com";
  * wholesale language and reads wrong on a cart, where the reader does not have
  * one — that is an audience difference, not a different rule.
  */
-const TENNESSEE_REASON = "the law we produce under keeps our sales inside the state.";
+const TENNESSEE_REASON = "we can only sell inside the state for now";
 
 /** Trade. /wholesale and the wholesale card on /contact. */
-export const TENNESSEE_ONLY = `Tennessee shelves only for now — ${TENNESSEE_REASON}`;
+export const TENNESSEE_ONLY = `Tennessee stores only: ${TENNESSEE_REASON}.`;
 
 /** Retail. /shop and /cart, where the reader is buying a jar, not stocking one. */
-export const TENNESSEE_ONLY_RETAIL = `We can only sell inside Tennessee for now — ${TENNESSEE_REASON}`;
+export const TENNESSEE_ONLY_RETAIL = `Tennessee orders only: ${TENNESSEE_REASON}.`;
 
 export const hero = {
-  heading: "Good shelves deserve more than one nut",
+  heading: "A good shelf needs more than one nut butter",
   /** Three square plates, as theirs are. Outer two hide on mobile. */
   plates: [
     { src: "/brand/cinema/two-shelves.jpg", alt: "Jars lined up on the workshop shelves" },
@@ -110,7 +110,7 @@ export const hero = {
     },
     { src: "/brand/cinema/tasting-hands-up.jpg", alt: "Doc and Cecil at the bench, the jars filled" },
   ],
-  lede: "Small batches, ground in Columbia, TN. Every jar names what is in it, so a customer can decide for themselves.",
+  lede: "Ground in small batches in Columbia, TN. Every jar lists what is in it, so your customers can read it and decide.",
 };
 
 export type LadderCard = {
@@ -127,10 +127,10 @@ export const ladder: LadderCard[] = [
     question: "Why?",
     title: "Why carry Tumblenut",
     items: [
-      "Labels anyone can read — what is in the jar, in plain words",
+      "Labels anyone can read, in plain words",
       "Peanut jars and no-peanut jars, side by side on the same shelf",
-      "Ground in small batches here, not run off by a co-packer",
-      "Glass that earns its spot — this does not look like a plastic tub",
+      "Ground here in small batches, not made in someone else's plant",
+      "Glass jars, so it does not look like a plastic tub",
       "Doc and Cecil do the explaining, so your staff do not have to",
     ],
   },
@@ -139,12 +139,12 @@ export const ladder: LadderCard[] = [
     question: "What?",
     title: "What wholesalers get",
     items: [
-      "Wholesale pricing with room to make the shelf worth it",
-      "Mixed cases, so the shelf is not a bet on one flavour",
-      "Short lead times — the mill is a drive away, not a container away",
-      "Shelf tags that name every ingredient, printed and ready to clip on",
-      "A direct line to the person who ground the batch and can answer for it",
-      "Tennessee shelves — the law we produce under keeps sales in-state",
+      "Wholesale prices that leave room for you to make money",
+      "Mixed cases, so you are not betting on one flavor",
+      "Quick restocks, because we are a drive away",
+      "Shelf tags that list every ingredient, printed and ready to clip on",
+      "You can call the person who ground the batch",
+      "We can only sell inside Tennessee right now",
     ],
   },
   {
@@ -152,16 +152,16 @@ export const ladder: LadderCard[] = [
     question: "Who?",
     title: "Who this is for",
     items: [
-      "Specialty grocers and general stores",
+      "Grocery stores and general stores",
       "Farmers markets and co-ops",
-      "Coffee shops and bakeries with a retail shelf",
+      "Coffee shops and bakeries that sell jars off a shelf",
       "Farm stands and gift shops",
-      "Anyone tired of stocking one nut butter and calling it a section",
+      "Anyone tired of carrying just one nut butter",
     ],
   },
 ];
 
-export const enquiry = {
+export const inquiry = {
   heading: "Let's talk",
   /**
    * NO CHARACTER IN THE FORM COPY, and this should not come back.
@@ -180,17 +180,17 @@ export const enquiry = {
    * If a line like this is ever wanted, it takes a real person's name.
    */
   intro:
-    "Tell us about the shelf — the size of it, the town, and what your customers keep asking for.",
+    "Tell us about your shelf: how big it is, what town you are in, and what your customers keep asking for.",
   cta: "Send it",
   /** Under the form, so the address is reachable without submitting first. */
   orEmail: `Or email ${WHOLESALE_EMAIL}`,
   /** Shown after submit while WHOLESALE_LIVE is false. Says plainly what happened. */
-  stubbed: `Nothing was sent — this form is not wired up yet. Email ${WHOLESALE_EMAIL} instead.`,
-  live: "Got it. We will come back to you — usually within a couple of days, and always from a real person.",
+  stubbed: `Nothing was sent. This form is not working yet, so please email ${WHOLESALE_EMAIL} instead.`,
+  live: "Got it. We will get back to you, usually within a couple of days.",
   businessTypes: [
-    "Specialty grocer or general store",
+    "Grocery store or general store",
     "Farmers market or co-op",
-    "Coffee shop or bakery with a retail shelf",
+    "Coffee shop or bakery that sells jars off a shelf",
     "Farm stand or gift shop",
     "Something else",
   ],

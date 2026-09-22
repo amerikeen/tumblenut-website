@@ -1,6 +1,6 @@
 {
-  "_note": "Read by the platform bake as strict JSON (no comments) -- see src/lib/seo.ts. 'title' is deliberately ABSENT so og:title falls through to each page's own <title>; adding it back freezes every share card to one name.",
+  "_note": "Read by the platform bake as strict JSON (no comments) -- see src/lib/seo.ts. 'title' is deliberately ABSENT so og:title falls through to each page's own <title>; adding it back freezes every share card to one name. 'description' is the SHARE-CARD line and is deliberately NOT SITE_DESCRIPTION: that one still feeds the name=description meta and the JSON-LD, where a card-length line would say nothing. Keep this under 87 characters or WhatsApp clips it.",
   "card": "custom",
   "color": "F3EDE0",
-  "description": "Small batch nut butters from a workshop in Columbia, Tennessee. Now Cecil can enjoy his favorite nut butters too!"
+  "description": "Small-batch goodness, with every ingredient named on the label."
 }

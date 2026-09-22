@@ -76,12 +76,29 @@ test("robots.txt points at the sitemap and blocks nothing that carries a noindex
   }
 });
 
-test("site.json carries the share description and does NOT pin a title", () => {
+test("site.json carries a SHARE description, distinct from the SEO one, and pins no title", () => {
   // The platform injector overwrites og:* from this file. `title` here freezes
   // every page's share card to one name; `description` here is the only
   // og:description the deployed site can emit. See src/lib/seo.ts.
   const site = JSON.parse(read("src/lib/og/site.json"));
-  assert.equal(site.description, SITE_DESCRIPTION);
   assert.equal(site.title, undefined);
   assert.equal(site.card, "custom");
+  assert.equal(typeof site.description, "string");
+  assert.ok(site.description.length > 0, "an empty description emits no og:description at all");
+
+  // These two used to be required to match. They are now deliberately
+  // different: this one sits under the card art, SITE_DESCRIPTION is read by
+  // Google and by the JSON-LD Organization. Re-syncing them is a regression.
+  assert.notEqual(
+    site.description,
+    SITE_DESCRIPTION,
+    "the share line and the SEO description decoupled on 2026-09-21; see src/lib/seo.ts",
+  );
+
+  // Measured in the WhatsApp preview block on 2026-09-21: it renders two lines
+  // at Arial 12 in 268px, which is 87 characters. Past that it truncates.
+  assert.ok(
+    site.description.length <= 87,
+    `share description is ${site.description.length} chars; WhatsApp clips at 87`,
+  );
 });

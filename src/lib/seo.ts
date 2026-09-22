@@ -48,15 +48,28 @@ export const SITE_NAME = "Tumblenut";
 
 /**
  * The site-wide description: the `description` meta every page without its own
- * inherits, and the one og:description the platform can emit.
+ * inherits, and the description on the JSON-LD Organization and WebSite in
+ * `src/lib/structured-data.ts`.
  *
- * KEEP THIS IN SYNC WITH `src/lib/og/site.json`. It cannot be imported there --
- * that file is read as JSON by the Vite/Nitro bake, before any module graph
- * exists -- so `scripts/sitemap.test.mjs` asserts the two match instead.
+ * IT IS NO LONGER THE SHARE-CARD TEXT. Until 2026-09-21 this string and
+ * `description` in `src/lib/og/site.json` had to match, and a test enforced it.
+ * They decoupled that day because they want opposite things. The share card
+ * line sits under an image that already names the brand and the category, so it
+ * is short and adds one fact. This one is read by Google for any page without
+ * its own description, and by answer engines off the Organization schema, where
+ * a card-length line would omit the category and the location entirely. The
+ * test now asserts they are DIFFERENT; do not "fix" the drift by re-syncing.
  *
  * The closing sentence is Jeff's, off the end of the reel. It is not a safety
  * claim and must not be edited into one: Cecil having favourites he can enjoy
  * is a fact about the range, not a promise about any jar.
+ *
+ * Cecil came OFF the share card on 2026-09-21 and survives only here. Jeff's
+ * reason was not length: the card art names DOC three times, on his hat and his
+ * pocket, and never names Cecil at all, so a stranger has nothing to attach the
+ * name to and the only labelled character is the squirrel. That argument
+ * applies wherever this line is read without the reel behind it, which includes
+ * the Organization schema. Open question, not an oversight.
  *
  * It opens "Small batch nut butters", NOT "Tumblenut -- small batch...". The
  * brand-name prefix was dropped 2026-09-21: it carried an em dash (Jeff reads

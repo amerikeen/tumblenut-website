@@ -44,7 +44,29 @@ export type Product = {
    */
   hook: string;
   tasteProfile: string[];
-  /** What to eat it with. Serving suggestion, never a health or safety claim. */
+  /**
+   * What to eat it with. Serving suggestion, never a health or safety claim.
+   *
+   * THREE RULES, all set by Jeff on 2026-09-22:
+   *
+   * 1. **A DIFFERENT BREAD ON EVERY JAR**, chosen to suit that flavour --
+   *    wheat, cornbread, rye, biscuit, sourdough, cinnamon raisin, English
+   *    muffin. Before this the lines had drifted together: two opened on a
+   *    generic "bread" and three closed on "straight off the spoon", so seven
+   *    pages read as one page. The bread is what makes each page concrete.
+   * 2. **NOTHING THAT NEEDS PREPARING.** No thinning, warming or stirring.
+   *    A suggestion that needs a recipe step is recipe content, not a product
+   *    card. This is what killed "dipping sauce" on firecracker-peanut, which
+   *    was also ambiguous -- as written it read as eating the butter WITH a
+   *    dipping sauce rather than the butter BEING one.
+   * 3. **COLUMBIA, TN SHOPPING.** If it is not on the shelf at the local
+   *    grocery, it does not go in. Cold noodles and fresh figs were both cut
+   *    for this. Satay, ricotta and espresso went earlier, same reason.
+   *
+   * The "things you would never think to put peanut butter on" construction
+   * is deliberately used ONCE, on firecracker-peanut, where the surprise is
+   * the point of the jar. Repeat it across the set and it becomes wallpaper.
+   */
   eatWith: string;
   /** Which of the cast fronts this jar. Doc takes the peanut jars, Cecil the rest. */
   face: "doc" | "cecil";
@@ -124,7 +146,7 @@ export const products: Product[] = [
       "A little honey, just enough to soften it",
       "Ends warm and smoky",
     ],
-    eatWith: "Toast, apple slices, straight off a spoon, and the peanut butter sandwich you already make.",
+    eatWith: "Wheat bread, celery sticks, apple slices, and the sandwich you already make.",
     ingredients: [
       "Peanuts",
       "J.Q. Dickinson Applewood smoked salt",
@@ -155,7 +177,7 @@ export const products: Product[] = [
       "Ghost pepper salt gives it a spark, not a burn",
       "Honey keeps the heat from taking over",
     ],
-    eatWith: "Cold noodles, grilled chicken, dipping sauce, or anything that needs waking up.",
+    eatWith: "Cornbread, celery, cauliflower, and things you would never think to put peanut butter on, like a hamburger or grilled chicken.",
     ingredients: [
       "Peanuts",
       "Chili",
@@ -193,7 +215,7 @@ export const products: Product[] = [
       "No sweetness at all",
       "Ends quick and clean",
     ],
-    eatWith: "Dark bread, sharp cheese, roasted carrots, or a spoonful with coffee.",
+    eatWith: "Rye bread, sharp cheddar, cucumber slices, or roasted carrots.",
     ingredients: [
       "Almonds",
       "J.Q. Dickinson Bourbon Barrel smoked salt",
@@ -223,7 +245,7 @@ export const products: Product[] = [
       "Smoked salt keeps it from tasting like dessert",
       "Ends drier than a nut butter",
     ],
-    eatWith: "Oatmeal, yogurt, warm banana bread, or straight off the spoon.",
+    eatWith: "A warm biscuit, oatmeal, yogurt, or straight off the spoon.",
     ingredients: [
       "Pumpkin seeds",
       "Cinnamon",
@@ -257,7 +279,7 @@ export const products: Product[] = [
       "A little honey underneath",
       "Salt, then a clean finish",
     ],
-    eatWith: "Good bread, soft cheese, or fresh figs. It does not need much.",
+    eatWith: "Sourdough, soft cheese, or sliced pears. It does not need much.",
     ingredients: [
       "Pistachios",
       "Organic Raw Honey",
@@ -291,7 +313,7 @@ export const products: Product[] = [
       "Smoke from the salt in the dark flecks",
       "Ends sweet and a little smoky",
     ],
-    eatWith: "Pancakes, roasted sweet potato, vanilla ice cream, or straight off the spoon.",
+    eatWith: "Cinnamon raisin toast, roasted sweet potato, or a spoonful over vanilla ice cream.",
     ingredients: [
       "Pecans",
       "Maple syrup",
@@ -322,7 +344,7 @@ export const products: Product[] = [
       "A little maple at the end",
       "Salt brings the chocolate out",
     ],
-    eatWith: "Sourdough, strawberries, black coffee, and one more spoonful than you planned.",
+    eatWith: "An English muffin, strawberries, black coffee, and one more spoonful than you planned.",
     ingredients: [
       "Hazelnuts",
       "Triple Fat Cacao (100%)",

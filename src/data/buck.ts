@@ -78,10 +78,21 @@ export const skuPan = {
   heading: "On the wall right now",
 };
 
+/**
+ * NOTE: there is no `body` here, and adding one back would be a trap.
+ *
+ * Unlike `punchline`, this section's paragraph carries an <Icon>, so it has to
+ * be JSX and it lives in `Differentiator.tsx`. A `body` string sat here until
+ * 2026-09-21 and was never rendered by anything. It had drifted: it still read
+ * "a real jar for a peanut allergy" and looked, to anyone opening this file,
+ * like the live copy. Editing it would have fixed nothing and felt like a fix.
+ *
+ * Edit the paragraph in the component, and read the rules in the comment above
+ * it before you do.
+ */
 export const differentiator = {
   eyebrow: "Why Doc bothered",
   heading: "More than peanut. Never a sugar bomb.",
-  body: "Doc still grinds peanut, plus almond, pistachio, pecan, hazelnut and pepita: a real jar for a peanut allergy, never stacked with sugar and fillers.",
   proof: [
     { k: "Ingredients", v: "All natural" },
     { k: "Made in", v: "Columbia, TN" },

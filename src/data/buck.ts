@@ -9,9 +9,13 @@
  *
  * **Never count.** No "two to four ingredients", no "seven jars", no counting
  * sweeteners. Recipes and the SKU list both move, and every number here is a
- * claim that quietly goes false when they do. Lean on "all natural", whatever
- * the ingredients happen to be. Ingredient truth lives in the label maker in
- * the kit repo -- never invent it, and never let copy outrun it.
+ * claim that quietly goes false when they do. Reach instead for a line that is
+ * true whatever the ingredients happen to be -- but make it a CHECKABLE one.
+ * This paragraph used to say "lean on 'all natural'", which cleared the
+ * never-count bar and failed the checkable one; see the note on
+ * `differentiator.proof` for why that phrase came off the site on 2026-09-21.
+ * Ingredient truth lives in the label maker in the kit repo -- never invent it,
+ * and never let copy outrun it.
  *
  * **Honest.** Nothing may claim or imply that a jar is allergen-safe. Doc still
  * makes peanut butter, every jar is packed in a shop that handles peanuts and
@@ -93,8 +97,30 @@ export const skuPan = {
 export const differentiator = {
   eyebrow: "Why Doc bothered",
   heading: "More than peanut. Never a sugar bomb.",
+  /**
+   * All three tiles are CHECKABLE FACTS. That is the rule, and the first one
+   * broke it until 2026-09-21.
+   *
+   * It read "All natural", and the header of this file used to tell you to
+   * lean on that phrase. The reason was sound as far as it went -- it was the
+   * dodge around the never-count rule, since it survives any recipe change
+   * without naming a number. But "natural" has no FDA regulatory definition
+   * for food labelling
+   * (only an informal policy, and a 2015 comment docket that never became a
+   * rule), and it is one of the most litigated words in US food marketing. It
+   * was also the odd one out: "Columbia, TN" and "Glass" are things a buyer
+   * can verify, and that one was an opinion word standing between them.
+   *
+   * "Named on the front" clears the same never-count bar -- it cannot go false
+   * when a recipe moves, and it counts nothing -- while being a fact. It is
+   * also already what /faq promises: "We name every ingredient on the front so
+   * you can read it and decide."
+   *
+   * If you replace any of these, the replacement has to be checkable AND
+   * count-free. Both, not either.
+   */
   proof: [
-    { k: "Ingredients", v: "All natural" },
+    { k: "Ingredients", v: "Named on the front" },
     { k: "Made in", v: "Columbia, TN" },
     { k: "Packed in", v: "Glass" },
   ],

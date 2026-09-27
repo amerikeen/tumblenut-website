@@ -285,7 +285,11 @@ export const NEWSLETTER_LIVE = false;
 
 export const newsletter = {
   heading: "Get on the list",
-  body: "Email goes in. Batch news comes out.",
+  // Two sentences, forced onto their own lines by both renderers below
+  // rather than left to wrap wherever the column happens to break --
+  // "Email goes in. Batch news / comes out." read badly at the footer's
+  // narrower desktop width.
+  bodyLines: ["Email goes in.", "Batch news comes out."],
   placeholder: "you@somewhere.com",
   cta: "Get on the list",
   stubbed: "Noted. The list opens with the first batch. There is no mailer behind this box yet.",

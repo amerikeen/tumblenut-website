@@ -29,7 +29,11 @@ export function Newsletter() {
       />
       <div className="relative mx-auto max-w-2xl text-center">
         <ResolveHeading text={newsletter.heading} className="t-section text-[#fbf3e4]" />
-        <p className="t-body mt-5 text-[#f0e3cd]">{newsletter.body}</p>
+        <p className="t-body mt-5 text-[#f0e3cd]">
+          {newsletter.bodyLines[0]}
+          <br />
+          {newsletter.bodyLines[1]}
+        </p>
 
         {done ? (
           <p className="t-body mx-auto mt-8 max-w-[44ch] text-[#f0e3cd]" role="status">

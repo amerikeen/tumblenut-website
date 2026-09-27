@@ -167,7 +167,11 @@ export function SiteFooter() {
         {/* 3 — the list */}
         <div className="mt-6 flex flex-col lg:mt-0">
           <h2 className="t-card text-[1.75rem]">{newsletter.heading}</h2>
-          <p className="t-body mt-4 opacity-70">{newsletter.body}</p>
+          <p className="t-body mt-4 opacity-70">
+            {newsletter.bodyLines[0]}
+            <br />
+            {newsletter.bodyLines[1]}
+          </p>
           <form
             className="relative mt-8 lg:mt-auto"
             onSubmit={(e) => {

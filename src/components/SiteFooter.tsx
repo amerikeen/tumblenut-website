@@ -97,13 +97,13 @@ export function SiteFooter() {
       style={{ color: CREAM, backgroundColor: "rgba(20,13,7,0.82)" }}
       data-chrome="dark"
     >
-      {/* Column split was 22/32/32/14. Widened the mark's box to 30fr and gave
-          up the difference from the nav column (32 -> 24) so the lockup has
-          more room -- the newsletter and button columns (32fr, 14fr) are
-          untouched, so their pixel widths do not move. The nav column can
-          afford it: "Become a wholesaler" shortened to "Wholesale" the same
-          pass, so the narrower column isn't fighting its own longest label. */}
-      <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-[30fr_24fr_32fr_14fr]">
+      {/* Column split was 22/32/32/14, then 30/24/32/14 once the mark's box
+          widened. The social icons used to be a fourth column (14fr) of
+          their own; they now live inside the list column as a row under the
+          CTA, so that 14fr folded into the list column instead of sitting
+          empty -- 32+14=46fr, leaving the mark and nav columns' pixel widths
+          untouched. */}
+      <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-[30fr_24fr_46fr]">
         {/* 1 — the mark, in its dashed box */}
         {/* The composed 3D lockup, not the two solo cutouts side by side.
             The footer has the room the header doesn't, so it keeps the
@@ -247,25 +247,27 @@ export function SiteFooter() {
               </p>
             ) : null}
           </form>
-        </div>
 
-        {/* 4 — social icons, two per row so six fit this narrow column
-            without running taller than the nav list beside it. */}
-        <div className="grid grid-cols-2 gap-2.5">
-          {SOCIAL_LINKS.map((s) => (
-            <a
-              key={s.href}
-              href={s.href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={s.label}
-              className="flex aspect-square min-h-[3.5rem] items-center justify-center rounded-xl border-2 border-current transition-transform duration-200 hover:scale-[1.05] active:scale-[0.95]"
-            >
-              <svg viewBox="0 0 24 24" className="h-3/5 w-3/5" fill="currentColor" aria-hidden="true">
-                <path d={s.path} />
-              </svg>
-            </a>
-          ))}
+          {/* One row, six across -- sized by the column's own width (each
+              icon is 1fr of it) rather than a fixed px box, so they fill
+              this column's full width at any breakpoint instead of leaving
+              slack on one side. */}
+          <div className="mt-2.5 grid grid-cols-6 gap-2">
+            {SOCIAL_LINKS.map((s) => (
+              <a
+                key={s.href}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={s.label}
+                className="flex aspect-square items-center justify-center rounded-xl border-2 border-current transition-transform duration-200 hover:scale-[1.05] active:scale-[0.95]"
+              >
+                <svg viewBox="0 0 24 24" className="h-3/5 w-3/5" fill="currentColor" aria-hidden="true">
+                  <path d={s.path} />
+                </svg>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 

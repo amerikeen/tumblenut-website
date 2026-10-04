@@ -18,7 +18,7 @@ import { products, type Product } from "@/data/products";
 import { TENNESSEE_ONLY_RETAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { jsonLd, shopGraph } from "@/lib/structured-data";
-import { formatUsd } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 import { FacilityNote } from "@/components/chrome/FacilityNote";
 
 export const Route = createFileRoute("/shop/")({
@@ -270,7 +270,7 @@ function JarCard({ product, priority }: { product: Product; priority?: boolean }
         <p className={`t-body mt-4 font-slab font-semibold text-[0.92rem] ${ON_DARK_MUTED}`}>
           {product.sizeLabel}
           <span className="mx-2 text-[#c4a35a]">·</span>
-          <span className="tabular-nums text-[#fbf3e4]">{formatUsd(product.priceCents)}</span>
+          <span className="tabular-nums text-[#fbf3e4]">{formatPrice(product.priceCents)}</span>
         </p>
         <p className={`t-meta mt-2 text-[0.62rem] ${ON_DARK_MUTED}`}>{product.contains}</p>
       </Link>

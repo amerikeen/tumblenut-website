@@ -17,7 +17,7 @@ import { allergenLabel, productBySlug } from "@/data/products";
 import { PACK_DISCOUNT_CENTS, PACK_SIZE } from "@/lib/cart";
 import { seo } from "@/lib/seo";
 import { jsonLd, productGraph } from "@/lib/structured-data";
-import { formatUsd } from "@/lib/utils";
+import { formatUsd, formatPrice } from "@/lib/utils";
 import { FacilityNote } from "@/components/chrome/FacilityNote";
 
 export const Route = createFileRoute("/shop/$slug")({
@@ -285,7 +285,7 @@ function ProductPage() {
                 {product.sizeLabel}
                 <span className="mx-2">·</span>
                 <span className="tabular-nums text-[#fbf3e4]">
-                  {formatUsd(product.priceCents)}
+                  {formatPrice(product.priceCents)}
                 </span>
               </p>
             </div>
@@ -353,7 +353,7 @@ function ProductPage() {
           <div className="min-w-0">
             <p className={`t-meta truncate text-[0.62rem] ${ON_DARK_EYEBROW}`}>{product.name}</p>
             <p className="t-body font-slab font-semibold text-[1rem] tabular-nums text-[#fbf3e4]">
-              {formatUsd(product.priceCents)}
+              {formatPrice(product.priceCents)}
               <span className="mx-2 text-[#c4a35a]">·</span>
               <span className={ON_DARK_MUTED}>{product.sizeLabel}</span>
             </p>

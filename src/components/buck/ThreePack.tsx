@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { products } from "@/data/products";
 import { PACK_DISCOUNT_CENTS, PACK_SIZE, useCart } from "@/lib/cart";
-import { cn, formatUsd } from "@/lib/utils";
+import { cn, formatUsd, formatPrice } from "@/lib/utils";
 import { threePack } from "@/data/buck";
 
 /**
@@ -314,7 +314,7 @@ export function ThreePack() {
                   {full ? (
                     <>
                       <span>Add to cart</span>
-                      <span className="tabular-nums">{formatUsd(total)}</span>
+                      <span className="tabular-nums">{formatPrice(total)}</span>
                     </>
                   ) : (
                     <span>
@@ -326,7 +326,7 @@ export function ThreePack() {
                     without the button text having to be polite about it. */}
                 <p aria-live="polite" className="sr-only">
                   {full
-                    ? `Pack complete, ${formatUsd(total)} with ${formatUsd(PACK_DISCOUNT_CENTS)} off.`
+                    ? `Pack complete, ${formatPrice(total)} with ${formatUsd(PACK_DISCOUNT_CENTS)} off.`
                     : `${picked.length} of ${PACK_SIZE} picked.`}
                 </p>
                 {sent ? (

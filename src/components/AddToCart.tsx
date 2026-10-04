@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
-import { cn, formatUsd } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import type { Product } from "@/data/products";
 import { useState } from "react";
 
@@ -60,7 +60,7 @@ export function AddToCart({
             tone === "dark" ? "text-[#fbf3e4]" : "text-ink",
           )}
         >
-          {formatUsd(product.priceCents)}
+          {formatPrice(product.priceCents)}
         </span>
       )}
     </div>

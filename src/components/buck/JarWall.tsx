@@ -4,7 +4,7 @@ import { ResolveHeading } from "@/components/buck/ResolveHeading";
 import { TextRoll } from "@/components/chrome/TextRoll";
 import { ON_DARK_HEAD, ON_DARK_LINE, ON_DARK_MUTED } from "@/components/chrome/PageBackdrop";
 import { products, type Product } from "@/data/products";
-import { formatUsd } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 
 /**
  * The closing jar grid.
@@ -86,7 +86,7 @@ export function JarWall({
                 <p className={`t-body relative font-slab font-semibold text-[0.92rem] ${ON_DARK_MUTED}`}>
                   {p.sizeLabel}
                   <span className="mx-2 text-[#c4a35a]">·</span>
-                  <span className="tabular-nums text-[#fbf3e4]">{formatUsd(p.priceCents)}</span>
+                  <span className="tabular-nums text-[#fbf3e4]">{formatPrice(p.priceCents)}</span>
                 </p>
               </Link>
             </li>

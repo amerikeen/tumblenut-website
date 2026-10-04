@@ -24,7 +24,7 @@ import {
   PACK_SIZE,
   useCart,
 } from "@/lib/cart";
-import { formatUsd } from "@/lib/utils";
+import { formatUsd, formatPrice } from "@/lib/utils";
 
 import { ORDERS_EMAIL, TENNESSEE_ONLY_RETAIL } from "@/data/wholesale";
 import { seo } from "@/lib/seo";
@@ -194,7 +194,7 @@ function CartPage() {
                   className={`t-body h-12 w-16 px-2 text-center font-slab font-semibold tabular-nums ${ON_DARK_FIELD}`}
                 />
                 <span className="t-body w-20 text-right font-slab font-semibold tabular-nums text-[#fbf3e4]">
-                  {formatUsd(lineCents)}
+                  {formatPrice(lineCents)}
                 </span>
               </li>
             ))}
@@ -203,7 +203,7 @@ function CartPage() {
           <aside className="h-fit rounded-xl border border-[#f0e3cd]/40 bg-[#1c120a]/90 p-6">
             <p className={`t-body flex justify-between text-[0.95rem] ${ON_DARK_MUTED}`}>
               <span>Subtotal</span>
-              <span className="font-slab font-semibold tabular-nums">{formatUsd(subtotal)}</span>
+              <span className="font-slab font-semibold tabular-nums">{formatPrice(subtotal)}</span>
             </p>
             {discount > 0 ? (
               <p className="t-body mt-2 flex justify-between text-[0.95rem] text-[#e9a06a]">
@@ -217,7 +217,7 @@ function CartPage() {
             )}
             <p className="t-card mt-4 flex justify-between border-t border-[#f0e3cd]/25 pt-4 text-[1.35rem] text-[#fbf3e4]">
               <span>Total</span>
-              <span className="tabular-nums">{formatUsd(total)}</span>
+              <span className="tabular-nums">{formatPrice(total)}</span>
             </p>
 
             {/* ABOVE the button, not after it, for the same reason

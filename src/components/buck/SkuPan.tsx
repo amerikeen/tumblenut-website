@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { products } from "@/data/products";
-import { formatUsd } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 import { usePrefersReducedMotion } from "@/lib/scroll";
 import { skuPan } from "@/data/buck";
 
@@ -154,7 +154,7 @@ export function SkuPan() {
               <p className="t-card mt-7 text-[#fbf3e4]">{p.name}</p>
               {/* font-slab for size + price, matching /shop and the jar wall. */}
               <p className="t-meta mt-3 font-slab text-[1.1rem] text-[#e9c98a]">
-                {p.sizeLabel} · {formatUsd(p.priceCents)}
+                {p.sizeLabel} · {formatPrice(p.priceCents)}
               </p>
             </div>
           );

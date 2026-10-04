@@ -102,8 +102,11 @@ export function SiteFooter() {
           their own; they now live inside the list column as a row under the
           CTA, so that 14fr folded into the list column instead of sitting
           empty -- 32+14=46fr, leaving the mark and nav columns' pixel widths
-          untouched. */}
-      <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-[30fr_24fr_46fr]">
+          untouched. 2026-10-04: 30/24/46 became 42/22/36 for the new 3D
+          lockup (wider box), with the nav column pushed right and the list
+          column narrowed. The social row is `grid-cols-6` with square cells,
+          so its icons shrink by themselves as this column narrows. */}
+      <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-[42fr_22fr_36fr]">
         {/* 1 — the mark, in its dashed box */}
         {/* The composed 3D lockup, not the two solo cutouts side by side.
             The footer has the room the header doesn't, so it keeps the

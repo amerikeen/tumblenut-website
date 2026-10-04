@@ -73,6 +73,6 @@ export const faq: FaqEntry[] = [
   {
     id: "glass",
     q: "Why glass instead of a plastic tub?",
-    a: "Glass is inert, and nut butter is mostly oil. Oil pulls at plastic, but it can't pull at glass. Costs more than a tub, but it's worth it.",
+    a: "Glass is inert, and nut butter is mostly oil. Oil pulls at plastic, but it can't pull at glass. More expensive to jar in glass, but it's worth it.",
   },
 ];

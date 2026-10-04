@@ -254,7 +254,7 @@ export const whyStops = [
   {
     id: "glass",
     title: "Glass, not plastic",
-    line: "Glass is inert, and nut butter is mostly oil. Costs more than a tub. Worth it.",
+    line: "Glass is inert, and nut butter is mostly oil. Oil pulls at plastic, but it can't pull at glass. Costs more than a tub. Worth it.",
   },
 ];
 

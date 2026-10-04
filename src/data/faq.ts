@@ -49,7 +49,7 @@ export const faq: FaqEntry[] = [
   {
     id: "allergy",
     q: "Is it safe for someone with a nut allergy?",
-    a: "Doc grinds one nut at a time and cleans the equipment between nuts, but the jars are still packed in a facility that handles peanuts and tree nuts, and a peanut allergy is not a tree-nut allergy. We name every ingredient on the front of the jar so you can read it and decide.",
+    a: "Doc grinds one nut at a time. He cleans the equipment between nut batches. But the jars are still packed in a place that also handles peanuts and tree nuts. Peanuts and tree nuts, like almonds and pecans, are two different allergies. Someone can be allergic to one and not the other. We name every ingredient on the front of the jar so you can read it and decide.",
   },
   {
     id: "shipping",

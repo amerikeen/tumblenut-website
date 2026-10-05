@@ -43,7 +43,7 @@ export const openingShots: Shot[] = [
     src: "/brand/cinema/cecil-arrives.mp4",
     poster: "/brand/cinema/cecil-arrives.jpg",
     seconds: 6.04,
-    line: "Cecil fell off a truck bound for the zoo and found his new home with Doc.",
+    line: "Cecil fell off a truck bound for the zoo\nand found his new home with Doc.",
   },
   {
     id: "peanut",

@@ -57,7 +57,7 @@ export const openingShots: Shot[] = [
     src: "/brand/cinema/two-shelves.mp4",
     poster: "/brand/cinema/two-shelves.jpg",
     seconds: 6.04,
-    line: "So Doc started grinding other nuts for Cecil to try.",
+    line: "So Doc started grinding other nuts and seeds for Cecil to try.",
   },
   {
     id: "tasting",

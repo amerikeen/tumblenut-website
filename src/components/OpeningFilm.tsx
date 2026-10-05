@@ -2,7 +2,7 @@
 
 import { openingShots } from "@/data/film";
 import { cn } from "@/lib/utils";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 
 export function OpeningFilm() {
   const [index, setIndex] = useState(0);
@@ -68,7 +68,7 @@ export function OpeningFilm() {
           <li key={s.id}>
             <button
               type="button"
-              aria-label={s.line}
+              aria-label={s.line.replace("\n", " ")}
               aria-current={i === index}
               onClick={() => go(i)}
               className={cn(
@@ -102,7 +102,17 @@ export function OpeningFilm() {
             key={shot.id}
             className="reel-line max-w-3xl font-display text-[calc(1.65rem+6pt)] leading-snug tracking-[0.08em] text-[#eadcc9] sm:text-[calc(1.85rem+6pt)]"
           >
-            {shot.line}
+            {shot.line.split("\n").map((part, i) => (
+              <Fragment key={part}>
+                {i > 0 && (
+                  <>
+                    {" "}
+                    <br className="hidden sm:inline" />
+                  </>
+                )}
+                {part}
+              </Fragment>
+            ))}
           </p>
         )}
       </div>

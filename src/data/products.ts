@@ -260,12 +260,14 @@ export const products: Product[] = [
   {
     slug: "lucky-pistachio",
     name: "Lucky Pistachio",
-    size: "4oz",
-    sizeLabel: "4 oz (113g)",
+    size: "8oz",
+    sizeLabel: "8 oz (227g)",
     // Repriced 2026-09-18: from $16.99. Real landed cost is $6.52; $22.99
     // holds 3.5x but sits above every real 8oz pistachio-butter comp found
     // ($2.00-3.02/oz vs. $5.75/oz here) -- a market test, Jeff's call, eyes
     // open. See cost-model.ts's recWhy on this SKU.
+    // 8 oz as of 2026-10-09 (the jar moved from 4 oz). priceCents below is still the OLD 4 oz figure;
+    // it is hidden by PRICES_PUBLIC ($TBD) and must be reset when the 8 oz price is decided.
     priceCents: 2299,
     allergens: ["tree-nut"],
     contains: "Pistachios (tree nuts)",
@@ -287,19 +289,21 @@ export const products: Product[] = [
     ],
     face: "cecil",
     cutout: "/brand/catalog/pistachio.png",
-    jar: "/brand/jars3d/jar-4oz-lucky-pistachio-hero.png",
+    jar: "/brand/jars3d/jar-8oz-lucky-pistachio-hero.png",
     die: "/brand/dies/lucky-pistachio.png",
     tone: "#5C6840",
   },
   {
     slug: "harvest-pecan",
     name: "Harvest Pecan",
-    size: "4oz",
-    sizeLabel: "4 oz (113g)",
+    size: "8oz",
+    sizeLabel: "8 oz (227g)",
     // Repriced 2026-09-18: from $14.99. Real landed cost is $5.06; $17.99
     // holds 3.5x but sits above most real 8oz pecan-butter comps found
     // ($1.45-2.69/oz vs. $4.50/oz here) -- a market test, Jeff's call, eyes
     // open. See cost-model.ts's recWhy on this SKU.
+    // 8 oz as of 2026-10-09 (the jar moved from 4 oz). priceCents below is still the OLD 4 oz figure;
+    // it is hidden by PRICES_PUBLIC ($TBD) and must be reset when the 8 oz price is decided.
     priceCents: 1799,
     allergens: ["tree-nut"],
     contains: "Pecans (tree nuts)",
@@ -321,16 +325,18 @@ export const products: Product[] = [
     ],
     face: "cecil",
     cutout: "/brand/catalog/pecan.png",
-    jar: "/brand/jars3d/jar-4oz-harvest-pecan-hero.png",
+    jar: "/brand/jars3d/jar-8oz-harvest-pecan-hero.png",
     die: "/brand/dies/harvest-pecan.png",
     tone: "#7A4326",
   },
   {
     slug: "wild-cacao",
     name: "Wild Cacao",
-    size: "4oz",
-    sizeLabel: "4 oz (113g)",
+    size: "8oz",
+    sizeLabel: "8 oz (227g)",
     // Repriced 2026-09-18: from $18.99. Real landed cost is $6.41.
+    // 8 oz as of 2026-10-09 (the jar moved from 4 oz). priceCents below is still the OLD 4 oz figure;
+    // it is hidden by PRICES_PUBLIC ($TBD) and must be reset when the 8 oz price is decided.
     priceCents: 2249,
     allergens: ["tree-nut"],
     contains: "Hazelnuts (tree nuts)",
@@ -353,7 +359,7 @@ export const products: Product[] = [
     ],
     face: "cecil",
     cutout: "/brand/catalog/cacao.png",
-    jar: "/brand/jars3d/jar-4oz-wild-cacao-hero.png",
+    jar: "/brand/jars3d/jar-8oz-wild-cacao-hero.png",
     die: "/brand/dies/wild-cacao.png",
     tone: "#3D2A20",
   },

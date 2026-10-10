@@ -8,7 +8,13 @@ import {
   PageBackdrop,
   PLATES,
 } from "@/components/chrome/PageBackdrop";
-import { ORDERS_EMAIL, TENNESSEE_ONLY, WHOLESALE_EMAIL } from "@/data/wholesale";
+import {
+  ORDERS_EMAIL,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  TENNESSEE_ONLY,
+  WHOLESALE_EMAIL,
+} from "@/data/wholesale";
 import { seo } from "@/lib/seo";
 import { contactGraph, jsonLd } from "@/lib/structured-data";
 
@@ -18,7 +24,7 @@ export const Route = createFileRoute("/contact")({
     ...seo({
       title: "Get in touch — Tumblenut",
       description:
-        "Reach the workshop in Columbia, Tennessee. Trade questions go to wholesale@tumblenut.com.",
+        "Reach the workshop in Columbia, Tennessee. Call (931) 777-8799, or send trade questions to wholesale@tumblenut.com.",
       path: "/contact",
     }),
     scripts: jsonLd(contactGraph),
@@ -46,6 +52,13 @@ export const Route = createFileRoute("/contact")({
  *    buyer decides whether this is a real business, and a talking squirrel
  *    handling correspondence is a fact that is not true. Doc belongs on the
  *    jar, in the reel and on /about — not here.
+ *
+ * THE PHONE, added 2026-10-09. (931) 777-8799 is bought on Jeff's Quo
+ * account and is the number on every jar. The page says it exists and nothing
+ * more: no hours, no "we answer", no voicemail, no texting -- none of that has
+ * been set up or checked, and the no-reply-time rule above applies to calls too.
+ * The lead used to read "Email is the way in"; that stopped being true with the
+ * number, so it now says email or call.
  *
  * TWO ADDRESSES, TWO AUDIENCES, as of 2026-09-17. `WHOLESALE_EMAIL` is
  * trade only; `ORDERS_EMAIL` is for a retail buyer -- today that means the
@@ -79,7 +92,7 @@ function ContactPage() {
         className={`t-hero mt-4 max-w-[10ch] ${ON_DARK_HEAD}`}
       />
       <p className={`t-lead mt-7 max-w-[46ch] ${ON_DARK_BODY}`}>
-        The workshop is in Columbia, Tennessee. Email is the way in, trade or not.
+        The workshop is in Columbia, Tennessee. Email or call, trade or not.
       </p>
 
       {/* The address, given its own panel. It is the only real thing on this
@@ -114,6 +127,27 @@ function ContactPage() {
         >
           What wholesalers get →
         </Link>
+      </section>
+
+      {/* The number, in the same shape as the address above it and at the same
+          weight, since it is the other real thing on this page. The label is
+          the literal number, like the mailto links: never "Call us". */}
+      <section
+        aria-labelledby="contact-phone"
+        className="mt-3 rounded-xl border-2 border-[#f0e3cd]/55 bg-[#1c120a]/90 p-7 sm:p-10"
+      >
+        <h2 id="contact-phone" className={`t-meta ${ON_DARK_EYEBROW}`}>
+          Phone
+        </h2>
+        <a
+          href={`tel:${PHONE_TEL}`}
+          className="t-card mt-4 block text-[1.6rem] text-[#fbf3e4] underline decoration-[#c4a35a] decoration-2 underline-offset-[6px] hover:decoration-[#fbf3e4] sm:text-[2rem]"
+        >
+          {PHONE_DISPLAY}
+        </a>
+        <p className={`t-body mt-6 max-w-[52ch] ${ON_DARK_BODY}`}>
+          The workshop line, Columbia, Tennessee.
+        </p>
       </section>
 
       <div className="mt-3 grid gap-3 lg:grid-cols-2">

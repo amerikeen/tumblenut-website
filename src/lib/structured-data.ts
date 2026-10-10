@@ -41,7 +41,7 @@
  *    property that says what is not, and there must not be.
  * ────────────────────────────────────────────────────────────────────────────
  */
-import { WHOLESALE_EMAIL } from "@/data/wholesale";
+import { PHONE_TEL, WHOLESALE_EMAIL } from "@/data/wholesale";
 import type { Product } from "@/data/products";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./seo";
 
@@ -68,6 +68,7 @@ const organization = {
   logo: `${SITE_URL}/__grok/icon-180.png`,
   image: `${SITE_URL}/og.jpg`,
   email: WHOLESALE_EMAIL,
+  telephone: PHONE_TEL,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Columbia",
@@ -78,6 +79,7 @@ const organization = {
   contactPoint: {
     "@type": "ContactPoint",
     email: WHOLESALE_EMAIL,
+    telephone: PHONE_TEL,
     contactType: "wholesale",
     areaServed: "US-TN",
   },

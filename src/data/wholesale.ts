@@ -62,6 +62,18 @@ export const WHOLESALE_EMAIL = "wholesale@tumblenut.com";
 export const ORDERS_EMAIL = "orders@tumblenut.com";
 
 /**
+ * Tumblenut's main line, (931) 777-8799: a local Columbia number bought on
+ * Jeff's Quo account on 2026-10-09 and printed on every jar as the Food Freedom
+ * Act producer phone. `PHONE_TEL` is the same number in E.164, for `tel:` links
+ * and structured data.
+ *
+ * What the site may say about it: that it exists. Nothing about hours, who
+ * answers, voicemail or texting -- none of that has been set up or checked.
+ */
+export const PHONE_DISPLAY = "(931) 777-8799";
+export const PHONE_TEL = "+19317778799";
+
+/**
  * TENNESSEE ONLY. This is a legal boundary, not a growth stage.
  *
  * Every jar is produced under the Tennessee Food Freedom Act (T.C.A. 53-1-118),
